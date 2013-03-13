@@ -1,0 +1,230 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/padding_large"
+    android:paddingRight="@dimen/padding_large" >
+
+    <Space
+        android:id="@+id/center_space"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true" />
+
+    <EditText
+        android:id="@+id/activity_acedit_armor_bonus_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/center_space"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <EditText
+        android:id="@+id/activity_acedit_defl_bonus_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/activity_acedit_armor_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_acedit_armor_bonus_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/armor_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/activity_acedit_defl_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_acedit_defl_bonus_field"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/deflection_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/activity_acedit_dodge_bonus_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_acedit_defl_bonus_field"
+        android:layout_toLeftOf="@id/center_space"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/activity_acedit_dodge_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_acedit_dodge_bonus_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/dodge_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/activity_acedit_shield_bonus_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/activity_acedit_defl_bonus_field"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/activity_acedit_shield_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_acedit_shield_bonus_field"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/shield_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/activity_acedit_done_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="onClickDoneButton"
+        android:text="@string/done_button" />
+
+    <Button
+        android:id="@+id/activity_acedit_ffac_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/activity_acedit_shield_bonus_field"
+        android:clickable="false"
+        android:minHeight="42dp"
+        android:minWidth="48dp" />
+
+    <Button
+        android:id="@+id/activity_acedit_ac_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_acedit_ffac_button"
+        android:layout_alignBottom="@+id/activity_acedit_ffac_button"
+        android:layout_toLeftOf="@id/center_space"
+        android:clickable="false"
+        android:minHeight="42dp"
+        android:minWidth="48dp" />
+
+    <TextView
+        android:id="@+id/activity_acedit_ac_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_acedit_ac_button"
+        android:layout_alignBottom="@+id/activity_acedit_ac_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/ac"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/activity_acedit_ff_t_ac_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/activity_acedit_ffac_button"
+        android:clickable="false"
+        android:minHeight="42dp"
+        android:minWidth="48dp" />
+
+    <TextView
+        android:id="@+id/activity_acedit_ffac_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_acedit_ac_button"
+        android:layout_alignBottom="@+id/activity_acedit_ac_button"
+        android:layout_toRightOf="@+id/center_space"
+        android:text="@string/ffac"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/activity_acedit_touch_ac_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/activity_acedit_ac_button"
+        android:layout_below="@+id/activity_acedit_ac_button"
+        android:clickable="false"
+        android:minHeight="42dp"
+        android:minWidth="48dp" />
+
+    <TextView
+        android:id="@+id/activity_acedit_touch_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_acedit_touch_ac_button"
+        android:layout_alignBottom="@+id/activity_acedit_touch_ac_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/touch"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/activity_acedit_ff_t_ac_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_acedit_ff_t_ac_button"
+        android:layout_alignBottom="@+id/activity_acedit_ff_t_ac_button"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/fftac"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/activity_acedit_cmd_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/activity_acedit_touch_ac_button"
+        android:layout_below="@+id/activity_acedit_touch_ac_button"
+        android:clickable="false"
+        android:minHeight="42dp"
+        android:minWidth="48dp" />
+
+    <Button
+        android:id="@+id/activity_acedit_ffcmd_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_acedit_cmd_button"
+        android:layout_alignBottom="@+id/activity_acedit_cmd_button"
+        android:layout_alignParentRight="true"
+        android:clickable="false"
+        android:minHeight="42dp"
+        android:minWidth="48dp" />
+
+    <TextView
+        android:id="@+id/activity_acedit_cmd_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_acedit_cmd_button"
+        android:layout_alignBottom="@+id/activity_acedit_cmd_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/cmd"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_acedit_cmd_button"
+        android:layout_alignBottom="@+id/activity_acedit_cmd_button"
+        android:layout_alignLeft="@+id/activity_acedit_ff_t_ac_text"
+        android:text="@string/ffcmd"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <CheckBox
+        android:id="@+id/activity_acedit_shield_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_acedit_shield_bonus_text"
+        android:layout_alignBottom="@+id/activity_acedit_shield_bonus_text"
+        android:layout_toLeftOf="@id/activity_acedit_shield_bonus_field" />
+
+</RelativeLayout>

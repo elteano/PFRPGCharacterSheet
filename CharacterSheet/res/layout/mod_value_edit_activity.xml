@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding_large"
+    android:paddingRight="@dimen/padding_large" >
+
+    <TableLayout
+        android:id="@+id/mod_value_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:stretchColumns="0" >
+
+        <TableRow android:id="@+id/base_score_row" >
+
+            <TextView
+                android:text="@string/base_score"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/base_score_field"
+                android:hint="@string/z0"
+                android:inputType="number" >
+
+                <requestFocus />
+            </EditText>
+        </TableRow>
+
+        <TableRow android:id="@+id/temp_score_row" >
+
+            <TextView
+                android:text="@string/base_score_modifier"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Button
+                android:id="@+id/base_score_modifier"
+                android:clickable="false" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="@string/temp_adjust"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/temp_adjust_field"
+                android:hint="@string/z0"
+                android:inputType="numberSigned" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="@string/temp_modifier"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Button
+                android:id="@+id/temp_score_modifier"
+                android:clickable="false" />
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/mod_value_done_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/mod_value_done_editing" />
+
+</RelativeLayout>

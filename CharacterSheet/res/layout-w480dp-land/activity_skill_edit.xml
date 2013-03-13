@@ -1,0 +1,116 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/padding_large"
+    android:paddingRight="@dimen/padding_large" >
+
+    <Space
+        android:id="@+id/center_space"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true" />
+
+    <EditText
+        android:id="@+id/activity_skill_edit_skill_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:hint="@string/hint_skill_name"
+        android:inputType="textCapWords|textAutoCorrect" />
+
+    <Spinner
+        android:id="@+id/activity_skill_edit_base_ability"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_skill_edit_skill_name" />
+
+    <EditText
+        android:id="@+id/activity_skill_edit_skill_ranks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/activity_skill_edit_base_ability"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/activity_skill_edit_skill_ranks_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_skill_edit_skill_ranks"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/text_skill_ranks"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/activity_skill_edit_misc_mod_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_skill_edit_base_ability"
+        android:layout_toLeftOf="@id/center_space"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/activity_skill_edit_misc_mod_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_skill_edit_misc_mod_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/misc_mods"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/activity_skill_edit_ability_mod_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_skill_edit_skill_ranks"
+        android:layout_toLeftOf="@id/center_space"
+        android:clickable="false" />
+
+    <TextView
+        android:id="@+id/activity_skill_edit_ability_mod_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_skill_edit_ability_mod_button"
+        android:text="@string/text_ability_modifier"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/activity_skill_edit_total_mod_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/activity_skill_edit_skill_ranks"
+        android:clickable="false" />
+
+    <TextView
+        android:id="@+id/activity_skill_edit_total_mod_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_skill_edit_total_mod_button"
+        android:layout_toRightOf="@id/activity_skill_edit_ability_mod_button"
+        android:text="@string/text_total_modifier"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/activity_skill_edit_done_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/activity_skill_edit_button_delete"
+        android:onClick="onClickDoneButton"
+        android:text="@string/done_button" />
+
+    <Button
+        android:id="@+id/activity_skill_edit_button_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="onClickDeleteButton"
+        android:text="@string/delete_button" />
+
+</RelativeLayout>

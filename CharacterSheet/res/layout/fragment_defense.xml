@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/padding_large"
+    android:paddingRight="@dimen/padding_large" >
+
+    <Button
+        android:id="@+id/fragment_defense_ac_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:id="@+id/fragment_defense_cmd_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/fragment_defense_ac_button" />
+
+    <Button
+        android:id="@+id/fragment_defense_fortitude_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/fragment_defense_cmd_button" />
+
+    <Button
+        android:id="@+id/fragment_defense_reflex_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/fragment_defense_fortitude_button" />
+
+    <Button
+        android:id="@+id/fragment_defense_will_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/fragment_defense_reflex_button" />
+
+    <TextView
+        android:id="@+id/fragment_defense_ac_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_defense_ac_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/ac"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/fragment_defense_cmd_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_defense_cmd_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/cmd"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/fragment_defense_fortitude_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_defense_fortitude_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/fortitude"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/fragment_defense_reflex_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_defense_reflex_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/reflex"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/fragment_defense_will_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_defense_will_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/will"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

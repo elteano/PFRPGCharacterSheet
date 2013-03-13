@@ -1,0 +1,134 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/padding_large"
+    android:paddingRight="@dimen/padding_large" >
+
+    <!--
+    <TextView
+        android:id="@+id/activity_spell_edit_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/spell_name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    -->
+
+    <Button
+        android:id="@+id/activity_spell_edit_delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/delete" />
+
+    <Button
+        android:id="@+id/activity_spell_edit_done_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/activity_spell_edit_delete_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/done_button" />
+
+    <EditText
+        android:id="@+id/activity_spell_edit_name_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:hint="@string/spell_name"
+        android:inputType="textCapWords" />
+
+    <EditText
+        android:id="@+id/activity_spell_edit_level_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/activity_spell_edit_name_field"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/activity_spell_edit_level_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_spell_edit_level_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/spell_level"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/activity_spell_edit_save_ability_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/activity_spell_edit_level_field" />
+
+    <TextView
+        android:id="@+id/activity_spell_edit_save_ability_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_spell_edit_save_ability_spinner"
+        android:layout_alignParentLeft="true"
+        android:text="@string/save_ability"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/activity_spell_edit_save_bonus_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/activity_spell_edit_save_ability_spinner"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/activity_spell_edit_save_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_spell_edit_save_bonus_field"
+        android:layout_alignParentLeft="true"
+        android:clickable="false"
+        android:text="@string/save_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/activity_spell_edit_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/activity_spell_edit_save_bonus_field"
+        android:ems="@integer/ems_standard" />
+
+    <TextView
+        android:id="@+id/activity_spell_edit_save_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_spell_edit_save_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/save_dc"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <FrameLayout
+        android:id="@+id/activity_spell_edit_desc_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/activity_spell_edit_done_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/activity_spell_edit_save_button" >
+
+        <EditText
+            android:id="@+id/activity_spell_edit_desc_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/spell_description"
+            android:inputType="textMultiLine|textCapSentences|textAutoCorrect|textAutoComplete" />
+    </FrameLayout>
+
+</RelativeLayout>

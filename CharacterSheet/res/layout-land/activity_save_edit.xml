@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/padding_large"
+    android:paddingRight="@dimen/padding_large" >
+
+    <Space
+        android:id="@+id/center_space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:id="@+id/activity_save_edit_base_abilities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/base_abilities"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TableLayout
+        android:id="@+id/activity_save_edit_box_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_save_edit_base_abilities"
+        android:stretchColumns="0,1,2" >
+
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/activity_save_edit_cha_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cha" />
+
+            <CheckBox
+                android:id="@+id/activity_save_edit_dex_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dex" />
+
+            <CheckBox
+                android:id="@+id/activity_save_edit_str_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str" />
+        </TableRow>
+
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/activity_save_edit_con_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/con" />
+
+            <CheckBox
+                android:id="@+id/activity_save_edit_int_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inte" />
+
+            <CheckBox
+                android:id="@+id/activity_save_edit_wis_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wis" />
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/activity_save_edit_done_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="onClickDoneButton"
+        android:text="@string/done_button" />
+
+    <EditText
+        android:id="@+id/activity_save_edit_class_modifiers_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_save_edit_box_table"
+        android:layout_toLeftOf="@id/center_space"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/activity_save_edit_class_modifiers_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/activity_save_edit_class_modifiers_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/class_modifiers"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/activity_save_edit_misc_modifiers_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/activity_save_edit_box_table"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/activity_save_edit_misc_modifiers_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/activity_save_edit_misc_modifiers_field"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/misc_modifiers"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/activity_save_edit_modifier_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/activity_save_edit_misc_modifiers_field" />
+
+    <TextView
+        android:id="@+id/activity_save_edit_total_modifier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_save_edit_modifier_button"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/text_total_modifier"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

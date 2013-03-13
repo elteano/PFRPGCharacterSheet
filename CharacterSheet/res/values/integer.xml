@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="ems_standard">3</integer>
+    <integer name="ems_large">5</integer>
+
+</resources>

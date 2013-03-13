@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/fragment_character_select_menu_add_character"
+        android:icon="@drawable/ab_add"
+        android:showAsAction="ifRoom"
+        android:title="@string/character_select_add"
+        android:titleCondensed="@string/new_c"/>
+    <item
+        android:id="@+id/fragment_character_select_menu_remove_character"
+        android:icon="@drawable/ab_remove"
+        android:showAsAction="ifRoom"
+        android:title="@string/character_select_remove"
+        android:titleCondensed="@string/erase_c"/>
+
+</menu>

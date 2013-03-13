@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:paddingLeft="@dimen/padding_large"
+    android:paddingRight="@dimen/padding_large"
+    android:useDefaultMargins="true" >
+
+    <Space
+        android:id="@+id/center_space"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true" />
+
+    <TableLayout
+        android:id="@+id/fragment_stats_i_shouldnt_need_to_use_this_layout_but_i_do"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,2,4" >
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/cha_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/stat_charisma"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Button
+                android:id="@+id/cha_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/dex_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/stat_dexterity"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Button
+                android:id="@+id/dex_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/str_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/stat_strength"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Button
+                android:id="@+id/str_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/con_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/stat_constitution"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Button
+                android:id="@+id/con_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/int_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/stat_intelligence"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Button
+                android:id="@+id/int_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/wis_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/stat_wisdom"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Button
+                android:id="@+id/wis_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/fragment_stats_current_hp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_stats_max_hp_button"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/current_hp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/fragment_stats_current_hp_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_stats_max_hp_button"
+        android:layout_alignParentRight="true"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <Button
+        android:id="@+id/fragment_stats_max_hp_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/center_space" />
+
+    <TextView
+        android:id="@+id/fragment_stats_max_hp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_stats_max_hp_button"
+        android:layout_alignBottom="@+id/fragment_stats_max_hp_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/max_hp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/fragment_stats_rolled_hp_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fragment_stats_max_hp_button"
+        android:layout_toLeftOf="@id/center_space"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/fragment_stats_rolled_hp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_stats_rolled_hp_field"
+        android:layout_alignBottom="@+id/fragment_stats_rolled_hp_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/rolled_hp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/fragment_stats_init_bonus_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_stats_rolled_hp_field"
+        android:layout_alignBottom="@+id/fragment_stats_rolled_hp_field"
+        android:layout_alignParentRight="true"
+        android:clickable="false" />
+
+    <TextView
+        android:id="@+id/fragment_stats_init_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_stats_rolled_hp_field"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/init_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/fragment_stats_misc_init_bonus_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fragment_stats_init_bonus_button"
+        android:layout_alignParentRight="true"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/fragment_stats_misc_init_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_stats_misc_init_bonus_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/miscellaneous_initiative_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

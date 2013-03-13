@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:useDefaultMargins="true" >
+
+    <TextView
+        android:id="@+id/con_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/con_button"
+        android:layout_toLeftOf="@+id/con_button"
+        android:text="@string/stat_constitution"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/dex_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dex_button"
+        android:layout_toLeftOf="@+id/dex_button"
+        android:text="@string/stat_dexterity"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/int_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/int_button"
+        android:layout_toLeftOf="@+id/int_button"
+        android:text="@string/stat_intelligence"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/str_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/str_button"
+        android:layout_toLeftOf="@+id/str_button"
+        android:text="@string/stat_strength"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/wis_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/wis_button"
+        android:layout_toLeftOf="@+id/wis_button"
+        android:text="@string/stat_wisdom"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/cha_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/cha_button"
+        android:layout_toLeftOf="@+id/cha_button"
+        android:text="@string/stat_charisma"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/cha_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/fragment_stats_center" />
+
+    <Button
+        android:id="@+id/con_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cha_button"
+        android:layout_toLeftOf="@+id/fragment_stats_center" />
+
+    <Space
+        android:id="@+id/fragment_stats_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <Button
+        android:id="@+id/dex_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/con_button"
+        android:layout_below="@+id/con_button" />
+
+    <Button
+        android:id="@+id/int_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:id="@+id/str_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/int_button" />
+
+    <Button
+        android:id="@+id/wis_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/str_button" />
+
+    <TextView
+        android:id="@+id/fragment_stats_current_hp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_stats_current_hp_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/current_hp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/fragment_stats_current_hp_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <Button
+        android:id="@+id/fragment_stats_max_hp_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fragment_stats_current_hp_field"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/fragment_stats_max_hp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_stats_max_hp_button"
+        android:layout_alignBottom="@+id/fragment_stats_max_hp_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/max_hp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/fragment_stats_rolled_hp_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fragment_stats_max_hp_button"
+        android:layout_alignParentRight="true"
+        android:ems="3"
+        android:hint="@string/z0"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/fragment_stats_rolled_hp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_stats_rolled_hp_field"
+        android:layout_alignBottom="@+id/fragment_stats_rolled_hp_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/rolled_hp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/fragment_stats_init_bonus_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fragment_stats_rolled_hp_field"
+        android:layout_alignParentRight="true"
+        android:clickable="false" />
+
+    <EditText
+        android:id="@+id/fragment_stats_misc_init_bonus_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/fragment_stats_init_bonus_button"
+        android:layout_alignParentRight="true"
+        android:ems="3"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/fragment_stats_init_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_stats_init_bonus_button"
+        android:layout_alignBottom="@+id/fragment_stats_init_bonus_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/initiative_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/fragment_stats_misc_init_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_stats_misc_init_bonus_field"
+        android:layout_alignBottom="@+id/fragment_stats_misc_init_bonus_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/misc_init_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

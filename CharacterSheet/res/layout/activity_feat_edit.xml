@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/padding_large"
+    android:paddingRight="@dimen/padding_large" >
+
+    <EditText
+        android:id="@+id/field_feat_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/feat_name_hint"
+        android:inputType="textCapWords" />
+
+    <Button
+        android:id="@+id/feat_button_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="onClickDeleteButton"
+        android:text="@string/delete_button" />
+
+    <Button
+        android:id="@+id/feat_button_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/feat_button_delete"
+        android:text="@string/done_button" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_above="@id/feat_button_done"
+        android:layout_below="@id/field_feat_name" >
+
+        <EditText
+            android:id="@+id/field_feat_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/feat_description_hint"
+            android:inputType="textMultiLine|textCapSentences" />
+    </FrameLayout>
+
+</RelativeLayout>

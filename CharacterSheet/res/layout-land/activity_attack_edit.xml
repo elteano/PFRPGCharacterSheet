@@ -1,0 +1,144 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/padding_large"
+    android:paddingRight="@dimen/padding_large" >
+
+    <Space
+        android:id="@+id/center_space"
+        android:layout_width="@dimen/padding_medium"
+        android:layout_height="@dimen/padding_medium"
+        android:layout_centerInParent="true" />
+
+    <EditText
+        android:id="@+id/activity_attack_edit_attack_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:hint="@string/attack_name"
+        android:inputType="textCapWords" />
+
+    <Spinner
+        android:id="@+id/activity_attack_edit_base_attack_ability_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/activity_attack_edit_attack_name" />
+
+    <TextView
+        android:id="@+id/activity_attack_edit_base_attack_ability_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_attack_edit_base_attack_ability_spinner"
+        android:layout_alignParentLeft="true"
+        android:text="@string/attack_ability"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/activity_attack_edit_attack_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/activity_attack_edit_base_attack_ability_spinner"
+        android:text="@string/attack_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/activity_attack_edit_attack_bonus_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_attack_edit_attack_bonus_text"
+        android:layout_alignParentRight="true"
+        android:ems="3"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <EditText
+        android:id="@+id/activity_attack_edit_damage_die_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/activity_attack_edit_attack_bonus_text"
+        android:ems="@integer/ems_standard"
+        android:inputType="textNoSuggestions" />
+
+    <TextView
+        android:id="@+id/activity_attack_edit_damage_die_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_attack_edit_damage_die_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/damage_die"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/activity_attack_edit_base_damage_ability_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/activity_attack_edit_damage_die_field" />
+
+    <TextView
+        android:id="@+id/activity_attack_edit_base_damage_ability_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_attack_edit_base_damage_ability_spinner"
+        android:layout_alignParentLeft="true"
+        android:text="@string/damage_ability"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/activity_attack_edit_damage_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/activity_attack_edit_base_damage_ability_spinner"
+        android:text="@string/damage_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/activity_attack_edit_damage_bonus_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_attack_edit_damage_bonus_text"
+        android:layout_alignParentRight="true"
+        android:ems="3"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <Button
+        android:id="@+id/activity_attack_edit_delete_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="onClickDeleteButton"
+        android:text="@string/delete_button" />
+
+    <Button
+        android:id="@+id/activity_attack_edit_done_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/activity_attack_edit_delete_button"
+        android:onClick="onClickDoneButton"
+        android:text="@string/done_button" />
+
+    <!-- The FrameLayout enforces bounds on the EditText without enforcing size. -->
+
+    <FrameLayout
+        android:id="@+id/activity_attack_edit_attack_description_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_above="@id/activity_attack_edit_done_button"
+        android:layout_below="@id/activity_attack_edit_damage_bonus_text" >
+
+        <EditText
+            android:id="@+id/activity_attack_edit_attack_description_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/attack_desc"
+            android:inputType="textCapSentences|textMultiLine" />
+    </FrameLayout>
+
+</RelativeLayout>

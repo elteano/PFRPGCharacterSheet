@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/padding_large"
+    android:paddingRight="@dimen/padding_large" >
+
+    <EditText
+        android:id="@+id/activity_skill_edit_skill_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:hint="@string/hint_skill_name"
+        android:inputType="textCapWords|textAutoCorrect" />
+
+    <Spinner
+        android:id="@+id/activity_skill_edit_base_ability"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_skill_edit_skill_name" />
+
+    <TableLayout
+        android:id="@+id/activity_skill_edit_content_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_skill_edit_base_ability"
+        android:stretchColumns="0" >
+
+        <TableRow android:id="@+id/activity_skill_edit_skill_ranks_row" >
+
+            <TextView
+                android:text="@string/text_skill_ranks"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/activity_skill_edit_skill_ranks"
+                android:hint="@string/z0"
+                android:inputType="number" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="@string/misc_modifiers"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/activity_skill_edit_misc_mod_field"
+                android:hint="@string/z0"
+                android:inputType="numberSigned" />
+        </TableRow>
+
+        <TableRow android:id="@+id/activity_skill_edit_ability_mod_row" >
+
+            <TextView
+                android:text="@string/text_ability_modifier"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Button
+                android:id="@+id/activity_skill_edit_ability_mod_button"
+                android:clickable="false" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="@string/text_total_modifier"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Button
+                android:id="@+id/activity_skill_edit_total_mod_button"
+                android:clickable="false" />
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/activity_skill_edit_done_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/activity_skill_edit_button_delete"
+        android:onClick="onClickDoneButton"
+        android:text="@string/done_button" />
+
+    <Button
+        android:id="@+id/activity_skill_edit_button_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="onClickDeleteButton"
+        android:text="@string/delete_button" />
+
+</RelativeLayout>

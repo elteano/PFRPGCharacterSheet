@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="ability_array">
+        <item>CHA</item>
+        <item>CON</item>
+        <item>DEX</item>
+        <item>INT</item>
+        <item>STR</item>
+        <item>WIS</item>
+    </string-array>
+    
+    <string-array name="ability_array_with_none">
+        <item>CHA</item>
+        <item>CON</item>
+        <item>DEX</item>
+        <item>INT</item>
+        <item>STR</item>
+        <item>WIS</item>
+        <item>NONE</item>
+    </string-array>
+
+</resources>

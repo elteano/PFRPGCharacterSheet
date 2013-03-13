@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:requiresFadingEdge="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" >
+
+        <TextView
+            android:id="@+id/fragment_name_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/character_name_text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/character_name_name_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_name_name_text"
+            android:hint="@string/character_name_field"
+            android:inputType="textCapWords" />
+
+        <TextView
+            android:id="@+id/fragment_name_class_level_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/character_name_name_field"
+            android:text="@string/text_class_levels"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/fragment_name_class_level_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_name_class_level_text"
+            android:inputType="textCapWords" />
+
+        <TextView
+            android:id="@+id/fragment_name_age_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_name_class_level_field"
+            android:text="@string/age"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/fragment_name_character_age_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/fragment_name_age_text"
+            android:layout_alignParentRight="true"
+            android:ems="3"
+            android:hint="@string/z0"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/fragment_name_character_size_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_name_age_text"
+            android:text="@string/character_size"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Spinner
+            android:id="@+id/fragment_name_character_size_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/fragment_name_character_size_text"
+            android:layout_alignParentRight="true" />
+
+        <TextView
+            android:id="@+id/fragment_name_xp_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/fragment_name_character_size_text"
+            android:text="@string/character_xp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/fragment_name_xp_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/fragment_name_xp_text"
+            android:layout_alignParentRight="true"
+            android:ems="@integer/ems_large"
+            android:hint="@string/z0"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/fragment_name_languages_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/fragment_name_xp_text"
+            android:text="@string/languages"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/fragment_name_languages_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/fragment_name_languages_text"
+            android:inputType="textMultiLine|textCapWords" />
+
+        <TextView
+            android:id="@+id/fragment_name_character_bio_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_name_languages_field"
+            android:text="@string/character_bio"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/fragment_name_character_bio_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_name_character_bio_text"
+            android:inputType="textCapSentences|textMultiLine" />
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/fragment_spells_add_spell"
+        android:icon="@drawable/ab_add_spell"
+        android:showAsAction="ifRoom"
+        android:title="@string/add_spell"
+        android:titleCondensed="@string/add"/>
+
+</menu>

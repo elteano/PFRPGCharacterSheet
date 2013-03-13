@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Space
+        android:id="@+id/center_space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:id="@+id/fragment_item_gold_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fragment_item_gold_field"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/padding_large"
+        android:text="@string/gold"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/fragment_item_gold_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="8dp"
+        android:layout_toLeftOf="@id/center_space"
+        android:layout_toRightOf="@id/fragment_item_gold_text"
+        android:hint="@string/z0"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/fragment_item_weight_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_item_gold_field"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/total_weight"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/fragment_item_weight_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_item_gold_field"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/padding_large"
+        android:layout_toRightOf="@id/fragment_item_weight_text"
+        android:gravity="right"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/fragment_item_gold_field"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:foregroundGravity="top"
+        android:requiresFadingEdge="vertical" >
+
+        <TableLayout
+            android:id="@+id/fragment_item_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_large"
+            android:paddingRight="@dimen/padding_large"
+            android:stretchColumns="0" />
+    </ScrollView>
+
+</RelativeLayout>
