@@ -39,26 +39,20 @@ public class Save implements Parcelable {
 		return 0;
 	}
 
-	public int getTotal() {
+	public int getTotal(AbilityScore[] abilities) {
 		int ret = miscModifiers + classModifiers;
 		if ((flags & FLAG_CHA) == FLAG_CHA)
-			ret += CharacterSheetActivity.getCharacter().getAbility(
-					PlayerCharacter.ABILITY_CHA).getTempModifier();
+			ret += abilities[PlayerCharacter.ABILITY_CHA].getTempModifier();
 		if ((flags & FLAG_CON) == FLAG_CON)
-			ret += CharacterSheetActivity.getCharacter().getAbility(
-					PlayerCharacter.ABILITY_CON).getTempModifier();
+			ret += abilities[PlayerCharacter.ABILITY_CON].getTempModifier();
 		if ((flags & FLAG_DEX) == FLAG_DEX)
-			ret += CharacterSheetActivity.getCharacter().getAbility(
-					PlayerCharacter.ABILITY_DEX).getTempModifier();
+			ret += abilities[PlayerCharacter.ABILITY_DEX].getTempModifier();
 		if ((flags & FLAG_INT) == FLAG_INT)
-			ret += CharacterSheetActivity.getCharacter().getAbility(
-					PlayerCharacter.ABILITY_INT).getTempModifier();
+			ret += abilities[PlayerCharacter.ABILITY_INT].getTempModifier();
 		if ((flags & FLAG_STR) == FLAG_STR)
-			ret += CharacterSheetActivity.getCharacter().getAbility(
-					PlayerCharacter.ABILITY_STR).getTempModifier();
+			ret += abilities[PlayerCharacter.ABILITY_STR].getTempModifier();
 		if ((flags & FLAG_WIS) == FLAG_WIS)
-			ret += CharacterSheetActivity.getCharacter().getAbility(
-					PlayerCharacter.ABILITY_WIS).getTempModifier();
+			ret += abilities[PlayerCharacter.ABILITY_WIS].getTempModifier();
 		return ret;
 	}
 

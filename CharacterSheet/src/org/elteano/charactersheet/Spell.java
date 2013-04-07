@@ -9,7 +9,8 @@ public class Spell implements Parcelable {
 
 		public Spell createFromParcel(Parcel source) {
 			return new Spell(source.readInt(), source.readString(),
-					source.readString(), source.readInt(), source.readInt());
+					source.readString(), source.readInt(), source.readInt(),
+					null);
 		}
 
 		public Spell[] newArray(int size) {
@@ -17,6 +18,7 @@ public class Spell implements Parcelable {
 		}
 	};
 
+	private AbilityScore[] abilities;
 	public int level, saveBonus, saveAbility;
 	public String name, desc;
 
@@ -26,8 +28,8 @@ public class Spell implements Parcelable {
 	 * 
 	 * @deprecated
 	 */
-	public Spell(int level, String name, String desc) {
-		this(level, name, desc, 0, 0);
+	public Spell(int level, String name, String desc, AbilityScore[] abilities) {
+		this(level, name, desc, 0, 0, abilities);
 	}
 
 	/**
@@ -35,12 +37,13 @@ public class Spell implements Parcelable {
 	 * now be called in most cases.
 	 */
 	public Spell(int level, String name, String desc, int saveBonus,
-			int saveAbility) {
+			int saveAbility, AbilityScore[] abilities) {
 		this.level = level;
 		this.name = name;
 		this.desc = desc;
 		this.saveBonus = saveBonus;
 		this.saveAbility = saveAbility;
+		this.abilities = abilities;
 	}
 
 	public int describeContents() {
@@ -48,14 +51,11 @@ public class Spell implements Parcelable {
 	}
 
 	public int getSaveDC() {
-		return 10
-				+ level
-				+ saveBonus
-				+ CharacterSheetActivity.getCharacter().getAbility(saveAbility)
-						.getTempModifier();
+		return 10 + level + saveBonus
+				+ abilities[saveAbility].getTempModifier();
 	}
 
-	public static Spell fromSaveString(String s) {
+	public static Spell fromSaveString(String s, AbilityScore[] abilities) {
 		String[] cont = s.split(PlayerCharacter.SPLITTER_SMALL);
 		if (cont.length >= 3) {
 			int level = 0;
@@ -72,11 +72,11 @@ public class Spell implements Parcelable {
 				} catch (NumberFormatException ex) {
 				}
 				return new Spell(level, cont[1], cont[2], saveBonus,
-						saveAbility);
+						saveAbility, abilities);
 			}
-			return new Spell(level, cont[1], cont[2]);
+			return new Spell(level, cont[1], cont[2], abilities);
 		}
-		return new Spell(0, "", "", 0, 0);
+		return new Spell(0, "", "", 0, 0, abilities);
 
 	}
 
@@ -86,6 +86,10 @@ public class Spell implements Parcelable {
 		out.writeString(desc);
 		out.writeInt(saveBonus);
 		out.writeInt(saveAbility);
+	}
+
+	public void setAbilities(AbilityScore[] abilities) {
+		this.abilities = abilities;
 	}
 
 	public String toSaveString() {

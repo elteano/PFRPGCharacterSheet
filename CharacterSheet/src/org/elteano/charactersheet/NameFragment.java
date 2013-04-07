@@ -23,6 +23,7 @@ public class NameFragment extends CharacterUpdaterFragment implements
 	// private TextWatcher bioTextWatcher;
 	private TextWatcher classTextWatcher;
 	private TextWatcher nameTextWatcher;
+	private EditText nameView;
 	private IntTextWatcher xpTextWatcher;
 
 	private void fillFields() {
@@ -33,25 +34,33 @@ public class NameFragment extends CharacterUpdaterFragment implements
 		Spinner spinner = (Spinner) getView().findViewById(
 				R.id.fragment_name_character_size_spinner);
 		spinner.setAdapter(adapter);
-		spinner.setSelection(CharacterSheetActivity.getCharacter().getSize());
+		spinner.setSelection(((CharacterSheetActivity) getActivity())
+				.getCharacter().getSize());
 		EditText ageView = (EditText) getView().findViewById(
 				R.id.fragment_name_character_age_field);
-		ageView.setText("" + CharacterSheetActivity.getCharacter().getAge());
+		ageView.setText(""
+				+ ((CharacterSheetActivity) getActivity()).getCharacter()
+						.getAge());
 		EditText bioView = (EditText) getView().findViewById(
 				R.id.fragment_name_character_bio_field);
-		bioView.setText(CharacterSheetActivity.getCharacter().getBio());
+		bioView.setText(((CharacterSheetActivity) getActivity()).getCharacter()
+				.getBio());
 		EditText classView = (EditText) getView().findViewById(
 				R.id.fragment_name_class_level_field);
-		classView.setText(CharacterSheetActivity.getCharacter()
-				.getLevelString());
+		classView.setText(((CharacterSheetActivity) getActivity())
+				.getCharacter().getLevelString());
 		EditText nameView = (EditText) getView().findViewById(
 				R.id.character_name_name_field);
-		nameView.setText(CharacterSheetActivity.getCharacter().getName());
+		nameView.setText(((CharacterSheetActivity) getActivity())
+				.getCharacter().getName());
 		EditText xpView = (EditText) getView().findViewById(
 				R.id.fragment_name_xp_field);
-		xpView.setText("" + CharacterSheetActivity.getCharacter().getXP());
+		xpView.setText(""
+				+ ((CharacterSheetActivity) getActivity()).getCharacter()
+						.getXP());
 		((EditText) getView().findViewById(R.id.fragment_name_languages_field))
-				.setText(CharacterSheetActivity.getCharacter().getLanguages());
+				.setText(((CharacterSheetActivity) getActivity())
+						.getCharacter().getLanguages());
 	}
 
 	private void hookupListeners() {
@@ -62,10 +71,11 @@ public class NameFragment extends CharacterUpdaterFragment implements
 					public void onFocusChange(View v, boolean hasFocus) {
 						if (!hasFocus) {
 							String s = ((EditText) v).getText().toString();
-							CharacterSheetActivity.getCharacter().setBio(
-									s.toString());
-							CharacterSheetActivity.getCharacter()
-									.saveSelfByPlayerList(getActivity());
+							((CharacterSheetActivity) getActivity())
+									.getCharacter().setBio(s.toString());
+							((CharacterSheetActivity) getActivity())
+									.getCharacter().saveSelfByPlayerList(
+											getActivity());
 						}
 					}
 				});
@@ -86,24 +96,29 @@ public class NameFragment extends CharacterUpdaterFragment implements
 		xpView.addTextChangedListener(xpTextWatcher);
 	}
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// Inflate the layout for this CharacterUpdaterFragment
-		View ret = inflater.inflate(R.layout.fragment_name, container, false);
-		final EditText nameView = (EditText) ret
-				.findViewById(R.id.character_name_name_field);
-		nameView.setText(CharacterSheetActivity.getCharacter().getName());
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		Log.i("CharacterSheet", "Entering NameFragment.onActivityCreated()");
+		super.onActivityCreated(savedInstanceState);
+		Log.i("CharacterSheet",
+				"Character == null: "
+						+ (((CharacterSheetActivity) getActivity())
+								.getCharacter() == null));
+		nameView.setText(((CharacterSheetActivity) getActivity())
+				.getCharacter().getName());
 		ageTextWatcher = new TextWatcher() {
 
 			public void afterTextChanged(Editable s) {
 				try {
-					CharacterSheetActivity.getCharacter().setAge(
-							Integer.parseInt(s.toString()));
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.setAge(Integer.parseInt(s.toString()));
 				} catch (NumberFormatException e) {
-					CharacterSheetActivity.getCharacter().setAge(0);
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.setAge(0);
 				}
-				CharacterSheetActivity.getCharacter().saveSelfByPlayerList(
-						getActivity());
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.saveSelfByPlayerList(getActivity());
 			}
 
 			public void beforeTextChanged(CharSequence s, int start, int count,
@@ -118,9 +133,21 @@ public class NameFragment extends CharacterUpdaterFragment implements
 
 			@Override
 			public void numberChanged(int newNumber) {
-				CharacterSheetActivity.getCharacter().setXP(newNumber);
+				((CharacterSheetActivity) getActivity()).getCharacter().setXP(
+						newNumber);
 			}
 		};
+	}
+
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// Inflate the layout for this CharacterUpdaterFragment
+		// Log.i("CharacterSheet",
+		// "In NameFragment.onCreateView(), hasCharacter(): "
+		// + ((CharacterSheetActivity) getActivity())
+		// .hasCharacter());
+		View ret = inflater.inflate(R.layout.fragment_name, container, false);
+		nameView = (EditText) ret.findViewById(R.id.character_name_name_field);
 		classTextWatcher = new ClassTextWatcher();
 		nameTextWatcher = new NameTextWatcher();
 		return ret;
@@ -151,8 +178,8 @@ public class NameFragment extends CharacterUpdaterFragment implements
 
 	public void onStop() {
 		pushFieldsToCharacter();
-		CharacterSheetActivity.getCharacter().saveSelfByPlayerList(
-				getActivity());
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 		super.onStop();
 	};
 
@@ -164,17 +191,18 @@ public class NameFragment extends CharacterUpdaterFragment implements
 	// }
 
 	private void pushFieldsToCharacter() {
-		CharacterSheetActivity.getCharacter().setLanguages(
+		((CharacterSheetActivity) getActivity()).getCharacter().setLanguages(
 				((EditText) getView().findViewById(
 						R.id.fragment_name_languages_field)).getText()
 						.toString());
-		CharacterSheetActivity.getCharacter().setBio(
+		((CharacterSheetActivity) getActivity()).getCharacter().setBio(
 				((EditText) getView().findViewById(
 						R.id.fragment_name_character_bio_field)).getText()
 						.toString());
-		Log.d("CharacterSheet", CharacterSheetActivity.getCharacter().getBio());
-		Log.d("CharacterSheet", CharacterSheetActivity.getCharacter()
-				.getLanguages());
+		Log.d("CharacterSheet", ((CharacterSheetActivity) getActivity())
+				.getCharacter().getBio());
+		Log.d("CharacterSheet", ((CharacterSheetActivity) getActivity())
+				.getCharacter().getLanguages());
 	}
 
 	private void unhookListeners() {
@@ -193,10 +221,10 @@ public class NameFragment extends CharacterUpdaterFragment implements
 	private class ClassTextWatcher implements TextWatcher {
 
 		public void afterTextChanged(Editable text) {
-			CharacterSheetActivity.getCharacter().setLevelString(
-					text.toString());
-			CharacterSheetActivity.getCharacter().saveSelfByPlayerList(
-					getActivity());
+			((CharacterSheetActivity) getActivity()).getCharacter()
+					.setLevelString(text.toString());
+			((CharacterSheetActivity) getActivity()).getCharacter()
+					.saveSelfByPlayerList(getActivity());
 		}
 
 		public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
@@ -218,7 +246,7 @@ public class NameFragment extends CharacterUpdaterFragment implements
 			EditText nameView = (EditText) getView().findViewById(
 					R.id.character_name_name_field);
 			for (String key : playerList.getAll().keySet()) {
-				if (CharacterSheetActivity
+				if (((CharacterSheetActivity) getActivity())
 						.getCharacter()
 						.getName()
 						.equals(playerList
@@ -234,10 +262,11 @@ public class NameFragment extends CharacterUpdaterFragment implements
 					break;
 				}
 			}
-			CharacterSheetActivity.getCharacter().setName(
+			((CharacterSheetActivity) getActivity()).getCharacter().setName(
 					nameView.getText().toString());
 			getActivity().getActionBar().setTitle(
-					CharacterSheetActivity.getCharacter().getName());
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.getName());
 			updateOthers();
 		}
 
@@ -252,9 +281,9 @@ public class NameFragment extends CharacterUpdaterFragment implements
 
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
 			long id) {
-		CharacterSheetActivity.getCharacter().setSize(pos);
-		CharacterSheetActivity.getCharacter().saveSelfByPlayerList(
-				getActivity());
+		((CharacterSheetActivity) getActivity()).getCharacter().setSize(pos);
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 	}
 
 	public void onNothingSelected(AdapterView<?> parent) {
@@ -269,7 +298,7 @@ public class NameFragment extends CharacterUpdaterFragment implements
 
 	@Override
 	public void preUpdate() {
-		if (CharacterSheetActivity.getCharacter() != null) {
+		if (((CharacterSheetActivity) getActivity()).getCharacter() != null) {
 			Log.d("CharacterSheet", "pushing fields");
 			pushFieldsToCharacter();
 		}

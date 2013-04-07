@@ -2,14 +2,27 @@ package org.elteano.charactersheet;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class AbilityScore {
+public class AbilityScore implements Parcelable {
 
 	private static final String BASE_VALUE = "org.elteano.charactersheet.AbilityScore.baseValue";
 	private static final String TEMP_ADJUSTMENT = "org.elteano.charactersheet.AbilityScore.tempAdjustment";
 
 	private int baseValue;
 	private int tempAdjustment;
+
+	public static final Parcelable.Creator<AbilityScore> CREATOR = new Parcelable.Creator<AbilityScore>() {
+
+		public AbilityScore createFromParcel(Parcel source) {
+			return new AbilityScore(source.readInt(), source.readInt());
+		}
+
+		public AbilityScore[] newArray(int size) {
+			return new AbilityScore[size];
+		}
+	};
 
 	public AbilityScore(int baseValue) {
 		this(baseValue, 0);
@@ -83,5 +96,14 @@ public class AbilityScore {
 			return "+" + getTempModifier();
 		else
 			return "" + getTempModifier();
+	}
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel arg0, int arg1) {
+		arg0.writeInt(baseValue);
+		arg0.writeInt(tempAdjustment);
 	}
 }

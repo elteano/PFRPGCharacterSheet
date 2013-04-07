@@ -19,20 +19,43 @@ public class DefenseFragment extends CharacterUpdaterFragment implements
 	private static final int REQUEST_WILL = 4;
 
 	private void fillFields() {
+		ArmorClass ac = ((CharacterSheetActivity) getActivity()).getCharacter()
+				.getAC();
+		AbilityScore[] abilities = ((CharacterSheetActivity) getActivity())
+				.getCharacter().getAbilities();
+		int size = ((CharacterSheetActivity) getActivity()).getCharacter()
+				.getSize();
+		int bab = ((CharacterSheetActivity) getActivity()).getCharacter()
+				.getBAB();
 		((Button) getView().findViewById(R.id.fragment_defense_ac_button))
-				.setText("" + CharacterSheetActivity.getCharacter().getAC().getAC());
+				.setText("" + ac.getAC(abilities, size, bab));
 		((Button) getView().findViewById(R.id.fragment_defense_cmd_button))
-				.setText("" + CharacterSheetActivity.getCharacter().getAC().getCMD());
+				.setText("" + ac.getCMD(abilities, size, bab));
 		((Button) getView()
 				.findViewById(R.id.fragment_defense_fortitude_button))
 				.setText(""
-						+ CharacterSheetActivity.getCharacter().getFort().getTotal());
+						+ ((CharacterSheetActivity) getActivity())
+								.getCharacter()
+								.getFort()
+								.getTotal(
+										((CharacterSheetActivity) getActivity())
+												.getCharacter().getAbilities()));
 		((Button) getView().findViewById(R.id.fragment_defense_reflex_button))
 				.setText(""
-						+ CharacterSheetActivity.getCharacter().getRef().getTotal());
+						+ ((CharacterSheetActivity) getActivity())
+								.getCharacter()
+								.getRef()
+								.getTotal(
+										((CharacterSheetActivity) getActivity())
+												.getCharacter().getAbilities()));
 		((Button) getView().findViewById(R.id.fragment_defense_will_button))
 				.setText(""
-						+ CharacterSheetActivity.getCharacter().getWill().getTotal());
+						+ ((CharacterSheetActivity) getActivity())
+								.getCharacter()
+								.getWill()
+								.getTotal(
+										((CharacterSheetActivity) getActivity())
+												.getCharacter().getAbilities()));
 	}
 
 	private void hookupListeners() {
@@ -55,23 +78,27 @@ public class DefenseFragment extends CharacterUpdaterFragment implements
 			switch (requestCode) {
 			case REQUEST_AC:
 			case REQUEST_CMD:
-				CharacterSheetActivity.getCharacter().setAC((ArmorClass) data
-						.getExtras().getParcelable("result"));
+				((CharacterSheetActivity) getActivity()).getCharacter().setAC(
+						(ArmorClass) data.getExtras().getParcelable("result"));
 				break;
 			case REQUEST_FORT:
-				CharacterSheetActivity.getCharacter().setFort((Save) data
-						.getExtras().getParcelable("result"));
+				((CharacterSheetActivity) getActivity())
+						.getCharacter()
+						.setFort(
+								(Save) data.getExtras().getParcelable("result"));
 				break;
 			case REQUEST_REF:
-				CharacterSheetActivity.getCharacter().setRef((Save) data.getExtras()
-						.getParcelable("result"));
+				((CharacterSheetActivity) getActivity()).getCharacter().setRef(
+						(Save) data.getExtras().getParcelable("result"));
 				break;
 			case REQUEST_WILL:
-				CharacterSheetActivity.getCharacter().setWill((Save) data
-						.getExtras().getParcelable("result"));
+				((CharacterSheetActivity) getActivity())
+						.getCharacter()
+						.setWill(
+								(Save) data.getExtras().getParcelable("result"));
 				break;
 			}
-			CharacterSheetActivity.getCharacter()
+			((CharacterSheetActivity) getActivity()).getCharacter()
 					.saveSelfByPlayerList(getActivity());
 		}
 		super.onActivityResult(requestCode, resultCode, data);
@@ -79,27 +106,36 @@ public class DefenseFragment extends CharacterUpdaterFragment implements
 
 	public void onClick(View source) {
 		Intent intent = new Intent(getActivity(), SaveEditActivity.class);
+		intent.putExtra(SaveEditActivity.INPUT_ABILITIES,
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.getAbilities());
 		int request = -1;
 		switch (source.getId()) {
 		case R.id.fragment_defense_ac_button:
+		case R.id.fragment_defense_cmd_button:
+			// Both of these should lead to ACEditActivity
 			intent = new Intent(getActivity(), ACEditActivity.class);
-			intent.putExtra("input", CharacterSheetActivity.getCharacter().getAC());
+			intent.putExtra("input", ((CharacterSheetActivity) getActivity())
+					.getCharacter().getAC());
+			intent.putExtra(ACEditActivity.INPUT_ABILITIES,
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.getAbilities());
 			request = REQUEST_AC;
 			startActivityForResult(intent, request);
 			return;
-		case R.id.fragment_defense_cmd_button:
-			request = REQUEST_CMD;
-			return;
 		case R.id.fragment_defense_fortitude_button:
-			intent.putExtra("input", CharacterSheetActivity.getCharacter().getFort());
+			intent.putExtra("input", ((CharacterSheetActivity) getActivity())
+					.getCharacter().getFort());
 			request = REQUEST_FORT;
 			break;
 		case R.id.fragment_defense_reflex_button:
-			intent.putExtra("input", CharacterSheetActivity.getCharacter().getRef());
+			intent.putExtra("input", ((CharacterSheetActivity) getActivity())
+					.getCharacter().getRef());
 			request = REQUEST_REF;
 			break;
 		case R.id.fragment_defense_will_button:
-			intent.putExtra("input", CharacterSheetActivity.getCharacter().getWill());
+			intent.putExtra("input", ((CharacterSheetActivity) getActivity())
+					.getCharacter().getWill());
 			request = REQUEST_WILL;
 			break;
 		}

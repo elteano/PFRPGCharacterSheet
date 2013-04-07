@@ -1,5 +1,7 @@
 package org.elteano.charactersheet;
 
+import java.util.Locale;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -54,14 +56,12 @@ public class Attack implements Parcelable {
 		return 0;
 	}
 
-	public String toDescriptionString() {
+	public String toDescriptionString(AbilityScore[] abilities, int bab) {
 		int attackTotal = addAttack
-				+ CharacterSheetActivity.getCharacter()
-						.getAbility(baseAttackAbility).getTempModifier()
-				+ CharacterSheetActivity.getCharacter().getBAB();
+				+ abilities[baseAttackAbility].getTempModifier() + bab;
 		String attackBonus = (attackTotal <= 0) ? "" : "+";
 		attackBonus += attackTotal;
-		int damageTotal = getDamageMod();
+		int damageTotal = getDamageMod(abilities);
 		String damageBonus = ((damageTotal > 0) ? "+" : "") + damageTotal;
 		return String.format("%s %s (%s %s)", name, attackBonus, damageDie,
 				damageBonus);
@@ -70,7 +70,7 @@ public class Attack implements Parcelable {
 	public String toStorageString() {
 		if (description.isEmpty())
 			description = " ";
-		return String.format(
+		return String.format(Locale.getDefault(),
 				"%1$s%7$s%2$d%7$s%3$d%7$s%4$d%7$s%5$d%7$s%6$s%7$s%8$s", name,
 				baseAttackAbility, baseDamageAbility, addAttack, addDamage,
 				damageDie, PlayerCharacter.SPLITTER_SMALL, description);
@@ -86,9 +86,9 @@ public class Attack implements Parcelable {
 		out.writeString(description);
 	}
 
-	private int getDamageMod() {
+	private int getDamageMod(AbilityScore[] abilities) {
 		return addDamage
-				+ ((baseDamageAbility != 6) ? CharacterSheetActivity.getCharacter()
-						.getAbility(baseDamageAbility).getTempModifier() : 0);
+				+ ((baseDamageAbility != 6) ? abilities[baseDamageAbility]
+						.getTempModifier() : 0);
 	}
 }

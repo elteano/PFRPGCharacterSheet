@@ -22,13 +22,19 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 	private void fillFields() {
 		EditText et = (EditText) getView().findViewById(
 				R.id.fragment_stats_current_hp_field);
-		et.setText("" + CharacterSheetActivity.getCharacter().getHPCurrent());
+		et.setText(""
+				+ ((CharacterSheetActivity) getActivity()).getCharacter()
+						.getHPCurrent());
 		et = (EditText) getView().findViewById(
 				R.id.fragment_stats_rolled_hp_field);
-		et.setText("" + CharacterSheetActivity.getCharacter().getHPRolled());
+		et.setText(""
+				+ ((CharacterSheetActivity) getActivity()).getCharacter()
+						.getHPRolled());
 		et = (EditText) getView().findViewById(
 				R.id.fragment_stats_misc_init_bonus_field);
-		et.setText("" + CharacterSheetActivity.getCharacter().getMiscInitBonus());
+		et.setText(""
+				+ ((CharacterSheetActivity) getActivity()).getCharacter()
+						.getMiscInitBonus());
 	}
 
 	private void hookupClickListeners() {
@@ -78,8 +84,9 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 
 			@Override
 			public void numberChanged(int newNumber) {
-				CharacterSheetActivity.getCharacter().setHPCurrent(newNumber);
-				CharacterSheetActivity.getCharacter()
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.setHPCurrent(newNumber);
+				((CharacterSheetActivity) getActivity()).getCharacter()
 						.saveSelfByPlayerList(getActivity());
 			}
 		};
@@ -87,11 +94,13 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 
 			@Override
 			public void numberChanged(int newNumber) {
-				CharacterSheetActivity.getCharacter().setHPRolled(newNumber);
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.setHPRolled(newNumber);
 				((Button) getView().findViewById(
 						R.id.fragment_stats_max_hp_button)).setText(""
-						+ CharacterSheetActivity.getCharacter().getHPMax());
-				CharacterSheetActivity.getCharacter()
+						+ ((CharacterSheetActivity) getActivity())
+								.getCharacter().getHPMax());
+				((CharacterSheetActivity) getActivity()).getCharacter()
 						.saveSelfByPlayerList(getActivity());
 			}
 		};
@@ -99,8 +108,9 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 
 			@Override
 			public void numberChanged(int newNumber) {
-				CharacterSheetActivity.getCharacter().setInitBonus(newNumber);
-				CharacterSheetActivity.getCharacter()
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.setInitBonus(newNumber);
+				((CharacterSheetActivity) getActivity()).getCharacter()
 						.saveSelfByPlayerList(getActivity());
 				updateButtons();
 			}
@@ -112,7 +122,8 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 	 * Updates all of the display buttons within the StatsFragment.
 	 */
 	public void updateButtons() {
-		PlayerCharacter c = CharacterSheetActivity.getCharacter();
+		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
+				.getCharacter();
 		if (getView() == null)
 			Log.d("CharacterSheet", "Error, view null");
 		((Button) getView().findViewById(R.id.cha_button)).setText(c
@@ -128,9 +139,13 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 		((Button) getView().findViewById(R.id.wis_button)).setText(c
 				.getAbility(PlayerCharacter.ABILITY_WIS).toString());
 		((Button) getView().findViewById(R.id.fragment_stats_init_bonus_button))
-				.setText("" + CharacterSheetActivity.getCharacter().getInitiative());
+				.setText(""
+						+ ((CharacterSheetActivity) getActivity())
+								.getCharacter().getInitiative());
 		((Button) getView().findViewById(R.id.fragment_stats_max_hp_button))
-				.setText("" + CharacterSheetActivity.getCharacter().getHPMax());
+				.setText(""
+						+ ((CharacterSheetActivity) getActivity())
+								.getCharacter().getHPMax());
 
 		// Update temporary bonus labels
 		for (int i = 0; i < 6; i++) {
@@ -157,8 +172,8 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 			}
 			if (id != 0) {
 				TextView tv = (TextView) getView().findViewById(id);
-				if (CharacterSheetActivity.getCharacter().getAbility(i)
-						.getTempAdjustment() != 0) {
+				if (((CharacterSheetActivity) getActivity()).getCharacter()
+						.getAbility(i).getTempAdjustment() != 0) {
 					if (!tv.getText().toString().contains("*"))
 						tv.setText("*" + tv.getText().toString());
 				} else if (tv.getText().toString().startsWith("*"))
@@ -171,7 +186,8 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 		Intent intent = new Intent(getActivity(), ModValueEditActivity.class);
 		intent.putExtra("Ability", view.getId());
 		Bundle b = new Bundle();
-		PlayerCharacter c = CharacterSheetActivity.getCharacter();
+		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
+				.getCharacter();
 		switch (view.getId()) {
 		case R.id.cha_button:
 			c.getAbility(PlayerCharacter.ABILITY_CHA).addToBundle(b);
@@ -194,7 +210,8 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 		case R.id.fragment_stats_max_hp_button:
 			((EditText) getView().findViewById(
 					R.id.fragment_stats_current_hp_field)).setText(""
-					+ CharacterSheetActivity.getCharacter().getHPMax());
+					+ ((CharacterSheetActivity) getActivity()).getCharacter()
+							.getHPMax());
 			return;
 		}
 		intent.putExtras(b);
@@ -227,10 +244,11 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 			dest = PlayerCharacter.ABILITY_WIS;
 			break;
 		}
-		CharacterSheetActivity.getCharacter().setAbility(dest,
-				new AbilityScore(data.getExtras()));
+		((CharacterSheetActivity) getActivity()).getCharacter().setAbility(
+				dest, new AbilityScore(data.getExtras()));
 		// updateButtons();
-		CharacterSheetActivity.getCharacter().saveSelfByPlayerList(getActivity());
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 	}
 
 	@Override

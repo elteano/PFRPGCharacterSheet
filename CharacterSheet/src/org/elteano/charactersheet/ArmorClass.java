@@ -58,42 +58,32 @@ public class ArmorClass implements Parcelable {
 		return new ArmorClass(abonus, dbonus, mbonus, sbonus, shield);
 	}
 
-	public int getAC() {
-		return 10
-				+ armorBonus
-				+ miscBonus
-				+ dodgeBonus
-				+ CharacterSheetActivity.getCharacter().getAbility(
-						PlayerCharacter.ABILITY_DEX).getTempModifier()
-				+ getSizeModifier() + getShieldBonus();
+	public int getAC(AbilityScore[] abilities, int size, int bab) {
+		return 10 + armorBonus + miscBonus + dodgeBonus
+				+ abilities[PlayerCharacter.ABILITY_DEX].getTempModifier()
+				+ getSizeModifier(size) + getShieldBonus();
 	}
 
-	public int getCMD() {
-		return getTouchAC()
-				- getSizeModifier()
-				* 2
-				+ CharacterSheetActivity.getCharacter().getBAB()
-				+ CharacterSheetActivity.getCharacter().getAbility(
-						PlayerCharacter.ABILITY_STR).getTempModifier();
+	public int getCMD(AbilityScore[] abilities, int size, int bab) {
+		return getTouchAC(abilities, size, bab) - getSizeModifier(size) * 2
+				+ bab
+				+ abilities[PlayerCharacter.ABILITY_STR].getTempModifier();
 	}
 
-	public int getFlatFootAC() {
-		return getFlatFootTouchAC() + armorBonus + getShieldBonus();
+	public int getFlatFootAC(AbilityScore[] abilities, int size, int bab) {
+		return getFlatFootTouchAC(abilities, size, bab) + armorBonus
+				+ getShieldBonus();
 	}
 
-	public int getFlatFootCMD() {
-		return getFlatFootTouchAC() - getSizeModifier() * 2
-				+ CharacterSheetActivity.getCharacter().getBAB();
+	public int getFlatFootCMD(AbilityScore[] abilities, int size, int bab) {
+		return getFlatFootTouchAC(abilities, size, bab) - getSizeModifier(size)
+				* 2 + bab;
 	}
 
-	public int getShieldlessAC() {
-		return 10
-				+ armorBonus
-				+ miscBonus
-				+ dodgeBonus
-				+ CharacterSheetActivity.getCharacter().getAbility(
-						PlayerCharacter.ABILITY_DEX).getTempModifier()
-				+ getSizeModifier();
+	public int getShieldlessAC(AbilityScore[] abilities, int size, int bab) {
+		return 10 + armorBonus + miscBonus + dodgeBonus
+				+ abilities[PlayerCharacter.ABILITY_DEX].getTempModifier()
+				+ getSizeModifier(size);
 	}
 
 	public int getShieldBonus() {
@@ -103,8 +93,8 @@ public class ArmorClass implements Parcelable {
 			return 0;
 	}
 
-	public static int getSizeModifier() {
-		switch (CharacterSheetActivity.getCharacter().getSize()) {
+	public static int getSizeModifier(int size) {
+		switch (size) {
 		case PlayerCharacter.SIZE_FINE:
 			return 8;
 		case PlayerCharacter.SIZE_DIMINUTIVE:
@@ -126,21 +116,17 @@ public class ArmorClass implements Parcelable {
 		}
 	}
 
-	public int getTouchAC() {
-		return 10
-				+ dodgeBonus
-				+ miscBonus
-				+ CharacterSheetActivity.getCharacter().getAbility(
-						PlayerCharacter.ABILITY_DEX).getTempModifier()
-				+ getSizeModifier();
+	public int getTouchAC(AbilityScore[] abilities, int size, int bab) {
+		return 10 + dodgeBonus + miscBonus
+				+ abilities[PlayerCharacter.ABILITY_DEX].getTempModifier()
+				+ getSizeModifier(size);
 	}
 
-	public int getFlatFootTouchAC() {
+	public int getFlatFootTouchAC(AbilityScore[] abilities, int size, int bab) {
 		return 10
-				+ ((CharacterSheetActivity.getCharacter().getAbility(
-						PlayerCharacter.ABILITY_DEX).getTempModifier() < 0) ? CharacterSheetActivity.getCharacter()
-						.getAbility(PlayerCharacter.ABILITY_DEX)
-						.getTempModifier() : 0) + getSizeModifier() + miscBonus;
+				+ ((abilities[PlayerCharacter.ABILITY_DEX].getTempModifier() < 0) ? abilities[PlayerCharacter.ABILITY_DEX]
+						.getTempModifier() : 0) + getSizeModifier(size)
+				+ miscBonus;
 	}
 
 	public int describeContents() {

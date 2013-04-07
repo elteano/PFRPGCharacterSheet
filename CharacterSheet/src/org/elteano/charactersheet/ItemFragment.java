@@ -34,14 +34,15 @@ public class ItemFragment extends CharacterUpdaterFragment implements
 	private void fillFields() {
 		EditText goldText = (EditText) getView().findViewById(
 				R.id.fragment_item_gold_field);
-		goldText.setText(CharacterSheetActivity.getCharacter().getGold() + "");
+		goldText.setText(((CharacterSheetActivity) getActivity())
+				.getCharacter().getGold() + "");
 	}
 
 	private void fillListings() {
 		TableLayout table = (TableLayout) getView().findViewById(
 				R.id.fragment_item_table);
-		ArrayList<Item> itemList = CharacterSheetActivity.getCharacter()
-				.getItemList();
+		ArrayList<Item> itemList = ((CharacterSheetActivity) getActivity())
+				.getCharacter().getItemList();
 		for (int i = 0; i < itemList.size() - 1; i++) {
 			int swapWith = i;
 			for (int j = i + 1; j < itemList.size(); j++) {
@@ -71,31 +72,35 @@ public class ItemFragment extends CharacterUpdaterFragment implements
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == ItemEditActivity.REQUEST_EDIT_ITEM
 				&& resultCode == ItemEditActivity.RESULT_CANCELED)
-			CharacterSheetActivity.getCharacter().addItem(lastItem);
+			((CharacterSheetActivity) getActivity()).getCharacter().addItem(
+					lastItem);
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (resultCode) {
 		case Activity.RESULT_OK:
 			Item item = data.getParcelableExtra(ItemEditActivity.EXTRA_ITEM);
-			CharacterSheetActivity.getCharacter().addItem(item);
+			((CharacterSheetActivity) getActivity()).getCharacter().addItem(
+					item);
 			lastItem = null;
 			break;
 		}
 		if (getActivity() == null)
 			Log.d("CharacterSheet", "no activity");
-		if (CharacterSheetActivity.getCharacter() == null)
+		if (((CharacterSheetActivity) getActivity()).getCharacter() == null)
 			Log.d("CharacterSheet", "no character");
-		CharacterSheetActivity.getCharacter().saveSelfByPlayerList(getActivity());
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 	}
 
 	public void onClick(View source) {
 		if (source instanceof ItemListing) {
 			ItemListing il = (ItemListing) source;
 			Intent intent = new Intent(getActivity(), ItemEditActivity.class);
-			lastItem = CharacterSheetActivity.getCharacter().getItem(il
-					.getItemName());
+			lastItem = ((CharacterSheetActivity) getActivity()).getCharacter()
+					.getItem(il.getItemName());
 			Log.d("CharacterSheet", "The selected item is " + il.getItemName());
 			Log.d("CharacterSheet", "The found item is " + lastItem.getName());
-			CharacterSheetActivity.getCharacter().removeItem(lastItem);
+			((CharacterSheetActivity) getActivity()).getCharacter().removeItem(
+					lastItem);
 			intent.putExtra(ItemEditActivity.EXTRA_ITEM, lastItem);
 			startActivityForResult(intent, ItemEditActivity.REQUEST_EDIT_ITEM);
 		}
@@ -117,12 +122,13 @@ public class ItemFragment extends CharacterUpdaterFragment implements
 
 			public void afterTextChanged(Editable text) {
 				try {
-					CharacterSheetActivity.getCharacter().setGold(Float
-							.parseFloat(text.toString()));
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.setGold(Float.parseFloat(text.toString()));
 				} catch (NumberFormatException ex) {
-					CharacterSheetActivity.getCharacter().setGold(0);
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.setGold(0);
 				}
-				CharacterSheetActivity.getCharacter()
+				((CharacterSheetActivity) getActivity()).getCharacter()
 						.saveSelfByPlayerList(getActivity());
 			}
 
@@ -176,7 +182,7 @@ public class ItemFragment extends CharacterUpdaterFragment implements
 				R.id.fragment_item_weight_field);
 		if (weight != null)
 			weight.setText(""
-					+ CharacterSheetActivity.getCharacter()
+					+ ((CharacterSheetActivity) getActivity()).getCharacter()
 							.calculateTotalCarriedWeight() + " lbs");
 	}
 

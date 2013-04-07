@@ -65,7 +65,9 @@ public class SkillListing extends TableRow {
 		this.skill = skill;
 		setAbilityUsed(skill.getBaseAbility());
 		setName(skill.getName());
-		int totalMod = skill.getTotalModifier();
+		int totalMod = skill
+				.getTotalModifier(((CharacterSheetActivity) getContext())
+						.getCharacter().getAbilities());
 		String prefix = (totalMod < 0) ? "" : "+";
 		pointsView.setText(prefix + totalMod);
 		updateName();

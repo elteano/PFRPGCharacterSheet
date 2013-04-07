@@ -38,7 +38,8 @@ public class FeatFragment extends CharacterUpdaterFragment implements
 	}
 
 	private void fillListings() {
-		ArrayList<Feat> list = CharacterSheetActivity.getCharacter().getFeatList();
+		ArrayList<Feat> list = ((CharacterSheetActivity) getActivity())
+				.getCharacter().getFeatList();
 		for (int i = 0; i < list.size() - 1; i++) {
 			int swapWith = i;
 			for (int j = i + 1; j < list.size(); j++) {
@@ -59,18 +60,22 @@ public class FeatFragment extends CharacterUpdaterFragment implements
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode != FeatEditActivity.RESULT_CANCELED) {
 			if (lastSelectedView != null)
-				CharacterSheetActivity.getCharacter()
+				((CharacterSheetActivity) getActivity())
+						.getCharacter()
 						.removeFeatByName(lastSelectedView.getText().toString());
 			lastSelectedView = null;
 		}
 		if (resultCode == Activity.RESULT_OK) {
 			String name = data.getExtras().getString(
 					FeatEditActivity.RESULT_KEY_NAME);
-			CharacterSheetActivity.getCharacter().getFeatList().add(
-					new Feat(name, data.getExtras().getString(
+			((CharacterSheetActivity) getActivity())
+					.getCharacter()
+					.getFeatList()
+					.add(new Feat(name, data.getExtras().getString(
 							FeatEditActivity.RESULT_KEY_DESC)));
 		}
-		CharacterSheetActivity.getCharacter().saveSelfByPlayerList(getActivity());
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 	}
 
 	public void onClick(View view) {
@@ -80,10 +85,10 @@ public class FeatFragment extends CharacterUpdaterFragment implements
 		Intent intent = new Intent(getActivity(), FeatEditActivity.class);
 		intent.putExtra(FeatEditActivity.INPUT_KEY_NAME, lastSelectedView
 				.getText().toString());
-		intent.putExtra(
-				FeatEditActivity.INPUT_KEY_DESC,
-				CharacterSheetActivity.getCharacter().getFeat(
-						lastSelectedView.getText().toString()).getDescription());
+		intent.putExtra(FeatEditActivity.INPUT_KEY_DESC,
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.getFeat(lastSelectedView.getText().toString())
+						.getDescription());
 		startActivityForResult(intent, FeatEditActivity.REQUEST_EDIT_FEAT);
 	}
 

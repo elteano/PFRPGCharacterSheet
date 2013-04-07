@@ -66,28 +66,31 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 		int[] inds = new int[0];
 		if (requestCode == REQUEST_EDIT
 				&& resultCode != Activity.RESULT_CANCELED) {
-			inds = findAllIndices(
-					CharacterSheetActivity.getCharacter().getPrepSpells(), lastSpell);
-			CharacterSheetActivity.getCharacter().getSpells().remove(lastSpell);
+			inds = findAllIndices(((CharacterSheetActivity) getActivity())
+					.getCharacter().getPrepSpells(), lastSpell);
+			((CharacterSheetActivity) getActivity()).getCharacter().getSpells()
+					.remove(lastSpell);
 			for (int i = inds.length - 1; i >= 0; i--) {
-				CharacterSheetActivity.getCharacter().getPrepSpells()
-						.remove(inds[i]);
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.getPrepSpells().remove(inds[i]);
 			}
 		}
 		switch (resultCode) {
 		case Activity.RESULT_CANCELED:
 			break;
 		case Activity.RESULT_OK:
-			CharacterSheetActivity.getCharacter().getSpells().add(
-					(Spell) data.getExtras().getParcelable("result"));
+			((CharacterSheetActivity) getActivity()).getCharacter().getSpells()
+					.add((Spell) data.getExtras().getParcelable("result"));
 			for (int i = 0; i < inds.length; i++)
-				CharacterSheetActivity.getCharacter().getPrepSpells().add(
-						(Spell) data.getExtras().getParcelable("result"));
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.getPrepSpells()
+						.add((Spell) data.getExtras().getParcelable("result"));
 			break;
 		case SpellEditActivity.RESULT_DELETE:
 			break;
 		}
-		CharacterSheetActivity.getCharacter().saveSelfByPlayerList(getActivity());
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
@@ -98,17 +101,17 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 				if (lastView.getParent().equals(
 						(LinearLayout) getView().findViewById(
 								R.id.fragment_spells_full_list_line))) {
-					CharacterSheetActivity.getCharacter().getPrepSpells().add(
-							lastSpell);
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.getPrepSpells().add(lastSpell);
 					clearPrepSpells();
 					fillPrepSpells();
-					CharacterSheetActivity.getCharacter()
+					((CharacterSheetActivity) getActivity()).getCharacter()
 							.saveSelfByPlayerList(getActivity());
 				}
 				return;
 			case R.id.fragment_spells_remove_button:
-				CharacterSheetActivity.getCharacter().getPrepSpells().remove(
-						lastSpell);
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.getPrepSpells().remove(lastSpell);
 				if (lastView.getParent().equals(
 						getView().findViewById(
 								R.id.fragment_spells_prep_list_line))) {
@@ -117,7 +120,7 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 				}
 				clearPrepSpells();
 				fillPrepSpells();
-				CharacterSheetActivity.getCharacter()
+				((CharacterSheetActivity) getActivity()).getCharacter()
 						.saveSelfByPlayerList(getActivity());
 				return;
 			}
@@ -125,12 +128,16 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 			TextView tv = (TextView) v;
 			String name = tv.getText().toString()
 					.substring(tv.getText().toString().indexOf('-') + 1).trim();
-			for (Spell s : CharacterSheetActivity.getCharacter().getSpells()) {
+			for (Spell s : ((CharacterSheetActivity) getActivity())
+					.getCharacter().getSpells()) {
 				if (s.name.equals(name)) {
 					if (v.equals(lastView)) {
 						Intent intent = new Intent(getActivity(),
 								SpellEditActivity.class);
 						intent.putExtra("input", lastSpell);
+						intent.putExtra(SpellEditActivity.SPELL_ABILITY_IN,
+								((CharacterSheetActivity) getActivity())
+										.getCharacter().getAbilities());
 						startActivityForResult(intent, REQUEST_EDIT);
 						return;
 					}
@@ -146,7 +153,7 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 					return;
 				}
 			}
-			CharacterSheetActivity.getCharacter()
+			((CharacterSheetActivity) getActivity()).getCharacter()
 					.saveSelfByPlayerList(getActivity());
 		}
 	}
@@ -186,6 +193,9 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 		switch (item.getItemId()) {
 		case R.id.fragment_spells_add_spell:
 			Intent intent = new Intent(getActivity(), SpellEditActivity.class);
+			intent.putExtra(SpellEditActivity.SPELL_ABILITY_IN,
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.getAbilities());
 			startActivityForResult(intent, REQUEST_NEW);
 			return true;
 		}
@@ -213,7 +223,8 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 	}
 
 	public void fillKnownSpells() {
-		ArrayList<Spell> list = CharacterSheetActivity.getCharacter().getSpells();
+		ArrayList<Spell> list = ((CharacterSheetActivity) getActivity())
+				.getCharacter().getSpells();
 		for (int i = 0; i < list.size() - 1; i++) {
 			int swapWith = i;
 			for (int j = i + 1; j < list.size(); j++) {
@@ -231,8 +242,8 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 	}
 
 	public void fillPrepSpells() {
-		ArrayList<Spell> list = CharacterSheetActivity.getCharacter()
-				.getPrepSpells();
+		ArrayList<Spell> list = ((CharacterSheetActivity) getActivity())
+				.getCharacter().getPrepSpells();
 		for (int i = 0; i < list.size() - 1; i++) {
 			int swapWith = i;
 			for (int j = i + 1; j < list.size(); j++) {

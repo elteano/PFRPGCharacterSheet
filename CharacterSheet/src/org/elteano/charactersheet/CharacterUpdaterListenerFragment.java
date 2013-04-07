@@ -37,8 +37,8 @@ public abstract class CharacterUpdaterListenerFragment extends Fragment {
 
 	public void postUpdateOthers(CharacterUpdaterFragment source) {
 		for (CharacterUpdaterFragment frag : children) {
-//			if (!frag.equals(source))
-				frag.updateDisplay();
+			// if (!frag.equals(source))
+			frag.updateDisplay();
 		}
 	}
 
@@ -46,10 +46,10 @@ public abstract class CharacterUpdaterListenerFragment extends Fragment {
 		for (CharacterUpdaterFragment frag : children) {
 			frag.preUpdate();
 		}
-		CharacterSheetActivity.getCharacter().saveSelfByPlayerList(
-				getActivity());
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 		for (CharacterUpdaterFragment frag : children) {
-//			if (!frag.equals(source))
+			if (!frag.equals(source))
 				frag.updateDisplay();
 		}
 	}

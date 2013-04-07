@@ -38,7 +38,8 @@ public class CFeatFragment extends CharacterUpdaterFragment implements
 	}
 
 	private void fillListings() {
-		ArrayList<Feat> list = CharacterSheetActivity.getCharacter().getCFeatList();
+		ArrayList<Feat> list = ((CharacterSheetActivity) getActivity())
+				.getCharacter().getCFeatList();
 		for (int i = 0; i < list.size() - 1; i++) {
 			int swapWith = i;
 			for (int j = i + 1; j < list.size(); j++) {
@@ -59,19 +60,22 @@ public class CFeatFragment extends CharacterUpdaterFragment implements
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode != CFeatEditActivity.RESULT_CANCELED) {
 			if (lastSelectedView != null)
-				CharacterSheetActivity.getCharacter()
-						.removeCFeatByName(lastSelectedView.getText()
-								.toString());
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.removeCFeatByName(
+								lastSelectedView.getText().toString());
 			lastSelectedView = null;
 		}
 		if (resultCode == Activity.RESULT_OK) {
 			String name = data.getExtras().getString(
 					CFeatEditActivity.RESULT_KEY_NAME);
-			CharacterSheetActivity.getCharacter().getCFeatList().add(
-					new Feat(name, data.getExtras().getString(
+			((CharacterSheetActivity) getActivity())
+					.getCharacter()
+					.getCFeatList()
+					.add(new Feat(name, data.getExtras().getString(
 							CFeatEditActivity.RESULT_KEY_DESC)));
 		}
-		CharacterSheetActivity.getCharacter().saveSelfByPlayerList(getActivity());
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 	}
 
 	public void onClick(View view) {
@@ -81,10 +85,10 @@ public class CFeatFragment extends CharacterUpdaterFragment implements
 		Intent intent = new Intent(getActivity(), CFeatEditActivity.class);
 		intent.putExtra(CFeatEditActivity.INPUT_KEY_NAME, lastSelectedView
 				.getText().toString());
-		intent.putExtra(
-				CFeatEditActivity.INPUT_KEY_DESC,
-				CharacterSheetActivity.getCharacter().getCFeat(
-						lastSelectedView.getText().toString()).getDescription());
+		intent.putExtra(CFeatEditActivity.INPUT_KEY_DESC,
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.getCFeat(lastSelectedView.getText().toString())
+						.getDescription());
 		startActivityForResult(intent, CFeatEditActivity.REQUEST_EDIT_FEAT);
 	}
 

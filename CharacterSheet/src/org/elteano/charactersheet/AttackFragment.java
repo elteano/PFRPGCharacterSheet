@@ -30,7 +30,11 @@ public class AttackFragment extends CharacterUpdaterFragment implements
 
 	public void addAttackListing(Attack attack) {
 		TextView tv = new TextView(getActivity());
-		tv.setText(attack.toDescriptionString());
+		tv.setText(attack.toDescriptionString(
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.getAbilities(),
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.getBAB()));
 		tv.setClickable(true);
 		tv.setWidth(0);
 		tv.setTextSize(24);
@@ -47,13 +51,15 @@ public class AttackFragment extends CharacterUpdaterFragment implements
 
 	private void fillFields() {
 		((EditText) getView().findViewById(R.id.fragment_attack_bab_field))
-				.setText("" + CharacterSheetActivity.getCharacter().getBAB());
+				.setText(""
+						+ ((CharacterSheetActivity) getActivity())
+								.getCharacter().getBAB());
 		updateCMB();
 	}
 
 	private void fillListings() {
-		ArrayList<Attack> list = CharacterSheetActivity.getCharacter()
-				.getAttackList();
+		ArrayList<Attack> list = ((CharacterSheetActivity) getActivity())
+				.getCharacter().getAttackList();
 		for (int i = 0; i < list.size() - 1; i++) {
 			int swapWith = i;
 			for (int j = i + 1; j < list.size(); j++) {
@@ -78,13 +84,15 @@ public class AttackFragment extends CharacterUpdaterFragment implements
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_EDIT
 				&& resultCode == Activity.RESULT_CANCELED)
-			CharacterSheetActivity.getCharacter().addAttack(lastAttack);
+			((CharacterSheetActivity) getActivity()).getCharacter().addAttack(
+					lastAttack);
 		if (resultCode == Activity.RESULT_OK) {
-			CharacterSheetActivity.getCharacter().addAttack((Attack) data
-					.getExtras()
-					.getParcelable(AttackEditActivity.RESULT_STRING));
+			((CharacterSheetActivity) getActivity()).getCharacter().addAttack(
+					(Attack) data.getExtras().getParcelable(
+							AttackEditActivity.RESULT_STRING));
 		}
-		CharacterSheetActivity.getCharacter().saveSelfByPlayerList(getActivity());
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
@@ -98,13 +106,14 @@ public class AttackFragment extends CharacterUpdaterFragment implements
 				return;
 			String newStuff = siftingIsFun.substring(0,
 					siftingIsFun.lastIndexOf(" ")).trim();
-			Attack attack = CharacterSheetActivity.getCharacter()
-					.getAttack(newStuff);
+			Attack attack = ((CharacterSheetActivity) getActivity())
+					.getCharacter().getAttack(newStuff);
 			if (attack != null) {
 				Intent intent = new Intent(getActivity(),
 						AttackEditActivity.class);
 				intent.putExtra("input", lastAttack = attack);
-				CharacterSheetActivity.getCharacter().removeAttack(attack);
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.removeAttack(attack);
 				startActivityForResult(intent, REQUEST_EDIT);
 			}
 		}
@@ -124,12 +133,13 @@ public class AttackFragment extends CharacterUpdaterFragment implements
 
 			public void afterTextChanged(Editable text) {
 				try {
-					CharacterSheetActivity.getCharacter().setBAB(Integer
-							.parseInt(text.toString()));
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.setBAB(Integer.parseInt(text.toString()));
 				} catch (NumberFormatException ex) {
-					CharacterSheetActivity.getCharacter().setBAB(0);
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.setBAB(0);
 				}
-				CharacterSheetActivity.getCharacter()
+				((CharacterSheetActivity) getActivity()).getCharacter()
 						.saveSelfByPlayerList(getActivity());
 				((LinearLayout) getView().findViewById(
 						R.id.fragment_attack_list)).removeAllViews();
@@ -154,7 +164,8 @@ public class AttackFragment extends CharacterUpdaterFragment implements
 	public void onStop() {
 		clearListings();
 		unhookListeners();
-		CharacterSheetActivity.getCharacter().saveSelfByPlayerList(getActivity());
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 		super.onStop();
 	}
 
@@ -184,7 +195,8 @@ public class AttackFragment extends CharacterUpdaterFragment implements
 	}
 
 	private void updateCMB() {
-		int cmb = CharacterSheetActivity.getCharacter().getCMB();
+		int cmb = ((CharacterSheetActivity) getActivity()).getCharacter()
+				.getCMB();
 		String text = ((cmb > 0) ? "+" : "") + cmb;
 		((Button) getView().findViewById(R.id.fragment_attack_cmb_button))
 				.setText("" + text);

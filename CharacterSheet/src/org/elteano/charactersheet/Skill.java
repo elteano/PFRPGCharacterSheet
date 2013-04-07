@@ -105,9 +105,8 @@ public class Skill implements Parcelable {
 		return numRanks;
 	}
 
-	public int getTotalModifier() {
-		return CharacterSheetActivity.getCharacter().getAbility(baseAbility)
-				.getTempModifier() + numRanks + miscMod;
+	public int getTotalModifier(AbilityScore[] abilities) {
+		return abilities[baseAbility].getTempModifier() + numRanks + miscMod;
 	}
 
 	public void setBaseAbility(int baseAbility) {

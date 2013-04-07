@@ -7,11 +7,23 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class HandsetPagerAdapter extends FragmentPagerAdapter {
 
-	private static final Class[] list = { CharacterSelectFragment.class,
-			NameFragment.class, StatsFragment.class, FeatFragment.class,
+	/**
+	 * List of classes to be contained in the pager. Exists mostly for
+	 * convenience. Unfortunately, there is no other method of storing this
+	 * list.
+	 */
+	@SuppressWarnings("rawtypes")
+	private static final Class[] list = {// CharacterSelectFragment.class,
+	NameFragment.class, StatsFragment.class, FeatFragment.class,
 			CFeatFragment.class, SkillFragment.class, ItemFragment.class,
 			AttackFragment.class, DefenseFragment.class, SpellFragment.class };
+	/**
+	 * Activity to which the fragments will be attached.
+	 */
 	private final Activity mActivity;
+	/**
+	 * Array for storing initialized forms of the fragments.
+	 */
 	private Fragment[] frags;
 
 	public HandsetPagerAdapter(FragmentManager fm, Activity activity) {

@@ -26,15 +26,18 @@ public class SkillFragment extends CharacterUpdaterFragment implements
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == SkillEditActivity.REQUEST_EDIT_SKILL
 				&& resultCode != Activity.RESULT_CANCELED)
-			CharacterSheetActivity.getCharacter().removeSkill(lastSkill);
+			((CharacterSheetActivity) getActivity()).getCharacter()
+					.removeSkill(lastSkill);
 		if (resultCode == Activity.RESULT_OK) {
 			lastSkill = null;
 			Skill result = data
 					.getParcelableExtra(SkillEditActivity.RESULT_SKILL);
-			CharacterSheetActivity.getCharacter().addSkill(result);
+			((CharacterSheetActivity) getActivity()).getCharacter().addSkill(
+					result);
 			Log.d("CharacterSheet", result.toSaveString());
 		}
-		CharacterSheetActivity.getCharacter().saveSelfByPlayerList(getActivity());
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
@@ -55,7 +58,8 @@ public class SkillFragment extends CharacterUpdaterFragment implements
 	}
 
 	private void fillListings() {
-		ArrayList<Skill> list = CharacterSheetActivity.getCharacter().getSkillList();
+		ArrayList<Skill> list = ((CharacterSheetActivity) getActivity())
+				.getCharacter().getSkillList();
 		for (int i = 0; i < list.size() - 1; i++) {
 			int swapWith = i;
 			for (int j = i + 1; j < list.size(); j++) {
@@ -105,6 +109,9 @@ public class SkillFragment extends CharacterUpdaterFragment implements
 		switch (item.getItemId()) {
 		case R.id.add_skill:
 			Intent intent = new Intent(getActivity(), SkillEditActivity.class);
+			intent.putExtra(SkillEditActivity.INPUT_ABILITIES,
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.getAbilities());
 			startActivityForResult(intent, SkillEditActivity.REQUEST_NEW_SKILL);
 			return true;
 		default:
@@ -116,6 +123,9 @@ public class SkillFragment extends CharacterUpdaterFragment implements
 		Intent intent = new Intent(getActivity(), SkillEditActivity.class);
 		lastSkill = ((SkillListing) source).getSkill();
 		intent.putExtra(SkillEditActivity.INPUT_SKILL, lastSkill);
+		intent.putExtra(SkillEditActivity.INPUT_ABILITIES,
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.getAbilities());
 		startActivityForResult(intent, SkillEditActivity.REQUEST_EDIT_SKILL);
 	}
 

@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 public class SpellEditActivity extends Activity implements OnClickListener,
 		OnItemSelectedListener {
 
+	public static final String SPELL_ABILITY_IN = "spells";
 	public static final int RESULT_DELETE = 2;
 
 	private IntTextWatcher levelWatcher;
@@ -64,7 +66,14 @@ public class SpellEditActivity extends Activity implements OnClickListener,
 		if (getIntent().hasExtra("input"))
 			mSpell = (Spell) getIntent().getExtras().getParcelable("input");
 		else
-			mSpell = new Spell(0, "", "", 0, 0);
+			mSpell = new Spell(0, "", "", 0, 0, null);
+		AbilityScore[] whyDoINeedThis = new AbilityScore[6];
+		Parcelable[] blorf = getIntent().getParcelableArrayExtra(
+				SPELL_ABILITY_IN);
+		for (int i = 0; i < whyDoINeedThis.length; i++) {
+			whyDoINeedThis[i] = (AbilityScore) blorf[i];
+		}
+		mSpell.setAbilities(whyDoINeedThis);
 	}
 
 	@Override

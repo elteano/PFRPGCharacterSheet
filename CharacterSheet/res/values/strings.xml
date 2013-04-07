@@ -41,6 +41,7 @@
     <string name="cmd">CMD</string>
     <string name="con">CON</string>
     <string name="combat_maneuver_bonus">Combat Maneuver Bonus</string>
+    <string name="cancel">Cancel</string>
     <string name="crash_toast_text">Ooooops ! I crashed, but a report has been sent to my developer to help fix the issue !</string>
     <string name="crash_dialog_title">PFRPG Character Sheet has crashed</string>
     <string name="crash_dialog_text">An unexpected error occurred forcing the
@@ -89,6 +90,7 @@
     <string name="misc_modifiers">Misc. Modifiers</string>
     <string name="misc_mods">Misc. Mods</string>
     <string name="mod_value_done_editing">Done</string>
+    <string name="ok">OK</string>
     <string name="pfor_toast">You need the \'Pathfinder Open Reference\' app by Devon Jones/Masterwork Tools for more information on your selected item.</string>
     <string name="prepared">Prepared</string>
     <string name="reflex">Reflex</string>
@@ -112,6 +114,7 @@
     <string name="str">STR</string>
     <string name="text_ability_modifier">Ability Modifier</string>
     <string name="text_class_levels">Classes/Levels</string>
+    <string name="title_counter">Counters</string>
     <string name="text_skill_ranks">Skill Ranks</string>
     <string name="text_total_modifier">Total Modifier</string>
     <string name="temp_adjust">Temporary Adjustment</string>
@@ -145,6 +148,6 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section1">Section 1</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_character_select">Select a Character</string>
 
 </resources>

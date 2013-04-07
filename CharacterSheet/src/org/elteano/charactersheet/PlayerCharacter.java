@@ -158,6 +158,10 @@ public class PlayerCharacter {
 		return ret;
 	}
 
+	public AbilityScore[] getAbilities() {
+		return abilities;
+	}
+
 	public AbilityScore getAbility(int ability) {
 		try {
 			return abilities[ability];
@@ -196,7 +200,7 @@ public class PlayerCharacter {
 
 	public int getCMB() {
 		return baseAttackBonus + getAbility(ABILITY_STR).getTempModifier()
-				- ArmorClass.getSizeModifier();
+				- ArmorClass.getSizeModifier(getSize());
 	}
 
 	public Feat getFeat(String featName) {
@@ -206,7 +210,7 @@ public class PlayerCharacter {
 		}
 		return null;
 	}
-	
+
 	public Feat getCFeat(String featName) {
 		for (Feat f : cfeats) {
 			if (f.getName().equals(featName))
@@ -218,7 +222,7 @@ public class PlayerCharacter {
 	public ArrayList<Feat> getFeatList() {
 		return feats;
 	}
-	
+
 	public ArrayList<Feat> getCFeatList() {
 		return cfeats;
 	}
@@ -353,7 +357,7 @@ public class PlayerCharacter {
 		if (removeFeat != null)
 			feats.remove(removeFeat);
 	}
-	
+
 	public void removeCFeatByName(String featName) {
 		Feat removeFeat = null;
 		for (Feat f : cfeats)
@@ -409,12 +413,14 @@ public class PlayerCharacter {
 		String s = state.getString(SAVESTATE_SPELLS, "");
 		if (!s.isEmpty())
 			for (String spellString : s.split(SPLITTER_LARGE)) {
-				ret.spells.add(Spell.fromSaveString(spellString));
+				ret.spells.add(Spell.fromSaveString(spellString,
+						ret.getAbilities()));
 			}
 		s = state.getString(SAVESTATE_PREP_SPELLS, "");
 		if (!s.isEmpty())
 			for (String spellString : s.split(SPLITTER_LARGE)) {
-				ret.prepSpells.add(Spell.fromSaveString(spellString));
+				ret.prepSpells.add(Spell.fromSaveString(spellString,
+						ret.getAbilities()));
 			}
 		s = state.getString(SAVESTATE_SKILLS, "");
 		if (!s.isEmpty())

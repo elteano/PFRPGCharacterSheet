@@ -45,7 +45,7 @@ public class PFRPGCharacterSheet extends Application {
 	@Override
 	public void onCreate() {
 		// The following line triggers the initialization of ACRA
-		ACRA.init(this);
+		// ACRA.init(this);
 		super.onCreate();
 	}
 }

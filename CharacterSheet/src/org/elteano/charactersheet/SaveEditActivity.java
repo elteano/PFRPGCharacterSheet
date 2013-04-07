@@ -3,6 +3,7 @@ package org.elteano.charactersheet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,9 +14,12 @@ import android.widget.EditText;
 public class SaveEditActivity extends Activity implements
 		OnCheckedChangeListener {
 
+	public static final String INPUT_ABILITIES = "ablities_in_here_plz";
+
 	private Save mSave;
 	private IntTextWatcher classModWatcher;
 	private IntTextWatcher miscModWatcher;
+	private AbilityScore[] abilities;
 
 	public void onClickDoneButton(View source) {
 		updateByBoxes();
@@ -29,6 +33,12 @@ public class SaveEditActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mSave = (Save) getIntent().getExtras().getParcelable("input");
+		Parcelable[] b = getIntent().getExtras().getParcelableArray(
+				INPUT_ABILITIES);
+		abilities = new AbilityScore[b.length];
+		for (int i = 0; i < b.length; i++) {
+			abilities[i] = (AbilityScore) b[i];
+		}
 		setContentView(R.layout.activity_save_edit);
 		((CheckBox) findViewById(R.id.activity_save_edit_cha_box))
 				.setChecked((mSave.flags & Save.FLAG_CHA) == Save.FLAG_CHA);
@@ -113,6 +123,6 @@ public class SaveEditActivity extends Activity implements
 		mSave.setWis(((CheckBox) findViewById(R.id.activity_save_edit_wis_box))
 				.isChecked());
 		((Button) findViewById(R.id.activity_save_edit_modifier_button))
-				.setText("" + mSave.getTotal());
+				.setText("" + mSave.getTotal(abilities));
 	}
 }

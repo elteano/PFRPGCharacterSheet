@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -30,7 +31,9 @@ public class SkillEditActivity extends Activity implements
 			.getCanonicalName() + ".skill";
 	public static final String RESULT_SKILL = SkillEditActivity.class
 			.getCanonicalName() + ".skill";
+	public static final String INPUT_ABILITIES = "abilities";
 
+	private AbilityScore[] abilities;
 	private TextWatcher nameWatcher;
 	private IntTextWatcher ranksWatcher;
 	private IntTextWatcher miscWatcher;
@@ -39,6 +42,12 @@ public class SkillEditActivity extends Activity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Parcelable[] a_in = getIntent().getExtras().getParcelableArray(
+				INPUT_ABILITIES);
+		abilities = new AbilityScore[6];
+		for (int i = 0; i < a_in.length; i++) {
+			abilities[i] = (AbilityScore) a_in[i];
+		}
 		setContentView(R.layout.activity_skill_edit);
 		if (getIntent().getExtras() != null)
 			mSkill = getIntent().getExtras().getParcelable(INPUT_SKILL);
@@ -118,10 +127,8 @@ public class SkillEditActivity extends Activity implements
 			long id) {
 		mSkill.setBaseAbility(pos);
 		((Button) findViewById(R.id.activity_skill_edit_ability_mod_button))
-				.setText(((CharacterSheetActivity.getCharacter().getAbility(pos)
-						.getTempModifier() < 0) ? "" : "+")
-						+ CharacterSheetActivity.getCharacter().getAbility(pos)
-								.getTempModifier());
+				.setText(((abilities[pos].getTempModifier() < 0) ? "" : "+")
+						+ abilities[pos].getTempModifier());
 		updateTotalModButton();
 	}
 
@@ -181,7 +188,7 @@ public class SkillEditActivity extends Activity implements
 	}
 
 	public void updateTotalModButton() {
-		int totalMod = mSkill.getTotalModifier();
+		int totalMod = mSkill.getTotalModifier(abilities);
 		((Button) findViewById(R.id.activity_skill_edit_total_mod_button))
 				.setText(((totalMod < 0) ? "" : "+") + totalMod);
 	}

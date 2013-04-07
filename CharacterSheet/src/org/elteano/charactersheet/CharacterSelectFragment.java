@@ -3,6 +3,7 @@ package org.elteano.charactersheet;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -37,7 +38,10 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 		editor.commit();
 		ret.saveToSharedPreferences(getActivity().getSharedPreferences(
 				"Character_" + i, Activity.MODE_PRIVATE));
-		CharacterSheetActivity.setCharacter(ret);
+		Intent result = new Intent();
+		result.putExtra("result", ret.getName());
+		((CharacterSelectActivity) getActivity()).setResult(Activity.RESULT_OK,
+				result);
 		// Line removed due to potential issues with other fragments
 		// updateOthers();
 		updateDisplay();
@@ -98,23 +102,33 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 		if (!(view instanceof TextView))
 			return;
 		TextView source = (TextView) view;
-		for (String key : playerList.getAll().keySet()) {
-			if (playerList.getString(key, "").equals(
-					source.getText().toString())) {
-				preUpdateOthers();
-				CharacterSheetActivity.getCharacter().saveSelfByPlayerList(
-						getActivity());
-				CharacterSheetActivity.setCharacter(PlayerCharacter
-						.restoreFromSharedPreferences(getActivity()
-								.getSharedPreferences(key,
-										Activity.MODE_PRIVATE)));
-				getActivity().getActionBar().setTitle(
-						CharacterSheetActivity.getCharacter().getName());
-				postUpdateOthers();
-				return;
-			}
-		}
-		Log.e("CharacterSheet", "No character found for TextView!");
+		// Intent result = new Intent();
+		// result.putExtra("result", source.getText());
+		((CharacterSelectActivity) getActivity()).setResultName(source
+				.getText().toString());
+		((CharacterSelectActivity) getActivity()).setCharacterSelected();
+		// for (String key : playerList.getAll().keySet()) {
+		// if (playerList.getString(key, "").equals(
+		// source.getText().toString())) {
+		// preUpdateOthers();
+		// if (((CharacterSheetActivity) getActivity()).hasCharacter())
+		// {
+		// ((CharacterSheetActivity) getActivity()).getCharacter()
+		// .saveSelfByPlayerList(getActivity());
+		// }
+		// ((CharacterSheetActivity) getActivity())
+		// .setCharacter(PlayerCharacter
+		// .restoreFromSharedPreferences(getActivity()
+		// .getSharedPreferences(key,
+		// Activity.MODE_PRIVATE)));
+		// getActivity().getActionBar().setTitle(
+		// ((CharacterSheetActivity) getActivity()).getCharacter()
+		// .getName());
+		// postUpdateOthers();
+		// return;
+		// }
+		// }
+		// Log.e("CharacterSheet", "No character found for TextView!");
 	}
 
 	@Override
@@ -135,11 +149,11 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 		View ret = inflater.inflate(R.layout.fragment_character_select,
 				container, false);
 		fillList(ret);
-		// if (CharacterSheetActivity.character == null)
+		// if (((CharacterSheetActivity) getActivity()).character == null)
 		// setToFirstCharacter();
-		// if (CharacterSheetActivity.character != null)
+		// if (((CharacterSheetActivity) getActivity()).character != null)
 		// getActivity().getActionBar().setTitle(
-		// CharacterSheetActivity.character.getName());
+		// ((CharacterSheetActivity) getActivity()).character.getName());
 		return ret;
 	}
 
@@ -152,29 +166,29 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 			postUpdateOthers();
 			return true;
 		case R.id.fragment_character_select_menu_remove_character:
-			if (CharacterSheetActivity.getCharacter() == null)
+			if (!((CharacterSheetActivity) getActivity()).hasCharacter())
 				Log.v("CharacterSheet", "No character selected; nothing done.");
 			else {
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						getActivity());
 				builder.setMessage(
 						"Delete "
-								+ CharacterSheetActivity.getCharacter()
-										.getName() + "?")
+								+ ((CharacterSheetActivity) getActivity())
+										.getCharacter().getName() + "?")
 						.setCancelable(false)
 						.setPositiveButton("Yes",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int id) {
 										preUpdateOthers();
-										removeCharacter(CharacterSheetActivity
+										removeCharacter(((CharacterSheetActivity) getActivity())
 												.getCharacter().getName());
-										removeCharacterListing(CharacterSheetActivity
+										removeCharacterListing(((CharacterSheetActivity) getActivity())
 												.getCharacter().getName());
 										if (playerList.getAll().isEmpty())
 											addCharacterListing(addCharacter());
 										else {
-											CharacterSheetActivity
+											((CharacterSheetActivity) getActivity())
 													.setCharacter(PlayerCharacter
 															.restoreFromSharedPreferences(getActivity()
 																	.getSharedPreferences(
@@ -186,7 +200,7 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 											getActivity()
 													.getActionBar()
 													.setTitle(
-															CharacterSheetActivity
+															((CharacterSheetActivity) getActivity())
 																	.getCharacter()
 																	.getName());
 											postUpdateOthers();
@@ -249,29 +263,29 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 	@Override
 	public void onStart() {
 		super.onStart();
-		if (CharacterSheetActivity.getCharacter() == null)
-			setToFirstCharacter();
-		getActivity().getActionBar().setTitle(
-				CharacterSheetActivity.getCharacter().getName());
+		// if (!((CharacterSheetActivity) getActivity()).hasCharacter())
+		// setToFirstCharacter();
+		// getActivity().getActionBar().setTitle(
+		// ((CharacterSheetActivity) getActivity()).getCharacter().getName());
 	}
 
 	@Override
 	public void onStop() {
-		if (CharacterSheetActivity.getCharacter() == null)
-			setToFirstCharacter();
 		super.onStop();
 	}
 
 	private void setToFirstCharacter() {
 		if (playerList.getAll().isEmpty())
-			CharacterSheetActivity.setCharacter(addCharacter());
+			((CharacterSheetActivity) getActivity())
+					.setCharacter(addCharacter());
 		else
-			CharacterSheetActivity.setCharacter(PlayerCharacter
-					.restoreFromSharedPreferences(getActivity()
-							.getSharedPreferences(
-									(String) playerList.getAll().keySet()
-											.toArray()[0],
-									Activity.MODE_PRIVATE)));
+			((CharacterSheetActivity) getActivity())
+					.setCharacter(PlayerCharacter
+							.restoreFromSharedPreferences(getActivity()
+									.getSharedPreferences(
+											(String) playerList.getAll()
+													.keySet().toArray()[0],
+											Activity.MODE_PRIVATE)));
 	}
 
 	@Override

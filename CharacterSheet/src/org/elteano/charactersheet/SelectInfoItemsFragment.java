@@ -24,9 +24,9 @@ public class SelectInfoItemsFragment extends CharacterUpdaterListenerFragment {
 		FragmentTransaction ft = ((FragmentActivity) getActivity())
 				.getSupportFragmentManager().beginTransaction();
 		if (noChildren()) {
-			CharacterSelectFragment csf = new CharacterSelectFragment();
-			ft.replace(R.id.left_fragment_space, csf);
-			addListeningChild(csf);
+			//CharacterSelectFragment csf = new CharacterSelectFragment();
+			//ft.replace(R.id.left_fragment_space, csf);
+			//addListeningChild(csf);
 			NameFragment nf = new NameFragment();
 			ft.replace(R.id.center_fragment_space, nf);
 			addListeningChild(nf);

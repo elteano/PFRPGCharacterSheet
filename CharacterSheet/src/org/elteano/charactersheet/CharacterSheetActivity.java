@@ -2,6 +2,7 @@ package org.elteano.charactersheet;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -10,21 +11,34 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.MenuItem;
 
 public class CharacterSheetActivity extends FragmentActivity {
 
+	public static final String CHARACTER_LIST_PREFERENCE = CharacterSheetActivity.PREFERENCES_PREFIX
+			+ "CharacterNames";
 	public static final String PREFERENCES_PREFIX = "org.elteano.charactersheet.prefs.";
 	private static final String INSTANCESTATE_CHARNAME = CharacterSheetActivity.class
 			.getCanonicalName() + ".charName";
-	private static PlayerCharacter character;
+	private static final String INSTANCESTATE_INITIALIZED = "initialized";
+	private PlayerCharacter character;
 	private ViewPager mViewPager;
 	private FragmentPagerAdapter mAdapter;
+	// Really bad coding
+	private boolean initialized = false;
 
 	private void addHandsetTabs() {
 		ActionBar actionBar = getActionBar();
-		actionBar.addTab(actionBar.newTab()
-				.setText(R.string.title_character_select)
-				.setIcon(R.drawable.ic_list).setTabListener(new TabListener()));
+		// actionBar.addTab(actionBar.newTab().setText(R.string.title_counter)
+		// set icon
+		// .setTabListener(new TabListener())
+		// this will be counter, but moved to a different position
+		// );
+		// Not doing this one anymore
+		// actionBar.addTab(actionBar.newTab()
+		// .setText(R.string.title_character_select)
+		// .setIcon(R.drawable.ic_list).setTabListener(new TabListener()));
 		// .setTabListener(
 		// new TabListener<CharacterSelectFragment>(this,
 		// "select", CharacterSelectFragment.class)));
@@ -118,13 +132,45 @@ public class CharacterSheetActivity extends FragmentActivity {
 		// mAdapter = new TabletPagerAdapter(getSupportFragmentManager(), this);
 	}
 
-	public static PlayerCharacter getCharacter() {
-//		if (character != null)
-			return character;
+	public synchronized PlayerCharacter getCharacter() {
+		// if (character == null) {
+		// Intent intent = new Intent(this, CharacterSelectActivity.class);
+		// startActivityForResult(intent, 0);
+		// }
+		return character;
 	}
 
-	public static void setCharacter(PlayerCharacter character) {
-		CharacterSheetActivity.character = character;
+	public boolean hasCharacter() {
+		return character != null;
+	}
+
+	/*
+	 * The following method is a relic from when this class was the root
+	 * activity. This code was part of a malfunctioning system. The setup has
+	 * since been changed so that CharacterSelectActivity is the root activity.
+	 */
+	// public void onActivityResult(int requestCode, int resultCode, Intent i) {
+	// SharedPreferences playerList = getSharedPreferences(
+	// CHARACTER_LIST_PREFERENCE, FragmentActivity.MODE_PRIVATE);
+	// String name = i.getStringExtra("result");
+	// for (String key : playerList.getAll().keySet()) {
+	// if (playerList.getString(key, "").equals(name)) {
+	// // if (hasCharacter()) {
+	// // getCharacter().saveSelfByPlayerList(this);
+	// // }
+	// setCharacter(PlayerCharacter
+	// .restoreFromSharedPreferences(getSharedPreferences(key,
+	// FragmentActivity.MODE_PRIVATE)));
+	// getActionBar().setTitle(getCharacter().getName());
+	// break;
+	// }
+	// }
+	// Log.i("CharacterSheet",
+	// "Character has been set to " + character.getName());
+	// }
+
+	public void setCharacter(PlayerCharacter character) {
+		this.character = character;
 	}
 
 	/**
@@ -133,8 +179,35 @@ public class CharacterSheetActivity extends FragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.i("CharacterSheet", "Entering CharacterSheetActivity.onCreate()");
 		// This is not used, as the root display will be the current fragment
 
+		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		if (getIntent().getStringExtra("result") != null) {
+			Log.i("CharacterSheet", "Character name found.");
+			setCharacter(PlayerCharacter.restoreByPlayerList(this, getIntent()
+					.getStringExtra("result")));
+			Log.i("CharacterSheet", "hasCharacter(): " + hasCharacter());
+		}
+
+		if (savedInstanceState == null) {
+		} else {
+			// Moved here from onRestoreInstanceState
+			if (savedInstanceState.containsKey(INSTANCESTATE_CHARNAME)) {
+				setCharacter(PlayerCharacter.restoreByPlayerList(this,
+						savedInstanceState.getString(INSTANCESTATE_CHARNAME)));
+			}
+			initialized = savedInstanceState.getBoolean(
+					INSTANCESTATE_INITIALIZED, false);
+		}
+
+		initialize();
+		Log.i("CharacterSheet", "Exiting CharacterSheetActivity.onCreate()");
+	}
+
+	private void initialize() {
+		Log.i("CharacterSheet", "Entering initialize()");
 		// setup action bar for tabs
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -146,7 +219,7 @@ public class CharacterSheetActivity extends FragmentActivity {
 				& Configuration.SCREENLAYOUT_SIZE_MASK;
 		if (screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_SMALL
 				|| screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 			setContentView(R.layout.activity_charactersheet);
 			mViewPager = (ViewPager) findViewById(R.id.pager);
 			addHandsetTabs();
@@ -172,36 +245,79 @@ public class CharacterSheetActivity extends FragmentActivity {
 			mViewPager.setAdapter(mAdapter);
 		} else {
 			addTabletTabs();
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 		}
+		initialized = true;
+		Log.i("CharacterSheet", "Exiting initialize()");
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// This is called when the Home (Up) button is pressed
+			// in the Action Bar.
+			Intent parentActivityIntent = new Intent(this,
+					CharacterSelectActivity.class);
+			parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+					| Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(parentActivityIntent);
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		Log.i("CharacterSheet", "Entering onRestoreInstanceState()");
+		if (savedInstanceState.containsKey("Tab"))
+			getActionBar().setSelectedNavigationItem(
+					savedInstanceState.getInt("Tab"));
 		super.onRestoreInstanceState(savedInstanceState);
-		setCharacter(PlayerCharacter.restoreByPlayerList(this,
-				savedInstanceState.getString(INSTANCESTATE_CHARNAME)));
-		getActionBar().setSelectedNavigationItem(
-				savedInstanceState.getInt("Tab"));
+		Log.i("CharacterSheet", "Exiting onRestoreInstanceState");
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
+		// Came from StackOverflow, not entirely sure if this does anything
+		// outState.putString("WORKAROUND_FOR_BUG_19917_KEY",
+		// "WORKAROUND_FOR_BUG_19917_VALUE");
+		Log.i("CharacterSheet", "Main activity is saving instance state.");
 		super.onSaveInstanceState(outState);
-		outState.putString(INSTANCESTATE_CHARNAME, getCharacter().getName());
-		outState.putInt("Tab", getActionBar().getSelectedNavigationIndex());
+		if (hasCharacter()) {
+			outState.putString(INSTANCESTATE_CHARNAME, getCharacter().getName());
+		}
+		if (initialized)
+			outState.putInt("Tab", getActionBar().getSelectedNavigationIndex());
+		outState.putBoolean(INSTANCESTATE_INITIALIZED, initialized);
+		Log.i("CharacterSheet", "Instance state saved.");
 	}
 
 	@Override
 	protected void onStart() {
+		Log.i("CharacterSheet", "Entering onStart()");
 		super.onStart();
-		if (getCharacter() != null)
+		// if (!hasCharacter()) {
+		// Intent intent = new Intent(this, CharacterSelectActivity.class);
+		// intent.putExtra(CharacterSelectActivity.INPUT_CHAR_REQUIRED, true);
+		// startActivityForResult(intent, 0);
+		// }
+		// if (!initialized)
+		// initialize();
+		Log.i("CharacterSheet", "Exiting onStart()");
+	}
+
+	protected void onResume() {
+		Log.i("CharacterSheet", "Entering onResume()");
+		super.onResume();
+		if (hasCharacter())
 			getActionBar().setTitle(getCharacter().getName());
+		Log.i("CharacterSheet", "Exiting onResume()");
 	}
 
 	@Override
 	protected void onStop() {
-		if (getCharacter() != null) {
+		if (hasCharacter()) {
 			getCharacter().saveSelfByPlayerList(this);
 		}
 		super.onStop();
@@ -259,6 +375,7 @@ public class CharacterSheetActivity extends FragmentActivity {
 
 		/* The following are each of the ActionBar.TabListener callbacks */
 		public void onTabSelected(Tab tab, android.app.FragmentTransaction fut) {
+			Log.i("CharacterSheet", "Entering onTabSelected()");
 			FragmentTransaction ft = mActivity.getSupportFragmentManager()
 					.beginTransaction();
 			// Check if the fragment is already initialized
@@ -270,7 +387,11 @@ public class CharacterSheetActivity extends FragmentActivity {
 				// If it exists, simply attach it in order to show it
 				ft.attach(mFragment);
 			}
-			ft.commit();
+			Log.i("CharacterSheet", "mActivity == null: " + (mActivity == null));
+			Log.i("CharacterSheet", "mActivity.getClass() returns: "
+					+ mActivity.getClass());
+			ft.commitAllowingStateLoss();
+			Log.i("CharacterSheet", "Exiting onTabSelected()");
 		}
 
 		public void onTabUnselected(Tab tab, android.app.FragmentTransaction fut) {
