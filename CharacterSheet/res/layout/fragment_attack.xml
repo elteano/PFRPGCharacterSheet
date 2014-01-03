@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:clickable="false" />
+        android:clickable="true" />
 
     <TextView
         android:id="@+id/fragment_attack_cmb_text"
@@ -27,8 +27,10 @@
         android:id="@+id/fragment_attack_bab_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/fragment_attack_bab_field"
+        android:layout_above="@+id/fragment_attack_bab_field"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
         android:text="@string/base_attack_bonus"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -36,17 +38,37 @@
         android:id="@+id/fragment_attack_bab_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/fragment_attack_cmb_button"
-        android:layout_alignParentRight="true"
+        android:layout_above="@+id/fragment_attack_cmb_button"
+        android:layout_alignParentLeft="true"
         android:ems="@integer/ems_standard"
         android:hint="@string/z0"
         android:inputType="number" />
+
+    <TextView
+        android:id="@+id/fragment_attack_bab_full"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_attack_bab_field"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/fragment_attack_bab_field"
+        android:gravity="right"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <!--
+    <Button
+        android:id="@+id/fragment_attack_bab_info_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_attack_bab_field"
+        android:layout_toLeftOf="@id/fragment_attack_bab_field"
+        android:text="\?" />
+    -->
 
     <ScrollView
         android:id="@+id/fragment_attack_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/fragment_attack_bab_field"
+        android:layout_above="@id/fragment_attack_bab_text"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" >
 

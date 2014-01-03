@@ -122,15 +122,10 @@ public class CFeatFragment extends CharacterUpdaterFragment implements
 	}
 
 	@Override
-	public void onStop() {
+	public void onResume() {
 		clearListings();
-		super.onStop();
-	}
-
-	@Override
-	public void onStart() {
 		fillListings();
-		super.onStart();
+		super.onResume();
 	}
 
 	@Override

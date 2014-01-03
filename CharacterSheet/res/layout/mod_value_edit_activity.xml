@@ -2,9 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:paddingLeft="@dimen/padding_large"
     android:paddingRight="@dimen/padding_large" >
+
+    <requestFocus />
 
     <TableLayout
         android:id="@+id/mod_value_table"
@@ -23,8 +26,6 @@
                 android:id="@+id/base_score_field"
                 android:hint="@string/z0"
                 android:inputType="number" >
-
-                <requestFocus />
             </EditText>
         </TableRow>
 

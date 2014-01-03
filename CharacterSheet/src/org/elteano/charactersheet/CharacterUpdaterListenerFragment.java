@@ -3,6 +3,7 @@ package org.elteano.charactersheet;
 import java.util.ArrayList;
 
 import android.support.v4.app.Fragment;
+import android.widget.Toast;
 
 public abstract class CharacterUpdaterListenerFragment extends Fragment {
 
@@ -46,11 +47,19 @@ public abstract class CharacterUpdaterListenerFragment extends Fragment {
 		for (CharacterUpdaterFragment frag : children) {
 			frag.preUpdate();
 		}
-		((CharacterSheetActivity) getActivity()).getCharacter()
-				.saveSelfByPlayerList(getActivity());
-		for (CharacterUpdaterFragment frag : children) {
-			if (!frag.equals(source))
-				frag.updateDisplay();
+		try {
+			((CharacterSheetActivity) getActivity()).getCharacter()
+					.saveSelfByPlayerList(getActivity());
+			for (CharacterUpdaterFragment frag : children) {
+				if (!frag.equals(source))
+					frag.updateDisplay();
+			}
+		} catch (NullPointerException ex) {
+			Toast.makeText(
+					getActivity(),
+					"Uh oh!  It seems the system has recycled your previous session.  Don't worry, though, your data was saved when you left!",
+					Toast.LENGTH_SHORT).show();
+			getActivity().finish();
 		}
 	}
 }

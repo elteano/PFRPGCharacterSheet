@@ -2,6 +2,8 @@ package org.elteano.charactersheet;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,9 +24,21 @@ public class ModValueEditActivity extends Activity implements OnClickListener {
 	private EditText tempEdit;
 	private Button tempMod;
 
+	private void setOrientation() {
+		int screenSizeFlag = getResources().getConfiguration().screenLayout
+				& Configuration.SCREENLAYOUT_SIZE_MASK;
+		if (screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_NORMAL
+				|| screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+		}
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setOrientation();
 		setContentView(R.layout.mod_value_edit_activity);
 		int ability = getIntent().getExtras().getInt("Ability");
 		switch (ability) {
@@ -52,7 +66,8 @@ public class ModValueEditActivity extends Activity implements OnClickListener {
 		findViewById(R.id.temp_score_row).setOnClickListener(this);
 		mAbilityScore = new AbilityScore(getIntent().getExtras());
 		baseEdit = (EditText) findViewById(R.id.base_score_field);
-		baseEdit.setText("" + mAbilityScore.getBaseValue());
+		baseEdit.setText((mAbilityScore.getBaseValue() != 0) ? ""
+				+ mAbilityScore.getBaseValue() : "");
 		baseEdit.addTextChangedListener(new IntTextWatcher() {
 
 			@Override
@@ -63,7 +78,8 @@ public class ModValueEditActivity extends Activity implements OnClickListener {
 		});
 		baseMod = (Button) findViewById(R.id.base_score_modifier);
 		tempEdit = (EditText) findViewById(R.id.temp_adjust_field);
-		tempEdit.setText("" + mAbilityScore.getTempAdjustment());
+		tempEdit.setText((mAbilityScore.getTempAdjustment() != 0) ? ""
+				+ mAbilityScore.getTempAdjustment() : "");
 		tempEdit.addTextChangedListener(new IntTextWatcher() {
 
 			@Override

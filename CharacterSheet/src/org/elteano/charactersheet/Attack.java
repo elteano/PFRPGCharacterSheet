@@ -1,13 +1,15 @@
 package org.elteano.charactersheet;
 
+import java.io.Serializable;
 import java.util.Locale;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-public class Attack implements Parcelable {
+public class Attack implements Parcelable, Serializable {
 
+	public static final long serialVersionUID = 1L;
 	public int addAttack;
 	public int addDamage;
 	public int baseAttackAbility;
@@ -41,6 +43,25 @@ public class Attack implements Parcelable {
 		description = desc;
 	}
 
+	public String calculateMultiAttack(AbilityScore[] abilities, int bab) {
+		String fulltext = "+";
+		int attackmod = addAttack
+				+ abilities[baseAttackAbility].getTempModifier();
+		if (bab == 0) {
+			fulltext = (attackmod < 0) ? "" + attackmod : "+" + attackmod;
+		} else {
+			for (; bab > 0; bab -= 5) {
+				fulltext += (bab + attackmod) + " / +";
+			}
+			fulltext = (fulltext.length() > 4) ? fulltext.substring(0,
+					fulltext.length() - 4) : "";
+			fulltext = fulltext.replaceAll("\\+-", "-");
+		}
+		if (fulltext.isEmpty())
+			fulltext = "+0";
+		return fulltext;
+	}
+
 	public static Attack constructFromString(String string) {
 		String[] split = string.split(PlayerCharacter.SPLITTER_SMALL);
 		if (split.length == 7) {
@@ -63,8 +84,8 @@ public class Attack implements Parcelable {
 		attackBonus += attackTotal;
 		int damageTotal = getDamageMod(abilities);
 		String damageBonus = ((damageTotal > 0) ? "+" : "") + damageTotal;
-		return String.format("%s %s (%s %s)", name, attackBonus, damageDie,
-				damageBonus);
+		return String.format("%s %s (%s %s)\n%s", name, attackBonus, damageDie,
+				damageBonus, calculateMultiAttack(abilities, bab));
 	}
 
 	public String toStorageString() {

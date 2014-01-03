@@ -2,8 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     android:paddingLeft="@dimen/padding_large"
     android:paddingRight="@dimen/padding_large" >
+
+    <requestFocus />
 
     <Space
         android:id="@+id/center_space"

@@ -2,6 +2,8 @@ package org.elteano.charactersheet;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -21,6 +23,17 @@ public class SaveEditActivity extends Activity implements
 	private IntTextWatcher miscModWatcher;
 	private AbilityScore[] abilities;
 
+	private void setOrientation() {
+		int screenSizeFlag = getResources().getConfiguration().screenLayout
+				& Configuration.SCREENLAYOUT_SIZE_MASK;
+		if (screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_NORMAL
+				|| screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+		}
+	}
+
 	public void onClickDoneButton(View source) {
 		updateByBoxes();
 		Intent intent = new Intent();
@@ -32,6 +45,8 @@ public class SaveEditActivity extends Activity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setOrientation();
+		setTitle("Edit Save");
 		mSave = (Save) getIntent().getExtras().getParcelable("input");
 		Parcelable[] b = getIntent().getExtras().getParcelableArray(
 				INPUT_ABILITIES);
@@ -64,10 +79,12 @@ public class SaveEditActivity extends Activity implements
 				.setChecked((mSave.flags & Save.FLAG_WIS) == Save.FLAG_WIS);
 		((CheckBox) findViewById(R.id.activity_save_edit_wis_box))
 				.setOnCheckedChangeListener(this);
+		int temp = mSave.classModifiers;
 		((EditText) findViewById(R.id.activity_save_edit_class_modifiers_field))
-				.setText("" + mSave.classModifiers);
+				.setText((temp != 0) ? "" + temp : "");
+		temp = mSave.miscModifiers;
 		((EditText) findViewById(R.id.activity_save_edit_misc_modifiers_field))
-				.setText("" + mSave.miscModifiers);
+				.setText((temp != 0) ? "" + temp : "");
 		updateByBoxes();
 	}
 

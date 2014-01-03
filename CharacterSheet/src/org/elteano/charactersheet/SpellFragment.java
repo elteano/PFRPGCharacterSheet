@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -134,7 +135,7 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 					if (v.equals(lastView)) {
 						Intent intent = new Intent(getActivity(),
 								SpellEditActivity.class);
-						intent.putExtra("input", lastSpell);
+						intent.putExtra("input", (Parcelable) lastSpell);
 						intent.putExtra(SpellEditActivity.SPELL_ABILITY_IN,
 								((CharacterSheetActivity) getActivity())
 										.getCharacter().getAbilities());
@@ -172,20 +173,20 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
+	public void onResume() {
+		super.onResume();
 		((Button) getView().findViewById(R.id.fragment_spells_add_button))
 				.setOnClickListener(this);
 		((Button) getView().findViewById(R.id.fragment_spells_remove_button))
 				.setOnClickListener(this);
+		clearSpells();
 		fillSpells();
 	}
 
 	@Override
-	public void onStop() {
-		clearSpells();
+	public void onPause() {
 		lastView = null;
-		super.onStop();
+		super.onPause();
 	}
 
 	@Override

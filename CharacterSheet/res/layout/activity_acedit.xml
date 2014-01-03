@@ -1,9 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     android:paddingLeft="@dimen/padding_large"
     android:paddingRight="@dimen/padding_large" >
+
+    <requestFocus />
 
     <Space
         android:id="@+id/center_space"
@@ -87,6 +91,25 @@
         android:text="@string/shield_bonus"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <EditText
+        android:id="@+id/activity_acedit_cmd_bonus_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/activity_acedit_shield_bonus_field"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/activity_acedit_cmd_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/activity_acedit_cmd_bonus_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/cmd_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <Button
         android:id="@+id/activity_acedit_done_button"
         android:layout_width="wrap_content"
@@ -102,7 +125,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/activity_acedit_shield_bonus_field"
+        android:layout_below="@+id/activity_acedit_cmd_bonus_field"
         android:clickable="false"
         android:minWidth="48dp" />
 

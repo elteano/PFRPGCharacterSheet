@@ -13,5 +13,13 @@
         android:showAsAction="ifRoom"
         android:title="@string/character_select_remove"
         android:titleCondensed="@string/erase_c"/>
+    <item
+        android:id="@+id/fragment_character_select_menu_send_character"
+        android:showAsAction="ifRoom"
+        android:title="@string/send_character"/>
+    <item
+        android:id="@+id/fragment_character_select_menu_receive_character"
+        android:showAsAction="ifRoom"
+        android:title="@string/receive_character"/>
 
 </menu>

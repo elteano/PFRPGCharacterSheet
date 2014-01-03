@@ -146,22 +146,20 @@
         android:text="@string/max_hp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/fragment_stats_rolled_hp_field"
+    <Button
+        android:id="@+id/fragment_stats_rolled_hp_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/fragment_stats_max_hp_button"
         android:layout_alignParentRight="true"
-        android:ems="3"
-        android:hint="@string/z0"
-        android:inputType="number" />
+        android:ems="3" />
 
     <TextView
         android:id="@+id/fragment_stats_rolled_hp_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/fragment_stats_rolled_hp_field"
-        android:layout_alignBottom="@+id/fragment_stats_rolled_hp_field"
+        android:layout_alignBaseline="@id/fragment_stats_rolled_hp_button"
+        android:layout_alignBottom="@id/fragment_stats_rolled_hp_button"
         android:layout_alignParentLeft="true"
         android:text="@string/rolled_hp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -170,7 +168,7 @@
         android:id="@+id/fragment_stats_init_bonus_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/fragment_stats_rolled_hp_field"
+        android:layout_above="@id/fragment_stats_rolled_hp_button"
         android:layout_alignParentRight="true"
         android:clickable="false" />
 

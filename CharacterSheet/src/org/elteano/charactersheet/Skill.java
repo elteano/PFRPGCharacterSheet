@@ -1,10 +1,13 @@
 package org.elteano.charactersheet;
 
+import java.io.Serializable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Skill implements Parcelable {
+public class Skill implements Parcelable, Serializable {
 
+	public static final long serialVersionUID = 1L;
 	public static final String SKILL_SUFFIX_CHA = ".cha";
 	public static final String SKILL_SUFFIX_CON = ".con";
 	public static final String SKILL_SUFFIX_DEX = ".dex";

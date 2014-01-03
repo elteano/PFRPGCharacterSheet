@@ -3,6 +3,7 @@ package org.elteano.charactersheet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -115,11 +116,18 @@ public class DefenseFragment extends CharacterUpdaterFragment implements
 		case R.id.fragment_defense_cmd_button:
 			// Both of these should lead to ACEditActivity
 			intent = new Intent(getActivity(), ACEditActivity.class);
-			intent.putExtra("input", ((CharacterSheetActivity) getActivity())
-					.getCharacter().getAC());
+			intent.putExtra("input",
+					(Parcelable) ((CharacterSheetActivity) getActivity())
+							.getCharacter().getAC());
 			intent.putExtra(ACEditActivity.INPUT_ABILITIES,
 					((CharacterSheetActivity) getActivity()).getCharacter()
 							.getAbilities());
+			intent.putExtra(ACEditActivity.INPUT_SIZE,
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.getSize());
+			intent.putExtra(ACEditActivity.INPUT_BAB,
+					((CharacterSheetActivity) getActivity()).getCharacter()
+							.getBAB());
 			request = REQUEST_AC;
 			startActivityForResult(intent, request);
 			return;

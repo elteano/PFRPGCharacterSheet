@@ -2,6 +2,8 @@ package org.elteano.charactersheet;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -21,7 +23,18 @@ public class ACEditActivity extends Activity implements OnCheckedChangeListener 
 	private AbilityScore[] abilities;
 	private int size;
 	private int bab;
-	private IntTextWatcher aBonus, deBonus, doBonus, sBonus;
+	private IntTextWatcher aBonus, deBonus, doBonus, sBonus, cBonus;
+
+	private void setOrientation() {
+		int screenSizeFlag = getResources().getConfiguration().screenLayout
+				& Configuration.SCREENLAYOUT_SIZE_MASK;
+		if (screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_NORMAL
+				|| screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+		}
+	}
 
 	public void onCheckedChanged(CompoundButton source, boolean newVal) {
 		ac.shield = newVal;
@@ -30,7 +43,7 @@ public class ACEditActivity extends Activity implements OnCheckedChangeListener 
 
 	public void onClickDoneButton(View source) {
 		Intent ret = new Intent();
-		ret.putExtra("result", ac);
+		ret.putExtra("result", (android.os.Parcelable) ac);
 		setResult(RESULT_OK, ret);
 		finish();
 	}
@@ -38,6 +51,7 @@ public class ACEditActivity extends Activity implements OnCheckedChangeListener 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setOrientation();
 		ac = getIntent().getExtras().getParcelable("input");
 		size = getIntent().getExtras().getInt(INPUT_SIZE);
 		Parcelable[] b = getIntent().getExtras().getParcelableArray(
@@ -68,6 +82,8 @@ public class ACEditActivity extends Activity implements OnCheckedChangeListener 
 				.removeTextChangedListener(doBonus);
 		((EditText) findViewById(R.id.activity_acedit_shield_bonus_field))
 				.removeTextChangedListener(sBonus);
+		((EditText) findViewById(R.id.activity_acedit_cmd_bonus_field))
+				.removeTextChangedListener(cBonus);
 	}
 
 	private void updateText() {
@@ -116,6 +132,17 @@ public class ACEditActivity extends Activity implements OnCheckedChangeListener 
 			@Override
 			public void numberChanged(int newNumber) {
 				ac.shieldBonus = newNumber;
+				updateButtons();
+			}
+		});
+		tv = (EditText) findViewById(R.id.activity_acedit_cmd_bonus_field);
+		if (ac.cmdBonus != 0)
+			tv.setText("" + ac.cmdBonus);
+		tv.addTextChangedListener(cBonus = new IntTextWatcher() {
+
+			@Override
+			public void numberChanged(int newNumber) {
+				ac.cmdBonus = newNumber;
 				updateButtons();
 			}
 		});

@@ -1,21 +1,26 @@
 package org.elteano.charactersheet;
 
+import java.io.Serializable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ArmorClass implements Parcelable {
+public class ArmorClass implements Parcelable, Serializable {
 
+	public static final long serialVersionUID = 1L;
 	public boolean shield;
 	public int armorBonus;
 	public int miscBonus;
 	public int dodgeBonus;
+	public int cmdBonus;
 	public int shieldBonus;
 
-	public static final Parcelable.Creator<ArmorClass> CREATOR = new Parcelable.Creator<ArmorClass>() {
+	public static transient final Parcelable.Creator<ArmorClass> CREATOR = new Parcelable.Creator<ArmorClass>() {
 
 		public ArmorClass createFromParcel(Parcel source) {
 			return new ArmorClass(source.readInt(), source.readInt(),
-					source.readInt(), source.readInt(), source.readByte());
+					source.readInt(), source.readInt(), source.readInt(),
+					source.readByte());
 		}
 
 		public ArmorClass[] newArray(int size) {
@@ -24,38 +29,52 @@ public class ArmorClass implements Parcelable {
 	};
 
 	public ArmorClass(int armorBonus, int miscBonus, int dodgeBonus,
-			int shieldBonus, byte getShieldBonus) {
-		this(armorBonus, miscBonus, dodgeBonus, shieldBonus,
+			int shieldBonus, int cmbBonus, byte getShieldBonus) {
+		this(armorBonus, miscBonus, dodgeBonus, shieldBonus, cmbBonus,
 				getShieldBonus == (byte) 1);
 	}
 
 	public ArmorClass(int armorBonus, int miscBonus, int dodgeBonus,
-			int shieldBonus, boolean getShieldBonus) {
+			int shieldBonus, int cmdBonus, boolean getShieldBonus) {
 		this.armorBonus = armorBonus;
 		this.miscBonus = miscBonus;
 		this.dodgeBonus = dodgeBonus;
 		this.shieldBonus = shieldBonus;
+		this.cmdBonus = cmdBonus;
 		shield = getShieldBonus;
 	}
 
+	// This code is exceedingly messy.
 	public static ArmorClass fromSaveString(String s) {
-		if (s.isEmpty())
-			return new ArmorClass(0, 0, 0, 0, true);
-		String[] container = s.split(PlayerCharacter.SPLITTER_SMALL);
-		if (container.length != 5)
-			return new ArmorClass(0, 0, 0, 0, true);
-		int abonus, dbonus, mbonus, sbonus;
-		abonus = dbonus = mbonus = sbonus = 0;
+		// Initialize all values to zero in the event they cannot read.
+		int abonus, dbonus, mbonus, sbonus, cbonus;
+		abonus = dbonus = mbonus = sbonus = cbonus = 0;
 		boolean shield;
+		// If we have no save data, then assume all zeros.
+		if (s.isEmpty())
+			return new ArmorClass(0, 0, 0, 0, 0, true);
+		// Get and split save data
+		String[] container = s.split(PlayerCharacter.SPLITTER_SMALL);
+		// If we don't have enough fields, abort. There were never less than
+		// five.
+		if (container.length < 5)
+			return new ArmorClass(0, 0, 0, 0, 0, true);
+		// Try to read everything, and don't cry if we fail.
 		try {
 			abonus = Integer.parseInt(container[0]);
 			dbonus = Integer.parseInt(container[1]);
 			mbonus = Integer.parseInt(container[2]);
 			sbonus = Integer.parseInt(container[3]);
+			// If we have more than five, then go ahead and read the last.
+			if (container.length > 5)
+				cbonus = Integer.parseInt(container[5]);
 		} catch (NumberFormatException ex) {
+			// Meh.
 		}
+		// Read shield value.
 		shield = container[4].equals("true");
-		return new ArmorClass(abonus, dbonus, mbonus, sbonus, shield);
+		// Make our new stuff.
+		return new ArmorClass(abonus, dbonus, mbonus, sbonus, cbonus, shield);
 	}
 
 	public int getAC(AbilityScore[] abilities, int size, int bab) {
@@ -65,8 +84,8 @@ public class ArmorClass implements Parcelable {
 	}
 
 	public int getCMD(AbilityScore[] abilities, int size, int bab) {
-		return getTouchAC(abilities, size, bab) - getSizeModifier(size) * 2
-				+ bab
+		return 10 - getSizeModifier(size) + bab + cmdBonus
+				+ abilities[PlayerCharacter.ABILITY_DEX].getTempModifier()
 				+ abilities[PlayerCharacter.ABILITY_STR].getTempModifier();
 	}
 
@@ -138,6 +157,7 @@ public class ArmorClass implements Parcelable {
 		out.writeInt(miscBonus);
 		out.writeInt(dodgeBonus);
 		out.writeInt(shieldBonus);
+		out.writeInt(cmdBonus);
 		out.writeByte((byte) ((shield) ? 1 : 0));
 	}
 
@@ -145,6 +165,7 @@ public class ArmorClass implements Parcelable {
 		return armorBonus + PlayerCharacter.SPLITTER_SMALL + dodgeBonus
 				+ PlayerCharacter.SPLITTER_SMALL + miscBonus
 				+ PlayerCharacter.SPLITTER_SMALL + shieldBonus
-				+ PlayerCharacter.SPLITTER_SMALL + shield;
+				+ PlayerCharacter.SPLITTER_SMALL + shield
+				+ PlayerCharacter.SPLITTER_SMALL + cmdBonus;
 	}
 }

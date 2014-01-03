@@ -1,10 +1,13 @@
 package org.elteano.charactersheet;
 
+import java.io.Serializable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Spell implements Parcelable {
+public class Spell implements Parcelable, Serializable {
 
+	public static final long serialVersionUID = 1L;
 	public static final Parcelable.Creator<Spell> CREATOR = new Parcelable.Creator<Spell>() {
 
 		public Spell createFromParcel(Parcel source) {

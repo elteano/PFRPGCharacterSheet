@@ -1,0 +1,172 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:paddingLeft="@dimen/padding_large"
+    android:paddingRight="@dimen/padding_large"
+    tools:context=".CMBEditActivity" >
+
+    <requestFocus />
+
+    <Space
+        android:id="@+id/center_space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:id="@+id/activity_cmb_edit_base_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/base_stats"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <CheckBox
+        android:id="@+id/activity_cmb_edit_bab_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/activity_cmb_edit_base_stats"
+        android:text="@string/bab" />
+
+    <CheckBox
+        android:id="@+id/activity_cmb_edit_size_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_cmb_edit_base_stats"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/size" />
+
+    <CheckBox
+        android:id="@+id/activity_cmb_edit_cha_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/activity_cmb_edit_bab_box"
+        android:text="@string/cha" />
+
+    <CheckBox
+        android:id="@+id/activity_cmb_edit_con_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/activity_cmb_edit_cha_box"
+        android:text="@string/con" />
+
+    <CheckBox
+        android:id="@+id/activity_cmb_edit_dex_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/activity_cmb_edit_con_box"
+        android:text="@string/dex" />
+
+    <CheckBox
+        android:id="@+id/activity_cmb_edit_int_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_cmb_edit_bab_box"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/inte" />
+
+    <CheckBox
+        android:id="@+id/activity_cmb_edit_str_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_cmb_edit_int_box"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/str" />
+
+    <CheckBox
+        android:id="@+id/activity_cmb_edit_wis_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_cmb_edit_str_box"
+        android:layout_toRightOf="@id/center_space"
+        android:text="@string/wis" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/activity_cmb_edit_class_modifiers_field"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/activity_cmb_edit_wis_box" >
+
+        <LinearLayout
+            android:id="@+id/activity_cmb_edit_class_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </ScrollView>
+
+    <EditText
+        android:id="@+id/activity_cmb_edit_class_modifiers_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/activity_cmb_edit_misc_modifiers_field"
+        android:layout_alignParentRight="true"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/activity_cmb_edit_class_modifiers_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/activity_cmb_edit_class_modifiers_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/class_modifiers"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/activity_cmb_edit_misc_modifiers_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/activity_cmb_edit_modifier_button"
+        android:layout_alignParentRight="true"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/activity_cmb_edit_misc_modifiers_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/activity_cmb_edit_misc_modifiers_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/misc_modifiers"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/activity_cmb_edit_modifier_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/activity_cmb_edit_done_button"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/activity_cmb_edit_total_modifier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_cmb_edit_modifier_button"
+        android:layout_alignBottom="@+id/activity_cmb_edit_modifier_button"
+        android:layout_alignParentLeft="true"
+        android:text="@string/text_total_modifier"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/activity_cmb_edit_done_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="onClickDoneButton"
+        android:text="@string/done_button" />
+
+</RelativeLayout>

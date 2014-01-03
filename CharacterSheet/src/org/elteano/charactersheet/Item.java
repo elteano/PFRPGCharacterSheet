@@ -1,10 +1,13 @@
 package org.elteano.charactersheet;
 
+import java.io.Serializable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Item implements Parcelable {
+public class Item implements Parcelable, Serializable {
 
+	public static final long serialVersionUID = 1L;
 	private static String SPLIT_STRING = "#split#field#";
 
 	private float weight;

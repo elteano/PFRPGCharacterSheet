@@ -2,7 +2,10 @@ package org.elteano.charactersheet;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -18,6 +21,17 @@ public class AttackEditActivity extends Activity implements
 			.getCanonicalName() + ".result";
 
 	private Attack mAttack;
+
+	private void setOrientation() {
+		int screenSizeFlag = getResources().getConfiguration().screenLayout
+				& Configuration.SCREENLAYOUT_SIZE_MASK;
+		if (screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_NORMAL
+				|| screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+		}
+	}
 
 	public void onClickDeleteButton(View source) {
 		setResult(RESULT_DELETE);
@@ -47,7 +61,7 @@ public class AttackEditActivity extends Activity implements
 			damageDieString = "1";
 		mAttack.damageDie = damageDieString;
 		Intent intent = new Intent();
-		intent.putExtra(RESULT_STRING, mAttack);
+		intent.putExtra(RESULT_STRING, (Parcelable) mAttack);
 		setResult(RESULT_OK, intent);
 		finish();
 	}
@@ -55,6 +69,7 @@ public class AttackEditActivity extends Activity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setOrientation();
 		setResult(RESULT_CANCELED);
 		setContentView(R.layout.activity_attack_edit);
 
@@ -67,11 +82,11 @@ public class AttackEditActivity extends Activity implements
 		((EditText) findViewById(R.id.activity_attack_edit_attack_name))
 				.setText(mAttack.name);
 		((EditText) findViewById(R.id.activity_attack_edit_attack_bonus_field))
-				.setText("" + mAttack.addAttack);
+				.setText((mAttack.addAttack != 0) ? "" + mAttack.addAttack : "");
 		((EditText) findViewById(R.id.activity_attack_edit_damage_die_field))
 				.setText(mAttack.damageDie);
 		((EditText) findViewById(R.id.activity_attack_edit_damage_bonus_field))
-				.setText("" + mAttack.addDamage);
+				.setText((mAttack.addDamage != 0) ? "" + mAttack.addDamage : "");
 		((EditText) findViewById(R.id.activity_attack_edit_attack_description_field))
 				.setText(mAttack.description.trim());
 

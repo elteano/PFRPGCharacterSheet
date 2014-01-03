@@ -14,9 +14,10 @@ public class HandsetPagerAdapter extends FragmentPagerAdapter {
 	 */
 	@SuppressWarnings("rawtypes")
 	private static final Class[] list = {// CharacterSelectFragment.class,
-	NameFragment.class, StatsFragment.class, FeatFragment.class,
-			CFeatFragment.class, SkillFragment.class, ItemFragment.class,
-			AttackFragment.class, DefenseFragment.class, SpellFragment.class };
+	NameFragment.class, ItemFragment.class, CounterFragment.class,
+			StatsFragment.class, AttackFragment.class, DefenseFragment.class,
+			FeatFragment.class, CFeatFragment.class, SkillFragment.class,
+			SpellFragment.class };
 	/**
 	 * Activity to which the fragments will be attached.
 	 */

@@ -1,31 +1,76 @@
 package org.elteano.charactersheet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
 
-public class PlayerCharacter {
+public class PlayerCharacter implements Parcelable, Serializable {
 
+	public static final long serialVersionUID = 0x1L;
 	public static final int ABILITY_CHA = 0;
 	public static final int ABILITY_CON = 1;
 	public static final int ABILITY_DEX = 2;
 	public static final int ABILITY_INT = 3;
 	public static final int ABILITY_STR = 4;
 	public static final int ABILITY_WIS = 5;
-	public static final int SIZE_FINE = 0;
-	public static final int SIZE_DIMINUTIVE = 1;
-	public static final int SIZE_TINY = 2;
-	public static final int SIZE_SMALL = 3;
-	public static final int SIZE_MEDIUM = 4;
-	public static final int SIZE_LARGE = 5;
-	public static final int SIZE_HUGE = 6;
-	public static final int SIZE_GARGANTUAN = 7;
-	public static final int SIZE_COLOSSAL = 8;
-	public static final String SPLITTER_LARGE = "#7SPACE7#";
-	public static final String SPLITTER_SMALL = ":1space4:";
-	// Must remain public for NameFragment
-	public static final String SAVESTATE_NAME = "org.elteano.charactersheet.Character.name";
+	public static Parcelable.Creator<PlayerCharacter> CREATOR = new Parcelable.Creator<PlayerCharacter>() {
+
+		public PlayerCharacter createFromParcel(Parcel src) {
+			PlayerCharacter ret = new PlayerCharacter();
+			Bundle b = src.readBundle();
+			ret.abilities = new AbilityScore[6];
+			b.setClassLoader(AbilityScore.class.getClassLoader());
+			Parcelable[] parcs = b.getParcelableArray("abilities");
+			for (int i = 0; i < 6; i++) {
+				ret.abilities[i] = (AbilityScore) parcs[i];
+			}
+			ret.attacks = b.getParcelableArrayList("attacks");
+			ret.counters = b.getParcelableArrayList("counters");
+			ret.cfeats = b.getParcelableArrayList("cfeats");
+			ret.feats = b.getParcelableArrayList("feats");
+			ret.items = b.getParcelableArrayList("items");
+			ret.classes = b.getParcelableArrayList("classes");
+			ret.skills = b.getParcelableArrayList("skills");
+			ret.spells = b.getParcelableArrayList("spells");
+			ret.ac = (ArmorClass) src.readParcelable(ArmorClass.class
+					.getClassLoader());
+			ret.cmb = (CMB) src.readParcelable(CMB.class.getClassLoader());
+			ret.characterGold = src.readFloat();
+			ret.baseAttackBonus = src.readInt();
+			ret.characterAge = src.readInt();
+			ret.characterHealth = src.readInt();
+			ret.characterSize = src.readInt();
+			ret.characterXP = src.readInt();
+			ret.flagsFort = src.readInt();
+			ret.flagsRef = src.readInt();
+			ret.flagsWill = src.readInt();
+			ret.hpCurrent = src.readInt();
+			// ret.hpRolled = src.readInt();
+			ret.mHP = (HP) src.readParcelable(HP.class.getClassLoader());
+			ret.miscInitBonus = src.readInt();
+			ret.cModFort = src.readInt();
+			ret.mModFort = src.readInt();
+			ret.cModRef = src.readInt();
+			ret.mModRef = src.readInt();
+			ret.cModWill = src.readInt();
+			ret.mModWill = src.readInt();
+			ret.characterBio = src.readString();
+			ret.languages = src.readString();
+			ret.name = src.readString();
+			return ret;
+		}
+
+		public PlayerCharacter[] newArray(int size) {
+			return new PlayerCharacter[size];
+		}
+	};
 	private static final String SAVESTATE_AC = PlayerCharacter.class
 			.getCanonicalName() + ".ac";
 	private static final String SAVESTATE_AGE = PlayerCharacter.class
@@ -38,12 +83,16 @@ public class PlayerCharacter {
 			.getCanonicalName() + ".bio";
 	private static final String SAVESTATE_CFEATS = PlayerCharacter.class
 			.getCanonicalName() + ".cfeats";
+	private static final String SAVESTATE_CMB = PlayerCharacter.class
+			.getCanonicalName() + ".cmb";
+	private static final String SAVESTATE_COUNTERS = PlayerCharacter.class
+			.getCanonicalName() + ".counters";
 	private static final String SAVESTATE_FEATS = PlayerCharacter.class
 			.getCanonicalName() + ".feats";
-	private static final String SAVESTATE_FORT_FLAGS = PlayerCharacter.class
-			.getCanonicalName() + ".fortFlags";
 	private static final String SAVESTATE_FORT_CMOD = PlayerCharacter.class
 			.getCanonicalName() + ".fortCMod";
+	private static final String SAVESTATE_FORT_FLAGS = PlayerCharacter.class
+			.getCanonicalName() + ".fortFlags";
 	private static final String SAVESTATE_FORT_MOD = PlayerCharacter.class
 			.getCanonicalName() + ".fortMod";
 	private static final String SAVESTATE_GOLD = PlayerCharacter.class
@@ -52,6 +101,8 @@ public class PlayerCharacter {
 			.getCanonicalName() + ".hpC";
 	private static final String SAVESTATE_HP_ROLLED = PlayerCharacter.class
 			.getCanonicalName() + ".hpR";
+	private static final String SAVESTATE_HP_CONTAINER = PlayerCharacter.class
+			.getCanonicalName() + ".hpContainer";
 	private static final String SAVESTATE_INIT_BONUS = PlayerCharacter.class
 			.getCanonicalName() + ".initBonus";
 	private static final String SAVESTATE_ITEMS = PlayerCharacter.class
@@ -60,12 +111,13 @@ public class PlayerCharacter {
 			.getCanonicalName() + ".languages";
 	private static final String SAVESTATE_LEVEL = PlayerCharacter.class
 			.getCanonicalName() + ".levelString";
+	public static final String SAVESTATE_NAME = "org.elteano.charactersheet.Character.name";
 	private static final String SAVESTATE_PREP_SPELLS = PlayerCharacter.class
 			.getCanonicalName() + ".prepSpells";
-	private static final String SAVESTATE_REF_FLAGS = PlayerCharacter.class
-			.getCanonicalName() + ".reflexFlags";
 	private static final String SAVESTATE_REF_CMOD = PlayerCharacter.class
 			.getCanonicalName() + ".reflexCMod";
+	private static final String SAVESTATE_REF_FLAGS = PlayerCharacter.class
+			.getCanonicalName() + ".reflexFlags";
 	private static final String SAVESTATE_REF_MOD = PlayerCharacter.class
 			.getCanonicalName() + ".reflexMod";
 	private static final String SAVESTATE_SIZE = PlayerCharacter.class
@@ -74,60 +126,178 @@ public class PlayerCharacter {
 			.getCanonicalName() + ".skills";
 	private static final String SAVESTATE_SPELLS = PlayerCharacter.class
 			.getCanonicalName() + ".spells";
-	private static final String SAVESTATE_WILL_FLAGS = PlayerCharacter.class
-			.getCanonicalName() + ".willFlags";
 	private static final String SAVESTATE_WILL_CMOD = PlayerCharacter.class
 			.getCanonicalName() + ".willCMod";
+	private static final String SAVESTATE_WILL_FLAGS = PlayerCharacter.class
+			.getCanonicalName() + ".willFlags";
 	private static final String SAVESTATE_WILL_MOD = PlayerCharacter.class
 			.getCanonicalName() + ".willMod";
 	private static final String SAVESTATE_XP = PlayerCharacter.class
 			.getCanonicalName() + ".xp";
+	public static final int SIZE_COLOSSAL = 8;
+	public static final int SIZE_DIMINUTIVE = 1;
+	public static final int SIZE_FINE = 0;
+	public static final int SIZE_GARGANTUAN = 7;
+	public static final int SIZE_HUGE = 6;
+	public static final int SIZE_LARGE = 5;
+	public static final int SIZE_MEDIUM = 4;
+	public static final int SIZE_SMALL = 3;
+	public static final int SIZE_TINY = 2;
+	public static final String SPLITTER_LARGE = "#7SPACE7#";
+	public static final String SPLITTER_SMALL = ":1space4:";
+
+	public static PlayerCharacter restoreByPlayerList(Activity activity,
+			String name) {
+		SharedPreferences playerList = activity.getSharedPreferences(
+				CharacterSelectFragment.CHARACTER_LIST_PREFERENCE,
+				Activity.MODE_PRIVATE);
+		for (String key : playerList.getAll().keySet()) {
+			if (playerList.getString(key, "basaoiunfalksjdbfioaweubf").equals(
+					name)) {
+				return restoreFromSharedPreferences(activity
+						.getSharedPreferences(key, Activity.MODE_PRIVATE));
+			}
+		}
+		return null;
+	}
+
+	public static PlayerCharacter restoreFromSharedPreferences(
+			SharedPreferences state) {
+		PlayerCharacter ret = new PlayerCharacter();
+		ret.ac = ArmorClass.fromSaveString(state.getString(SAVESTATE_AC, ""));
+		ret.hpCurrent = state.getInt(SAVESTATE_HP_CURRENT, 0);
+		ret.hpRolled = state.getInt(SAVESTATE_HP_ROLLED, 0);
+		// Code to convert old HP system to new HP system
+		if (ret.hpRolled != 0) {
+			ret.mHP = new HP(ret.hpRolled);
+		} else {
+			ret.mHP = HP.fromSaveString(state.getString(SAVESTATE_HP_CONTAINER,
+					""));
+		}
+		// End conversion code
+		ret.languages = state.getString(SAVESTATE_LANGUAGES, "");
+		ret.miscInitBonus = state.getInt(SAVESTATE_INIT_BONUS, 0);
+		ret.setAge(state.getInt(SAVESTATE_AGE, 0));
+		ret.setBAB(state.getInt(SAVESTATE_BAB, 0));
+		ret.setBio(state.getString(SAVESTATE_BIO, "No bio found."));
+		ret.setCMB(CMB.fromSaveString(state.getString(SAVESTATE_CMB, "")));
+		ret.setGold(state.getFloat(SAVESTATE_GOLD, 0));
+		ret.classes = PlayerClass.interpretListString(state.getString(
+				SAVESTATE_LEVEL, ""));
+		// ret.setLevelString(state.getString(SAVESTATE_LEVEL, "error - 0"));
+		ret.setName(state.getString(SAVESTATE_NAME, "Roy"));
+		ret.setSize(state.getInt(SAVESTATE_SIZE, SIZE_MEDIUM));
+		ret.setXP(state.getInt(SAVESTATE_XP, 0));
+		ret.setFort(new Save(state.getInt(SAVESTATE_FORT_FLAGS, Save.FLAG_CON),
+				state.getInt(SAVESTATE_FORT_CMOD, 0), state.getInt(
+						SAVESTATE_FORT_MOD, 0)));
+		ret.setRef(new Save(state.getInt(SAVESTATE_REF_FLAGS, Save.FLAG_DEX),
+				state.getInt(SAVESTATE_REF_CMOD, 0), state.getInt(
+						SAVESTATE_REF_MOD, 0)));
+		ret.setWill(new Save(state.getInt(SAVESTATE_WILL_FLAGS, Save.FLAG_WIS),
+				state.getInt(SAVESTATE_WILL_CMOD, 0), state.getInt(
+						SAVESTATE_WILL_MOD, 0)));
+		for (int i = 0; i < 6; i++) {
+			ret.setAbility(i,
+					AbilityScore.restoreFromSharedPreferences(state, i));
+		}
+		String s = state.getString(SAVESTATE_COUNTERS, "");
+		if (!s.isEmpty())
+			for (String counterString : s.split(SPLITTER_LARGE))
+				ret.addCounter(Counter.fromSaveString(counterString));
+		Log.d("CharacterSheet", "Restored " + ret.counters.toString());
+		String itemString = state.getString(SAVESTATE_ITEMS, "");
+		if (!itemString.isEmpty())
+			for (String item : itemString.split(SPLITTER_LARGE))
+				ret.items.add(Item.fromSaveString(item));
+		s = state.getString(SAVESTATE_SPELLS, "");
+		if (!s.isEmpty())
+			for (String spellString : s.split(SPLITTER_LARGE)) {
+				ret.spells.add(Spell.fromSaveString(spellString,
+						ret.getAbilities()));
+			}
+		s = state.getString(SAVESTATE_PREP_SPELLS, "");
+		if (!s.isEmpty())
+			for (String spellString : s.split(SPLITTER_LARGE)) {
+				ret.prepSpells.add(Spell.fromSaveString(spellString,
+						ret.getAbilities()));
+			}
+		s = state.getString(SAVESTATE_SKILLS, "");
+		if (!s.isEmpty())
+			for (String skillString : s.split(SPLITTER_LARGE))
+				ret.skills.add(Skill.fromSaveString(skillString));
+		for (String attackString : state.getString(SAVESTATE_ATTACKS, "")
+				.split(SPLITTER_LARGE)) {
+			Attack attack = Attack.constructFromString(attackString);
+			if (attack != null) {
+				ret.attacks.add(attack);
+			}
+		}
+		s = state.getString(SAVESTATE_FEATS, "");
+		if (!s.isEmpty())
+			for (String featString : s.split(SPLITTER_LARGE))
+				ret.feats.add(Feat.fromSaveString(featString));
+		s = state.getString(SAVESTATE_CFEATS, "");
+		if (!s.isEmpty())
+			for (String featString : s.split(SPLITTER_LARGE))
+				ret.cfeats.add(Feat.fromSaveString(featString));
+		return ret;
+	}
+
 	private AbilityScore[] abilities;
 	private ArmorClass ac;
 	private ArrayList<Attack> attacks;
-	private ArrayList<Feat> cfeats;
-	private ArrayList<Feat> feats;
-	private ArrayList<Item> items;
-	private ArrayList<Spell> prepSpells;
-	private ArrayList<Skill> skills;
-	private ArrayList<Spell> spells;
-	private float characterGold;
 	private int baseAttackBonus;
+	private ArrayList<Feat> cfeats;
 	private int characterAge;
+	private String characterBio;
+	private float characterGold;
 	private int characterHealth;
 	private int characterSize;
 	private int characterXP;
+	private ArrayList<PlayerClass> classes;
+	private CMB cmb;
+	private int cModFort;
+	private int cModRef;
+	private int cModWill;
+	private ArrayList<Counter> counters;
+	private ArrayList<Feat> feats;
 	private int flagsFort;
 	private int flagsRef;
 	private int flagsWill;
 	private int hpCurrent;
 	private int hpRolled;
-	private int miscInitBonus;
-	private int cModFort;
-	private int mModFort;
-	private int cModRef;
-	private int mModRef;
-	private int cModWill;
-	private int mModWill;
-	private String characterBio;
+	private ArrayList<Item> items;
 	private String languages;
-	private String levelString;
+	private int miscInitBonus;
+	private HP mHP;
+	private int mModFort;
+	private int mModRef;
+	private int mModWill;
+	// private String levelString;
 	private String name;
+	private ArrayList<Spell> prepSpells;
+	private ArrayList<Skill> skills;
+	private ArrayList<Spell> spells;
 
 	public PlayerCharacter() {
 		abilities = new AbilityScore[6];
-		ac = new ArmorClass(0, 0, 0, 0, true);
+		ac = new ArmorClass(0, 0, 0, 0, 0, true);
 		name = "New Character";
 		characterAge = 0;
 		characterSize = SIZE_MEDIUM;
 		characterBio = "";
-		levelString = "";
+		cmb = new CMB();
+		// levelString = "";
 		flagsFort = Save.FLAG_CON;
 		flagsRef = Save.FLAG_DEX;
 		flagsWill = Save.FLAG_WIS;
 		attacks = new ArrayList<Attack>();
+		counters = new ArrayList<Counter>();
+		classes = new ArrayList<PlayerClass>();
 		feats = new ArrayList<Feat>();
 		cfeats = new ArrayList<Feat>();
+		mHP = new HP();
 		items = new ArrayList<Item>();
 		skills = new ArrayList<Skill>();
 		spells = new ArrayList<Spell>();
@@ -139,6 +309,12 @@ public class PlayerCharacter {
 
 	public void addAttack(Attack attack) {
 		attacks.add(attack);
+	}
+
+	public void addCounter(Counter counter) {
+		counters.add(counter);
+		Log.d("CharacterSheet", "Counters now size " + counters.size()
+				+ " and are " + Arrays.toString(counters.toArray()));
 	}
 
 	public void addItem(Item item) {
@@ -156,6 +332,10 @@ public class PlayerCharacter {
 		}
 		// TODO determine how to factor in moneys
 		return ret;
+	}
+
+	public int describeContents() {
+		return 0;
 	}
 
 	public AbilityScore[] getAbilities() {
@@ -198,9 +378,38 @@ public class PlayerCharacter {
 		return characterBio;
 	}
 
+	public Feat getCFeat(String featName) {
+		for (Feat f : cfeats) {
+			if (f.getName().equals(featName))
+				return f;
+		}
+		return null;
+	}
+
+	public ArrayList<Feat> getCFeatList() {
+		return cfeats;
+	}
+
 	public int getCMB() {
-		return baseAttackBonus + getAbility(ABILITY_STR).getTempModifier()
-				- ArmorClass.getSizeModifier(getSize());
+		return cmb.getCMB(getBAB(), getSize(), abilities, classes);
+		// return baseAttackBonus + getAbility(ABILITY_STR).getTempModifier()
+		// - ArmorClass.getSizeModifier(getSize());
+	}
+
+	public CMB getCMBParc() {
+		return cmb;
+	}
+
+	public Counter getCounter(String counterName) {
+		for (Counter c : counters) {
+			if (c.getName().equals(counterName))
+				return c;
+		}
+		return null;
+	}
+
+	public ArrayList<Counter> getCounterList() {
+		return counters;
 	}
 
 	public Feat getFeat(String featName) {
@@ -211,20 +420,8 @@ public class PlayerCharacter {
 		return null;
 	}
 
-	public Feat getCFeat(String featName) {
-		for (Feat f : cfeats) {
-			if (f.getName().equals(featName))
-				return f;
-		}
-		return null;
-	}
-
 	public ArrayList<Feat> getFeatList() {
 		return feats;
-	}
-
-	public ArrayList<Feat> getCFeatList() {
-		return cfeats;
 	}
 
 	public Save getFort() {
@@ -243,17 +440,20 @@ public class PlayerCharacter {
 		return characterHealth;
 	}
 
+	public HP getHP() {
+		return mHP;
+	}
+
 	public int getHPCurrent() {
 		return hpCurrent;
 	}
 
 	public int getHPMax() {
-		return hpRolled + getTotalLevel()
-				* getAbility(ABILITY_CON).getTempModifier();
+		return mHP.getMaxHP(abilities[ABILITY_CON].getTempModifier());
 	}
 
 	public int getHPRolled() {
-		return hpRolled;
+		return mHP.getRolledHP();
 	}
 
 	public int getInitiative() {
@@ -276,8 +476,13 @@ public class PlayerCharacter {
 		return languages;
 	}
 
+	/**
+	 * @deprecated Use <code>getPlayerClassString()</code> instead.
+	 * @return
+	 */
 	public String getLevelString() {
-		return levelString;
+		return getPlayerClassString();
+		// return levelString;
 	}
 
 	public int getMiscInitBonus() {
@@ -286,6 +491,14 @@ public class PlayerCharacter {
 
 	public String getName() {
 		return name;
+	}
+
+	public ArrayList<PlayerClass> getPlayerClasses() {
+		return classes;
+	}
+
+	public String getPlayerClassString() {
+		return PlayerClass.compoundToString(classes);
 	}
 
 	public ArrayList<Spell> getPrepSpells() {
@@ -322,17 +535,14 @@ public class PlayerCharacter {
 
 	public int getTotalLevel() {
 		int ret = 0;
-		for (String s : levelString.split("[\\s/]")) {
-			try {
-				ret += Integer.parseInt(s);
-			} catch (NumberFormatException ex) {
-			}
+		for (PlayerClass c : classes) {
+			ret += c.getLevels();
 		}
+		/*
+		 * for (String s : levelString.split("[\\s/]")) { try { ret +=
+		 * Integer.parseInt(s); } catch (NumberFormatException ex) { } }
+		 */
 		return ret;
-	}
-
-	public int getXP() {
-		return characterXP;
 	}
 
 	public Save getWill() {
@@ -343,19 +553,12 @@ public class PlayerCharacter {
 		return mModWill;
 	}
 
-	public void removeAttack(Attack attack) {
-		attacks.remove(attack);
+	public int getXP() {
+		return characterXP;
 	}
 
-	public void removeFeatByName(String featName) {
-		Feat removeFeat = null;
-		for (Feat f : feats)
-			if (f.getName().equals(featName)) {
-				removeFeat = f;
-				break;
-			}
-		if (removeFeat != null)
-			feats.remove(removeFeat);
+	public void removeAttack(Attack attack) {
+		attacks.remove(attack);
 	}
 
 	public void removeCFeatByName(String featName) {
@@ -369,6 +572,21 @@ public class PlayerCharacter {
 			cfeats.remove(removeFeat);
 	}
 
+	public void removeCounter(Counter counter) {
+		counters.remove(counter);
+	}
+
+	public void removeFeatByName(String featName) {
+		Feat removeFeat = null;
+		for (Feat f : feats)
+			if (f.getName().equals(featName)) {
+				removeFeat = f;
+				break;
+			}
+		if (removeFeat != null)
+			feats.remove(removeFeat);
+	}
+
 	public void removeItem(Item item) {
 		items.remove(item);
 	}
@@ -377,86 +595,18 @@ public class PlayerCharacter {
 		skills.remove(skill);
 	}
 
-	public static PlayerCharacter restoreFromSharedPreferences(
-			SharedPreferences state) {
-		PlayerCharacter ret = new PlayerCharacter();
-		ret.ac = ArmorClass.fromSaveString(state.getString(SAVESTATE_AC, ""));
-		ret.hpCurrent = state.getInt(SAVESTATE_HP_CURRENT, 0);
-		ret.hpRolled = state.getInt(SAVESTATE_HP_ROLLED, 0);
-		ret.languages = state.getString(SAVESTATE_LANGUAGES, "");
-		ret.miscInitBonus = state.getInt(SAVESTATE_INIT_BONUS, 0);
-		ret.setAge(state.getInt(SAVESTATE_AGE, 0));
-		ret.setBAB(state.getInt(SAVESTATE_BAB, 0));
-		ret.setBio(state.getString(SAVESTATE_BIO, "No bio found."));
-		ret.setGold(state.getFloat(SAVESTATE_GOLD, 0));
-		ret.setLevelString(state.getString(SAVESTATE_LEVEL, "error - 0"));
-		ret.setName(state.getString(SAVESTATE_NAME, "Roy"));
-		ret.setSize(state.getInt(SAVESTATE_SIZE, SIZE_MEDIUM));
-		ret.setXP(state.getInt(SAVESTATE_XP, 0));
-		ret.setFort(new Save(state.getInt(SAVESTATE_FORT_FLAGS, Save.FLAG_CON),
-				state.getInt(SAVESTATE_FORT_CMOD, 0), state.getInt(
-						SAVESTATE_FORT_MOD, 0)));
-		ret.setRef(new Save(state.getInt(SAVESTATE_REF_FLAGS, Save.FLAG_DEX),
-				state.getInt(SAVESTATE_REF_CMOD, 0), state.getInt(
-						SAVESTATE_REF_MOD, 0)));
-		ret.setWill(new Save(state.getInt(SAVESTATE_WILL_FLAGS, Save.FLAG_WIS),
-				state.getInt(SAVESTATE_WILL_CMOD, 0), state.getInt(
-						SAVESTATE_WILL_MOD, 0)));
-		for (int i = 0; i < 6; i++) {
-			ret.setAbility(i,
-					AbilityScore.restoreFromSharedPreferences(state, i));
-		}
-		String itemString = state.getString(SAVESTATE_ITEMS, "");
-		if (!itemString.isEmpty())
-			for (String item : itemString.split(SPLITTER_LARGE))
-				ret.items.add(Item.fromSaveString(item));
-		String s = state.getString(SAVESTATE_SPELLS, "");
-		if (!s.isEmpty())
-			for (String spellString : s.split(SPLITTER_LARGE)) {
-				ret.spells.add(Spell.fromSaveString(spellString,
-						ret.getAbilities()));
-			}
-		s = state.getString(SAVESTATE_PREP_SPELLS, "");
-		if (!s.isEmpty())
-			for (String spellString : s.split(SPLITTER_LARGE)) {
-				ret.prepSpells.add(Spell.fromSaveString(spellString,
-						ret.getAbilities()));
-			}
-		s = state.getString(SAVESTATE_SKILLS, "");
-		if (!s.isEmpty())
-			for (String skillString : s.split(SPLITTER_LARGE))
-				ret.skills.add(Skill.fromSaveString(skillString));
-		for (String attackString : state.getString(SAVESTATE_ATTACKS, "")
-				.split(SPLITTER_LARGE)) {
-			Attack attack = Attack.constructFromString(attackString);
-			if (attack != null) {
-				ret.attacks.add(attack);
-			}
-		}
-		s = state.getString(SAVESTATE_FEATS, "");
-		if (!s.isEmpty())
-			for (String featString : s.split(SPLITTER_LARGE))
-				ret.feats.add(Feat.fromSaveString(featString));
-		s = state.getString(SAVESTATE_CFEATS, "");
-		if (!s.isEmpty())
-			for (String featString : s.split(SPLITTER_LARGE))
-				ret.cfeats.add(Feat.fromSaveString(featString));
-		return ret;
-	}
-
-	public static PlayerCharacter restoreByPlayerList(Activity activity,
-			String name) {
+	public void saveSelfByPlayerList(Activity activity) {
 		SharedPreferences playerList = activity.getSharedPreferences(
 				CharacterSelectFragment.CHARACTER_LIST_PREFERENCE,
 				Activity.MODE_PRIVATE);
 		for (String key : playerList.getAll().keySet()) {
 			if (playerList.getString(key, "basaoiunfalksjdbfioaweubf").equals(
-					name)) {
-				return restoreFromSharedPreferences(activity
-						.getSharedPreferences(key, Activity.MODE_PRIVATE));
+					getName())) {
+				saveToSharedPreferences(activity.getSharedPreferences(key,
+						Activity.MODE_PRIVATE));
+				break;
 			}
 		}
-		return null;
 	}
 
 	public void saveToSharedPreferences(SharedPreferences state) {
@@ -466,10 +616,12 @@ public class PlayerCharacter {
 		editor.putInt(SAVESTATE_AGE, characterAge);
 		editor.putInt(SAVESTATE_BAB, baseAttackBonus);
 		editor.putString(SAVESTATE_BIO, characterBio);
+		editor.putString(SAVESTATE_CMB, cmb.toSaveString());
 		editor.putFloat(SAVESTATE_GOLD, characterGold);
 		editor.putInt(SAVESTATE_HP_CURRENT, hpCurrent);
-		editor.putInt(SAVESTATE_HP_ROLLED, hpRolled);
-		editor.putString(SAVESTATE_LEVEL, levelString);
+		// editor.putInt(SAVESTATE_HP_ROLLED, hpRolled);
+		editor.putString(SAVESTATE_HP_CONTAINER, mHP.toSaveString());
+		editor.putString(SAVESTATE_LEVEL, getPlayerClassString());
 		editor.putString(SAVESTATE_NAME, name);
 		editor.putInt(SAVESTATE_SIZE, characterSize);
 		editor.putInt(SAVESTATE_XP, characterXP);
@@ -487,6 +639,11 @@ public class PlayerCharacter {
 		for (int i = 0; i < 6; i++) {
 			abilities[i].appendToSharedPreferencesEditor(editor, i);
 		}
+		String conglomerate = "";
+		for (Counter counter : counters) {
+			conglomerate += counter.toSaveString() + SPLITTER_LARGE;
+		}
+		editor.putString(SAVESTATE_COUNTERS, conglomerate);
 		String featString = "";
 		for (Feat feat : feats) {
 			featString += feat.toSaveString() + SPLITTER_LARGE;
@@ -525,26 +682,12 @@ public class PlayerCharacter {
 		editor.commit();
 	}
 
-	public void saveSelfByPlayerList(Activity activity) {
-		SharedPreferences playerList = activity.getSharedPreferences(
-				CharacterSelectFragment.CHARACTER_LIST_PREFERENCE,
-				Activity.MODE_PRIVATE);
-		for (String key : playerList.getAll().keySet()) {
-			if (playerList.getString(key, "basaoiunfalksjdbfioaweubf").equals(
-					getName())) {
-				saveToSharedPreferences(activity.getSharedPreferences(key,
-						Activity.MODE_PRIVATE));
-				break;
-			}
-		}
+	public void setAbility(int ability, AbilityScore score) {
+		abilities[ability] = score;
 	}
 
 	public void setAbility(int ability, int points) {
 		abilities[ability].setBaseValue(points);
-	}
-
-	public void setAbility(int ability, AbilityScore score) {
-		abilities[ability] = score;
 	}
 
 	public void setAC(ArmorClass ac) {
@@ -563,6 +706,14 @@ public class PlayerCharacter {
 		characterBio = bio;
 	}
 
+	public void setClassesByString(String levelString) {
+		classes = PlayerClass.interpretListString(levelString);
+	}
+
+	public void setCMB(CMB cmb) {
+		this.cmb = cmb;
+	}
+
 	public void setFort(Save fort) {
 		flagsFort = fort.flags;
 		cModFort = fort.classModifiers;
@@ -577,20 +728,37 @@ public class PlayerCharacter {
 		characterHealth = health;
 	}
 
+	public void setHP(HP hp) {
+		mHP = hp;
+	}
+
 	public void setHPCurrent(int hp) {
 		hpCurrent = hp;
 	}
 
+	/**
+	 * @deprecated
+	 * @param hp
+	 */
 	public void setHPRolled(int hp) {
-		hpRolled = hp;
+		mHP.setMiscModifiers(hp);
+	}
+
+	public void setInitBonus(int newNumber) {
+		miscInitBonus = newNumber;
 	}
 
 	public void setLanguages(String langs) {
 		languages = langs;
 	}
 
+	/**
+	 * @deprecated Use <code>setClassesByString()</code>
+	 * @param levelString
+	 */
 	public void setLevelString(String levelString) {
-		this.levelString = levelString;
+		setClassesByString(levelString);
+		// this.levelString = levelString;
 	}
 
 	public void setName(String name) {
@@ -617,7 +785,40 @@ public class PlayerCharacter {
 		characterXP = xp;
 	}
 
-	public void setInitBonus(int newNumber) {
-		miscInitBonus = newNumber;
+	public void writeToParcel(Parcel dest, int flags) {
+		Bundle b = new Bundle();
+		b.putParcelableArray("abilities", abilities);
+		b.putParcelableArrayList("attacks", attacks);
+		b.putParcelableArrayList("counters", counters);
+		b.putParcelableArrayList("cfeats", cfeats);
+		b.putParcelableArrayList("feats", feats);
+		b.putParcelableArrayList("items", items);
+		b.putParcelableArrayList("classes", classes);
+		b.putParcelableArrayList("skills", skills);
+		b.putParcelableArrayList("spells", spells);
+		dest.writeBundle(b);
+		dest.writeParcelable(ac, 0);
+		dest.writeParcelable(cmb, 0);
+		dest.writeFloat(characterGold);
+		dest.writeInt(baseAttackBonus);
+		dest.writeInt(characterAge);
+		dest.writeInt(characterHealth);
+		dest.writeInt(characterSize);
+		dest.writeInt(characterXP);
+		dest.writeInt(flagsFort);
+		dest.writeInt(flagsRef);
+		dest.writeInt(flagsWill);
+		dest.writeInt(hpCurrent);
+		dest.writeParcelable(mHP, 0);
+		dest.writeInt(miscInitBonus);
+		dest.writeInt(cModFort);
+		dest.writeInt(mModFort);
+		dest.writeInt(cModRef);
+		dest.writeInt(mModRef);
+		dest.writeInt(cModWill);
+		dest.writeInt(mModWill);
+		dest.writeString(characterBio);
+		dest.writeString(languages);
+		dest.writeString(name);
 	}
 }

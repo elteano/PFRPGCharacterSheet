@@ -3,6 +3,7 @@ package org.elteano.charactersheet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,25 +17,34 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 		OnClickListener {
 
 	private IntTextWatcher currentWatcher;
-	private IntTextWatcher rollWatcher;
 	private IntTextWatcher initWatcher;
 
 	private void fillFields() {
 		EditText et = (EditText) getView().findViewById(
 				R.id.fragment_stats_current_hp_field);
-		et.setText(""
-				+ ((CharacterSheetActivity) getActivity()).getCharacter()
-						.getHPCurrent());
-		et = (EditText) getView().findViewById(
-				R.id.fragment_stats_rolled_hp_field);
-		et.setText(""
-				+ ((CharacterSheetActivity) getActivity()).getCharacter()
-						.getHPRolled());
+		int tempVal = ((CharacterSheetActivity) getActivity()).getCharacter()
+				.getHPCurrent();
+		et.setText((tempVal != 0) ? "" + tempVal : "");
+		// et = (EditText) getView().findViewById(
+		// R.id.fragment_stats_rolled_hp_field);
+		// tempVal = ((CharacterSheetActivity) getActivity()).getCharacter()
+		// .getHPRolled();
+		// et.setText((tempVal != 0) ? "" + tempVal : "");
 		et = (EditText) getView().findViewById(
 				R.id.fragment_stats_misc_init_bonus_field);
-		et.setText(""
-				+ ((CharacterSheetActivity) getActivity()).getCharacter()
-						.getMiscInitBonus());
+		tempVal = ((CharacterSheetActivity) getActivity()).getCharacter()
+				.getMiscInitBonus();
+		((CharacterSheetActivity) getActivity())
+				.getCharacter()
+				.getHP()
+				.ensureLevelCount(
+						((CharacterSheetActivity) getActivity()).getCharacter()
+								.getTotalLevel());
+		((Button) getView().findViewById(R.id.fragment_stats_rolled_hp_button))
+				.setText(""
+						+ ((CharacterSheetActivity) getActivity())
+								.getCharacter().getHPRolled());
+		et.setText((tempVal != 0) ? "" + tempVal : "");
 	}
 
 	private void hookupClickListeners() {
@@ -44,6 +54,8 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 		getView().findViewById(R.id.int_button).setOnClickListener(this);
 		getView().findViewById(R.id.str_button).setOnClickListener(this);
 		getView().findViewById(R.id.wis_button).setOnClickListener(this);
+		getView().findViewById(R.id.fragment_stats_rolled_hp_button)
+				.setOnClickListener(this);
 		getView().findViewById(R.id.fragment_stats_max_hp_button)
 				.setOnClickListener(this);
 	}
@@ -52,8 +64,6 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 		((EditText) getView()
 				.findViewById(R.id.fragment_stats_current_hp_field))
 				.addTextChangedListener(currentWatcher);
-		((EditText) getView().findViewById(R.id.fragment_stats_rolled_hp_field))
-				.addTextChangedListener(rollWatcher);
 		((EditText) getView().findViewById(
 				R.id.fragment_stats_misc_init_bonus_field))
 				.addTextChangedListener(initWatcher);
@@ -86,20 +96,6 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 			public void numberChanged(int newNumber) {
 				((CharacterSheetActivity) getActivity()).getCharacter()
 						.setHPCurrent(newNumber);
-				((CharacterSheetActivity) getActivity()).getCharacter()
-						.saveSelfByPlayerList(getActivity());
-			}
-		};
-		rollWatcher = new IntTextWatcher() {
-
-			@Override
-			public void numberChanged(int newNumber) {
-				((CharacterSheetActivity) getActivity()).getCharacter()
-						.setHPRolled(newNumber);
-				((Button) getView().findViewById(
-						R.id.fragment_stats_max_hp_button)).setText(""
-						+ ((CharacterSheetActivity) getActivity())
-								.getCharacter().getHPMax());
 				((CharacterSheetActivity) getActivity()).getCharacter()
 						.saveSelfByPlayerList(getActivity());
 			}
@@ -138,6 +134,10 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 				.getAbility(PlayerCharacter.ABILITY_STR).toString());
 		((Button) getView().findViewById(R.id.wis_button)).setText(c
 				.getAbility(PlayerCharacter.ABILITY_WIS).toString());
+		((Button) getView().findViewById(R.id.fragment_stats_rolled_hp_button))
+				.setText(""
+						+ ((CharacterSheetActivity) getActivity())
+								.getCharacter().getHPRolled());
 		((Button) getView().findViewById(R.id.fragment_stats_init_bonus_button))
 				.setText(""
 						+ ((CharacterSheetActivity) getActivity())
@@ -189,6 +189,16 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
 				.getCharacter();
 		switch (view.getId()) {
+		case R.id.fragment_stats_rolled_hp_button:
+			Log.i("CharacterSheet", "HP button clicked");
+			intent = new Intent(getActivity(), HPEditActivity.class);
+			intent.putExtra(HPEditActivity.INPUT_HP, (Parcelable) c.getHP());
+			intent.putExtra(HPEditActivity.INPUT_PER_LEVEL_MOD,
+					c.getAbility(PlayerCharacter.ABILITY_CON).getTempModifier());
+			intent.putExtra(HPEditActivity.INPUT_TOTAL_LEVELS,
+					c.getTotalLevel());
+			startActivityForResult(intent, HPEditActivity.REQUEST_EDIT);
+			return;
 		case R.id.cha_button:
 			c.getAbility(PlayerCharacter.ABILITY_CHA).addToBundle(b);
 			break;
@@ -220,10 +230,15 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.i("CharacterSheet", "StatsFragment.onActivityResult");
 		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode != Activity.RESULT_OK)
+		if (resultCode != Activity.RESULT_OK) {
+			Log.i("CharacterSheet",
+					"StatsFragment receiving cancelled request.");
 			return;
+		}
 		int dest = 0;
+		Log.i("CharacterSheet", "Request code is " + requestCode);
 		switch (requestCode) {
 		case ModValueEditActivity.REQUEST_CHA:
 			dest = PlayerCharacter.ABILITY_CHA;
@@ -243,6 +258,15 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 		case ModValueEditActivity.REQUEST_WIS:
 			dest = PlayerCharacter.ABILITY_WIS;
 			break;
+		case HPEditActivity.REQUEST_EDIT:
+			((CharacterSheetActivity) getActivity()).getCharacter().setHP(
+					(HP) data.getParcelableExtra(HPEditActivity.RESULT));
+			Log.i("CharacterSheet", "Max HP: "
+					+ ((CharacterSheetActivity) getActivity()).getCharacter()
+							.getHPMax());
+			((CharacterSheetActivity) getActivity()).getCharacter()
+					.saveSelfByPlayerList(getActivity());
+			return;
 		}
 		((CharacterSheetActivity) getActivity()).getCharacter().setAbility(
 				dest, new AbilityScore(data.getExtras()));
@@ -252,26 +276,24 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 	}
 
 	@Override
-	public void onStart() {
+	public void onResume() {
 		updateButtons();
 		fillFields();
 		hookupClickListeners();
 		hookupTextListeners();
-		super.onStart();
+		super.onResume();
 	}
 
 	@Override
-	public void onStop() {
+	public void onPause() {
 		unhookTextListeners();
-		super.onStop();
+		super.onPause();
 	}
 
 	private void unhookTextListeners() {
 		((EditText) getView()
 				.findViewById(R.id.fragment_stats_current_hp_field))
 				.removeTextChangedListener(currentWatcher);
-		((EditText) getView().findViewById(R.id.fragment_stats_rolled_hp_field))
-				.removeTextChangedListener(rollWatcher);
 		((EditText) getView().findViewById(
 				R.id.fragment_stats_misc_init_bonus_field))
 				.removeTextChangedListener(initWatcher);

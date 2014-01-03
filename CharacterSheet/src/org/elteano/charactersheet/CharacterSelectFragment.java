@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 		OnClickListener {
@@ -25,6 +26,8 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 			+ "CharacterNames";
 
 	private SharedPreferences playerList;
+	private boolean deleting = false;
+	private boolean selectingSend = false;
 
 	private PlayerCharacter addCharacter() {
 		PlayerCharacter ret = new PlayerCharacter();
@@ -69,6 +72,23 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 				.addView(characterView);
 	}
 
+	/**
+	 * Cancel a delete, if necessary. If a delete is canceled, then text is
+	 * displayed stating that a delete was canceled.
+	 * 
+	 * @return True if a delete was canceled.
+	 */
+	private boolean cancelDelete() {
+		if (deleting) {
+			Toast.makeText(getActivity(),
+					getResources().getString(R.string.prompt_cancel),
+					Toast.LENGTH_SHORT).show();
+			deleting = false;
+			return true;
+		}
+		return false;
+	}
+
 	private void clearList() {
 		((LinearLayout) getView().findViewById(
 				R.id.fragment_character_select_layout)).removeAllViews();
@@ -104,9 +124,24 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 		TextView source = (TextView) view;
 		// Intent result = new Intent();
 		// result.putExtra("result", source.getText());
-		((CharacterSelectActivity) getActivity()).setResultName(source
-				.getText().toString());
-		((CharacterSelectActivity) getActivity()).setCharacterSelected();
+		if (deleting) {
+			promptDeleteCharacter(source.getText().toString());
+			deleting = false;
+		} else if (selectingSend) {
+			PlayerCharacter c = PlayerCharacter.restoreByPlayerList(
+					getActivity(), source.getText().toString());
+			Intent intent = new Intent(getActivity(),
+					BluetoothTransferActivity.class);
+			intent.putExtra(BluetoothTransferActivity.INPUT, (Parcelable) c);
+			// intent.putExtra(BluetoothTransferActivity.REQUEST,
+			// BluetoothTransferActivity.MODE_SEND);
+			startActivityForResult(intent, BluetoothTransferActivity.MODE_SEND);
+			selectingSend = false;
+		} else {
+			((CharacterSelectActivity) getActivity()).setResultName(source
+					.getText().toString());
+			((CharacterSelectActivity) getActivity()).setCharacterSelected();
+		}
 		// for (String key : playerList.getAll().keySet()) {
 		// if (playerList.getString(key, "").equals(
 		// source.getText().toString())) {
@@ -166,60 +201,71 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 			postUpdateOthers();
 			return true;
 		case R.id.fragment_character_select_menu_remove_character:
-			if (!((CharacterSheetActivity) getActivity()).hasCharacter())
-				Log.v("CharacterSheet", "No character selected; nothing done.");
-			else {
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						getActivity());
-				builder.setMessage(
-						"Delete "
-								+ ((CharacterSheetActivity) getActivity())
-										.getCharacter().getName() + "?")
-						.setCancelable(false)
-						.setPositiveButton("Yes",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int id) {
-										preUpdateOthers();
-										removeCharacter(((CharacterSheetActivity) getActivity())
-												.getCharacter().getName());
-										removeCharacterListing(((CharacterSheetActivity) getActivity())
-												.getCharacter().getName());
-										if (playerList.getAll().isEmpty())
-											addCharacterListing(addCharacter());
-										else {
-											((CharacterSheetActivity) getActivity())
-													.setCharacter(PlayerCharacter
-															.restoreFromSharedPreferences(getActivity()
-																	.getSharedPreferences(
-																			(String) playerList
-																					.getAll()
-																					.keySet()
-																					.toArray()[0],
-																			Activity.MODE_PRIVATE)));
-											getActivity()
-													.getActionBar()
-													.setTitle(
-															((CharacterSheetActivity) getActivity())
-																	.getCharacter()
-																	.getName());
-											postUpdateOthers();
-										}
-									}
-								})
-						.setNegativeButton("No",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int id) {
-										dialog.cancel();
-									}
-								});
-				builder.create().show();
+			if (!cancelDelete()) {
+				Toast.makeText(getActivity(),
+						getResources().getString(R.string.prompt_delete),
+						Toast.LENGTH_SHORT).show();
+				deleting = true;
 			}
+			return true;
+		case R.id.fragment_character_select_menu_send_character:
+			if (cancelDelete()) {
+				// In the event we want a Toast (unlikely as that may be)
+			}
+			selectingSend = true;
+			Toast.makeText(getActivity(), "Select a character to send.",
+					Toast.LENGTH_SHORT).show();
+			return true;
+		case R.id.fragment_character_select_menu_receive_character:
+			Intent intent = new Intent(getActivity(),
+					CharacterReceiveActivity.class);
+			// intent.putExtra(CharacterSendActivity.REQUEST,
+			// CharacterSendActivity.MODE_RECEIVE);
+			startActivityForResult(intent, 0);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+	private void promptDeleteCharacter(String characterName) {
+		final String name = characterName;
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setMessage("Delete " + name + "?")
+				.setCancelable(false)
+				.setPositiveButton("Yes",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								preUpdateOthers();
+								removeCharacter(name);
+								removeCharacterListing(name);
+							}
+						})
+				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+		builder.create().show();
+	}
+
+	/*
+	 * private void promptDeleteCharacter_old(PlayerCharacter c) { final
+	 * PlayerCharacter pc = c; AlertDialog.Builder builder = new
+	 * AlertDialog.Builder(getActivity()); builder.setMessage("Delete " +
+	 * c.getName() + "?") .setCancelable(false) .setPositiveButton("Yes", new
+	 * DialogInterface.OnClickListener() { public void onClick(DialogInterface
+	 * dialog, int id) { preUpdateOthers(); removeCharacter(pc.getName());
+	 * removeCharacterListing(pc.getName()); if (playerList.getAll().isEmpty())
+	 * addCharacterListing(addCharacter()); else { ((CharacterSheetActivity)
+	 * getActivity()).setCharacter(PlayerCharacter
+	 * .restoreFromSharedPreferences(getActivity() .getSharedPreferences(
+	 * (String) playerList .getAll() .keySet() .toArray()[0],
+	 * Activity.MODE_PRIVATE))); getActivity() .getActionBar() .setTitle(
+	 * ((CharacterSheetActivity) getActivity()) .getCharacter() .getName());
+	 * postUpdateOthers(); } } }) .setNegativeButton("No", new
+	 * DialogInterface.OnClickListener() { public void onClick(DialogInterface
+	 * dialog, int id) { dialog.cancel(); } }); builder.create().show(); }
+	 */
 
 	private boolean removeCharacter(int ident) {
 		if (playerList.contains("Character_" + ident)) {
@@ -286,6 +332,12 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 											(String) playerList.getAll()
 													.keySet().toArray()[0],
 											Activity.MODE_PRIVATE)));
+	}
+
+	private void sendCharacter(PlayerCharacter c) {
+		Intent intent = new Intent(getActivity(), CharacterSendActivity.class);
+		intent.putExtra(CharacterSendActivity.INPUT, (Parcelable) c);
+		startActivityForResult(intent, BluetoothTransferActivity.MODE_SEND);
 	}
 
 	@Override

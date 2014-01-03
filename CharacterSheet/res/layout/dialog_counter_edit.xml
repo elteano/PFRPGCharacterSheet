@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:paddingLeft="@dimen/padding_large"
+    android:paddingRight="@dimen/padding_large" >
+
+    <requestFocus />
+
+    <EditText
+        android:id="@+id/dialog_counter_edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:hint="@string/counter_name"
+        android:inputType="textCapWords" />
+
+    <EditText
+        android:id="@+id/dialog_counter_edit_min_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dialog_counter_edit_name"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="number" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/dialog_counter_edit_min_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/min"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/dialog_counter_edit_max_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dialog_counter_edit_min_field"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="number" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/dialog_counter_edit_max_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/max"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/dialog_counter_edit_init_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dialog_counter_edit_max_field"
+        android:ems="@integer/ems_standard"
+        android:hint="@string/z0"
+        android:inputType="number" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/dialog_counter_edit_init_field"
+        android:layout_alignParentLeft="true"
+        android:text="@string/init"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/dialog_counter_edit_done_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/dialog_counter_edit_button_delete"
+        android:onClick="onClickDoneButton"
+        android:text="@string/done_button" />
+
+    <Button
+        android:id="@+id/dialog_counter_edit_button_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="onClickDeleteButton"
+        android:text="@string/delete_button" />
+
+</RelativeLayout>

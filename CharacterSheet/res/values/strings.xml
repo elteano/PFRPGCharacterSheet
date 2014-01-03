@@ -6,6 +6,7 @@
     <string name="ability_mod">Ability Mod.</string>
     <string name="add">Add</string>
     <string name="add_attack">Add Attack</string>
+    <string name="add_counter">Add Counter</string>
     <string name="add_item">Add Item</string>
     <string name="add_cfeat">Add Other</string>
     <string name="add_feat">Add Feat</string>
@@ -24,10 +25,12 @@
     <string name="attack_bonus">Attack Bonus</string>
     <string name="attack_desc">Attack Description</string>
     <string name="attack_name">Attack Name</string>
+    <string name="bab">BAB</string>
     <string name="base_abilities">Base Abilities</string>
     <string name="base_attack_bonus">Base Attack Bonus</string>
     <string name="base_score">Base Score</string>
     <string name="base_score_modifier">Modifier</string>
+    <string name="base_stats">Base Stats</string>
     <string name="cha">CHA</string>
     <string name="character_bio">Character Bio</string>
     <string name="character_name_field">Character Name</string>
@@ -39,8 +42,11 @@
     <string name="class_modifiers">Class Modifiers</string>
     <string name="cmb">CMB</string>
     <string name="cmd">CMD</string>
+    <string name="cmd_bonus">CMD Bonus</string>
     <string name="con">CON</string>
     <string name="combat_maneuver_bonus">Combat Maneuver Bonus</string>
+    <string name="counter_name">Counter Name</string>
+    <string name="edit_counter">Edit Counter</string>
     <string name="cancel">Cancel</string>
     <string name="crash_toast_text">Ooooops ! I crashed, but a report has been sent to my developer to help fix the issue !</string>
     <string name="crash_dialog_title">PFRPG Character Sheet has crashed</string>
@@ -74,6 +80,7 @@
     <string name="hint_item_name">Item Name</string>
     <string name="hint_item_desc">Item Description</string>
     <string name="hint_skill_name">Skill Name</string>
+    <string name="init">Init</string>
     <string name="init_bonus">Init. Bonus</string>
     <string name="initiative_bonus">Initiative Bonus</string>
     <string name="inte">INT</string>
@@ -81,9 +88,14 @@
     <string name="item_weight">Item Weight</string>
     <string name="known">Known</string>
     <string name="languages">Languages</string>
+    <string name="listening_for_chars">Now listening for characters.</string>
+    <string name="listening_for_chars_already">Already listening for characters.</string>
     <string name="new_c">New C.</string>
+    <string name="new_peers">You have new peers available!</string>
+    <string name="max">Max</string>
     <string name="max_hp">Max HP</string>
     <string name="menu_settings">Settings</string>
+    <string name="min">Min</string>
     <string name="misc">Misc.</string>
     <string name="misc_init_bonus">Misc. Init. Bonus</string>
     <string name="miscellaneous_initiative_bonus">Miscellaneous Initiative Bonus</string>
@@ -91,15 +103,21 @@
     <string name="misc_mods">Misc. Mods</string>
     <string name="mod_value_done_editing">Done</string>
     <string name="ok">OK</string>
+    <string name="paired_devices">Paired Devices</string>
     <string name="pfor_toast">You need the \'Pathfinder Open Reference\' app by Devon Jones/Masterwork Tools for more information on your selected item.</string>
     <string name="prepared">Prepared</string>
+    <string name="prompt_cancel">You are no longer deleting a character.</string>
+    <string name="prompt_delete">You will be prompted to delete the next selected character.</string>
+    <string name="receive_character">Receive Character</string>
     <string name="reflex">Reflex</string>
     <string name="rolled_hp">Rolled HP</string>
     <string name="save_ability">Save Ability</string>
     <string name="save_bonus">Save Bonus</string>
     <string name="save_dc">Save DC</string>
+    <string name="send_character">Send Character</string>
     <string name="shield">Shield</string>
     <string name="shield_bonus">Shield Bonus</string>
+    <string name="size">Size</string>
     <string name="skill_description_hint">Skill Description</string>
     <string name="skill_name_hint">Skill Name</string>
     <string name="spell_level">Spell Level</string>
@@ -134,7 +152,7 @@
     <string name="title_feat">Feats</string>
     <string name="title_feat_skill">Feats/Skills</string>
     <string name="title_items">Items</string>
-    <string name="title_select_info_items">Select/Info/Items</string>
+    <string name="title_select_info_items">Info/Items/Counters</string>
     <string name="title_skill">Skills</string>
     <string name="title_spells">Spells</string>
     <string name="title_stats">Stats</string>
@@ -142,6 +160,7 @@
     <string name="total_mod">Total Mod.</string>
     <string name="total_weight">Total Weight</string>
     <string name="touch">Touch</string>
+    <string name="transfer_complete">Transfer complete</string>
     <string name="will">Will</string>
     <string name="wis">WIS</string>
     <string name="title_section3">Section 3</string>
@@ -149,5 +168,12 @@
     <string name="title_section1">Section 1</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_character_select">Select a Character</string>
+    <string name="title_activity_cmbedit">Edit CMB</string>
+    <string name="title_activity_character_send">Send Character</string>
+    <string name="title_activity_character_receive">Receive Character</string>
+    <string name="title_activity_hpedit">Edit HP</string>
+    <string name="title_activity_bluetooth_transfer">Transfer via Bluetooth</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_bluetooth_send">BluetoothSendActivity</string>
 
 </resources>

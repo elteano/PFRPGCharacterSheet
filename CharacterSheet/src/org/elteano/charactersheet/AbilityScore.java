@@ -1,19 +1,22 @@
 package org.elteano.charactersheet;
 
+import java.io.Serializable;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class AbilityScore implements Parcelable {
+public class AbilityScore implements Parcelable, Serializable {
 
+	public static final long serialVersionUID = 1L;
 	private static final String BASE_VALUE = "org.elteano.charactersheet.AbilityScore.baseValue";
 	private static final String TEMP_ADJUSTMENT = "org.elteano.charactersheet.AbilityScore.tempAdjustment";
 
 	private int baseValue;
 	private int tempAdjustment;
 
-	public static final Parcelable.Creator<AbilityScore> CREATOR = new Parcelable.Creator<AbilityScore>() {
+	public static transient final Parcelable.Creator<AbilityScore> CREATOR = new Parcelable.Creator<AbilityScore>() {
 
 		public AbilityScore createFromParcel(Parcel source) {
 			return new AbilityScore(source.readInt(), source.readInt());

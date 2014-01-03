@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CharacterSelectActivity" >
+
+    <fragment
+        android:id="@+id/activity_character_select_fragment"
+        android:name="org.elteano.charactersheet.CharacterSelectFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        tools:layout="@layout/fragment_character_select" />
+
+    <!-- For a done button. Unused at this time. -->
+    <!-- <Button -->
+    <!-- android:id="@+id/activity_character_select_done_button" -->
+    <!-- android:layout_width="wrap_content" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:layout_alignParentBottom="true" -->
+    <!-- android:layout_alignParentLeft="true" -->
+    <!-- android:layout_alignParentRight="true" -->
+    <!-- android:onClick="onClickDoneButton" -->
+    <!-- android:text="@string/done_button" /> -->
+
+</RelativeLayout>

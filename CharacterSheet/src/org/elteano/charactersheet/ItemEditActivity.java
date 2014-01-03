@@ -5,7 +5,10 @@ import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +25,17 @@ public class ItemEditActivity extends Activity {
 			.getCanonicalName() + ".itemExtra";
 
 	private Item mItem;
+
+	private void setOrientation() {
+		int screenSizeFlag = getResources().getConfiguration().screenLayout
+				& Configuration.SCREENLAYOUT_SIZE_MASK;
+		if (screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_NORMAL
+				|| screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+		}
+	}
 
 	public void onClickDoneButton(View source) {
 		mItem.setName(((EditText) findViewById(R.id.activity_item_edit_item_name))
@@ -46,7 +60,7 @@ public class ItemEditActivity extends Activity {
 		mItem.setDesc(((EditText) findViewById(R.id.activity_item_edit_item_desc))
 				.getText().toString());
 		Intent intent = new Intent();
-		intent.putExtra(EXTRA_ITEM, mItem);
+		intent.putExtra(EXTRA_ITEM, (Parcelable) mItem);
 		setResult(RESULT_OK, intent);
 		finish();
 	}
@@ -59,6 +73,7 @@ public class ItemEditActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setOrientation();
 		setContentView(R.layout.activity_item_edit);
 		if (getIntent().getExtras() != null)
 			mItem = getIntent().getParcelableExtra(EXTRA_ITEM);
@@ -68,9 +83,10 @@ public class ItemEditActivity extends Activity {
 		((EditText) findViewById(R.id.activity_item_edit_item_name))
 				.setText(mItem.getName());
 		((EditText) findViewById(R.id.activity_item_edit_quantity_field))
-				.setText("" + mItem.getQuantity());
+				.setText((mItem.getQuantity() != 0) ? "" + mItem.getQuantity()
+						: "");
 		((EditText) findViewById(R.id.activity_item_edit_weight_field))
-				.setText("" + mItem.getWeight());
+				.setText((mItem.getWeight() != 0) ? "" + mItem.getWeight() : "");
 		((EditText) findViewById(R.id.activity_item_edit_item_desc))
 				.setText(mItem.getDesc());
 		setResult(RESULT_CANCELED);

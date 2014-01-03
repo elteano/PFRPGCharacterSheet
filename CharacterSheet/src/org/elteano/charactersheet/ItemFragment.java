@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -101,7 +102,7 @@ public class ItemFragment extends CharacterUpdaterFragment implements
 			Log.d("CharacterSheet", "The found item is " + lastItem.getName());
 			((CharacterSheetActivity) getActivity()).getCharacter().removeItem(
 					lastItem);
-			intent.putExtra(ItemEditActivity.EXTRA_ITEM, lastItem);
+			intent.putExtra(ItemEditActivity.EXTRA_ITEM, (Parcelable) lastItem);
 			startActivityForResult(intent, ItemEditActivity.REQUEST_EDIT_ITEM);
 		}
 	}
@@ -157,16 +158,16 @@ public class ItemFragment extends CharacterUpdaterFragment implements
 	}
 
 	@Override
-	public void onStart() {
+	public void onResume() {
+		clearListings();
 		fillFields();
 		hookupListeners();
 		fillListings();
 		updateWeight();
-		super.onStart();
+		super.onResume();
 	}
 
-	public void onStop() {
-		clearListings();
+	public void onPause() {
 		unhookListeners();
 		super.onPause();
 	}

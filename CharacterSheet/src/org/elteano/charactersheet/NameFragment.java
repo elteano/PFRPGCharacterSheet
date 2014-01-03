@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,9 +37,9 @@ public class NameFragment extends CharacterUpdaterFragment implements
 				.getCharacter().getSize());
 		EditText ageView = (EditText) getView().findViewById(
 				R.id.fragment_name_character_age_field);
-		ageView.setText(""
-				+ ((CharacterSheetActivity) getActivity()).getCharacter()
-						.getAge());
+		int tempVal = ((CharacterSheetActivity) getActivity()).getCharacter()
+				.getAge();
+		ageView.setText((tempVal != 0) ? "" + tempVal : "");
 		EditText bioView = (EditText) getView().findViewById(
 				R.id.fragment_name_character_bio_field);
 		bioView.setText(((CharacterSheetActivity) getActivity()).getCharacter()
@@ -55,9 +54,9 @@ public class NameFragment extends CharacterUpdaterFragment implements
 				.getCharacter().getName());
 		EditText xpView = (EditText) getView().findViewById(
 				R.id.fragment_name_xp_field);
-		xpView.setText(""
-				+ ((CharacterSheetActivity) getActivity()).getCharacter()
-						.getXP());
+		tempVal = ((CharacterSheetActivity) getActivity()).getCharacter()
+				.getXP();
+		xpView.setText((tempVal != 0) ? "" + tempVal : "");
 		((EditText) getView().findViewById(R.id.fragment_name_languages_field))
 				.setText(((CharacterSheetActivity) getActivity())
 						.getCharacter().getLanguages());
@@ -99,12 +98,7 @@ public class NameFragment extends CharacterUpdaterFragment implements
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.i("CharacterSheet", "Entering NameFragment.onActivityCreated()");
 		super.onActivityCreated(savedInstanceState);
-		Log.i("CharacterSheet",
-				"Character == null: "
-						+ (((CharacterSheetActivity) getActivity())
-								.getCharacter() == null));
 		nameView.setText(((CharacterSheetActivity) getActivity())
 				.getCharacter().getName());
 		ageTextWatcher = new TextWatcher() {
@@ -199,10 +193,6 @@ public class NameFragment extends CharacterUpdaterFragment implements
 				((EditText) getView().findViewById(
 						R.id.fragment_name_character_bio_field)).getText()
 						.toString());
-		Log.d("CharacterSheet", ((CharacterSheetActivity) getActivity())
-				.getCharacter().getBio());
-		Log.d("CharacterSheet", ((CharacterSheetActivity) getActivity())
-				.getCharacter().getLanguages());
 	}
 
 	private void unhookListeners() {
@@ -299,7 +289,6 @@ public class NameFragment extends CharacterUpdaterFragment implements
 	@Override
 	public void preUpdate() {
 		if (((CharacterSheetActivity) getActivity()).getCharacter() != null) {
-			Log.d("CharacterSheet", "pushing fields");
 			pushFieldsToCharacter();
 		}
 	}

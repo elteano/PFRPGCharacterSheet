@@ -5,6 +5,8 @@ import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -39,9 +41,21 @@ public class SkillEditActivity extends Activity implements
 	private IntTextWatcher miscWatcher;
 	private Skill mSkill;
 
+	private void setOrientation() {
+		int screenSizeFlag = getResources().getConfiguration().screenLayout
+				& Configuration.SCREENLAYOUT_SIZE_MASK;
+		if (screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_NORMAL
+				|| screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+		}
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setOrientation();
 		Parcelable[] a_in = getIntent().getExtras().getParcelableArray(
 				INPUT_ABILITIES);
 		abilities = new AbilityScore[6];
@@ -118,7 +132,7 @@ public class SkillEditActivity extends Activity implements
 			return;
 		}
 		Intent result = new Intent();
-		result.putExtra(RESULT_SKILL, mSkill);
+		result.putExtra(RESULT_SKILL, (Parcelable) mSkill);
 		setResult(RESULT_OK, result);
 		finish();
 	}

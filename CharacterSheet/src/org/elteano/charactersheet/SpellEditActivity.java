@@ -5,6 +5,8 @@ import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -34,6 +36,17 @@ public class SpellEditActivity extends Activity implements OnClickListener,
 	private TextWatcher nameWatcher;
 	private TextWatcher descWatcher;
 
+	private void setOrientation() {
+		int screenSizeFlag = getResources().getConfiguration().screenLayout
+				& Configuration.SCREENLAYOUT_SIZE_MASK;
+		if (screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_NORMAL
+				|| screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+		}
+	}
+
 	public void onClick(View source) {
 		switch (source.getId()) {
 		case R.id.activity_spell_edit_delete_button:
@@ -47,7 +60,7 @@ public class SpellEditActivity extends Activity implements OnClickListener,
 				return;
 			}
 			Intent result = new Intent();
-			result.putExtra("result", mSpell);
+			result.putExtra("result", (Parcelable) mSpell);
 			setResult(RESULT_OK, result);
 			finish();
 			break;
@@ -57,6 +70,7 @@ public class SpellEditActivity extends Activity implements OnClickListener,
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setOrientation();
 		setResult(RESULT_CANCELED);
 		setContentView(R.layout.activity_spell_edit);
 		((Button) findViewById(R.id.activity_spell_edit_delete_button))

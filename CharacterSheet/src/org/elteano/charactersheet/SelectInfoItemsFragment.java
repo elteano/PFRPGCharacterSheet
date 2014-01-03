@@ -24,14 +24,14 @@ public class SelectInfoItemsFragment extends CharacterUpdaterListenerFragment {
 		FragmentTransaction ft = ((FragmentActivity) getActivity())
 				.getSupportFragmentManager().beginTransaction();
 		if (noChildren()) {
-			//CharacterSelectFragment csf = new CharacterSelectFragment();
-			//ft.replace(R.id.left_fragment_space, csf);
-			//addListeningChild(csf);
+			CounterFragment csf = new CounterFragment();
+			ft.replace(R.id.right_fragment_space, csf);
+			addListeningChild(csf);
 			NameFragment nf = new NameFragment();
-			ft.replace(R.id.center_fragment_space, nf);
+			ft.replace(R.id.left_fragment_space, nf);
 			addListeningChild(nf);
 			ItemFragment sf = new ItemFragment();
-			ft.replace(R.id.right_fragment_space, sf);
+			ft.replace(R.id.center_fragment_space, sf);
 			addListeningChild(sf);
 		} else {
 			for (Fragment f : children) {

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -85,15 +86,10 @@ public class SkillFragment extends CharacterUpdaterFragment implements
 	}
 
 	@Override
-	public void onStart() {
-		fillListings();
-		super.onStart();
-	}
-
-	@Override
-	public void onStop() {
+	public void onResume() {
 		clearListings();
-		super.onStop();
+		fillListings();
+		super.onResume();
 	}
 
 	@Override
@@ -122,7 +118,7 @@ public class SkillFragment extends CharacterUpdaterFragment implements
 	public void onClick(View source) {
 		Intent intent = new Intent(getActivity(), SkillEditActivity.class);
 		lastSkill = ((SkillListing) source).getSkill();
-		intent.putExtra(SkillEditActivity.INPUT_SKILL, lastSkill);
+		intent.putExtra(SkillEditActivity.INPUT_SKILL, (Parcelable) lastSkill);
 		intent.putExtra(SkillEditActivity.INPUT_ABILITIES,
 				((CharacterSheetActivity) getActivity()).getCharacter()
 						.getAbilities());

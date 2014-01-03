@@ -1,11 +1,27 @@
 package org.elteano.charactersheet;
 
+import java.io.Serializable;
+
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Feat {
+public class Feat implements Parcelable, Serializable {
 
+	public static final long serialVersionUID = 1L;
 	private static final String BUNDLE_NAME = "org.elteano.charactersheet.Feat.name";
 	private static final String BUNDLE_DESC = "org.elteano.charactersheet.Feat.desc";
+
+	public static transient final Parcelable.Creator<Feat> CREATOR = new Parcelable.Creator<Feat>() {
+
+		public Feat createFromParcel(Parcel source) {
+			return new Feat(source.readString(), source.readString());
+		}
+
+		public Feat[] newArray(int size) {
+			return new Feat[size];
+		}
+	};
 
 	private String name;
 	private String desc;
@@ -63,5 +79,14 @@ public class Feat {
 		if (name.isEmpty())
 			name = " ";
 		return name + PlayerCharacter.SPLITTER_SMALL + desc;
+	}
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(name);
+		dest.writeString(desc);
 	}
 }
