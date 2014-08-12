@@ -76,7 +76,7 @@ public class AttackEditActivity extends Activity implements
 		if (getIntent().getExtras() != null)
 			mAttack = (Attack) getIntent().getExtras().getParcelable("input");
 		else
-			mAttack = new Attack("", 0, 0, 0, 0, "", "");
+			mAttack = new Attack("", 4, 4, 0, 0, "", "");
 
 		// Set to input Attack
 		((EditText) findViewById(R.id.activity_attack_edit_attack_name))
