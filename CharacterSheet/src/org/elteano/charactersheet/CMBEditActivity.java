@@ -37,7 +37,7 @@ public class CMBEditActivity extends Activity implements
 	private CMB mCMB;
 	private IntTextWatcher classModWatcher;
 	private IntTextWatcher miscModWatcher;
-	private AbilityScore[] abilities;
+	private AbilityScores abilities;
 	private ArrayList<PlayerClass> classes;
 	private int size;
 	private int bab;
@@ -65,15 +65,11 @@ public class CMBEditActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setOrientation();
-		Parcelable[] b = getIntent().getExtras().getParcelableArray(
-				INPUT_ABILITIES);
 		mCMB = getIntent().getExtras().getParcelable(INPUT_CMB);
-		abilities = new AbilityScore[b.length];
-		for (int i = 0; i < b.length; i++) {
-			abilities[i] = (AbilityScore) b[i];
-		}
+		abilities = getIntent().getExtras().getParcelable(INPUT_ABILITIES);
 		classes = new ArrayList<PlayerClass>();
-		b = getIntent().getExtras().getParcelableArray(INPUT_CLASSES);
+		Parcelable[] b = getIntent().getExtras().getParcelableArray(
+				INPUT_CLASSES);
 		for (Parcelable parc : b) {
 			classes.add((PlayerClass) parc);
 		}

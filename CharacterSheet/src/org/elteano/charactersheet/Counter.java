@@ -3,15 +3,19 @@ package org.elteano.charactersheet;
 import java.io.Serializable;
 import java.util.Locale;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 /**
  * Counter class used for keeping track of castings, rages, etc. for the day, or
  * whatever else someone may want.
- * 
+ *
  * @author emryn
- * 
+ *
  */
 public class Counter implements Parcelable, Serializable {
 
@@ -44,7 +48,7 @@ public class Counter implements Parcelable, Serializable {
 	 * Creates a new Counter with the given parameters. This is the only
 	 * constructor, and so there are no default values other than those which
 	 * are set by the GUI.
-	 * 
+	 *
 	 * @param counterName
 	 *            the counterName of the Counter as it will be displayed
 	 * @param minValue
@@ -85,7 +89,7 @@ public class Counter implements Parcelable, Serializable {
 	/**
 	 * Expands a Counter from the given save string. For use by
 	 * PlayerCharacter's <code>restoreFromSharedPreferences()</code> method.
-	 * 
+	 *
 	 * @param saveString
 	 *            String to expand.
 	 * @return a Counter represented by the savestring.
@@ -109,7 +113,7 @@ public class Counter implements Parcelable, Serializable {
 
 	/**
 	 * Retrieves the current value of the counter.
-	 * 
+	 *
 	 * @return the current value.
 	 */
 	public int getCur() {
@@ -119,7 +123,7 @@ public class Counter implements Parcelable, Serializable {
 	/**
 	 * Retrieves the name of the counter. This should be used to define the
 	 * labels for this Counter in the GUI.
-	 * 
+	 *
 	 * @return the name.
 	 */
 	public String getName() {
@@ -128,7 +132,7 @@ public class Counter implements Parcelable, Serializable {
 
 	/**
 	 * Retrieves the maximum value permitted for this counter.
-	 * 
+	 *
 	 * @return the maximum value.
 	 */
 	public int getMax() {
@@ -137,7 +141,7 @@ public class Counter implements Parcelable, Serializable {
 
 	/**
 	 * Retrieves the minimum value permitted for this counter.
-	 * 
+	 *
 	 * @return the minimum value.
 	 */
 	public int getMin() {
@@ -146,7 +150,7 @@ public class Counter implements Parcelable, Serializable {
 
 	/**
 	 * Changes the current value of this Counter.
-	 * 
+	 *
 	 * @param newCur
 	 *            the new value.
 	 */
@@ -157,7 +161,7 @@ public class Counter implements Parcelable, Serializable {
 	/**
 	 * Changes the name of this Counter. This should reflect itself in a change
 	 * of the label in the GUI.
-	 * 
+	 *
 	 * @param newName
 	 *            the new counterName.
 	 */
@@ -167,7 +171,7 @@ public class Counter implements Parcelable, Serializable {
 
 	/**
 	 * Changes the maximum value of this Counter.
-	 * 
+	 *
 	 * @param newMax
 	 *            the new max.
 	 */
@@ -177,7 +181,7 @@ public class Counter implements Parcelable, Serializable {
 
 	/**
 	 * Changes the minimum value of this Counter.
-	 * 
+	 *
 	 * @param newMin
 	 *            the new min.
 	 */
@@ -188,7 +192,7 @@ public class Counter implements Parcelable, Serializable {
 	/**
 	 * Compiles the Counter into a saveable String for use by PlayerCharacter's
 	 * <code>saveToSharedPreference()</code> method.
-	 * 
+	 *
 	 * @return a save String.
 	 */
 	public String toSaveString() {
@@ -204,4 +208,28 @@ public class Counter implements Parcelable, Serializable {
 		out.writeInt(getCur());
 	}
 
+	public JSONObject writeToJSON() {
+		try {
+			JSONObject ret = new JSONObject();
+			ret.put("counterName", counterName);
+			ret.put("cur", cur);
+			ret.put("max", max);
+			ret.put("min", min);
+			return ret;
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error creating JSON from Counter");
+			return null;
+		}
+	}
+
+	public static Counter createFromJSON(JSONObject input) {
+		try {
+			return new Counter(input.getString("counterName"),
+					input.getInt("min"), input.getInt("max"),
+					input.getInt("cur"));
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error inflating Counter from JSON");
+			return null;
+		}
+	}
 }

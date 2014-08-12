@@ -3,6 +3,9 @@ package org.elteano.charactersheet;
 import java.io.Serializable;
 import java.util.Locale;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -43,10 +46,10 @@ public class Attack implements Parcelable, Serializable {
 		description = desc;
 	}
 
-	public String calculateMultiAttack(AbilityScore[] abilities, int bab) {
+	public String calculateMultiAttack(AbilityScores abilities, int bab) {
 		String fulltext = "+";
 		int attackmod = addAttack
-				+ abilities[baseAttackAbility].getTempModifier();
+				+ abilities.getAbility(baseAttackAbility).getTempModifier();
 		if (bab == 0) {
 			fulltext = (attackmod < 0) ? "" + attackmod : "+" + attackmod;
 		} else {
@@ -77,9 +80,10 @@ public class Attack implements Parcelable, Serializable {
 		return 0;
 	}
 
-	public String toDescriptionString(AbilityScore[] abilities, int bab) {
+	public String toDescriptionString(AbilityScores abilities, int bab) {
 		int attackTotal = addAttack
-				+ abilities[baseAttackAbility].getTempModifier() + bab;
+				+ abilities.getAbility(baseAttackAbility).getTempModifier()
+				+ bab;
 		String attackBonus = (attackTotal <= 0) ? "" : "+";
 		attackBonus += attackTotal;
 		int damageTotal = getDamageMod(abilities);
@@ -107,9 +111,40 @@ public class Attack implements Parcelable, Serializable {
 		out.writeString(description);
 	}
 
-	private int getDamageMod(AbilityScore[] abilities) {
+	private int getDamageMod(AbilityScores abilities) {
 		return addDamage
-				+ ((baseDamageAbility != 6) ? abilities[baseDamageAbility]
-						.getTempModifier() : 0);
+				+ ((baseDamageAbility != 6) ? abilities.getAbility(
+						baseDamageAbility).getTempModifier() : 0);
+	}
+
+	public JSONObject writeToJSON() {
+		try {
+			JSONObject ret = new JSONObject();
+			ret.put("addAttack", addAttack);
+			ret.put("addDamage", addDamage);
+			ret.put("baseAttackAbility", baseAttackAbility);
+			ret.put("baseDamageAbility", baseDamageAbility);
+			ret.put("damageDie", damageDie);
+			ret.put("description", description);
+			ret.put("name", name);
+			return ret;
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error creating JSON for Attack");
+			return null;
+		}
+	}
+
+	public static Attack createFromJSON(JSONObject input) {
+		try {
+			return new Attack(input.getString("name"),
+					input.getInt("baseAttackAbility"),
+					input.getInt("baseDamageAbility"),
+					input.getInt("addAttack"), input.getInt("addDamage"),
+					input.getString("damageDie"),
+					input.getString("description"));
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error inflating Attack from JSON");
+			return null;
+		}
 	}
 }

@@ -2,10 +2,14 @@ package org.elteano.charactersheet;
 
 import java.io.Serializable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class AbilityScore implements Parcelable, Serializable {
 
@@ -94,6 +98,7 @@ public class AbilityScore implements Parcelable, Serializable {
 		this.tempAdjustment = tempAdjustment;
 	}
 
+	@Override
 	public String toString() {
 		if (getTempModifier() > 0)
 			return "+" + getTempModifier();
@@ -108,5 +113,26 @@ public class AbilityScore implements Parcelable, Serializable {
 	public void writeToParcel(Parcel arg0, int arg1) {
 		arg0.writeInt(baseValue);
 		arg0.writeInt(tempAdjustment);
+	}
+
+	public JSONObject writeToJSON() {
+		JSONObject ret = new JSONObject();
+		try {
+			ret.put("baseValue", baseValue);
+			ret.put("tempAdjustment", tempAdjustment);
+		} catch (JSONException ex) {
+		}
+		return ret;
+	}
+
+	public static AbilityScore createFromJSON(JSONObject input) {
+		try {
+			return new AbilityScore(input.getInt("baseValue"),
+					input.getInt("tempAdjustment"));
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet",
+					"JSONException while inflating AbilityScore");
+			return null;
+		}
 	}
 }

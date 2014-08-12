@@ -2,9 +2,13 @@ package org.elteano.charactersheet;
 
 import java.io.Serializable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class Feat implements Parcelable, Serializable {
 
@@ -88,5 +92,26 @@ public class Feat implements Parcelable, Serializable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(name);
 		dest.writeString(desc);
+	}
+
+	public JSONObject writeToJSON() {
+		try {
+			JSONObject ret = new JSONObject();
+			ret.put("desc", desc);
+			ret.put("name", name);
+			return ret;
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error creating JSON for Feat");
+			return null;
+		}
+	}
+
+	public static Feat createFromJSON(JSONObject input) {
+		try {
+			return new Feat(input.getString("name"), input.getString("desc"));
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error inflating Feat from JSON");
+			return null;
+		}
 	}
 }

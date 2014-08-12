@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,7 +20,7 @@ public class SaveEditActivity extends Activity implements
 	private Save mSave;
 	private IntTextWatcher classModWatcher;
 	private IntTextWatcher miscModWatcher;
-	private AbilityScore[] abilities;
+	private AbilityScores abilities;
 
 	private void setOrientation() {
 		int screenSizeFlag = getResources().getConfiguration().screenLayout
@@ -48,12 +47,7 @@ public class SaveEditActivity extends Activity implements
 		setOrientation();
 		setTitle("Edit Save");
 		mSave = (Save) getIntent().getExtras().getParcelable("input");
-		Parcelable[] b = getIntent().getExtras().getParcelableArray(
-				INPUT_ABILITIES);
-		abilities = new AbilityScore[b.length];
-		for (int i = 0; i < b.length; i++) {
-			abilities[i] = (AbilityScore) b[i];
-		}
+		abilities = getIntent().getExtras().getParcelable(INPUT_ABILITIES);
 		setContentView(R.layout.activity_save_edit);
 		((CheckBox) findViewById(R.id.activity_save_edit_cha_box))
 				.setChecked((mSave.flags & Save.FLAG_CHA) == Save.FLAG_CHA);

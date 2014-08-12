@@ -2,8 +2,12 @@ package org.elteano.charactersheet;
 
 import java.io.Serializable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class Skill implements Parcelable, Serializable {
 
@@ -108,8 +112,9 @@ public class Skill implements Parcelable, Serializable {
 		return numRanks;
 	}
 
-	public int getTotalModifier(AbilityScore[] abilities) {
-		return abilities[baseAbility].getTempModifier() + numRanks + miscMod;
+	public int getTotalModifier(AbilityScores abilities) {
+		return abilities.getAbility(baseAbility).getTempModifier() + numRanks
+				+ miscMod;
 	}
 
 	public void setBaseAbility(int baseAbility) {
@@ -148,4 +153,31 @@ public class Skill implements Parcelable, Serializable {
 			return new Skill[size];
 		}
 	};
+
+	public JSONObject writeToJSON() {
+		try {
+			JSONObject ret = new JSONObject();
+			ret.put("skillName", skillName);
+			ret.put("baseAbility", baseAbility);
+			ret.put("miscMod", miscMod);
+			ret.put("numRanks", numRanks);
+			ret.put("skillName", skillName);
+			return ret;
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error creating JSON from Skill");
+			return null;
+		}
+	}
+
+	public static Skill createFromJSON(JSONObject input) {
+		try {
+			return new Skill(input.getString("skillName"),
+					input.getInt("baseAbility"), input.getInt("numRanks"),
+					input.getInt("miscMod"));
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error inflating Skill from JSON");
+			ex.printStackTrace();
+			return null;
+		}
+	}
 }

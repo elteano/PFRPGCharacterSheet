@@ -22,7 +22,7 @@ public class DefenseFragment extends CharacterUpdaterFragment implements
 	private void fillFields() {
 		ArmorClass ac = ((CharacterSheetActivity) getActivity()).getCharacter()
 				.getAC();
-		AbilityScore[] abilities = ((CharacterSheetActivity) getActivity())
+		AbilityScores abilities = ((CharacterSheetActivity) getActivity())
 				.getCharacter().getAbilities();
 		int size = ((CharacterSheetActivity) getActivity()).getCharacter()
 				.getSize();
@@ -108,8 +108,8 @@ public class DefenseFragment extends CharacterUpdaterFragment implements
 	public void onClick(View source) {
 		Intent intent = new Intent(getActivity(), SaveEditActivity.class);
 		intent.putExtra(SaveEditActivity.INPUT_ABILITIES,
-				((CharacterSheetActivity) getActivity()).getCharacter()
-						.getAbilities());
+				(Parcelable) ((CharacterSheetActivity) getActivity())
+						.getCharacter().getAbilities());
 		int request = -1;
 		switch (source.getId()) {
 		case R.id.fragment_defense_ac_button:
@@ -120,8 +120,8 @@ public class DefenseFragment extends CharacterUpdaterFragment implements
 					(Parcelable) ((CharacterSheetActivity) getActivity())
 							.getCharacter().getAC());
 			intent.putExtra(ACEditActivity.INPUT_ABILITIES,
-					((CharacterSheetActivity) getActivity()).getCharacter()
-							.getAbilities());
+					(Parcelable) ((CharacterSheetActivity) getActivity())
+							.getCharacter().getAbilities());
 			intent.putExtra(ACEditActivity.INPUT_SIZE,
 					((CharacterSheetActivity) getActivity()).getCharacter()
 							.getSize());

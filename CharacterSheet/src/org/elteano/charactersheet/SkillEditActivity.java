@@ -35,7 +35,7 @@ public class SkillEditActivity extends Activity implements
 			.getCanonicalName() + ".skill";
 	public static final String INPUT_ABILITIES = "abilities";
 
-	private AbilityScore[] abilities;
+	private AbilityScores abilities;
 	private TextWatcher nameWatcher;
 	private IntTextWatcher ranksWatcher;
 	private IntTextWatcher miscWatcher;
@@ -56,12 +56,7 @@ public class SkillEditActivity extends Activity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setOrientation();
-		Parcelable[] a_in = getIntent().getExtras().getParcelableArray(
-				INPUT_ABILITIES);
-		abilities = new AbilityScore[6];
-		for (int i = 0; i < a_in.length; i++) {
-			abilities[i] = (AbilityScore) a_in[i];
-		}
+		abilities = getIntent().getExtras().getParcelable(INPUT_ABILITIES);
 		setContentView(R.layout.activity_skill_edit);
 		if (getIntent().getExtras() != null)
 			mSkill = getIntent().getExtras().getParcelable(INPUT_SKILL);
@@ -141,8 +136,9 @@ public class SkillEditActivity extends Activity implements
 			long id) {
 		mSkill.setBaseAbility(pos);
 		((Button) findViewById(R.id.activity_skill_edit_ability_mod_button))
-				.setText(((abilities[pos].getTempModifier() < 0) ? "" : "+")
-						+ abilities[pos].getTempModifier());
+				.setText(((abilities.getAbility(pos).getTempModifier() < 0) ? ""
+						: "+")
+						+ abilities.getAbility(pos).getTempModifier());
 		updateTotalModButton();
 	}
 

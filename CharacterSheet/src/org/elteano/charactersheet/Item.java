@@ -2,8 +2,12 @@ package org.elteano.charactersheet;
 
 import java.io.Serializable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class Item implements Parcelable, Serializable {
 
@@ -110,5 +114,30 @@ public class Item implements Parcelable, Serializable {
 		dest.writeFloat(weight);
 		dest.writeInt(quantity);
 		dest.writeString(desc);
+	}
+
+	public JSONObject writeToJSON() {
+		try {
+			JSONObject ret = new JSONObject();
+			ret.put("desc", desc);
+			ret.put("name", name);
+			ret.put("quantity", quantity);
+			ret.put("weight", weight);
+			return ret;
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error creating JSON from Item");
+			return null;
+		}
+	}
+
+	public static Item createFromJSON(JSONObject input) {
+		try {
+			return new Item(input.getString("name"),
+					(float) input.getDouble("weight"),
+					input.getInt("quantity"), input.getString("desc"));
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error inflating Item from JSON");
+			return null;
+		}
 	}
 }

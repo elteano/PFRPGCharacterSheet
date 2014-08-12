@@ -3,6 +3,10 @@ package org.elteano.charactersheet;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -77,7 +81,7 @@ public class HP implements Parcelable, Serializable {
 	/**
 	 * Get maximum possible HP, applying the given per-level modifiers
 	 * (typically constitution modifier)
-	 * 
+	 *
 	 * @param perLevelModifiers
 	 *            Modifiers applied to each level roll.
 	 * @return The maximum HP this character can possess.
@@ -133,5 +137,35 @@ public class HP implements Parcelable, Serializable {
 	public void writeToParcel(Parcel arg0, int arg1) {
 		arg0.writeInt(miscMods);
 		arg0.writeList(mHPs);
+	}
+
+	public JSONObject writeToJSON() {
+		JSONObject ret = new JSONObject();
+		try {
+			ret.put("miscMods", miscMods);
+			JSONArray arr = new JSONArray();
+			for (int ind : mHPs) {
+				arr.put(ind);
+			}
+			ret.put("mHPs", arr);
+		} catch (JSONException ex) {
+		}
+		return ret;
+	}
+
+	public static HP createFromJSON(JSONObject input) {
+		int miscMods = 0;
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		try {
+			miscMods = input.getInt("miscMods");
+			JSONArray jarr = input.getJSONArray("mHPs");
+			for (int i = 0; i < jarr.length(); ++i) {
+				arr.add(jarr.getInt(i));
+			}
+			return new HP(miscMods, arr);
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error inflating HP from JSON");
+			return null;
+		}
 	}
 }

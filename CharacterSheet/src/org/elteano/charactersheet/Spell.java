@@ -2,8 +2,12 @@ package org.elteano.charactersheet;
 
 import java.io.Serializable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class Spell implements Parcelable, Serializable {
 
@@ -21,17 +25,18 @@ public class Spell implements Parcelable, Serializable {
 		}
 	};
 
-	private AbilityScore[] abilities;
+	// private AbilityScore[] abilities;
 	public int level, saveBonus, saveAbility;
 	public String name, desc;
 
 	/**
 	 * Create a new spell conforming to the old ways. Retained for backwards
 	 * compatibility; should not be used very often.
-	 * 
+	 *
 	 * @deprecated
 	 */
-	public Spell(int level, String name, String desc, AbilityScore[] abilities) {
+	@Deprecated
+	public Spell(int level, String name, String desc, AbilityScores abilities) {
 		this(level, name, desc, 0, 0, abilities);
 	}
 
@@ -40,25 +45,25 @@ public class Spell implements Parcelable, Serializable {
 	 * now be called in most cases.
 	 */
 	public Spell(int level, String name, String desc, int saveBonus,
-			int saveAbility, AbilityScore[] abilities) {
+			int saveAbility, AbilityScores abilities) {
 		this.level = level;
 		this.name = name;
 		this.desc = desc;
 		this.saveBonus = saveBonus;
 		this.saveAbility = saveAbility;
-		this.abilities = abilities;
+		// this.abilities = abilities;
 	}
 
 	public int describeContents() {
 		return 0;
 	}
 
-	public int getSaveDC() {
+	public int getSaveDC(AbilityScores abilities) {
 		return 10 + level + saveBonus
-				+ abilities[saveAbility].getTempModifier();
+				+ abilities.getAbility(saveAbility).getTempModifier();
 	}
 
-	public static Spell fromSaveString(String s, AbilityScore[] abilities) {
+	public static Spell fromSaveString(String s, AbilityScores abilities) {
 		String[] cont = s.split(PlayerCharacter.SPLITTER_SMALL);
 		if (cont.length >= 3) {
 			int level = 0;
@@ -91,9 +96,9 @@ public class Spell implements Parcelable, Serializable {
 		out.writeInt(saveAbility);
 	}
 
-	public void setAbilities(AbilityScore[] abilities) {
-		this.abilities = abilities;
-	}
+	// public void setAbilities(AbilityScore[] abilities) {
+	// this.abilities = abilities;
+	// }
 
 	public String toSaveString() {
 		if (desc.isEmpty())
@@ -104,6 +109,7 @@ public class Spell implements Parcelable, Serializable {
 				saveAbility);
 	}
 
+	@Override
 	public String toString() {
 		return String.format("%d - %s", level, name.trim());
 	}
@@ -114,5 +120,31 @@ public class Spell implements Parcelable, Serializable {
 			return false;
 		Spell s = (Spell) o;
 		return name.equals(s.name) && level == s.level;
+	}
+
+	public JSONObject writeToJSON() {
+		try {
+			JSONObject ret = new JSONObject();
+			ret.put("desc", desc);
+			ret.put("level", level);
+			ret.put("name", name);
+			ret.put("saveAbility", saveAbility);
+			ret.put("saveBonus", saveBonus);
+			return ret;
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error creating JSON from Spell");
+			return null;
+		}
+	}
+
+	public static Spell createFromJSON(JSONObject input) {
+		try {
+			return new Spell(input.getInt("level"), input.getString("name"),
+					input.getString("desc"), input.getInt("saveBonus"),
+					input.getInt("saveAbility"), null);
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error inflating Spell from JSON");
+			return null;
+		}
 	}
 }

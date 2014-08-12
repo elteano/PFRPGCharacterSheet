@@ -106,8 +106,8 @@ public class SkillFragment extends CharacterUpdaterFragment implements
 		case R.id.add_skill:
 			Intent intent = new Intent(getActivity(), SkillEditActivity.class);
 			intent.putExtra(SkillEditActivity.INPUT_ABILITIES,
-					((CharacterSheetActivity) getActivity()).getCharacter()
-							.getAbilities());
+					(Parcelable) ((CharacterSheetActivity) getActivity())
+							.getCharacter().getAbilities());
 			startActivityForResult(intent, SkillEditActivity.REQUEST_NEW_SKILL);
 			return true;
 		default:
@@ -120,8 +120,8 @@ public class SkillFragment extends CharacterUpdaterFragment implements
 		lastSkill = ((SkillListing) source).getSkill();
 		intent.putExtra(SkillEditActivity.INPUT_SKILL, (Parcelable) lastSkill);
 		intent.putExtra(SkillEditActivity.INPUT_ABILITIES,
-				((CharacterSheetActivity) getActivity()).getCharacter()
-						.getAbilities());
+				(Parcelable) ((CharacterSheetActivity) getActivity())
+						.getCharacter().getAbilities());
 		startActivityForResult(intent, SkillEditActivity.REQUEST_EDIT_SKILL);
 	}
 

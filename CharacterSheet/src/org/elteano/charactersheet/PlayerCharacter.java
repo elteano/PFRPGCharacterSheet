@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,19 +29,22 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		public PlayerCharacter createFromParcel(Parcel src) {
 			PlayerCharacter ret = new PlayerCharacter();
 			Bundle b = src.readBundle();
-			ret.abilities = new AbilityScore[6];
-			b.setClassLoader(AbilityScore.class.getClassLoader());
-			Parcelable[] parcs = b.getParcelableArray("abilities");
-			for (int i = 0; i < 6; i++) {
-				ret.abilities[i] = (AbilityScore) parcs[i];
-			}
+			b.setClassLoader(AbilityScores.class.getClassLoader());
+			ret.abilities = b.getParcelable("abilities");
+			b.setClassLoader(Attack.class.getClassLoader());
 			ret.attacks = b.getParcelableArrayList("attacks");
+			b.setClassLoader(Counter.class.getClassLoader());
 			ret.counters = b.getParcelableArrayList("counters");
+			b.setClassLoader(Feat.class.getClassLoader());
 			ret.cfeats = b.getParcelableArrayList("cfeats");
 			ret.feats = b.getParcelableArrayList("feats");
+			b.setClassLoader(Item.class.getClassLoader());
 			ret.items = b.getParcelableArrayList("items");
+			b.setClassLoader(PlayerClass.class.getClassLoader());
 			ret.classes = b.getParcelableArrayList("classes");
+			b.setClassLoader(Skill.class.getClassLoader());
 			ret.skills = b.getParcelableArrayList("skills");
+			b.setClassLoader(Spell.class.getClassLoader());
 			ret.spells = b.getParcelableArrayList("spells");
 			ret.ac = (ArmorClass) src.readParcelable(ArmorClass.class
 					.getClassLoader());
@@ -244,7 +251,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		return ret;
 	}
 
-	private AbilityScore[] abilities;
+	private AbilityScores abilities;
 	private ArmorClass ac;
 	private ArrayList<Attack> attacks;
 	private int baseAttackBonus;
@@ -281,7 +288,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	private ArrayList<Spell> spells;
 
 	public PlayerCharacter() {
-		abilities = new AbilityScore[6];
+		abilities = new AbilityScores();
 		ac = new ArmorClass(0, 0, 0, 0, 0, true);
 		name = "New Character";
 		characterAge = 0;
@@ -302,9 +309,6 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		skills = new ArrayList<Skill>();
 		spells = new ArrayList<Spell>();
 		prepSpells = new ArrayList<Spell>();
-		for (int i = 0; i < 6; i++) {
-			abilities[i] = new AbilityScore(10);
-		}
 	}
 
 	public void addAttack(Attack attack) {
@@ -334,18 +338,39 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		return ret;
 	}
 
+	public JSONObject createJSON() {
+		JSONObject ret = new JSONObject();
+		try {
+			JSONArray arr = new JSONArray();
+			ret.put("abilities", abilities);
+		} catch (JSONException ex) {
+		}
+		return null;
+	}
+
 	public int describeContents() {
 		return 0;
 	}
 
-	public AbilityScore[] getAbilities() {
+	public AbilityScores getAbilities() {
 		return abilities;
 	}
 
 	public AbilityScore getAbility(int ability) {
-		try {
-			return abilities[ability];
-		} catch (IndexOutOfBoundsException ex) {
+		switch (ability) {
+		case ABILITY_CHA:
+			return abilities.getCha();
+		case ABILITY_CON:
+			return abilities.getCon();
+		case ABILITY_DEX:
+			return abilities.getDex();
+		case ABILITY_INT:
+			return abilities.getInt();
+		case ABILITY_STR:
+			return abilities.getStr();
+		case ABILITY_WIS:
+			return abilities.getWis();
+		default:
 			return null;
 		}
 	}
@@ -449,7 +474,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	}
 
 	public int getHPMax() {
-		return mHP.getMaxHP(abilities[ABILITY_CON].getTempModifier());
+		return mHP.getMaxHP(abilities.getCon().getTempModifier());
 	}
 
 	public int getHPRolled() {
@@ -480,6 +505,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	 * @deprecated Use <code>getPlayerClassString()</code> instead.
 	 * @return
 	 */
+	@Deprecated
 	public String getLevelString() {
 		return getPlayerClassString();
 		// return levelString;
@@ -637,7 +663,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		editor.putInt(SAVESTATE_WILL_CMOD, cModWill);
 		editor.putInt(SAVESTATE_WILL_MOD, mModWill);
 		for (int i = 0; i < 6; i++) {
-			abilities[i].appendToSharedPreferencesEditor(editor, i);
+			abilities.getAbility(i).appendToSharedPreferencesEditor(editor, i);
 		}
 		String conglomerate = "";
 		for (Counter counter : counters) {
@@ -683,11 +709,11 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	}
 
 	public void setAbility(int ability, AbilityScore score) {
-		abilities[ability] = score;
+		abilities.setAbility(ability, score);
 	}
 
 	public void setAbility(int ability, int points) {
-		abilities[ability].setBaseValue(points);
+		abilities.getAbility(ability).setBaseValue(points);
 	}
 
 	public void setAC(ArmorClass ac) {
@@ -740,6 +766,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	 * @deprecated
 	 * @param hp
 	 */
+	@Deprecated
 	public void setHPRolled(int hp) {
 		mHP.setMiscModifiers(hp);
 	}
@@ -756,6 +783,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	 * @deprecated Use <code>setClassesByString()</code>
 	 * @param levelString
 	 */
+	@Deprecated
 	public void setLevelString(String levelString) {
 		setClassesByString(levelString);
 		// this.levelString = levelString;
@@ -787,7 +815,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 
 	public void writeToParcel(Parcel dest, int flags) {
 		Bundle b = new Bundle();
-		b.putParcelableArray("abilities", abilities);
+		b.putParcelable("abilities", abilities);
 		b.putParcelableArrayList("attacks", attacks);
 		b.putParcelableArrayList("counters", counters);
 		b.putParcelableArrayList("cfeats", cfeats);
@@ -820,5 +848,200 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		dest.writeString(characterBio);
 		dest.writeString(languages);
 		dest.writeString(name);
+	}
+
+	public JSONObject writeToJSON() {
+		JSONObject ret = new JSONObject();
+		try {
+			ret.put("abilities", abilities.writeToJSON());
+			ret.put("ac", ac.writeToJSON());
+			// attacks handled below
+			ret.put("baseAttackBonus", baseAttackBonus);
+			// cfeats handled below
+			ret.put("characterAge", characterAge);
+			ret.put("characterBio", characterBio);
+			ret.put("characterGold", characterGold);
+			ret.put("characterHealth", characterHealth);
+			ret.put("characterSize", characterSize);
+			ret.put("characterXP", characterXP);
+			// classes handled below
+			ret.put("cmb", cmb.writeToJSON());
+			ret.put("cModFort", cModFort);
+			ret.put("cModRef", cModRef);
+			ret.put("cModWill", cModWill);
+			// counters handled below
+			// feats handled below
+			ret.put("flagsFort", flagsFort);
+			ret.put("flagsRef", flagsRef);
+			ret.put("flagsWill", flagsWill);
+			ret.put("hpCurrent", hpCurrent);
+			ret.put("hpRolled", hpRolled);
+			// items handled below
+			ret.put("languages", languages);
+			ret.put("mHP", mHP.writeToJSON());
+			ret.put("miscInitBonus", miscInitBonus);
+			ret.put("mModFort", mModFort);
+			ret.put("mModRef", mModRef);
+			ret.put("mModWill", mModWill);
+			ret.put("name", name);
+			// prepSpells handled below
+			// skills handled below
+			// spells handled below
+
+			// attacks
+			JSONArray atk = new JSONArray();
+			for (Attack a : attacks) {
+				atk.put(a.writeToJSON());
+			}
+			ret.put("attacks", atk);
+			// cfeats
+			JSONArray cfts = new JSONArray();
+			for (Feat cf : cfeats) {
+				cfts.put(cf.writeToJSON());
+			}
+			ret.put("cfeats", cfts);
+			// classes
+			JSONArray cls = new JSONArray();
+			for (PlayerClass cl : classes) {
+				cls.put(cl.writeToJSON());
+			}
+			ret.put("classes", cls);
+			// counters
+			JSONArray ctrs = new JSONArray();
+			for (Counter c : counters) {
+				ctrs.put(c.writeToJSON());
+			}
+			ret.put("counters", ctrs);
+			// feats
+			JSONArray fts = new JSONArray();
+			for (Feat f : feats) {
+				fts.put(f.writeToJSON());
+			}
+			ret.put("feats", fts);
+			// items
+			JSONArray itms = new JSONArray();
+			for (Item i : items) {
+				itms.put(i.writeToJSON());
+			}
+			ret.put("items", itms);
+			// prepSpells
+			JSONArray pspls = new JSONArray();
+			for (Spell ps : prepSpells) {
+				pspls.put(ps.writeToJSON());
+			}
+			ret.put("prepSpells", pspls);
+			// skills
+			JSONArray skls = new JSONArray();
+			for (Skill s : skills) {
+				skls.put(s.writeToJSON());
+			}
+			ret.put("skills", skls);
+			// spells
+			JSONArray spls = new JSONArray();
+			for (Spell s : spells) {
+				spls.put(s.writeToJSON());
+			}
+			ret.put("spells", spls);
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error creating JSON from PlayerCharacter");
+			return null;
+		}
+		return ret;
+	}
+
+	public static PlayerCharacter createFromJSON(JSONObject input) {
+		try {
+			PlayerCharacter ret = new PlayerCharacter();
+			ret.abilities = AbilityScores.createFromJSON(input
+					.getJSONObject("abilities"));
+			ret.ac = ArmorClass.createFromJSON(input.getJSONObject("ac"));
+			// attacks handled below
+			ret.baseAttackBonus = input.getInt("baseAttackBonus");
+			// cfeats handled below
+			ret.characterAge = input.getInt("characterAge");
+			ret.characterBio = input.getString("characterBio");
+			ret.characterGold = (float) input.getDouble("characterGold");
+			ret.characterHealth = input.getInt("characterHealth");
+			ret.characterSize = input.getInt("characterSize");
+			ret.characterXP = input.getInt("characterXP");
+			// classes handled below
+			ret.cmb = CMB.createFromJSON(input.getJSONObject("cmb"));
+			ret.cModFort = input.getInt("cModFort");
+			ret.cModRef = input.getInt("cModRef");
+			ret.cModWill = input.getInt("cModWill");
+			// counters handled below
+			// feats handled below
+			ret.flagsFort = input.getInt("flagsFort");
+			ret.flagsRef = input.getInt("flagsRef");
+			ret.flagsWill = input.getInt("flagsWill");
+			ret.hpCurrent = input.getInt("hpCurrent");
+			ret.hpRolled = input.getInt("hpRolled");
+			// items handled below
+			ret.languages = input.getString("languages");
+			ret.mHP = HP.createFromJSON(input.getJSONObject("mHP"));
+			ret.miscInitBonus = input.getInt("miscInitBonus");
+			ret.mModFort = input.getInt("mModFort");
+			ret.mModRef = input.getInt("mModRef");
+			ret.mModWill = input.getInt("mModWill");
+			ret.name = input.getString("name");
+			// prepSpells handled below
+			// skills handled below
+			// spells handled below
+
+			// inflate attacks
+			JSONArray attacks = input.getJSONArray("attacks");
+			for (int i = 0; i < attacks.length(); ++i) {
+				ret.attacks
+						.add(Attack.createFromJSON(attacks.getJSONObject(i)));
+			}
+			// inflate cfeats
+			JSONArray cfeats = input.getJSONArray("cfeats");
+			for (int i = 0; i < cfeats.length(); ++i) {
+				ret.cfeats.add(Feat.createFromJSON(cfeats.getJSONObject(i)));
+			}
+			// inflate classes
+			JSONArray classes = input.getJSONArray("classes");
+			for (int i = 0; i < classes.length(); ++i) {
+				ret.classes.add(PlayerClass.createFromJSON(classes
+						.getJSONObject(i)));
+			}
+			// inflate counters
+			JSONArray counters = input.getJSONArray("counters");
+			for (int i = 0; i < counters.length(); ++i) {
+				ret.counters.add(Counter.createFromJSON(counters
+						.getJSONObject(i)));
+			}
+			// inflate feats
+			JSONArray feats = input.getJSONArray("feats");
+			for (int i = 0; i < feats.length(); ++i) {
+				ret.feats.add(Feat.createFromJSON(feats.getJSONObject(i)));
+			}
+			// inflate items
+			JSONArray items = input.getJSONArray("items");
+			for (int i = 0; i < items.length(); ++i) {
+				ret.items.add(Item.createFromJSON(items.getJSONObject(i)));
+			}
+			// inflate prepSpells
+			JSONArray prepSpells = input.getJSONArray("prepSpells");
+			for (int i = 0; i < prepSpells.length(); ++i) {
+				ret.prepSpells.add(Spell.createFromJSON(prepSpells
+						.getJSONObject(i)));
+			}
+			// inflate skills
+			JSONArray skills = input.getJSONArray("skills");
+			for (int i = 0; i < skills.length(); ++i) {
+				ret.skills.add(Skill.createFromJSON(skills.getJSONObject(i)));
+			}
+			// inflate spells
+			JSONArray spells = input.getJSONArray("spells");
+			for (int i = 0; i < spells.length(); ++i) {
+				ret.spells.add(Spell.createFromJSON(spells.getJSONObject(i)));
+			}
+			return ret;
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error inflating PlayerCharacter from JSON");
+			ex.printStackTrace();
+			return null;
+		}
 	}
 }

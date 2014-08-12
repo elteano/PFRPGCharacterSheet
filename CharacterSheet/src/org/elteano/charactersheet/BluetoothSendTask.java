@@ -1,8 +1,10 @@
 package org.elteano.charactersheet;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.UUID;
+
+import org.json.JSONException;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -11,9 +13,9 @@ import android.util.Log;
 
 /**
  * Requires input of BluetoothDevice and PlayerCharacter.
- * 
+ *
  * @author emryn
- * 
+ *
  */
 public class BluetoothSendTask extends AsyncTask<Object, Integer, Integer> {
 
@@ -34,12 +36,20 @@ public class BluetoothSendTask extends AsyncTask<Object, Integer, Integer> {
 			sock = dest.createRfcommSocketToServiceRecord(new UUID(420, 1739));
 			sock.connect();
 			Log.i("BluetoothSend", "Socket connected.");
-			ObjectOutputStream out = new ObjectOutputStream(
+			OutputStreamWriter out = new OutputStreamWriter(
 					sock.getOutputStream());
 			Log.i("BluetoothSend", "Stream created.");
-			out.writeObject(send);
-			Log.i("BluetoothSend", String.format("Sent %s.", send.getName()));
+			String json = "";
+			try {
+				json = send.writeToJSON().toString(2);
+			} catch (JSONException ex) {
+				json = send.writeToJSON().toString();
+			}
+			Log.i("BluetoothSend", "Sending JSON: " + json);
+			out.write(json + '\04');
 			out.flush();
+			Log.i("BluetoothSend", String.format("Sent %s.", send.getName()));
+			sock.getInputStream().read();
 			out.close();
 			return Integer.valueOf(0);
 		} catch (IOException e) {

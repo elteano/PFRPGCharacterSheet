@@ -3,8 +3,12 @@ package org.elteano.charactersheet;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class PlayerClass implements Parcelable, Serializable {
 
@@ -19,6 +23,7 @@ public class PlayerClass implements Parcelable, Serializable {
 			return new PlayerClass[size];
 		}
 	};
+
 	public static String compoundToString(ArrayList<PlayerClass> classes) {
 		String ret = "";
 		for (PlayerClass c : classes) {
@@ -68,6 +73,7 @@ public class PlayerClass implements Parcelable, Serializable {
 		return name;
 	}
 
+	@Override
 	public String toString() {
 		return getName() + " " + getLevels();
 	}
@@ -77,4 +83,25 @@ public class PlayerClass implements Parcelable, Serializable {
 		dest.writeInt(levels);
 	}
 
+	public JSONObject writeToJSON() {
+		try {
+			JSONObject ret = new JSONObject();
+			ret.put("levels", levels);
+			ret.put("name", name);
+			return ret;
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error creating JSON for PlayerClass");
+			return null;
+		}
+	}
+
+	public static PlayerClass createFromJSON(JSONObject input) {
+		try {
+			return new PlayerClass(input.getString("name"),
+					input.getInt("levels"));
+		} catch (JSONException e) {
+			Log.e("CharacterSheet", "Error inflating PlayerClass from JSON");
+			return null;
+		}
+	}
 }

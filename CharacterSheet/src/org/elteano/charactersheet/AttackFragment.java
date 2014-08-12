@@ -114,7 +114,8 @@ public class AttackFragment extends CharacterUpdaterFragment implements
 				.getCharacter().getPlayerClasses()) {
 			if (c.getName().equalsIgnoreCase("monk")) {
 				int abilityBonus = ((CharacterSheetActivity) getActivity())
-						.getCharacter().getAbilities()[PlayerCharacter.ABILITY_STR]
+						.getCharacter().getAbilities()
+						.getAbility(PlayerCharacter.ABILITY_STR)
 						.getTempModifier();
 				// Determine if they have weapon finesse, which makes these
 				// attacks get bonus based on dex instead of str
@@ -122,7 +123,8 @@ public class AttackFragment extends CharacterUpdaterFragment implements
 						.getCharacter().getFeatList()) {
 					if (f.getName().equalsIgnoreCase("weapon finesse")) {
 						abilityBonus = ((CharacterSheetActivity) getActivity())
-								.getCharacter().getAbilities()[PlayerCharacter.ABILITY_DEX]
+								.getCharacter().getAbilities()
+								.getAbility(PlayerCharacter.ABILITY_DEX)
 								.getTempModifier();
 						break;
 					}
@@ -188,8 +190,8 @@ public class AttackFragment extends CharacterUpdaterFragment implements
 		if (source.getId() == R.id.fragment_attack_cmb_button) {
 			Intent intent = new Intent(getActivity(), CMBEditActivity.class);
 			intent.putExtra(CMBEditActivity.INPUT_ABILITIES,
-					((CharacterSheetActivity) getActivity()).getCharacter()
-							.getAbilities());
+					(Parcelable) ((CharacterSheetActivity) getActivity())
+							.getCharacter().getAbilities());
 			intent.putExtra(CMBEditActivity.INPUT_BAB,
 					((CharacterSheetActivity) getActivity()).getCharacter()
 							.getBAB());

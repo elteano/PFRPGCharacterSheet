@@ -1,8 +1,11 @@
 package org.elteano.charactersheet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.UUID;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
@@ -26,7 +29,7 @@ public class BluetoothReceiveTask extends
 		// Socket which will actually be used
 		BluetoothSocket sock = null;
 		// Input stream for reading the character
-		ObjectInputStream in = null;
+		BufferedReader in = null;
 		try {
 			// Get a listening socket
 			Log.i("BluetoothReceive", "Opening sockets.");
@@ -43,19 +46,37 @@ public class BluetoothReceiveTask extends
 			Log.i("BluetoothReceive", "Done listening.");
 			if (sock != null) {
 				// Read in a character (which is being sent)
-				in = new ObjectInputStream(sock.getInputStream());
+				// in = new BufferedReader(new InputStreamReader(
+				// sock.getInputStream()));
 				Log.i("BluetoothReceive", "Input stream created.");
-				PlayerCharacter ret = (PlayerCharacter) in.readObject();
+				String app = "";
+				try {
+					int val = 0;
+					while ((val = sock.getInputStream().read()) != -1) {
+						if (val == 4)
+							break;
+						app += (char) val;
+					}
+				} catch (IOException ex) {
+					Log.i("BluetoothReceive", "Reading threw IOException.");
+				}
+				sock.getOutputStream().write(1);
+				Log.i("BluetoothReceive", "JSON input: " + app);
+				PlayerCharacter ret = PlayerCharacter
+						.createFromJSON(new JSONObject(app));
 				Log.i("BluetoothReceive", "Received " + ret.getName());
-				in.close();
+				// in.close();
 				sock.close();
 				serv.close();
 				// Return the character
 				return ret;
 			}
+			if (sock == null) {
+				Log.e("BluetoothReceive", "Null socket :(");
+			}
 			// Socket is null, report error below
 		} catch (IOException e) {
-			Log.i("BluetoothReceive", e.getMessage());
+			Log.i("BluetoothReceive", "IOException: " + e.getMessage());
 			e.printStackTrace();
 			try {
 				if (in != null)
@@ -67,15 +88,9 @@ public class BluetoothReceiveTask extends
 			} catch (IOException two) {
 				// Subtle irony here...
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			try {
-				in.close();
-				sock.close();
-				serv.close();
-			} catch (IOException two) {
-				// Like honestly what the hell
-			}
+		} catch (JSONException ex) {
+			Log.e("BluetoothReceive",
+					"Error creating JSON from Bluetooth input");
 		}
 		return null;
 	}

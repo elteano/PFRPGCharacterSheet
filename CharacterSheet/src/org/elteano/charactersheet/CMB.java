@@ -3,8 +3,12 @@ package org.elteano.charactersheet;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class CMB implements Parcelable, Serializable {
 
@@ -43,23 +47,23 @@ public class CMB implements Parcelable, Serializable {
 		};
 	};
 
-	public int getCMB(int bab, int size, AbilityScore[] abilities,
+	public int getCMB(int bab, int size, AbilityScores abilities,
 			ArrayList<PlayerClass> classes) {
 		int ret = classModifiers + miscModifiers;
 		if (getBAB())
 			ret += bab;
 		if (getCha())
-			ret += abilities[PlayerCharacter.ABILITY_CHA].getTempModifier();
+			ret += abilities.getCha().getTempModifier();
 		if (getCon())
-			ret += abilities[PlayerCharacter.ABILITY_CON].getTempModifier();
+			ret += abilities.getCon().getTempModifier();
 		if (getDex())
-			ret += abilities[PlayerCharacter.ABILITY_DEX].getTempModifier();
+			ret += abilities.getDex().getTempModifier();
 		if (getInt())
-			ret += abilities[PlayerCharacter.ABILITY_INT].getTempModifier();
+			ret += abilities.getInt().getTempModifier();
 		if (getStr())
-			ret += abilities[PlayerCharacter.ABILITY_STR].getTempModifier();
+			ret += abilities.getStr().getTempModifier();
 		if (getWis())
-			ret += abilities[PlayerCharacter.ABILITY_WIS].getTempModifier();
+			ret += abilities.getWis().getTempModifier();
 		if (getSize())
 			ret -= ArmorClass.getSizeModifier(size);
 		for (PlayerClass c : classes) {
@@ -84,7 +88,7 @@ public class CMB implements Parcelable, Serializable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param c
 	 * @return true if the class was added, false if the list already contained
 	 *         that class
@@ -263,5 +267,33 @@ public class CMB implements Parcelable, Serializable {
 		out.writeInt(classModifiers);
 		out.writeInt(miscModifiers);
 		out.writeString(classList);
+	}
+
+	public JSONObject writeToJSON() {
+		JSONObject ret = new JSONObject();
+		try {
+			ret.put("classList", classList);
+			ret.put("classModifiers", classModifiers);
+			ret.put("flags", flags);
+			ret.put("miscModifiers", miscModifiers);
+			return ret;
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error creating JSON for CMB");
+			return null;
+		}
+	}
+
+	public static CMB createFromJSON(JSONObject input) {
+		try {
+			CMB ret = new CMB();
+			ret.classList = input.getString("classList");
+			ret.classModifiers = input.getInt("classModifiers");
+			ret.flags = input.getInt("flags");
+			ret.miscModifiers = input.getInt("flags");
+			return ret;
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error inflating CMB from JSON");
+			return null;
+		}
 	}
 }

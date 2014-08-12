@@ -35,6 +35,7 @@ public class SpellEditActivity extends Activity implements OnClickListener,
 	private Spell mSpell;
 	private TextWatcher nameWatcher;
 	private TextWatcher descWatcher;
+	private AbilityScores mAbilityScores;
 
 	private void setOrientation() {
 		int screenSizeFlag = getResources().getConfiguration().screenLayout
@@ -81,13 +82,8 @@ public class SpellEditActivity extends Activity implements OnClickListener,
 			mSpell = (Spell) getIntent().getExtras().getParcelable("input");
 		else
 			mSpell = new Spell(0, "", "", 0, 0, null);
-		AbilityScore[] whyDoINeedThis = new AbilityScore[6];
-		Parcelable[] blorf = getIntent().getParcelableArrayExtra(
-				SPELL_ABILITY_IN);
-		for (int i = 0; i < whyDoINeedThis.length; i++) {
-			whyDoINeedThis[i] = (AbilityScore) blorf[i];
-		}
-		mSpell.setAbilities(whyDoINeedThis);
+		mAbilityScores = getIntent().getParcelableExtra(SPELL_ABILITY_IN);
+		// mSpell.setAbilities(whyDoINeedThis);
 	}
 
 	@Override
@@ -219,6 +215,6 @@ public class SpellEditActivity extends Activity implements OnClickListener,
 
 	public void updateSave() {
 		((Button) findViewById(R.id.activity_spell_edit_save_button))
-				.setText("" + mSpell.getSaveDC());
+				.setText("" + mSpell.getSaveDC(mAbilityScores));
 	}
 }

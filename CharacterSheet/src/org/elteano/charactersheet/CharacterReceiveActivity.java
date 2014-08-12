@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +36,8 @@ public class CharacterReceiveActivity extends Activity implements
 				android.R.layout.simple_list_item_1);
 		((ListView) findViewById(R.id.activity_character_receive_list))
 				.setAdapter(mArrayAdapter);
+		((ListView) findViewById(R.id.activity_character_receive_list))
+				.setOnItemClickListener(this);
 	}
 
 	@Override
@@ -97,5 +101,8 @@ public class CharacterReceiveActivity extends Activity implements
 				String.format("You have selected %s.",
 						mReceivedCharacters.get(pos).getName()),
 				Toast.LENGTH_SHORT).show();
+		Intent result = new Intent();
+		result.putExtra("result", (Parcelable) mReceivedCharacters.get(pos));
+		setResult(RESULT_OK, result);
 	}
 }

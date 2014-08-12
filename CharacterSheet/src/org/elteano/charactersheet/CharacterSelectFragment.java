@@ -31,16 +31,9 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 
 	private PlayerCharacter addCharacter() {
 		PlayerCharacter ret = new PlayerCharacter();
-		int i = 1;
-		while (playerList.contains("Character_" + i)) {
-			i++;
-		}
+		int i = getNextAvailableNumber();
 		ret.setName("New Character " + i);
-		SharedPreferences.Editor editor = playerList.edit();
-		editor.putString("Character_" + i, ret.getName());
-		editor.commit();
-		ret.saveToSharedPreferences(getActivity().getSharedPreferences(
-				"Character_" + i, Activity.MODE_PRIVATE));
+		saveNewCharacter(ret, i);
 		Intent result = new Intent();
 		result.putExtra("result", ret.getName());
 		((CharacterSelectActivity) getActivity()).setResult(Activity.RESULT_OK,
@@ -49,6 +42,22 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 		// updateOthers();
 		updateDisplay();
 		return ret;
+	}
+
+	private int getNextAvailableNumber() {
+		int i = 1;
+		while (playerList.contains("Character_" + i)) {
+			i++;
+		}
+		return i;
+	}
+
+	private void saveNewCharacter(PlayerCharacter c, int i) {
+		SharedPreferences.Editor editor = playerList.edit();
+		editor.putString("Character_" + i, c.getName());
+		editor.commit();
+		c.saveToSharedPreferences(getActivity().getSharedPreferences(
+				"Character_" + i, Activity.MODE_PRIVATE));
 	}
 
 	private void addCharacterListing(PlayerCharacter character) {
@@ -75,7 +84,7 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 	/**
 	 * Cancel a delete, if necessary. If a delete is canceled, then text is
 	 * displayed stating that a delete was canceled.
-	 * 
+	 *
 	 * @return True if a delete was canceled.
 	 */
 	private boolean cancelDelete() {
@@ -117,6 +126,17 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 			addCharacterListing(characterName, dest);
 		}
 	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// Assuming it was CharacterReceive
+		if (resultCode == Activity.RESULT_OK) {
+			PlayerCharacter recChar = data.getParcelableExtra("result");
+			saveNewCharacter(recChar, getNextAvailableNumber());
+			updateDisplay();
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	};
 
 	public void onClick(View view) {
 		if (!(view instanceof TextView))

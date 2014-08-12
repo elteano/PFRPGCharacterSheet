@@ -2,8 +2,12 @@ package org.elteano.charactersheet;
 
 import java.io.Serializable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class ArmorClass implements Parcelable, Serializable {
 
@@ -77,32 +81,44 @@ public class ArmorClass implements Parcelable, Serializable {
 		return new ArmorClass(abonus, dbonus, mbonus, sbonus, cbonus, shield);
 	}
 
-	public int getAC(AbilityScore[] abilities, int size, int bab) {
-		return 10 + armorBonus + miscBonus + dodgeBonus
-				+ abilities[PlayerCharacter.ABILITY_DEX].getTempModifier()
-				+ getSizeModifier(size) + getShieldBonus();
+	public int getAC(AbilityScores abilities, int size, int bab) {
+		return 10
+				+ armorBonus
+				+ miscBonus
+				+ dodgeBonus
+				+ abilities.getAbility(PlayerCharacter.ABILITY_DEX)
+						.getTempModifier() + getSizeModifier(size)
+				+ getShieldBonus();
 	}
 
-	public int getCMD(AbilityScore[] abilities, int size, int bab) {
-		return 10 - getSizeModifier(size) + bab + cmdBonus
-				+ abilities[PlayerCharacter.ABILITY_DEX].getTempModifier()
-				+ abilities[PlayerCharacter.ABILITY_STR].getTempModifier();
+	public int getCMD(AbilityScores abilities, int size, int bab) {
+		return 10
+				- getSizeModifier(size)
+				+ bab
+				+ cmdBonus
+				+ abilities.getAbility(PlayerCharacter.ABILITY_DEX)
+						.getTempModifier()
+				+ abilities.getAbility(PlayerCharacter.ABILITY_STR)
+						.getTempModifier();
 	}
 
-	public int getFlatFootAC(AbilityScore[] abilities, int size, int bab) {
+	public int getFlatFootAC(AbilityScores abilities, int size, int bab) {
 		return getFlatFootTouchAC(abilities, size, bab) + armorBonus
 				+ getShieldBonus();
 	}
 
-	public int getFlatFootCMD(AbilityScore[] abilities, int size, int bab) {
+	public int getFlatFootCMD(AbilityScores abilities, int size, int bab) {
 		return getFlatFootTouchAC(abilities, size, bab) - getSizeModifier(size)
 				* 2 + bab;
 	}
 
-	public int getShieldlessAC(AbilityScore[] abilities, int size, int bab) {
-		return 10 + armorBonus + miscBonus + dodgeBonus
-				+ abilities[PlayerCharacter.ABILITY_DEX].getTempModifier()
-				+ getSizeModifier(size);
+	public int getShieldlessAC(AbilityScores abilities, int size, int bab) {
+		return 10
+				+ armorBonus
+				+ miscBonus
+				+ dodgeBonus
+				+ abilities.getAbility(PlayerCharacter.ABILITY_DEX)
+						.getTempModifier() + getSizeModifier(size);
 	}
 
 	public int getShieldBonus() {
@@ -135,17 +151,20 @@ public class ArmorClass implements Parcelable, Serializable {
 		}
 	}
 
-	public int getTouchAC(AbilityScore[] abilities, int size, int bab) {
-		return 10 + dodgeBonus + miscBonus
-				+ abilities[PlayerCharacter.ABILITY_DEX].getTempModifier()
-				+ getSizeModifier(size);
+	public int getTouchAC(AbilityScores abilities, int size, int bab) {
+		return 10
+				+ dodgeBonus
+				+ miscBonus
+				+ abilities.getAbility(PlayerCharacter.ABILITY_DEX)
+						.getTempModifier() + getSizeModifier(size);
 	}
 
-	public int getFlatFootTouchAC(AbilityScore[] abilities, int size, int bab) {
+	public int getFlatFootTouchAC(AbilityScores abilities, int size, int bab) {
 		return 10
-				+ ((abilities[PlayerCharacter.ABILITY_DEX].getTempModifier() < 0) ? abilities[PlayerCharacter.ABILITY_DEX]
-						.getTempModifier() : 0) + getSizeModifier(size)
-				+ miscBonus;
+				+ ((abilities.getAbility(PlayerCharacter.ABILITY_DEX)
+						.getTempModifier() < 0) ? abilities.getAbility(
+						PlayerCharacter.ABILITY_DEX).getTempModifier() : 0)
+				+ getSizeModifier(size) + miscBonus;
 	}
 
 	public int describeContents() {
@@ -167,5 +186,32 @@ public class ArmorClass implements Parcelable, Serializable {
 				+ PlayerCharacter.SPLITTER_SMALL + shieldBonus
 				+ PlayerCharacter.SPLITTER_SMALL + shield
 				+ PlayerCharacter.SPLITTER_SMALL + cmdBonus;
+	}
+
+	public JSONObject writeToJSON() {
+		JSONObject ret = new JSONObject();
+		try {
+			ret.put("armorBonus", armorBonus);
+			ret.put("cmdBonus", cmdBonus);
+			ret.put("dodgeBonus", dodgeBonus);
+			ret.put("miscBonus", miscBonus);
+			ret.put("shield", shield);
+			ret.put("shieldBonus", shieldBonus);
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error creating JSON for AC");
+		}
+		return ret;
+	}
+
+	public static ArmorClass createFromJSON(JSONObject source) {
+		try {
+			return new ArmorClass(source.getInt("armorBonus"),
+					source.getInt("miscBonus"), source.getInt("dodgeBonus"),
+					source.getInt("shieldBonus"), source.getInt("cmdBonus"),
+					source.getBoolean("shield"));
+		} catch (JSONException e) {
+			Log.e("CharacterSheet", "Error inflating AC from JSON");
+			return null;
+		}
 	}
 }

@@ -100,7 +100,7 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 			switch (v.getId()) {
 			case R.id.fragment_spells_add_button:
 				if (lastView.getParent().equals(
-						(LinearLayout) getView().findViewById(
+						getView().findViewById(
 								R.id.fragment_spells_full_list_line))) {
 					((CharacterSheetActivity) getActivity()).getCharacter()
 							.getPrepSpells().add(lastSpell);
@@ -136,8 +136,9 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 						Intent intent = new Intent(getActivity(),
 								SpellEditActivity.class);
 						intent.putExtra("input", (Parcelable) lastSpell);
-						intent.putExtra(SpellEditActivity.SPELL_ABILITY_IN,
-								((CharacterSheetActivity) getActivity())
+						intent.putExtra(
+								SpellEditActivity.SPELL_ABILITY_IN,
+								(Parcelable) ((CharacterSheetActivity) getActivity())
 										.getCharacter().getAbilities());
 						startActivityForResult(intent, REQUEST_EDIT);
 						return;
@@ -195,8 +196,8 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 		case R.id.fragment_spells_add_spell:
 			Intent intent = new Intent(getActivity(), SpellEditActivity.class);
 			intent.putExtra(SpellEditActivity.SPELL_ABILITY_IN,
-					((CharacterSheetActivity) getActivity()).getCharacter()
-							.getAbilities());
+					(Parcelable) ((CharacterSheetActivity) getActivity())
+							.getCharacter().getAbilities());
 			startActivityForResult(intent, REQUEST_NEW);
 			return true;
 		}

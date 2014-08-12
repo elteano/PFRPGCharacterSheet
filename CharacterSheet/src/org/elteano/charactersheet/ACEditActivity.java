@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,7 +19,7 @@ public class ACEditActivity extends Activity implements OnCheckedChangeListener 
 	public static final String INPUT_BAB = "bab";
 
 	private ArmorClass ac;
-	private AbilityScore[] abilities;
+	private AbilityScores abilities;
 	private int size;
 	private int bab;
 	private IntTextWatcher aBonus, deBonus, doBonus, sBonus, cBonus;
@@ -54,12 +53,7 @@ public class ACEditActivity extends Activity implements OnCheckedChangeListener 
 		setOrientation();
 		ac = getIntent().getExtras().getParcelable("input");
 		size = getIntent().getExtras().getInt(INPUT_SIZE);
-		Parcelable[] b = getIntent().getExtras().getParcelableArray(
-				INPUT_ABILITIES);
-		abilities = new AbilityScore[b.length];
-		for (int i = 0; i < b.length; i++) {
-			abilities[i] = (AbilityScore) b[i];
-		}
+		abilities = getIntent().getExtras().getParcelable(INPUT_ABILITIES);
 		bab = getIntent().getExtras().getInt(INPUT_BAB);
 		setContentView(R.layout.activity_acedit);
 	}
