@@ -83,7 +83,6 @@ public class SpellEditActivity extends Activity implements OnClickListener,
 		else
 			mSpell = new Spell(0, "", "", 0, 0, null);
 		mAbilityScores = getIntent().getParcelableExtra(SPELL_ABILITY_IN);
-		// mSpell.setAbilities(whyDoINeedThis);
 	}
 
 	@Override

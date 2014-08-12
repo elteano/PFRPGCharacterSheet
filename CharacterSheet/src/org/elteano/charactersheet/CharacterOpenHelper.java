@@ -6,9 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * The beginnings of a helper for storing PlayerCharacters in a database rather
- * than a messy assortment of XML files.
- * Further work is currently waiting on some manner of guarantee that no
- * additional fields will need to be saved.
+ * than a messy assortment of XML files. Further work is currently waiting on
+ * some manner of guarantee that no additional fields will need to be saved.
  */
 public class CharacterOpenHelper extends SQLiteOpenHelper {
 
@@ -17,7 +16,7 @@ public class CharacterOpenHelper extends SQLiteOpenHelper {
 	public static final String KEY_CNUM = "CharacterNumber";
 	public static final String KEY_CNAME = "CharacterName";
 
-	//TODO finish this stuff
+	// TODO finish this stuff
 	private static final String DATABASE_CREATE = "CREATE TABLE "
 			+ DATABASE_NAME + " ( ";
 
@@ -27,14 +26,10 @@ public class CharacterOpenHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

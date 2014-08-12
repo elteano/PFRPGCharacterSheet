@@ -51,7 +51,6 @@ public class HP implements Parcelable, Serializable {
 	}
 
 	public int describeContents() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

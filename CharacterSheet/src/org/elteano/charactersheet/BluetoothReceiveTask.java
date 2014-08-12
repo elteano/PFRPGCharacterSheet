@@ -45,9 +45,6 @@ public class BluetoothReceiveTask extends
 			}
 			Log.i("BluetoothReceive", "Done listening.");
 			if (sock != null) {
-				// Read in a character (which is being sent)
-				// in = new BufferedReader(new InputStreamReader(
-				// sock.getInputStream()));
 				Log.i("BluetoothReceive", "Input stream created.");
 				String app = "";
 				try {
@@ -65,7 +62,6 @@ public class BluetoothReceiveTask extends
 				PlayerCharacter ret = PlayerCharacter
 						.createFromJSON(new JSONObject(app));
 				Log.i("BluetoothReceive", "Received " + ret.getName());
-				// in.close();
 				sock.close();
 				serv.close();
 				// Return the character

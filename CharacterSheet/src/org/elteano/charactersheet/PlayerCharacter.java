@@ -59,7 +59,6 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			ret.flagsRef = src.readInt();
 			ret.flagsWill = src.readInt();
 			ret.hpCurrent = src.readInt();
-			// ret.hpRolled = src.readInt();
 			ret.mHP = (HP) src.readParcelable(HP.class.getClassLoader());
 			ret.miscInitBonus = src.readInt();
 			ret.cModFort = src.readInt();
@@ -191,7 +190,6 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		ret.setGold(state.getFloat(SAVESTATE_GOLD, 0));
 		ret.classes = PlayerClass.interpretListString(state.getString(
 				SAVESTATE_LEVEL, ""));
-		// ret.setLevelString(state.getString(SAVESTATE_LEVEL, "error - 0"));
 		ret.setName(state.getString(SAVESTATE_NAME, "Roy"));
 		ret.setSize(state.getInt(SAVESTATE_SIZE, SIZE_MEDIUM));
 		ret.setXP(state.getInt(SAVESTATE_XP, 0));
@@ -281,7 +279,6 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	private int mModFort;
 	private int mModRef;
 	private int mModWill;
-	// private String levelString;
 	private String name;
 	private ArrayList<Spell> prepSpells;
 	private ArrayList<Skill> skills;
@@ -417,8 +414,6 @@ public class PlayerCharacter implements Parcelable, Serializable {
 
 	public int getCMB() {
 		return cmb.getCMB(getBAB(), getSize(), abilities, classes);
-		// return baseAttackBonus + getAbility(ABILITY_STR).getTempModifier()
-		// - ArmorClass.getSizeModifier(getSize());
 	}
 
 	public CMB getCMBParc() {
@@ -645,7 +640,6 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		editor.putString(SAVESTATE_CMB, cmb.toSaveString());
 		editor.putFloat(SAVESTATE_GOLD, characterGold);
 		editor.putInt(SAVESTATE_HP_CURRENT, hpCurrent);
-		// editor.putInt(SAVESTATE_HP_ROLLED, hpRolled);
 		editor.putString(SAVESTATE_HP_CONTAINER, mHP.toSaveString());
 		editor.putString(SAVESTATE_LEVEL, getPlayerClassString());
 		editor.putString(SAVESTATE_NAME, name);
@@ -786,7 +780,6 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	@Deprecated
 	public void setLevelString(String levelString) {
 		setClassesByString(levelString);
-		// this.levelString = levelString;
 	}
 
 	public void setName(String name) {

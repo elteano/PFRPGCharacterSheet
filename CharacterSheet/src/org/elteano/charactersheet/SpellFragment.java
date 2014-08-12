@@ -147,7 +147,6 @@ public class SpellFragment extends CharacterUpdaterFragment implements
 						lastView.setBackgroundColor(getActivity()
 								.getResources().getColor(
 										android.R.color.transparent));
-					// lastView.setBackgroundResource(android.R.drawable.list_selector_background);
 					lastView = tv;
 					tv.setBackgroundColor(getActivity().getResources()
 							.getColor(android.R.color.holo_blue_light));

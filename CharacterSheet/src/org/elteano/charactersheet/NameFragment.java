@@ -133,13 +133,10 @@ public class NameFragment extends CharacterUpdaterFragment implements
 		};
 	}
 
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Inflate the layout for this CharacterUpdaterFragment
-		// Log.i("CharacterSheet",
-		// "In NameFragment.onCreateView(), hasCharacter(): "
-		// + ((CharacterSheetActivity) getActivity())
-		// .hasCharacter());
 		View ret = inflater.inflate(R.layout.fragment_name, container, false);
 		nameView = (EditText) ret.findViewById(R.id.character_name_name_field);
 		classTextWatcher = new ClassTextWatcher();
@@ -170,19 +167,13 @@ public class NameFragment extends CharacterUpdaterFragment implements
 		super.onResume();
 	}
 
+	@Override
 	public void onStop() {
 		pushFieldsToCharacter();
 		((CharacterSheetActivity) getActivity()).getCharacter()
 				.saveSelfByPlayerList(getActivity());
 		super.onStop();
 	};
-
-	// @Override
-	// public void onStart() {
-	// fillFields();
-	// hookupListeners();
-	// super.onStart();
-	// }
 
 	private void pushFieldsToCharacter() {
 		((CharacterSheetActivity) getActivity()).getCharacter().setLanguages(

@@ -25,11 +25,6 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 		int tempVal = ((CharacterSheetActivity) getActivity()).getCharacter()
 				.getHPCurrent();
 		et.setText((tempVal != 0) ? "" + tempVal : "");
-		// et = (EditText) getView().findViewById(
-		// R.id.fragment_stats_rolled_hp_field);
-		// tempVal = ((CharacterSheetActivity) getActivity()).getCharacter()
-		// .getHPRolled();
-		// et.setText((tempVal != 0) ? "" + tempVal : "");
 		et = (EditText) getView().findViewById(
 				R.id.fragment_stats_misc_init_bonus_field);
 		tempVal = ((CharacterSheetActivity) getActivity()).getCharacter()
@@ -270,7 +265,6 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 		}
 		((CharacterSheetActivity) getActivity()).getCharacter().setAbility(
 				dest, new AbilityScore(data.getExtras()));
-		// updateButtons();
 		((CharacterSheetActivity) getActivity()).getCharacter()
 				.saveSelfByPlayerList(getActivity());
 	}

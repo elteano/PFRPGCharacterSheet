@@ -142,8 +142,6 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 		if (!(view instanceof TextView))
 			return;
 		TextView source = (TextView) view;
-		// Intent result = new Intent();
-		// result.putExtra("result", source.getText());
 		if (deleting) {
 			promptDeleteCharacter(source.getText().toString());
 			deleting = false;
@@ -153,8 +151,6 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 			Intent intent = new Intent(getActivity(),
 					BluetoothTransferActivity.class);
 			intent.putExtra(BluetoothTransferActivity.INPUT, (Parcelable) c);
-			// intent.putExtra(BluetoothTransferActivity.REQUEST,
-			// BluetoothTransferActivity.MODE_SEND);
 			startActivityForResult(intent, BluetoothTransferActivity.MODE_SEND);
 			selectingSend = false;
 		} else {
@@ -162,28 +158,6 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 					.getText().toString());
 			((CharacterSelectActivity) getActivity()).setCharacterSelected();
 		}
-		// for (String key : playerList.getAll().keySet()) {
-		// if (playerList.getString(key, "").equals(
-		// source.getText().toString())) {
-		// preUpdateOthers();
-		// if (((CharacterSheetActivity) getActivity()).hasCharacter())
-		// {
-		// ((CharacterSheetActivity) getActivity()).getCharacter()
-		// .saveSelfByPlayerList(getActivity());
-		// }
-		// ((CharacterSheetActivity) getActivity())
-		// .setCharacter(PlayerCharacter
-		// .restoreFromSharedPreferences(getActivity()
-		// .getSharedPreferences(key,
-		// Activity.MODE_PRIVATE)));
-		// getActivity().getActionBar().setTitle(
-		// ((CharacterSheetActivity) getActivity()).getCharacter()
-		// .getName());
-		// postUpdateOthers();
-		// return;
-		// }
-		// }
-		// Log.e("CharacterSheet", "No character found for TextView!");
 	}
 
 	@Override
@@ -204,11 +178,6 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 		View ret = inflater.inflate(R.layout.fragment_character_select,
 				container, false);
 		fillList(ret);
-		// if (((CharacterSheetActivity) getActivity()).character == null)
-		// setToFirstCharacter();
-		// if (((CharacterSheetActivity) getActivity()).character != null)
-		// getActivity().getActionBar().setTitle(
-		// ((CharacterSheetActivity) getActivity()).character.getName());
 		return ret;
 	}
 
@@ -239,8 +208,6 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 		case R.id.fragment_character_select_menu_receive_character:
 			Intent intent = new Intent(getActivity(),
 					CharacterReceiveActivity.class);
-			// intent.putExtra(CharacterSendActivity.REQUEST,
-			// CharacterSendActivity.MODE_RECEIVE);
 			startActivityForResult(intent, 0);
 			return true;
 		}
@@ -267,25 +234,6 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 				});
 		builder.create().show();
 	}
-
-	/*
-	 * private void promptDeleteCharacter_old(PlayerCharacter c) { final
-	 * PlayerCharacter pc = c; AlertDialog.Builder builder = new
-	 * AlertDialog.Builder(getActivity()); builder.setMessage("Delete " +
-	 * c.getName() + "?") .setCancelable(false) .setPositiveButton("Yes", new
-	 * DialogInterface.OnClickListener() { public void onClick(DialogInterface
-	 * dialog, int id) { preUpdateOthers(); removeCharacter(pc.getName());
-	 * removeCharacterListing(pc.getName()); if (playerList.getAll().isEmpty())
-	 * addCharacterListing(addCharacter()); else { ((CharacterSheetActivity)
-	 * getActivity()).setCharacter(PlayerCharacter
-	 * .restoreFromSharedPreferences(getActivity() .getSharedPreferences(
-	 * (String) playerList .getAll() .keySet() .toArray()[0],
-	 * Activity.MODE_PRIVATE))); getActivity() .getActionBar() .setTitle(
-	 * ((CharacterSheetActivity) getActivity()) .getCharacter() .getName());
-	 * postUpdateOthers(); } } }) .setNegativeButton("No", new
-	 * DialogInterface.OnClickListener() { public void onClick(DialogInterface
-	 * dialog, int id) { dialog.cancel(); } }); builder.create().show(); }
-	 */
 
 	private boolean removeCharacter(int ident) {
 		if (playerList.contains("Character_" + ident)) {
@@ -329,10 +277,6 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 	@Override
 	public void onStart() {
 		super.onStart();
-		// if (!((CharacterSheetActivity) getActivity()).hasCharacter())
-		// setToFirstCharacter();
-		// getActivity().getActionBar().setTitle(
-		// ((CharacterSheetActivity) getActivity()).getCharacter().getName());
 	}
 
 	@Override

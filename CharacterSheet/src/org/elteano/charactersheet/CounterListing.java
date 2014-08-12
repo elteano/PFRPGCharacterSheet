@@ -30,7 +30,7 @@ public class CounterListing extends RelativeLayout implements OnClickListener {
 	 * Creates a new CounterListing within the given Context. Does not set the
 	 * Counter to be displayed; that must be set after this using
 	 * <code>setCounter()</code>.
-	 * 
+	 *
 	 * @param context
 	 *            The context in which this will reside.
 	 * @param attrs
@@ -55,14 +55,12 @@ public class CounterListing extends RelativeLayout implements OnClickListener {
 		labelParams = new RelativeLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		labelParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, TRUE);
-		// labelParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, TRUE);
 		labelParams.addRule(RelativeLayout.CENTER_IN_PARENT, TRUE);
 		label.setTextSize(TEXT_SIZE);
 		label.setLayoutParams(labelParams);
 
 		countParams = new RelativeLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		// countParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, TRUE);
 		countParams.addRule(RelativeLayout.CENTER_HORIZONTAL, TRUE);
 		countParams.addRule(RelativeLayout.BELOW, label.getId());
 		count.setTextSize(TEXT_SIZE);
@@ -102,7 +100,7 @@ public class CounterListing extends RelativeLayout implements OnClickListener {
 
 	/**
 	 * Retrieves the Counter associated with this CounterListing.
-	 * 
+	 *
 	 * @return this listing's counter.
 	 */
 	public Counter getCounter() {
@@ -117,7 +115,7 @@ public class CounterListing extends RelativeLayout implements OnClickListener {
 	 * Sets the displayed Counter to the given counter, updating the display
 	 * fields. This method must be called in order for the CounterListing to
 	 * display any meaningful data.
-	 * 
+	 *
 	 * @param c
 	 *            the new Counter
 	 */

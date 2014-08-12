@@ -51,7 +51,6 @@ public class Spell implements Parcelable, Serializable {
 		this.desc = desc;
 		this.saveBonus = saveBonus;
 		this.saveAbility = saveAbility;
-		// this.abilities = abilities;
 	}
 
 	public int describeContents() {
@@ -95,10 +94,6 @@ public class Spell implements Parcelable, Serializable {
 		out.writeInt(saveBonus);
 		out.writeInt(saveAbility);
 	}
-
-	// public void setAbilities(AbilityScore[] abilities) {
-	// this.abilities = abilities;
-	// }
 
 	public String toSaveString() {
 		if (desc.isEmpty())

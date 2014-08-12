@@ -30,29 +30,6 @@ public class SkillListing extends TableRow {
 		return skill;
 	}
 
-	// @Override
-	// protected void onRestoreInstanceState(Parcelable state) {
-	// if (!(state instanceof SavedState)) {
-	// super.onRestoreInstanceState(state);
-	// return;
-	// }
-	// SavedState ss = (SavedState) state;
-	// super.onRestoreInstanceState(ss.getSuperState());
-	// abilityUsed = ss.ability;
-	// skillRanks = ss.skillRanks;
-	// skillName = ss.skillName;
-	// updateName();
-	// }
-
-	// @Override
-	// protected Parcelable onSaveInstanceState() {
-	// SavedState ret = new SavedState(super.onSaveInstanceState());
-	// ret.ability = abilityUsed;
-	// ret.skillRanks = skillRanks;
-	// ret.skillName = skillName;
-	// return ret;
-	// }
-
 	public void setAbilityUsed(int used) {
 		skill.baseAbility = used;
 	}
@@ -76,30 +53,4 @@ public class SkillListing extends TableRow {
 	public void updateName() {
 		nameView.setText(skill.skillName);
 	}
-
-	// private static class SavedState extends View.BaseSavedState {
-	// public int ability;
-	// public int skillRanks;
-	// public String skillName;
-	//
-	// public SavedState(Parcelable superState) {
-	// super(superState);
-	// }
-	//
-	// public SavedState(Parcel p) {
-	// super(p);
-	// ability = p.readInt();
-	// skillRanks = p.readInt();
-	// skillName = p.readString();
-	// }
-	//
-	// @Override
-	// public void writeToParcel(Parcel dest, int flags) {
-	// super.writeToParcel(dest, flags);
-	// dest.writeParcelable(skill, flags);
-	// dest.writeInt(ability);
-	// dest.writeInt(skillRanks);
-	// dest.writeString(skillName);
-	// }
-	// }
 }
