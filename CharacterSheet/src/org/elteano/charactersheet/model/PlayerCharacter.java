@@ -336,16 +336,6 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		return ret;
 	}
 
-	public JSONObject createJSON() {
-		JSONObject ret = new JSONObject();
-		try {
-			JSONArray arr = new JSONArray();
-			ret.put("abilities", abilities);
-		} catch (JSONException ex) {
-		}
-		return null;
-	}
-
 	public int describeContents() {
 		return 0;
 	}
