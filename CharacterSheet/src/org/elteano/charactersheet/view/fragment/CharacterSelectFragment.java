@@ -1,10 +1,6 @@
 package org.elteano.charactersheet.view.fragment;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.id;
-import org.elteano.charactersheet.R.layout;
-import org.elteano.charactersheet.R.menu;
-import org.elteano.charactersheet.R.string;
 import org.elteano.charactersheet.model.PlayerCharacter;
 import org.elteano.charactersheet.view.activity.BluetoothTransferActivity;
 import org.elteano.charactersheet.view.activity.CharacterReceiveActivity;

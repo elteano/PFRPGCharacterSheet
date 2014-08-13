@@ -14,13 +14,16 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 /**
+ * AsyncTask for sending character information via Bluetooth.
+ *
  * Requires input of BluetoothDevice and PlayerCharacter.
- *
- * @author emryn
- *
  */
 public class BluetoothSendTask extends AsyncTask<Object, Integer, Integer> {
 
+	/**
+	 * Interface to notify upon success or failure of the receipt of the
+	 * character.
+	 */
 	private PlayerCharacterSendCallback mCallback;
 
 	public BluetoothSendTask(PlayerCharacterSendCallback callback) {
@@ -47,22 +50,38 @@ public class BluetoothSendTask extends AsyncTask<Object, Integer, Integer> {
 			} catch (JSONException ex) {
 				json = send.writeToJSON().toString();
 			}
-			Log.i("BluetoothSend", "Sending JSON: " + json);
+
+			/*
+			 * Bluetooth sends raw data, and so we need to mark the end of the
+			 * stream manually.
+			 */
 			out.write(json + '\04');
+
+			// If we don't flush, then more likely than not, nothing will be
+			// sent.
 			out.flush();
 			Log.i("BluetoothSend", String.format("Sent %s.", send.getName()));
+
+			/*
+			 * Wait for a response from the other device before closing. If we
+			 * don't wait before closing, then we will likely cause the other
+			 * device to become incapable of reading the entire message.
+			 */
 			sock.getInputStream().read();
 			out.close();
+			// Return 0 for success
 			return Integer.valueOf(0);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// Return 1 for failure
 		return Integer.valueOf(1);
 	}
 
 	@Override
 	protected void onPostExecute(Integer result) {
 		super.onPostExecute(result);
+		// Notify our callback that we have a result
 		mCallback.onPlayerCharacterSend(result);
 	}
 }

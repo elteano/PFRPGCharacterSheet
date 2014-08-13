@@ -1,6 +1,5 @@
 package org.elteano.charactersheet.bg.bluetooth;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -15,11 +14,25 @@ import android.bluetooth.BluetoothSocket;
 import android.os.AsyncTask;
 import android.util.Log;
 
+/**
+ * AsyncTask for receiving a character via Bluetooth.
+ *
+ * Requires a BluetoothAdapter as the only argument.
+ */
 public class BluetoothReceiveTask extends
 		AsyncTask<BluetoothAdapter, Integer, PlayerCharacter> {
 
+	/**
+	 * Callback to notify upon receipt of the character.
+	 */
 	private PlayerCharacterReceiveCallback mCallback;
 
+	/**
+	 * Create new receive task, hooked up to the given callback receiver.
+	 *
+	 * @param callback
+	 *            Object to notify upon receipt of character.
+	 */
 	public BluetoothReceiveTask(PlayerCharacterReceiveCallback callback) {
 		mCallback = callback;
 	}
@@ -30,8 +43,6 @@ public class BluetoothReceiveTask extends
 		BluetoothServerSocket serv = null;
 		// Socket which will actually be used
 		BluetoothSocket sock = null;
-		// Input stream for reading the character
-		BufferedReader in = null;
 		try {
 			// Get a listening socket
 			Log.i("BluetoothReceive", "Opening sockets.");
@@ -42,12 +53,16 @@ public class BluetoothReceiveTask extends
 			try {
 				sock = serv.accept(10000);
 			} catch (IOException e) {
-				Log.d("BluetoothReceive", "Socket :(");
-				e.printStackTrace();
+				Log.d("BluetoothReceive", "No connection established.");
+				return null;
 			}
-			Log.i("BluetoothReceive", "Done listening.");
+			Log.i("BluetoothReceive", "Connection established.");
 			if (sock != null) {
-				Log.i("BluetoothReceive", "Input stream created.");
+				/*
+				 * Begin reading. There's probably a better way to do this, but
+				 * wrapping it in a Reader caused problems, as the stream never
+				 * ends.
+				 */
 				String app = "";
 				try {
 					int val = 0;
@@ -57,10 +72,12 @@ public class BluetoothReceiveTask extends
 						app += (char) val;
 					}
 				} catch (IOException ex) {
+					// This may not be fatal.
 					Log.i("BluetoothReceive", "Reading threw IOException.");
 				}
+
+				// Notify the sender that we've finished reading.
 				sock.getOutputStream().write(1);
-				Log.i("BluetoothReceive", "JSON input: " + app);
 				PlayerCharacter ret = PlayerCharacter
 						.createFromJSON(new JSONObject(app));
 				Log.i("BluetoothReceive", "Received " + ret.getName());
@@ -77,10 +94,6 @@ public class BluetoothReceiveTask extends
 			Log.i("BluetoothReceive", "IOException: " + e.getMessage());
 			e.printStackTrace();
 			try {
-				if (in != null)
-					in.close();
-				if (in != null)
-					sock.close();
 				if (serv != null)
 					serv.close();
 			} catch (IOException two) {

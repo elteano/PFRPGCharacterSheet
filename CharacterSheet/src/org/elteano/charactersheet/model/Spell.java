@@ -9,9 +9,18 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+/**
+ * Class for storing data and enacting calculations relating to player spells.
+ */
 public class Spell implements Parcelable, Serializable {
 
+	/**
+	 * Requirement for Serializable.
+	 */
 	public static final long serialVersionUID = 1L;
+	/**
+	 * Requirement for Parcelable.
+	 */
 	public static final Parcelable.Creator<Spell> CREATOR = new Parcelable.Creator<Spell>() {
 
 		public Spell createFromParcel(Parcel source) {
@@ -25,9 +34,29 @@ public class Spell implements Parcelable, Serializable {
 		}
 	};
 
-	// private AbilityScore[] abilities;
-	public int level, saveBonus, saveAbility;
-	public String name, desc;
+	/**
+	 * The spell level.
+	 *
+	 * Mostly for the player's benefit, although this is also used in
+	 * calculating the DC.
+	 */
+	public int level;
+	/**
+	 * Any miscellaneous bonus to the save DC.
+	 */
+	public int saveBonus;
+	/**
+	 * The ability score used in calculating the save DC.
+	 */
+	public int saveAbility;
+	/**
+	 * The spell's name.
+	 */
+	public String name;
+	/**
+	 * A description of the spell.
+	 */
+	public String desc;
 
 	/**
 	 * Create a new spell conforming to the old ways. Retained for backwards
@@ -53,15 +82,36 @@ public class Spell implements Parcelable, Serializable {
 		this.saveAbility = saveAbility;
 	}
 
+	/**
+	 * Requirement for Parcelable.
+	 */
 	public int describeContents() {
 		return 0;
 	}
 
+	/**
+	 * Calculates the save DC for the spell.
+	 *
+	 * @param abilities
+	 *            The player's ability scores.
+	 * @return The spell's save DC.
+	 */
 	public int getSaveDC(AbilityScores abilities) {
 		return 10 + level + saveBonus
 				+ abilities.getAbility(saveAbility).getTempModifier();
 	}
 
+	/**
+	 * Constructs a spell from a save string.
+	 *
+	 * This is primarily used for saving the character to SharedPreferences.
+	 *
+	 * @param s
+	 *            The String from which to construct the spell.
+	 * @param abilities
+	 *            Unused.
+	 * @return A Spell constructed from the save string.
+	 */
 	public static Spell fromSaveString(String s, AbilityScores abilities) {
 		String[] cont = s.split(PlayerCharacter.SPLITTER_SMALL);
 		if (cont.length >= 3) {
