@@ -47,6 +47,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			ret.skills = b.getParcelableArrayList("skills");
 			b.setClassLoader(Spell.class.getClassLoader());
 			ret.spells = b.getParcelableArrayList("spells");
+			ret.prepSpells = b.getParcelableArrayList("prepSpells");
 			ret.ac = (ArmorClass) src.readParcelable(ArmorClass.class
 					.getClassLoader());
 			ret.cmb = (CMB) src.readParcelable(CMB.class.getClassLoader());
@@ -808,6 +809,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		b.putParcelableArrayList("classes", classes);
 		b.putParcelableArrayList("skills", skills);
 		b.putParcelableArrayList("spells", spells);
+		b.putParcelableArrayList("prepSpells", prepSpells);
 		dest.writeBundle(b);
 		dest.writeParcelable(ac, 0);
 		dest.writeParcelable(cmb, 0);
