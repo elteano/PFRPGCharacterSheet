@@ -87,8 +87,9 @@ public class Attack implements Parcelable, Serializable {
 		String attackBonus = (attackTotal <= 0) ? "" : "+";
 		attackBonus += attackTotal;
 		int damageTotal = getDamageMod(abilities);
-		String damageBonus = ((damageTotal > 0) ? "+" : "") + damageTotal;
-		return String.format("%s %s (%s %s)\n%s", name, attackBonus, damageDie,
+		String damageBonus = ((damageTotal == 0) ? ""
+				: ((damageTotal > 0) ? " +" : " ") + damageTotal);
+		return String.format("%s %s (%s%s)\n%s", name, attackBonus, damageDie,
 				damageBonus, calculateMultiAttack(abilities, bab));
 	}
 
