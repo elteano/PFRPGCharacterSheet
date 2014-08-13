@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/activity_character_select_fragment"
-        android:name="org.elteano.charactersheet.CharacterSelectFragment"
+        android:name="org.elteano.charactersheet.view.fragment.CharacterSelectFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

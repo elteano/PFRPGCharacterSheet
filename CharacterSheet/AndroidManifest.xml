@@ -25,7 +25,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
-            android:name="org.elteano.charactersheet.CharacterSheetActivity"
+            android:name="org.elteano.charactersheet.view.activity.CharacterSheetActivity"
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="adjustPan" >
         </activity>
@@ -35,48 +35,48 @@
             android:finishOnTaskLaunch="true"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name="org.elteano.charactersheet.CounterEditActivity" />
-        <activity android:name="org.elteano.charactersheet.ModValueEditActivity" />
+        <activity android:name="org.elteano.charactersheet.view.activity.CounterEditActivity" />
+        <activity android:name="org.elteano.charactersheet.view.activity.ModValueEditActivity" />
         <activity
-            android:name="org.elteano.charactersheet.FeatEditActivity"
+            android:name="org.elteano.charactersheet.view.activity.FeatEditActivity"
             android:label="@string/title_activity_feat_edit" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.elteano.charactersheet.CharacterSheetActivity" />
+                android:value="org.elteano.charactersheet.activity.CharacterSheetActivity" />
         </activity>
         <activity
-            android:name="org.elteano.charactersheet.CFeatEditActivity"
+            android:name="org.elteano.charactersheet.view.activity.CFeatEditActivity"
             android:label="@string/title_activity_cfeat_edit" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.elteano.charactersheet.CharacterSheetActivity" />
+                android:value="org.elteano.charactersheet.activity.CharacterSheetActivity" />
         </activity>
         <activity
-            android:name="org.elteano.charactersheet.SkillEditActivity"
+            android:name="org.elteano.charactersheet.view.activity.SkillEditActivity"
             android:label="@string/title_activity_skill_edit" >
         </activity>
         <activity
-            android:name="org.elteano.charactersheet.ItemEditActivity"
+            android:name="org.elteano.charactersheet.activity.ItemEditActivity"
             android:label="@string/title_activity_item_edit" >
         </activity>
-        <activity android:name="org.elteano.charactersheet.SaveEditActivity" >
+        <activity android:name="org.elteano.charactersheet.view.activity.SaveEditActivity" >
         </activity>
         <activity
-            android:name="org.elteano.charactersheet.AttackEditActivity"
+            android:name="org.elteano.charactersheet.activity.AttackEditActivity"
             android:label="@string/title_activity_attack_edit" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.elteano.charactersheet.CharacterSheetActivity" />
+                android:value="org.elteano.charactersheet.activity.CharacterSheetActivity" />
         </activity>
         <activity
-            android:name="org.elteano.charactersheet.ACEditActivity"
+            android:name="org.elteano.charactersheet.view.activity.ACEditActivity"
             android:label="@string/title_activity_acedit" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.elteano.charactersheet.CharacterSheetActivity" />
+                android:value="org.elteano.charactersheet.activity.CharacterSheetActivity" />
         </activity>
         <activity
-            android:name="org.elteano.charactersheet.SpellEditActivity"
+            android:name="org.elteano.charactersheet.activity.SpellEditActivity"
             android:label="@string/title_activity_spell_edit" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -85,8 +85,6 @@
         <activity
             android:name="org.elteano.charactersheet.CharacterSelectActivity"
             android:label="@string/app_name" >
-
-            <!-- android:label="@string/title_activity_character_select" -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -94,12 +92,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.elteano.charactersheet.CMBEditActivity"
+            android:name="org.elteano.charactersheet.activity.CMBEditActivity"
             android:label="@string/title_activity_cmbedit"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="org.elteano.charactersheet.CharacterSendActivity"
+            android:name="org.elteano.charactersheet.view.activity.CharacterSendActivity"
             android:label="@string/title_activity_character_send" >
         </activity>
         <activity
@@ -107,29 +105,30 @@
             android:label="@string/title_activity_character_receive" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.elteano.charactersheet.CharacterSelectActivity" />
+                android:value="org.elteano.charactersheet.activity.CharacterSelectActivity" />
         </activity>
         <activity
             android:name="org.elteano.charactersheet.HPEditActivity"
             android:label="@string/title_activity_hpedit" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.elteano.charactersheet.CharacterSheetActivity" />
+                android:value="org.elteano.charactersheet.activity.CharacterSheetActivity" />
         </activity>
         <activity
-            android:name="org.elteano.charactersheet.BluetoothTransferActivity"
+            android:name="org.elteano.charactersheet.view.activity.BluetoothTransferActivity"
             android:label="@string/title_activity_bluetooth_transfer" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.elteano.charactersheet.CharacterSelectActivity" />
+                android:value="org.elteano.charactersheet.activity.CharacterSelectActivity" />
         </activity>
         <activity
-            android:name="org.elteano.charactersheet.BluetoothSendActivity"
+            android:name="org.elteano.charactersheet.activity.BluetoothSendActivity"
             android:label="@string/title_activity_bluetooth_send" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.elteano.charactersheet.CharacterSelectActivity" />
+                android:value="org.elteano.charactersheet.activity.CharacterSelectActivity" />
         </activity>
+
     </application>
 
 </manifest>

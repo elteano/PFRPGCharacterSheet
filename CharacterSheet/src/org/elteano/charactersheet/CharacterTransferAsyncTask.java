@@ -5,6 +5,8 @@ import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import org.elteano.charactersheet.model.PlayerCharacter;
+
 import android.os.AsyncTask;
 import android.util.Log;
 

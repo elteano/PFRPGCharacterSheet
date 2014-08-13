@@ -1,5 +1,7 @@
 package org.elteano.charactersheet;
 
+import org.elteano.charactersheet.model.Item;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;

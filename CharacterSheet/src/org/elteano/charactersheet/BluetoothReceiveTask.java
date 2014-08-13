@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.elteano.charactersheet.model.PlayerCharacter;
 import org.json.JSONException;
 import org.json.JSONObject;
 

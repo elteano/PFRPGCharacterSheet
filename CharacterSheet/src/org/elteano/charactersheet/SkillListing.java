@@ -1,5 +1,8 @@
 package org.elteano.charactersheet;
 
+import org.elteano.charactersheet.model.Skill;
+import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;

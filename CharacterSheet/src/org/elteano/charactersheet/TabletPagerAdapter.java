@@ -2,6 +2,11 @@ package org.elteano.charactersheet;
 
 import java.util.ArrayList;
 
+import org.elteano.charactersheet.view.fragment.FeatSkillFragment;
+import org.elteano.charactersheet.view.fragment.SelectInfoItemsFragment;
+import org.elteano.charactersheet.view.fragment.SpellFragment;
+import org.elteano.charactersheet.view.fragment.StatsAttackDefenseFragment;
+
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

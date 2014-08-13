@@ -1,5 +1,16 @@
 package org.elteano.charactersheet;
 
+import org.elteano.charactersheet.view.fragment.AttackFragment;
+import org.elteano.charactersheet.view.fragment.CFeatFragment;
+import org.elteano.charactersheet.view.fragment.CounterFragment;
+import org.elteano.charactersheet.view.fragment.DefenseFragment;
+import org.elteano.charactersheet.view.fragment.FeatFragment;
+import org.elteano.charactersheet.view.fragment.ItemFragment;
+import org.elteano.charactersheet.view.fragment.NameFragment;
+import org.elteano.charactersheet.view.fragment.SkillFragment;
+import org.elteano.charactersheet.view.fragment.SpellFragment;
+import org.elteano.charactersheet.view.fragment.StatsFragment;
+
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
