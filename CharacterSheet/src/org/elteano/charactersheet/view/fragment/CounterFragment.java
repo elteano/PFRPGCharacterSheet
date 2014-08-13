@@ -2,7 +2,6 @@ package org.elteano.charactersheet.view.fragment;
 
 import java.util.ArrayList;
 
-import org.elteano.charactersheet.CounterListing;
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.R.id;
 import org.elteano.charactersheet.R.layout;
@@ -10,6 +9,7 @@ import org.elteano.charactersheet.R.menu;
 import org.elteano.charactersheet.model.Counter;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.activity.CounterEditActivity;
+import org.elteano.charactersheet.view.support.CounterListing;
 
 import android.app.Activity;
 import android.content.Intent;

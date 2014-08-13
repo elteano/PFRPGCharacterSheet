@@ -1,6 +1,5 @@
 package org.elteano.charactersheet.view.activity;
 
-import org.elteano.charactersheet.HandsetPagerAdapter;
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.R.drawable;
 import org.elteano.charactersheet.R.id;
@@ -12,6 +11,7 @@ import org.elteano.charactersheet.view.fragment.FeatSkillFragment;
 import org.elteano.charactersheet.view.fragment.SelectInfoItemsFragment;
 import org.elteano.charactersheet.view.fragment.SpellFragment;
 import org.elteano.charactersheet.view.fragment.StatsAttackDefenseFragment;
+import org.elteano.charactersheet.view.support.HandsetPagerAdapter;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;

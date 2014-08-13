@@ -1,9 +1,10 @@
-package org.elteano.charactersheet;
+package org.elteano.charactersheet.bg.bluetooth;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.UUID;
 
+import org.elteano.charactersheet.bg.wifid.PlayerCharacterSendCallback;
 import org.elteano.charactersheet.model.PlayerCharacter;
 import org.json.JSONException;
 

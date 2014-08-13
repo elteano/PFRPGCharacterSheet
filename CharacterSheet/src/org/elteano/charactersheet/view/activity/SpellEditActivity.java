@@ -1,6 +1,5 @@
 package org.elteano.charactersheet.view.activity;
 
-import org.elteano.charactersheet.IntTextWatcher;
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.R.array;
 import org.elteano.charactersheet.R.id;
@@ -9,6 +8,7 @@ import org.elteano.charactersheet.R.menu;
 import org.elteano.charactersheet.R.string;
 import org.elteano.charactersheet.model.AbilityScores;
 import org.elteano.charactersheet.model.Spell;
+import org.elteano.charactersheet.view.support.IntTextWatcher;
 
 import android.app.Activity;
 import android.app.SearchManager;

@@ -3,12 +3,12 @@ package org.elteano.charactersheet.view.activity;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.elteano.charactersheet.BluetoothSendTask;
-import org.elteano.charactersheet.PlayerCharacterSendCallback;
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.R.id;
 import org.elteano.charactersheet.R.layout;
 import org.elteano.charactersheet.R.menu;
+import org.elteano.charactersheet.bg.bluetooth.BluetoothSendTask;
+import org.elteano.charactersheet.bg.wifid.PlayerCharacterSendCallback;
 import org.elteano.charactersheet.model.PlayerCharacter;
 
 import android.app.Activity;

@@ -1,4 +1,4 @@
-package org.elteano.charactersheet;
+package org.elteano.charactersheet.view.support;
 
 import java.util.ArrayList;
 

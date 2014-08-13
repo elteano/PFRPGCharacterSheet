@@ -1,4 +1,4 @@
-package org.elteano.charactersheet;
+package org.elteano.charactersheet.bg.wifid;
 
 import org.elteano.charactersheet.model.PlayerCharacter;
 

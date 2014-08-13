@@ -1,4 +1,4 @@
-package org.elteano.charactersheet;
+package org.elteano.charactersheet.view.support;
 
 import org.elteano.charactersheet.view.fragment.AttackFragment;
 import org.elteano.charactersheet.view.fragment.CFeatFragment;
