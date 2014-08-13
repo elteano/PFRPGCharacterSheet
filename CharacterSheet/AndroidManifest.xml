@@ -101,7 +101,7 @@
             android:label="@string/title_activity_character_send" >
         </activity>
         <activity
-            android:name="org.elteano.charactersheet.CharacterReceiveActivity"
+            android:name="org.elteano.charactersheet.view.activity.CharacterReceiveActivity"
             android:label="@string/title_activity_character_receive" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
