@@ -1,8 +1,6 @@
 package org.elteano.charactersheet.view.fragment;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.layout;
-import org.elteano.charactersheet.R.string;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

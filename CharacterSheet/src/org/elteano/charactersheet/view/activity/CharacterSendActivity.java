@@ -8,10 +8,6 @@ import java.util.Enumeration;
 import java.util.concurrent.ExecutionException;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.id;
-import org.elteano.charactersheet.R.layout;
-import org.elteano.charactersheet.R.menu;
-import org.elteano.charactersheet.R.string;
 import org.elteano.charactersheet.bg.wifid.CharacterReceiveTask;
 import org.elteano.charactersheet.bg.wifid.CharacterTransferAsyncTask;
 import org.elteano.charactersheet.bg.wifid.CharacterTransferHandler;

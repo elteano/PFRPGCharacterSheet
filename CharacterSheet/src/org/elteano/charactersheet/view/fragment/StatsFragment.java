@@ -1,8 +1,6 @@
 package org.elteano.charactersheet.view.fragment;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.id;
-import org.elteano.charactersheet.R.layout;
 import org.elteano.charactersheet.model.AbilityScore;
 import org.elteano.charactersheet.model.HP;
 import org.elteano.charactersheet.model.PlayerCharacter;

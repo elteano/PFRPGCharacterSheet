@@ -1,9 +1,6 @@
 package org.elteano.charactersheet.view.activity;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.array;
-import org.elteano.charactersheet.R.id;
-import org.elteano.charactersheet.R.layout;
 import org.elteano.charactersheet.model.Attack;
 
 import android.app.Activity;

@@ -3,8 +3,6 @@ package org.elteano.charactersheet.view.activity;
 import java.util.ArrayList;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.layout;
-import org.elteano.charactersheet.R.menu;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;

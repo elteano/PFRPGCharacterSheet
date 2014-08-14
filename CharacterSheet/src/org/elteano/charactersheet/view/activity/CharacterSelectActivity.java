@@ -1,8 +1,6 @@
 package org.elteano.charactersheet.view.activity;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.layout;
-import org.elteano.charactersheet.R.string;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;

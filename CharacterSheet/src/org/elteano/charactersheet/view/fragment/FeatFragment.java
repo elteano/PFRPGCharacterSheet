@@ -3,9 +3,6 @@ package org.elteano.charactersheet.view.fragment;
 import java.util.ArrayList;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.id;
-import org.elteano.charactersheet.R.layout;
-import org.elteano.charactersheet.R.menu;
 import org.elteano.charactersheet.model.Feat;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.activity.FeatEditActivity;

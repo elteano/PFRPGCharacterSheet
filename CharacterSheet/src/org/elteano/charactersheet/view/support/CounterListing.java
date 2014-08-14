@@ -1,7 +1,6 @@
 package org.elteano.charactersheet.view.support;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.drawable;
 import org.elteano.charactersheet.model.Counter;
 
 import android.content.Context;

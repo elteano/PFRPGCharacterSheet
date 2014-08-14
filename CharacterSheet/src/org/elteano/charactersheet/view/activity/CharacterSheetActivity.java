@@ -3,7 +3,6 @@ package org.elteano.charactersheet.view.activity;
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.model.PlayerCharacter;
 import org.elteano.charactersheet.view.fragment.CharacterSelectFragment;
-import org.elteano.charactersheet.view.fragment.CharacterUpdaterFragment;
 import org.elteano.charactersheet.view.fragment.FeatSkillFragment;
 import org.elteano.charactersheet.view.fragment.SelectInfoItemsFragment;
 import org.elteano.charactersheet.view.fragment.SpellFragment;
@@ -25,6 +24,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class CharacterSheetActivity extends FragmentActivity {
@@ -131,29 +132,10 @@ public class CharacterSheetActivity extends FragmentActivity {
 		if (screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_SMALL
 				|| screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-			setContentView(R.layout.activity_charactersheet);
-			mViewPager = (ViewPager) findViewById(R.id.pager);
-			addHandsetTabs();
-			mViewPager
-					.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-						private int oldpos = 0;
-
-						@Override
-						public void onPageSelected(int position) {
-							// When swiping between pages, select the
-							// corresponding tab.
-							((CharacterUpdaterFragment) mAdapter
-									.getItem(oldpos)).preUpdate();
-							getActionBar().setSelectedNavigationItem(position);
-							getActionBar().selectTab(
-									getActionBar().getTabAt(position));
-							if (position == 1)
-								((CharacterUpdaterFragment) mAdapter
-										.getItem(position)).updateDisplay();
-							oldpos = position;
-						}
-					});
-			mViewPager.setAdapter(mAdapter);
+			setContentView(R.layout.activity_charactersheet_drawer);
+			ListView drawers = (ListView) findViewById(R.id.activity_charactersheet_nav_drawer);
+			drawers.setAdapter(new ArrayAdapter<String>(this,
+					android.R.layout.simple_list_item_1));
 		} else {
 			addTabletTabs();
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);

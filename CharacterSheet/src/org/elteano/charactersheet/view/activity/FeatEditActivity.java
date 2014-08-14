@@ -1,10 +1,6 @@
 package org.elteano.charactersheet.view.activity;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.id;
-import org.elteano.charactersheet.R.layout;
-import org.elteano.charactersheet.R.menu;
-import org.elteano.charactersheet.R.string;
 
 import android.app.Activity;
 import android.app.SearchManager;

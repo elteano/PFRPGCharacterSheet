@@ -1,8 +1,6 @@
 package org.elteano.charactersheet.view.fragment;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.id;
-import org.elteano.charactersheet.R.layout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
