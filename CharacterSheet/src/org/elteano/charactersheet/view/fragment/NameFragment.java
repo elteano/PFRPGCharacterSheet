@@ -1,10 +1,6 @@
 package org.elteano.charactersheet.view.fragment;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.array;
-import org.elteano.charactersheet.R.id;
-import org.elteano.charactersheet.R.layout;
-import org.elteano.charactersheet.model.PlayerCharacter;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.support.IntTextWatcher;
 
@@ -235,18 +231,10 @@ public class NameFragment extends CharacterUpdaterFragment implements
 			EditText nameView = (EditText) getView().findViewById(
 					R.id.character_name_name_field);
 			for (String key : playerList.getAll().keySet()) {
-				if (((CharacterSheetActivity) getActivity())
-						.getCharacter()
-						.getName()
-						.equals(playerList
-								.getString(key, "baaaaaaaaaad7778123"))) {
+				if (((CharacterSheetActivity) getActivity()).getCharacter()
+						.getName().equals(key)) {
 					SharedPreferences.Editor editor = playerList.edit();
-					editor.putString(key, nameView.getText().toString());
-					editor.commit();
-					editor = getActivity().getSharedPreferences(key,
-							Activity.MODE_PRIVATE).edit();
-					editor.putString(PlayerCharacter.SAVESTATE_NAME, nameView
-							.getText().toString());
+					editor.remove(key);
 					editor.commit();
 					break;
 				}

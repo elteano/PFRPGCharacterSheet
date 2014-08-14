@@ -61,11 +61,7 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 	}
 
 	private void saveNewCharacter(PlayerCharacter c, int i) {
-		SharedPreferences.Editor editor = playerList.edit();
-		editor.putString("Character_" + i, c.getName());
-		editor.commit();
-		c.saveToSharedPreferences(getActivity().getSharedPreferences(
-				"Character_" + i, Activity.MODE_PRIVATE));
+		c.saveToSharedPreferences(playerList);
 	}
 
 	private void addCharacterListing(PlayerCharacter character) {
@@ -111,12 +107,31 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 				R.id.fragment_character_select_layout)).removeAllViews();
 	}
 
+	/**
+	 * Updates all characters to the newest save format.
+	 */
+	private void updateSaveData() {
+		for (String key : playerList.getAll().keySet()) {
+			if (key.startsWith("Character_")) {
+				PlayerCharacter updateme = PlayerCharacter.restoreByPlayerList(
+						getActivity(), playerList.getString(key, "ERROR"));
+				updateme.saveToSharedPreferences(playerList);
+				SharedPreferences.Editor editor = playerList.edit();
+				editor.remove(key);
+				editor.commit();
+			}
+		}
+	}
+
 	private void fillList(View dest) {
 		String[] list = new String[playerList.getAll().size()];
 		{
 			int i = 0;
 			for (String key : playerList.getAll().keySet()) {
-				list[i] = playerList.getString(key, "ERROR");
+				String charName = key;
+				if (charName.startsWith("Character_"))
+					charName = playerList.getString(key, "ERROR");
+				list[i] = charName;
 				i++;
 			}
 		}
@@ -185,6 +200,7 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 				CHARACTER_LIST_PREFERENCE, Activity.MODE_PRIVATE);
 		View ret = inflater.inflate(R.layout.fragment_character_select,
 				container, false);
+		updateSaveData();
 		fillList(ret);
 		return ret;
 	}

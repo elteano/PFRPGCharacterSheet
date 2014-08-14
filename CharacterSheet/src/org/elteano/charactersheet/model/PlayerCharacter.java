@@ -612,85 +612,12 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		SharedPreferences playerList = activity.getSharedPreferences(
 				CharacterSelectFragment.CHARACTER_LIST_PREFERENCE,
 				Activity.MODE_PRIVATE);
-		for (String key : playerList.getAll().keySet()) {
-			if (playerList.getString(key, "basaoiunfalksjdbfioaweubf").equals(
-					getName())) {
-				saveToSharedPreferences(activity.getSharedPreferences(key,
-						Activity.MODE_PRIVATE));
-				break;
-			}
-		}
+		saveToSharedPreferences(playerList);
 	}
 
 	public void saveToSharedPreferences(SharedPreferences state) {
 		SharedPreferences.Editor editor = state.edit();
-		editor.clear();
-		editor.putString(SAVESTATE_AC, ac.toSaveString());
-		editor.putInt(SAVESTATE_AGE, characterAge);
-		editor.putInt(SAVESTATE_BAB, baseAttackBonus);
-		editor.putString(SAVESTATE_BIO, characterBio);
-		editor.putString(SAVESTATE_CMB, cmb.toSaveString());
-		editor.putFloat(SAVESTATE_GOLD, characterGold);
-		editor.putInt(SAVESTATE_HP_CURRENT, hpCurrent);
-		editor.putString(SAVESTATE_HP_CONTAINER, mHP.toSaveString());
-		editor.putString(SAVESTATE_LEVEL, getPlayerClassString());
-		editor.putString(SAVESTATE_NAME, name);
-		editor.putInt(SAVESTATE_SIZE, characterSize);
-		editor.putInt(SAVESTATE_XP, characterXP);
-		editor.putInt(SAVESTATE_FORT_FLAGS, flagsFort);
-		editor.putInt(SAVESTATE_FORT_CMOD, cModFort);
-		editor.putInt(SAVESTATE_INIT_BONUS, miscInitBonus);
-		editor.putInt(SAVESTATE_FORT_MOD, mModFort);
-		editor.putInt(SAVESTATE_REF_FLAGS, flagsRef);
-		editor.putString(SAVESTATE_LANGUAGES, languages);
-		editor.putInt(SAVESTATE_REF_CMOD, cModRef);
-		editor.putInt(SAVESTATE_REF_MOD, mModRef);
-		editor.putInt(SAVESTATE_WILL_FLAGS, flagsWill);
-		editor.putInt(SAVESTATE_WILL_CMOD, cModWill);
-		editor.putInt(SAVESTATE_WILL_MOD, mModWill);
-		for (int i = 0; i < 6; i++) {
-			abilities.getAbility(i).appendToSharedPreferencesEditor(editor, i);
-		}
-		String conglomerate = "";
-		for (Counter counter : counters) {
-			conglomerate += counter.toSaveString() + SPLITTER_LARGE;
-		}
-		editor.putString(SAVESTATE_COUNTERS, conglomerate);
-		String featString = "";
-		for (Feat feat : feats) {
-			featString += feat.toSaveString() + SPLITTER_LARGE;
-		}
-		editor.putString(SAVESTATE_FEATS, featString);
-		String cFeatString = "";
-		for (Feat feat : cfeats) {
-			cFeatString += feat.toSaveString() + SPLITTER_LARGE;
-		}
-		editor.putString(SAVESTATE_CFEATS, cFeatString);
-		String itemString = "";
-		for (Item item : items) {
-			itemString += item.toSaveString() + SPLITTER_LARGE;
-		}
-		editor.putString(SAVESTATE_ITEMS, itemString);
-		String skillString = "";
-		for (Skill s : skills) {
-			skillString += s.toSaveString() + SPLITTER_LARGE;
-		}
-		editor.putString(SAVESTATE_SKILLS, skillString);
-		String attackString = "";
-		for (Attack attack : attacks) {
-			attackString += attack.toStorageString() + SPLITTER_LARGE;
-		}
-		editor.putString(SAVESTATE_ATTACKS, attackString);
-		String spellString = "";
-		for (Spell s : spells) {
-			spellString += s.toSaveString() + SPLITTER_LARGE;
-		}
-		editor.putString(SAVESTATE_SPELLS, spellString);
-		spellString = "";
-		for (Spell s : prepSpells) {
-			spellString += s.toSaveString() + SPLITTER_LARGE;
-		}
-		editor.putString(SAVESTATE_PREP_SPELLS, spellString);
+		editor.putString(getName(), writeToJSON().toString());
 		editor.commit();
 	}
 
