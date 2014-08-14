@@ -28,6 +28,12 @@ public class NameFragment extends CharacterUpdaterFragment implements
 	private TextWatcher nameTextWatcher;
 	private EditText nameView;
 	private IntTextWatcher xpTextWatcher;
+	/**
+	 * The old name of the character currently being edited.
+	 *
+	 * An empty value signifies that the name was not changed.
+	 */
+	private String mOldName;
 
 	private void fillFields() {
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -141,6 +147,7 @@ public class NameFragment extends CharacterUpdaterFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Inflate the layout for this CharacterUpdaterFragment
+		mOldName = "";
 		View ret = inflater.inflate(R.layout.fragment_name, container, false);
 		nameView = (EditText) ret.findViewById(R.id.character_name_name_field);
 		classTextWatcher = new ClassTextWatcher();
@@ -160,6 +167,14 @@ public class NameFragment extends CharacterUpdaterFragment implements
 	@Override
 	public void onPause() {
 		unhookListeners();
+		if (!mOldName.isEmpty()) {
+			SharedPreferences.Editor editor = getActivity()
+					.getSharedPreferences(
+							CharacterSelectFragment.CHARACTER_LIST_PREFERENCE,
+							Activity.MODE_PRIVATE).edit();
+			editor.remove(mOldName);
+			editor.commit();
+		}
 		pushFieldsToCharacter();
 		super.onPause();
 	}
@@ -225,30 +240,17 @@ public class NameFragment extends CharacterUpdaterFragment implements
 	private class NameTextWatcher implements TextWatcher {
 
 		public void afterTextChanged(Editable text) {
-			SharedPreferences playerList = getActivity().getSharedPreferences(
-					CharacterSelectFragment.CHARACTER_LIST_PREFERENCE,
-					Activity.MODE_PRIVATE);
+			if (mOldName.isEmpty()) {
+				mOldName = ((CharacterSheetActivity) getActivity())
+						.getCharacter().getName();
+			}
 			EditText nameView = (EditText) getView().findViewById(
 					R.id.character_name_name_field);
-			for (String key : playerList.getAll().keySet()) {
-				if (((CharacterSheetActivity) getActivity()).getCharacter()
-						.getName().equals(key)) {
-					// TODO do not delete characters other than the one
-					// currently being edited
-					SharedPreferences.Editor editor = playerList.edit();
-					editor.remove(key);
-					editor.commit();
-					break;
-				}
-			}
 			((CharacterSheetActivity) getActivity()).getCharacter().setName(
 					nameView.getText().toString());
 			getActivity().getActionBar().setTitle(
 					((CharacterSheetActivity) getActivity()).getCharacter()
 							.getName());
-			// TODO make name changing more efficient
-			((CharacterSheetActivity) getActivity()).getCharacter()
-					.saveSelfByPlayerList(getActivity());
 			updateOthers();
 		}
 
