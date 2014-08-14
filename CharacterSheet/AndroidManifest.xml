@@ -108,7 +108,7 @@
                 android:value="org.elteano.charactersheet.view.activity.CharacterSelectActivity" />
         </activity>
         <activity
-            android:name="org.elteano.charactersheet.HPEditActivity"
+            android:name="org.elteano.charactersheet.view.activity.HPEditActivity"
             android:label="@string/title_activity_hpedit" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
