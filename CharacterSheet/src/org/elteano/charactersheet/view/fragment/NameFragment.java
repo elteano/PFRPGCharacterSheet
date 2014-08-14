@@ -233,6 +233,8 @@ public class NameFragment extends CharacterUpdaterFragment implements
 			for (String key : playerList.getAll().keySet()) {
 				if (((CharacterSheetActivity) getActivity()).getCharacter()
 						.getName().equals(key)) {
+					// TODO do not delete characters other than the one
+					// currently being edited
 					SharedPreferences.Editor editor = playerList.edit();
 					editor.remove(key);
 					editor.commit();
@@ -244,6 +246,9 @@ public class NameFragment extends CharacterUpdaterFragment implements
 			getActivity().getActionBar().setTitle(
 					((CharacterSheetActivity) getActivity()).getCharacter()
 							.getName());
+			// TODO make name changing more efficient
+			((CharacterSheetActivity) getActivity()).getCharacter()
+					.saveSelfByPlayerList(getActivity());
 			updateOthers();
 		}
 
