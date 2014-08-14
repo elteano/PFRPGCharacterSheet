@@ -119,6 +119,11 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 				SharedPreferences.Editor editor = playerList.edit();
 				editor.remove(key);
 				editor.commit();
+				SharedPreferences removeThis = getActivity()
+						.getSharedPreferences(key, Activity.MODE_PRIVATE);
+				editor = removeThis.edit();
+				editor.clear();
+				editor.commit();
 			}
 		}
 	}
@@ -259,30 +264,14 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 		builder.create().show();
 	}
 
-	private boolean removeCharacter(int ident) {
-		if (playerList.contains("Character_" + ident)) {
+	private boolean removeCharacter(String characterName) {
+		if (playerList.contains(characterName)) {
 			SharedPreferences.Editor editor = playerList.edit();
-			editor.remove("Character_" + ident);
-			editor.commit();
-			SharedPreferences removeThis = getActivity().getSharedPreferences(
-					"Character_" + ident, Activity.MODE_PRIVATE);
-			editor = removeThis.edit();
-			editor.clear();
+			editor.remove(characterName);
 			editor.commit();
 			return true;
-		}
-		return false;
-	}
-
-	private boolean removeCharacter(String characterName) {
-		for (String key : playerList.getAll().keySet()) {
-			if (playerList.getString(key, "thisisNotacharact3r").equals(
-					characterName)) {
-				return removeCharacter(Integer.parseInt(key.replace(
-						"Character_", "")));
-			}
-		}
-		return false;
+		} else
+			return false;
 	}
 
 	private boolean removeCharacterListing(String characterName) {
