@@ -1,17 +1,16 @@
 package org.elteano.charactersheet.view.activity;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.drawable;
-import org.elteano.charactersheet.R.id;
-import org.elteano.charactersheet.R.layout;
-import org.elteano.charactersheet.R.string;
 import org.elteano.charactersheet.model.PlayerCharacter;
+import org.elteano.charactersheet.view.fragment.CharacterSelectFragment;
 import org.elteano.charactersheet.view.fragment.CharacterUpdaterFragment;
 import org.elteano.charactersheet.view.fragment.FeatSkillFragment;
 import org.elteano.charactersheet.view.fragment.SelectInfoItemsFragment;
 import org.elteano.charactersheet.view.fragment.SpellFragment;
 import org.elteano.charactersheet.view.fragment.StatsAttackDefenseFragment;
 import org.elteano.charactersheet.view.support.HandsetPagerAdapter;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -26,6 +25,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class CharacterSheetActivity extends FragmentActivity {
 
@@ -177,6 +177,20 @@ public class CharacterSheetActivity extends FragmentActivity {
 			Log.i("CharacterSheet", "Character name found.");
 			setCharacter(PlayerCharacter.restoreByPlayerList(this, getIntent()
 					.getStringExtra("result")));
+			try {
+				JSONObject cjson = new JSONObject(getSharedPreferences(
+						CharacterSelectFragment.CHARACTER_LIST_PREFERENCE,
+						MODE_PRIVATE).getString(
+						getIntent().getStringExtra("result"), "ERROR"));
+				setCharacter(PlayerCharacter.createFromJSON(cjson));
+			} catch (JSONException ex) {
+				Log.e("CharacterSheet",
+						"Error obtaining JSON to inflate character.");
+				ex.printStackTrace();
+				Toast.makeText(this, "Error recreating character.",
+						Toast.LENGTH_SHORT).show();
+				navigateUp();
+			}
 			Log.i("CharacterSheet", "hasCharacter(): " + hasCharacter());
 		}
 
@@ -201,15 +215,19 @@ public class CharacterSheetActivity extends FragmentActivity {
 		case android.R.id.home:
 			// This is called when the Home (Up) button is pressed
 			// in the Action Bar.
-			Intent parentActivityIntent = new Intent(this,
-					CharacterSelectActivity.class);
-			parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-					| Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(parentActivityIntent);
-			finish();
+			navigateUp();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void navigateUp() {
+		Intent parentActivityIntent = new Intent(this,
+				CharacterSelectActivity.class);
+		parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+				| Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(parentActivityIntent);
+		finish();
 	}
 
 	@Override
