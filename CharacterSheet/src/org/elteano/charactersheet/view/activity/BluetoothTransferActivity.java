@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import org.elteano.charactersheet.R;
-import org.elteano.charactersheet.R.id;
-import org.elteano.charactersheet.R.layout;
-import org.elteano.charactersheet.R.menu;
 import org.elteano.charactersheet.bg.bluetooth.BluetoothSendTask;
 import org.elteano.charactersheet.bg.wifid.PlayerCharacterSendCallback;
 import org.elteano.charactersheet.model.PlayerCharacter;
@@ -110,7 +107,6 @@ public class BluetoothTransferActivity extends Activity implements
 
 	public void onItemClick(AdapterView<?> source, View item, int position,
 			long whoknows) {
-		// TODO Get destination from list element
 		devices.get(position);
 		// Spawn AsyncTask to handle transfer
 		if (mTask == null

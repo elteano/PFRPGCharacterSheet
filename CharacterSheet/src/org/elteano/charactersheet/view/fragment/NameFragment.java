@@ -107,7 +107,6 @@ public class NameFragment extends CharacterUpdaterFragment implements
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		nameView.setText(((CharacterSheetActivity) getActivity())
 				.getCharacter().getName());
