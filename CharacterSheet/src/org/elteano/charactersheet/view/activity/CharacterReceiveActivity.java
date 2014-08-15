@@ -81,6 +81,11 @@ public class CharacterReceiveActivity extends Activity implements
 						Toast.LENGTH_SHORT).show();
 			}
 			return true;
+		case R.id.action_settings:
+			Intent intent = new Intent();
+			intent.setAction(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
+			startActivity(intent);
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

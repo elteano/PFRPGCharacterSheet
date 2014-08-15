@@ -72,6 +72,11 @@ public class BluetoothTransferActivity extends Activity implements
 			//
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		case R.id.action_settings:
+			Intent intent = new Intent();
+			intent.setAction(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
+			startActivity(intent);
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
