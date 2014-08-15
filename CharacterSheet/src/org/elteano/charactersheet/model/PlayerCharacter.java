@@ -291,6 +291,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		ac = new ArmorClass(0, 0, 0, 0, 0, true);
 		name = "New Character";
 		characterAge = 0;
+		languages = "";
 		characterSize = SIZE_MEDIUM;
 		characterBio = "";
 		cmb = new CMB();
