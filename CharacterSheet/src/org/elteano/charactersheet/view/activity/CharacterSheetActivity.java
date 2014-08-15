@@ -26,6 +26,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -158,6 +159,8 @@ public class CharacterSheetActivity extends FragmentActivity {
 			mToggle.setDrawerIndicatorEnabled(true);
 			((DrawerLayout) findViewById(R.id.activity_charactersheet_drawer_layout))
 					.setDrawerListener(mToggle);
+			((DrawerLayout) findViewById(R.id.activity_charactersheet_drawer_layout))
+					.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
 		} else {
 			addTabletTabs();
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
