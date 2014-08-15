@@ -26,12 +26,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class CharacterSelectFragment extends CharacterUpdaterFragment implements
-		OnClickListener {
+		OnClickListener, OnItemClickListener {
 
 	public static final String CHARACTER_LIST_PREFERENCE = CharacterSheetActivity.PREFERENCES_PREFIX
 			+ "CharacterNames";
@@ -106,8 +110,8 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 	}
 
 	private void clearList() {
-		((LinearLayout) getView().findViewById(
-				R.id.fragment_character_select_layout)).removeAllViews();
+		((ListView) getView().findViewById(
+				R.id.fragment_character_select_layout)).setAdapter(null);
 	}
 
 	/**
@@ -143,19 +147,10 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 				i++;
 			}
 		}
-		for (int i = 0; i < list.length - 1; i++) {
-			int swapWith = i;
-			for (int j = i + 1; j < list.length; j++) {
-				if (list[j].compareTo(list[swapWith]) < 0)
-					swapWith = j;
-			}
-			String s = list[i];
-			list[i] = list[swapWith];
-			list[swapWith] = s;
-		}
-		for (String characterName : list) {
-			addCharacterListing(characterName, dest);
-		}
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+				android.R.layout.simple_list_item_1, list);
+		((ListView) dest.findViewById(R.id.fragment_character_select_layout))
+				.setAdapter(adapter);
 	}
 
 	@Override
@@ -172,38 +167,7 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 	public void onClick(View view) {
 		if (!(view instanceof TextView))
 			return;
-		TextView source = (TextView) view;
-		if (deleting) {
-			promptDeleteCharacter(source.getText().toString());
-			deleting = false;
-		} else if (selectingSend) {
-			try {
-				PlayerCharacter c = PlayerCharacter
-						.createFromJSON(new JSONObject(
-								getActivity()
-										.getSharedPreferences(
-												CharacterSelectFragment.CHARACTER_LIST_PREFERENCE,
-												Activity.MODE_PRIVATE)
-										.getString(source.getText().toString(),
-												"ERROR")));
-				Intent intent = new Intent(getActivity(),
-						BluetoothTransferActivity.class);
-				intent.putExtra(BluetoothTransferActivity.INPUT, (Parcelable) c);
-				startActivityForResult(intent,
-						BluetoothTransferActivity.MODE_SEND);
-			} catch (JSONException ex) {
-				Toast.makeText(getActivity(),
-						"Error loading character to send.", Toast.LENGTH_SHORT)
-						.show();
-				Log.e("CharacterSheet", "Error loading character to send.");
-				ex.printStackTrace();
-			}
-			selectingSend = false;
-		} else {
-			((CharacterSelectActivity) getActivity()).setResultName(source
-					.getText().toString());
-			((CharacterSelectActivity) getActivity()).setCharacterSelected();
-		}
+		handleCharacterClick(view);
 	}
 
 	@Override
@@ -224,6 +188,8 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 		View ret = inflater.inflate(R.layout.fragment_character_select,
 				container, false);
 		updateSaveData();
+		((ListView) ret.findViewById(R.id.fragment_character_select_layout))
+				.setOnItemClickListener(this);
 		fillList(ret);
 		return ret;
 	}
@@ -271,7 +237,7 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 							public void onClick(DialogInterface dialog, int id) {
 								preUpdateOthers();
 								removeCharacter(name);
-								removeCharacterListing(name);
+								updateDisplay();
 							}
 						})
 				.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -340,5 +306,44 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 	public void updateDisplay() {
 		clearList();
 		fillList(getView());
+	}
+
+	public void onItemClick(AdapterView<?> parent, View view, int index, long id) {
+		handleCharacterClick(view);
+	}
+
+	private void handleCharacterClick(View view) {
+		TextView source = (TextView) view;
+		if (deleting) {
+			promptDeleteCharacter(source.getText().toString());
+			deleting = false;
+		} else if (selectingSend) {
+			try {
+				PlayerCharacter c = PlayerCharacter
+						.createFromJSON(new JSONObject(
+								getActivity()
+										.getSharedPreferences(
+												CharacterSelectFragment.CHARACTER_LIST_PREFERENCE,
+												Activity.MODE_PRIVATE)
+										.getString(source.getText().toString(),
+												"ERROR")));
+				Intent intent = new Intent(getActivity(),
+						BluetoothTransferActivity.class);
+				intent.putExtra(BluetoothTransferActivity.INPUT, (Parcelable) c);
+				startActivityForResult(intent,
+						BluetoothTransferActivity.MODE_SEND);
+			} catch (JSONException ex) {
+				Toast.makeText(getActivity(),
+						"Error loading character to send.", Toast.LENGTH_SHORT)
+						.show();
+				Log.e("CharacterSheet", "Error loading character to send.");
+				ex.printStackTrace();
+			}
+			selectingSend = false;
+		} else {
+			((CharacterSelectActivity) getActivity()).setResultName(source
+					.getText().toString());
+			((CharacterSelectActivity) getActivity()).setCharacterSelected();
+		}
 	}
 }
