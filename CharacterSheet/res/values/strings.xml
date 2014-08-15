@@ -60,12 +60,14 @@
     <string name="damage_bonus">Damage Bonus</string>
     <string name="damage_die">Damage Die</string>
     <string name="deflection_bonus">Misc. Bonus</string>
+    <string name="delete">Delete</string>
+    <string name="delete_button">Delete</string>
     <string name="dex">DEX</string>
     <string name="dodge">Dodge</string>
     <string name="dodge_bonus">Dodge Bonus</string>
     <string name="done_button">Done</string>
-    <string name="delete">Delete</string>
-    <string name="delete_button">Delete</string>
+    <string name="drawer_close">Close Drawer</string>
+    <string name="drawer_open">Open Drawer</string>
     <string name="erase_c">Erase C.</string>
     <string name="feat_description_hint">Feat Description</string>
     <string name="feat_name_hint">Feat Name</string>

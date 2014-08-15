@@ -8,6 +8,8 @@ import org.elteano.charactersheet.view.fragment.SelectInfoItemsFragment;
 import org.elteano.charactersheet.view.fragment.SpellFragment;
 import org.elteano.charactersheet.view.fragment.StatsAttackDefenseFragment;
 import org.elteano.charactersheet.view.support.HandsetPagerAdapter;
+import org.elteano.charactersheet.view.support.NavDrawerListListener;
+import org.elteano.charactersheet.view.support.NavDrawerToggle;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,6 +24,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -43,6 +46,7 @@ public class CharacterSheetActivity extends FragmentActivity {
 	private boolean initialized = false;
 	private FragmentPagerAdapter mAdapter;
 	private ViewPager mViewPager;
+	private NavDrawerToggle mToggle;
 
 	private void addHandsetTabs() {
 		ActionBar actionBar = getActionBar();
@@ -82,6 +86,7 @@ public class CharacterSheetActivity extends FragmentActivity {
 
 	private void addTabletTabs() {
 		ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.addTab(actionBar
 				.newTab()
 				.setText(R.string.title_select_info_items)
@@ -120,11 +125,16 @@ public class CharacterSheetActivity extends FragmentActivity {
 		return character != null;
 	}
 
+	public void setToFragment(Fragment f) {
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.replace(R.id.activity_charactersheet_filler, f);
+		ft.commit();
+	}
+
 	private void initialize() {
 		Log.i("CharacterSheet", "Entering initialize()");
 		// setup action bar for tabs
 		ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		// Add all the tabbies
 		int screenSizeFlag = getResources().getConfiguration().screenLayout
@@ -135,7 +145,19 @@ public class CharacterSheetActivity extends FragmentActivity {
 			setContentView(R.layout.activity_charactersheet_drawer);
 			ListView drawers = (ListView) findViewById(R.id.activity_charactersheet_nav_drawer);
 			drawers.setAdapter(new ArrayAdapter<String>(this,
-					android.R.layout.simple_list_item_1));
+					android.R.layout.simple_list_item_1, getResources()
+							.getStringArray(R.array.nav_dests)));
+			NavDrawerListListener listener = new NavDrawerListListener(
+					this,
+					(DrawerLayout) findViewById(R.id.activity_charactersheet_drawer_layout));
+			listener.setToBeginning();
+			drawers.setOnItemClickListener(listener);
+			mToggle = new NavDrawerToggle(
+					this,
+					(DrawerLayout) findViewById(R.id.activity_charactersheet_drawer_layout));
+			mToggle.setDrawerIndicatorEnabled(true);
+			((DrawerLayout) findViewById(R.id.activity_charactersheet_drawer_layout))
+					.setDrawerListener(mToggle);
 		} else {
 			addTabletTabs();
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
@@ -191,6 +213,9 @@ public class CharacterSheetActivity extends FragmentActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		// Let the drawer toggle handle it, but only for handsets
+		if (mToggle != null && mToggle.onOptionsItemSelected(item))
+			return true;
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			// This is called when the Home (Up) button is pressed
@@ -225,6 +250,14 @@ public class CharacterSheetActivity extends FragmentActivity {
 		super.onResume();
 		if (hasCharacter())
 			getActionBar().setTitle(getCharacter().getName());
+	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		// Guard statement so that tablets don't crash
+		if (mToggle != null)
+			mToggle.syncState();
 	}
 
 	@Override

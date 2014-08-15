@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="nav_dests">
+        <item>Info</item>
+        <item>Items</item>
+        <item>Counters</item>
+        <item>Stats</item>
+        <item>Attacks</item>
+        <item>Defense</item>
+        <item>Feats</item>
+        <item>Other</item>
+        <item>Skills</item>
+        <item>Spells</item>
+    </string-array>
+
+</resources>
