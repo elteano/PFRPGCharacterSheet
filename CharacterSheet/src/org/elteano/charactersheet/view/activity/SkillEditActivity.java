@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -105,6 +106,11 @@ public class SkillEditActivity extends Activity implements
 				updateTotalModButton();
 			}
 		};
+		ArrayAdapter<String> autocompleteAdapter = new ArrayAdapter<String>(
+				this, android.R.layout.simple_dropdown_item_1line,
+				getResources().getStringArray(R.array.skills_array));
+		((AutoCompleteTextView) findViewById(R.id.activity_skill_edit_skill_name))
+				.setAdapter(autocompleteAdapter);
 	}
 
 	@Override

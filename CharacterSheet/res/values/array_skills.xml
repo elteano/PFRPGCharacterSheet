@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="skills_array">
+        <item>Acrobatics</item>
+        <item>Appraise</item>
+        <item>Bluff</item>
+        <item>Climb</item>
+        <item>Craft</item>
+        <item>Diplomacy</item>
+        <item>Disable Device</item>
+        <item>Disguise</item>
+        <item>Escape Artist</item>
+        <item>Fly</item>
+        <item>Handle Animal</item>
+        <item>Heal</item>
+        <item>Intimidate</item>
+        <item>Knowledge (subj)</item>
+        <item>Linguistics</item>
+        <item>Perception</item>
+        <item>Perform (inst)</item>
+        <item>Profession (job)</item>
+        <item>Ride</item>
+        <item>Sense Motive</item>
+        <item>Sleight of Hand</item>
+        <item>Spellcraft</item>
+        <item>Stealth</item>
+        <item>Survival</item>
+        <item>Swim</item>
+        <item>Use Magic Device</item>
+    </string-array>
+
+</resources>

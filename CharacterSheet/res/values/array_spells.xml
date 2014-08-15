@@ -1,0 +1,1374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="spells_array">
+        <item>Ablative Barrier</item>
+        <item>Aboleth\'s Lung</item>
+        <item>Absorbing Inhalation</item>
+        <item>Absorbing Touch</item>
+        <item>Absorb Toxicity</item>
+        <item>Abundant Ammunition</item>
+        <item>Accelerate Poison</item>
+        <item>Acid Arrow</item>
+        <item>Acid Fog</item>
+        <item>Acidic Spray</item>
+        <item>Acid Pit</item>
+        <item>Acid Splash</item>
+        <item>Acute Senses</item>
+        <item>Adjuring Step</item>
+        <item>Adoration</item>
+        <item>Age Resistance</item>
+        <item>Age Resistance, Greater</item>
+        <item>Age Resistance, Lesser</item>
+        <item>Agonize</item>
+        <item>Agonizing Rebuke</item>
+        <item>Aid</item>
+        <item>Air Bubble</item>
+        <item>Air Walk</item>
+        <item>Air Walk, Communal</item>
+        <item>Alarm</item>
+        <item>Alchemical Allocation</item>
+        <item>Alchemical Tinkering</item>
+        <item>Align Weapon</item>
+        <item>Allegro</item>
+        <item>Allfood</item>
+        <item>Alter Self</item>
+        <item>Alter Winds</item>
+        <item>Amplify Elixir</item>
+        <item>Analyze Dweomer</item>
+        <item>Ancestral Regression</item>
+        <item>Animal Aspect</item>
+        <item>Animal Aspect, Greater</item>
+        <item>Animal Growth</item>
+        <item>Animal Messenger</item>
+        <item>Animal Shapes</item>
+        <item>Animal Trance</item>
+        <item>Animate Dead</item>
+        <item>Animate Dead, Lesser</item>
+        <item>Animate Objects</item>
+        <item>Animate Plants</item>
+        <item>Animate Rope</item>
+        <item>Ant Haul</item>
+        <item>Ant Haul, Communal</item>
+        <item>Anthropomorphic Animal</item>
+        <item>Anticipate Peril</item>
+        <item>Antilife Shell</item>
+        <item>Antimagic Field</item>
+        <item>Antipathy</item>
+        <item>Antiplant Shell</item>
+        <item>Aqueous Orb</item>
+        <item>Arboreal Hammer</item>
+        <item>Arcana Theft</item>
+        <item>Arcane Cannon</item>
+        <item>Arcane Concordance</item>
+        <item>Arcane Eye</item>
+        <item>Arcane Lock</item>
+        <item>Arcane Mark</item>
+        <item>Arcane Sight</item>
+        <item>Arcane Sight, Greater</item>
+        <item>Archon\'s Aura</item>
+        <item>Arrow Eruption</item>
+        <item>Arrow Of Law</item>
+        <item>Ascension</item>
+        <item>Ash Storm</item>
+        <item>Aspect Of The Bear</item>
+        <item>Aspect Of The Falcon</item>
+        <item>Aspect Of The Stag</item>
+        <item>Aspect Of The Wolf</item>
+        <item>Astral Projection</item>
+        <item>Astral Projection, Lesser</item>
+        <item>Atavism</item>
+        <item>Atavism, Mass</item>
+        <item>Atonement</item>
+        <item>Augury</item>
+        <item>Aura Of Doom</item>
+        <item>Aura Of Greater Courage</item>
+        <item>Awaken</item>
+        <item>Badger\'s Ferocity</item>
+        <item>Baleful Polymorph</item>
+        <item>Ball Lightning</item>
+        <item>Bane</item>
+        <item>Banishment</item>
+        <item>Banish Seeming</item>
+        <item>Bard\'s Escape</item>
+        <item>Barkskin</item>
+        <item>Battlemind Link</item>
+        <item>Battle Trance</item>
+        <item>Bear\'s Endurance</item>
+        <item>Bear\'s Endurance, Mass</item>
+        <item>Beast Shape I</item>
+        <item>Beast Shape II</item>
+        <item>Beast Shape III</item>
+        <item>Beast Shape IV</item>
+        <item>Beguiling Gift</item>
+        <item>Bestow Curse</item>
+        <item>Bestow Grace</item>
+        <item>Bestow Grace Of The Champion</item>
+        <item>Bestow Insight</item>
+        <item>Bestow Weapon Proficiency</item>
+        <item>Binding</item>
+        <item>Binding Earth</item>
+        <item>Binding Earth, Mass</item>
+        <item>Black Mark</item>
+        <item>Black Tentacles</item>
+        <item>Blade Barrier</item>
+        <item>Blade Of Bright Victory</item>
+        <item>Blade Of Dark Triumph</item>
+        <item>Blasphemy</item>
+        <item>Blaze Of Glory</item>
+        <item>Bleed</item>
+        <item>Bleed Glory</item>
+        <item>Blend</item>
+        <item>Bless</item>
+        <item>Blessing Of Courage And Life</item>
+        <item>Blessing Of Fervor</item>
+        <item>Blessing Of Luck And Resolve</item>
+        <item>Blessing Of Luck And Resolve, Mass</item>
+        <item>Blessing Of The Mole</item>
+        <item>Blessing Of The Salamander</item>
+        <item>Bless Water</item>
+        <item>Bless Weapon</item>
+        <item>Blight</item>
+        <item>Blinding Ray</item>
+        <item>Blindness/Deafness</item>
+        <item>Blink</item>
+        <item>Blistering Invective</item>
+        <item>Blood Biography</item>
+        <item>Blood Blaze</item>
+        <item>Blood Crow Strike</item>
+        <item>Bloodhound</item>
+        <item>Blood Mist</item>
+        <item>Blood Scent</item>
+        <item>Blood Transcription</item>
+        <item>Bloody Claws</item>
+        <item>Blur</item>
+        <item>Boiling Blood</item>
+        <item>Bomber\'s Eye</item>
+        <item>Borrow Fortune</item>
+        <item>Borrow Skill</item>
+        <item>Bow Spirit</item>
+        <item>Bowstaff</item>
+        <item>Brand</item>
+        <item>Brand, Greater</item>
+        <item>Break</item>
+        <item>Break Enchantment</item>
+        <item>Breath Of Life</item>
+        <item>Brilliant Inspiration</item>
+        <item>Bristle</item>
+        <item>Brow Gasher</item>
+        <item>Bullet Shield</item>
+        <item>Bull\'s Strength</item>
+        <item>Bull\'s Strength, Mass</item>
+        <item>Bungle</item>
+        <item>Burning Gaze</item>
+        <item>Burning Hands</item>
+        <item>Burrow</item>
+        <item>Burst Bonds</item>
+        <item>Burst Of Nettles</item>
+        <item>Burst Of Speed</item>
+        <item>Cackling Skull</item>
+        <item>Cacophonous Call</item>
+        <item>Cacophonous Call, Mass</item>
+        <item>Caging Bomb Admixture</item>
+        <item>Calcific Touch</item>
+        <item>Call Animal</item>
+        <item>Call Construct</item>
+        <item>Call Lightning</item>
+        <item>Call Lightning Storm</item>
+        <item>Calm Animals</item>
+        <item>Calm Emotions</item>
+        <item>Campfire Wall</item>
+        <item>Cape Of Wasps</item>
+        <item>Castigate</item>
+        <item>Castigate, Mass</item>
+        <item>Cast Out</item>
+        <item>Cat\'s Grace</item>
+        <item>Cat\'s Grace, Mass</item>
+        <item>Cause Fear</item>
+        <item>Caustic Eruption</item>
+        <item>Certain Grip</item>
+        <item>Chain Lightning</item>
+        <item>Chain Of Perdition</item>
+        <item>Chains Of Fire</item>
+        <item>Challenge Evil</item>
+        <item>Chameleon Stride</item>
+        <item>Changestaff</item>
+        <item>Chaos Hammer</item>
+        <item>Charm Animal</item>
+        <item>Charm Monster</item>
+        <item>Charm Monster, Mass</item>
+        <item>Charm Person</item>
+        <item>Chill Metal</item>
+        <item>Chill Touch</item>
+        <item>Chord Of Shards</item>
+        <item>Circle Of Clarity</item>
+        <item>Circle Of Death</item>
+        <item>Clairaudience/Clairvoyance</item>
+        <item>Clashing Rocks</item>
+        <item>Cleanse</item>
+        <item>Clenched Fist</item>
+        <item>Cloak Of Chaos</item>
+        <item>Cloak Of Dreams</item>
+        <item>Cloak Of Shade</item>
+        <item>Cloak Of Winds</item>
+        <item>Clone</item>
+        <item>Cloudkill</item>
+        <item>Cloud Shape</item>
+        <item>Cold Ice Strike</item>
+        <item>Color Spray</item>
+        <item>Command</item>
+        <item>Command, Greater</item>
+        <item>Command Plants</item>
+        <item>Command Undead</item>
+        <item>Commune</item>
+        <item>Commune With Birds</item>
+        <item>Commune With Nature</item>
+        <item>Companion Mind Link</item>
+        <item>Compassionate Ally</item>
+        <item>Compel Hostility</item>
+        <item>Comprehend Languages</item>
+        <item>Cone Of Cold</item>
+        <item>Confess</item>
+        <item>Confusion</item>
+        <item>Confusion, Lesser</item>
+        <item>Conjure Black Pudding</item>
+        <item>Consecrate</item>
+        <item>Contact Other Plane</item>
+        <item>Contagion</item>
+        <item>Contagion, Greater</item>
+        <item>Contagious Flame</item>
+        <item>Contingency</item>
+        <item>Continual Flame</item>
+        <item>Control Construct</item>
+        <item>Control Plants</item>
+        <item>Control Summoned Creature</item>
+        <item>Control Undead</item>
+        <item>Control Water</item>
+        <item>Control Weather</item>
+        <item>Control Winds</item>
+        <item>Coordinated Effort</item>
+        <item>Corrosive Consumption</item>
+        <item>Corrosive Touch</item>
+        <item>Corruption Resistance</item>
+        <item>Countless Eyes</item>
+        <item>Coward\'s Lament</item>
+        <item>Crafter\'s Curse</item>
+        <item>Crafter\'s Fortune</item>
+        <item>Create Demiplane</item>
+        <item>Create Demiplane, Greater</item>
+        <item>Create Demiplane, Lesser</item>
+        <item>Create Food And Water</item>
+        <item>Create Greater Undead</item>
+        <item>Create Pit</item>
+        <item>Create Treasure Map</item>
+        <item>Create Undead</item>
+        <item>Create Water</item>
+        <item>Creeping Doom</item>
+        <item>Crushing Despair</item>
+        <item>Crushing Hand</item>
+        <item>Cup Of Dust</item>
+        <item>Cure Critical Wounds</item>
+        <item>Cure Critical Wounds, Mass</item>
+        <item>Cure Light Wounds</item>
+        <item>Cure Light Wounds, Mass</item>
+        <item>Cure Moderate Wounds</item>
+        <item>Cure Moderate Wounds, Mass</item>
+        <item>Cure Serious Wounds</item>
+        <item>Cure Serious Wounds, Mass</item>
+        <item>Cursed Earth</item>
+        <item>Curse, Major</item>
+        <item>Curse Of Disgust</item>
+        <item>Curse Of Magic Negation</item>
+        <item>Curse Water</item>
+        <item>Cushioning Bands</item>
+        <item>Damnation Stride</item>
+        <item>Damp Powder</item>
+        <item>Dance Of A Hundred Cuts</item>
+        <item>Dance Of A Thousand Cuts</item>
+        <item>Dancing Lantern</item>
+        <item>Dancing Lights</item>
+        <item>Darkness</item>
+        <item>Darkvision</item>
+        <item>Darkvision, Communal</item>
+        <item>Darkvision, Greater</item>
+        <item>Daybreak Arrow</item>
+        <item>Daylight</item>
+        <item>Daze</item>
+        <item>Daze, Mass</item>
+        <item>Daze Monster</item>
+        <item>Deadeye\'s Lore</item>
+        <item>Deadly Finale</item>
+        <item>Deadly Juggernaut</item>
+        <item>Deafening Song Bolt</item>
+        <item>Death Candle</item>
+        <item>Death From Below</item>
+        <item>Death Knell</item>
+        <item>Deathless</item>
+        <item>Death Ward</item>
+        <item>Deathwatch</item>
+        <item>Debilitating Portent</item>
+        <item>Decompose Corpse</item>
+        <item>Deeper Darkness</item>
+        <item>Deep Slumber</item>
+        <item>Defensive Shock</item>
+        <item>Defile Armor</item>
+        <item>Deflection</item>
+        <item>Delay Disease</item>
+        <item>Delayed Blast Fireball</item>
+        <item>Delayed Consumption</item>
+        <item>Delay Pain</item>
+        <item>Delay Poison</item>
+        <item>Delay Poison, Communal</item>
+        <item>Delusional Pride</item>
+        <item>Demand</item>
+        <item>Denounce</item>
+        <item>Desecrate</item>
+        <item>Destabilize Powder</item>
+        <item>Destruction</item>
+        <item>Detect Aberration</item>
+        <item>Detect Animals Or Plants</item>
+        <item>Detect Chaos</item>
+        <item>Detect Evil</item>
+        <item>Detect Good</item>
+        <item>Detect Law</item>
+        <item>Detect Magic</item>
+        <item>Detect Poison</item>
+        <item>Detect Scrying</item>
+        <item>Detect Secret Doors</item>
+        <item>Detect Snares And Pits</item>
+        <item>Detect Thoughts</item>
+        <item>Detect Undead</item>
+        <item>Detonate</item>
+        <item>Devolution</item>
+        <item>Diagnose Disease</item>
+        <item>Dictum</item>
+        <item>Dimensional Anchor</item>
+        <item>Dimensional Lock</item>
+        <item>Dimension Door</item>
+        <item>Diminish Plants</item>
+        <item>Discern Lies</item>
+        <item>Discern Location</item>
+        <item>Discordant Blast</item>
+        <item>Discovery Torch</item>
+        <item>Disfiguring Touch</item>
+        <item>Disguise Other</item>
+        <item>Disguise Self</item>
+        <item>Disintegrate</item>
+        <item>Dismissal</item>
+        <item>Dispel Chaos</item>
+        <item>Dispel Evil</item>
+        <item>Dispel Good</item>
+        <item>Dispel Law</item>
+        <item>Dispel Magic</item>
+        <item>Dispel Magic, Greater</item>
+        <item>Displacement</item>
+        <item>Disrupting Weapon</item>
+        <item>Disrupt Undead</item>
+        <item>Distracting Cacophony</item>
+        <item>Distressing Tone</item>
+        <item>Divination</item>
+        <item>Divine Arrow</item>
+        <item>Divine Favor</item>
+        <item>Divine Power</item>
+        <item>Divine Pursuit</item>
+        <item>Divine Transfer</item>
+        <item>Divine Vessel</item>
+        <item>Dominate Animal</item>
+        <item>Dominate Monster</item>
+        <item>Dominate Person</item>
+        <item>Doom</item>
+        <item>Draconic Reservoir</item>
+        <item>Dragon\'s Breath</item>
+        <item>Dread Bolt</item>
+        <item>Dream</item>
+        <item>Dust Form</item>
+        <item>Dust Of Twilight</item>
+        <item>Eagle Aerie</item>
+        <item>Eagle Eye</item>
+        <item>Eagle\'s Splendor</item>
+        <item>Eagle\'s Splendor, Mass</item>
+        <item>Ear-Piercing Scream</item>
+        <item>Earth Glide</item>
+        <item>Earthquake</item>
+        <item>Echolocation</item>
+        <item>Effortless Armor</item>
+        <item>Eldritch Fever</item>
+        <item>Elemental Aura</item>
+        <item>Elemental Body I</item>
+        <item>Elemental Body II</item>
+        <item>Elemental Body III</item>
+        <item>Elemental Body IV</item>
+        <item>Elemental Speech</item>
+        <item>Elemental Swarm</item>
+        <item>Elemental Touch</item>
+        <item>Elude Time</item>
+        <item>Endure Elements</item>
+        <item>Endure Elements, Communal</item>
+        <item>Enemy Hammer</item>
+        <item>Enemy\'s Heart</item>
+        <item>Energy Drain</item>
+        <item>Energy Siege Shot</item>
+        <item>Energy Siege Shot, Greater</item>
+        <item>Enervation</item>
+        <item>Enlarge Person</item>
+        <item>Enlarge Person, Mass</item>
+        <item>Entangle</item>
+        <item>Enter Image</item>
+        <item>Enthrall</item>
+        <item>Entropic Shield</item>
+        <item>Envious Urge</item>
+        <item>Epidemic</item>
+        <item>Erase</item>
+        <item>Eruptive Pustules</item>
+        <item>Escaping Ward</item>
+        <item>Ethereal Jaunt</item>
+        <item>Etherealness</item>
+        <item>Euphoric Tranquility</item>
+        <item>Evolution Surge</item>
+        <item>Evolution Surge, Greater</item>
+        <item>Evolution Surge, Lesser</item>
+        <item>Excruciating Deformation</item>
+        <item>Expeditious Excavation</item>
+        <item>Expeditious Retreat</item>
+        <item>Expend</item>
+        <item>Explosive Runes</item>
+        <item>Exquisite Accompaniment</item>
+        <item>Eyebite</item>
+        <item>Fabricate</item>
+        <item>Fabricate Bullets</item>
+        <item>Faerie Fire</item>
+        <item>False Life</item>
+        <item>False Life, Greater</item>
+        <item>False Vision</item>
+        <item>Familiar Melding</item>
+        <item>Fear</item>
+        <item>Fearsome Duplicate</item>
+        <item>Feast Of Ashes</item>
+        <item>Feather Fall</item>
+        <item>Feather Step</item>
+        <item>Feather Step, Mass</item>
+        <item>Feeblemind</item>
+        <item>Fester</item>
+        <item>Fester, Mass</item>
+        <item>Fickle Winds</item>
+        <item>Fiery Body</item>
+        <item>Fiery Shuriken</item>
+        <item>Find Quarry</item>
+        <item>Find The Path</item>
+        <item>Find Traps</item>
+        <item>Finger Of Death</item>
+        <item>Fins To Feet</item>
+        <item>Fireball</item>
+        <item>Firebrand</item>
+        <item>Fire Breath</item>
+        <item>Firefall</item>
+        <item>Fire Of Entanglement</item>
+        <item>Fire Of Judgment</item>
+        <item>Fire Of Vengeance</item>
+        <item>Fire Seeds</item>
+        <item>Fire Shield</item>
+        <item>Fire Snake</item>
+        <item>Fire Storm</item>
+        <item>Firestream</item>
+        <item>Fire Trail</item>
+        <item>Fire Trap</item>
+        <item>Flame Arrow</item>
+        <item>Flame Blade</item>
+        <item>Flames Of The Faithful</item>
+        <item>Flame Strike</item>
+        <item>Flaming Sphere</item>
+        <item>Flare</item>
+        <item>Flare Burst</item>
+        <item>Flash Fire</item>
+        <item>Flesh To Stone</item>
+        <item>Fleshworm Infestation</item>
+        <item>Floating Disk</item>
+        <item>Fluid Form</item>
+        <item>Fly</item>
+        <item>Fly, Mass</item>
+        <item>Foe To Friend</item>
+        <item>Fog Cloud</item>
+        <item>Follow Aura</item>
+        <item>Fool\'s Forbiddance</item>
+        <item>Forbid Action</item>
+        <item>Forbid Action, Greater</item>
+        <item>Forbiddance</item>
+        <item>Forcecage</item>
+        <item>Forced Quiet</item>
+        <item>Forced Repentance</item>
+        <item>Forceful Hand</item>
+        <item>Force Hook Charge</item>
+        <item>Force Punch</item>
+        <item>Foresight</item>
+        <item>Forest Friend</item>
+        <item>Forgetful Slumber</item>
+        <item>Form Of The Dragon I</item>
+        <item>Form Of The Dragon II</item>
+        <item>Form Of The Dragon III</item>
+        <item>Fox\'s Cunning</item>
+        <item>Fox\'s Cunning, Mass</item>
+        <item>Freedom</item>
+        <item>Freedom Of Movement</item>
+        <item>Freezing Sphere</item>
+        <item>Frightful Aspect</item>
+        <item>Frigid Touch</item>
+        <item>Frostbite</item>
+        <item>Frost Fall</item>
+        <item>Frozen Note</item>
+        <item>Fumbletongue</item>
+        <item>Fungal Infestation</item>
+        <item>Fury Of The Sun</item>
+        <item>Gallant Inspiration</item>
+        <item>Gaseous Form</item>
+        <item>Gate</item>
+        <item>Geas, Lesser</item>
+        <item>Geas/Quest</item>
+        <item>Gentle Repose</item>
+        <item>Getaway</item>
+        <item>Geyser</item>
+        <item>Ghostbane Dirge</item>
+        <item>Ghostbane Dirge, Mass</item>
+        <item>Ghostly Disguise</item>
+        <item>Ghost Sound</item>
+        <item>Ghost Wolf</item>
+        <item>Ghoul Touch</item>
+        <item>Giant Form I</item>
+        <item>Giant Form II</item>
+        <item>Giant Vermin</item>
+        <item>Glibness</item>
+        <item>Glide</item>
+        <item>Glitterdust</item>
+        <item>Globe Of Invulnerability</item>
+        <item>Globe Of Invulnerability, Lesser</item>
+        <item>Gloomblind Bolts</item>
+        <item>Glyph Of Warding</item>
+        <item>Glyph Of Warding, Greater</item>
+        <item>Goodberry</item>
+        <item>Good Hope</item>
+        <item>Grace</item>
+        <item>Grasping Hand</item>
+        <item>Gravity Bow</item>
+        <item>Grease</item>
+        <item>Groundswell</item>
+        <item>Grove Of Respite</item>
+        <item>Guards And Wards</item>
+        <item>Guidance</item>
+        <item>Guiding Star</item>
+        <item>Gusting Sphere</item>
+        <item>Gust Of Wind</item>
+        <item>Half-Blood Extraction</item>
+        <item>Hallow</item>
+        <item>Hallucinatory Terrain</item>
+        <item>Halt Undead</item>
+        <item>Harm</item>
+        <item>Haste</item>
+        <item>Haunted Fey Aspect</item>
+        <item>Haunting Choir</item>
+        <item>Haunting Mists</item>
+        <item>Heal</item>
+        <item>Healing Thief</item>
+        <item>Healing Warmth</item>
+        <item>Heal, Mass</item>
+        <item>Heal Mount</item>
+        <item>Heat Metal</item>
+        <item>Hellmouth Lash</item>
+        <item>Helping Hand</item>
+        <item>Heroes\' Feast</item>
+        <item>Heroic Finale</item>
+        <item>Heroic Fortune</item>
+        <item>Heroic Fortune, Mass</item>
+        <item>Heroic Invocation</item>
+        <item>Heroism</item>
+        <item>Heroism, Greater</item>
+        <item>Hero\'s Defiance</item>
+        <item>Hex Ward</item>
+        <item>Hidden Speech</item>
+        <item>Hide Campsite</item>
+        <item>Hide From Animals</item>
+        <item>Hide From Undead</item>
+        <item>Hideous Laughter</item>
+        <item>Hold Animal</item>
+        <item>Hold Monster</item>
+        <item>Hold Monster, Mass</item>
+        <item>Hold Person</item>
+        <item>Hold Person, Mass</item>
+        <item>Hold Portal</item>
+        <item>Holy Aura</item>
+        <item>Holy Ice</item>
+        <item>Holy Shield</item>
+        <item>Holy Smite</item>
+        <item>Holy Sword</item>
+        <item>Holy Whisper</item>
+        <item>Holy Word</item>
+        <item>Honeyed Tongue</item>
+        <item>Horn Of Pursuit</item>
+        <item>Horrid Wilting</item>
+        <item>Hostile Juxtaposition</item>
+        <item>Hostile Juxtaposition, Greater</item>
+        <item>Hostile Levitation</item>
+        <item>Howling Agony</item>
+        <item>Hungry Pit</item>
+        <item>Hunter\'s Eye</item>
+        <item>Hunter\'s Howl</item>
+        <item>Hydraulic Push</item>
+        <item>Hydraulic Torrent</item>
+        <item>Hypnotic Pattern</item>
+        <item>Hypnotism</item>
+        <item>Ice Body</item>
+        <item>Ice Crystal Teleport</item>
+        <item>Ice Storm</item>
+        <item>Icicle Dagger</item>
+        <item>Icy Prison</item>
+        <item>Icy Prison, Mass</item>
+        <item>Identify</item>
+        <item>Ill Omen</item>
+        <item>Illusion Of Calm</item>
+        <item>Illusory Script</item>
+        <item>Illusory Wall</item>
+        <item>Imbue With Aura</item>
+        <item>Imbue With Elemental Might</item>
+        <item>Imbue With Spell Ability</item>
+        <item>Implosion</item>
+        <item>Imprisonment</item>
+        <item>Improve Trap</item>
+        <item>Incendiary Cloud</item>
+        <item>Inflict Critical Wounds</item>
+        <item>Inflict Critical Wounds, Mass</item>
+        <item>Inflict Light Wounds</item>
+        <item>Inflict Light Wounds, Mass</item>
+        <item>Inflict Moderate Wounds</item>
+        <item>Inflict Moderate Wounds, Mass</item>
+        <item>Inflict Serious Wounds</item>
+        <item>Inflict Serious Wounds, Mass</item>
+        <item>Innocence</item>
+        <item>Insanity</item>
+        <item>Insect Plague</item>
+        <item>Instant Armor</item>
+        <item>Instant Enemy</item>
+        <item>Instant Summons</item>
+        <item>Instrument Of Agony</item>
+        <item>Interplanetary Teleport</item>
+        <item>Interposing Hand</item>
+        <item>Interrogation</item>
+        <item>Invigorate</item>
+        <item>Invigorate, Mass</item>
+        <item>Invisibility</item>
+        <item>Invisibility, Greater</item>
+        <item>Invisibility, Mass</item>
+        <item>Invisibility Purge</item>
+        <item>Invisibility Sphere</item>
+        <item>Ironbeard</item>
+        <item>Iron Body</item>
+        <item>Ironwood</item>
+        <item>Irresistible Dance</item>
+        <item>Jester\'s Jaunt</item>
+        <item>Jitterbugs</item>
+        <item>Jolting Portent</item>
+        <item>Joyful Rapture</item>
+        <item>Judgment Light</item>
+        <item>Jump</item>
+        <item>Jury-Rig</item>
+        <item>Karmic Blessing</item>
+        <item>Keen Edge</item>
+        <item>Keen Senses</item>
+        <item>Ki Arrow</item>
+        <item>Ki Leech</item>
+        <item>Kinetic Reverberation</item>
+        <item>King\'s Castle</item>
+        <item>Ki Shout</item>
+        <item>Knight\'s Calling</item>
+        <item>Knock</item>
+        <item>Know Direction</item>
+        <item>Know The Enemy</item>
+        <item>Languid Bomb Admixture</item>
+        <item>Lead Blades</item>
+        <item>Leashed Shackles</item>
+        <item>Legend Lore</item>
+        <item>Lend Judgment</item>
+        <item>Lend Judgment, Greater</item>
+        <item>Lend Path</item>
+        <item>Levitate</item>
+        <item>Liberating Command</item>
+        <item>Life Bubble</item>
+        <item>Life Channel</item>
+        <item>Life Conduit</item>
+        <item>Life Conduit, Greater</item>
+        <item>Life Conduit, Improved</item>
+        <item>Light</item>
+        <item>Light Lance</item>
+        <item>Lightning Arc</item>
+        <item>Lightning Bolt</item>
+        <item>Lightning Lash Bomb Admixture</item>
+        <item>Lily Pad Stride</item>
+        <item>Limited Wish</item>
+        <item>Linebreaker</item>
+        <item>Litany Of Defense</item>
+        <item>Litany Of Eloquence</item>
+        <item>Litany Of Entanglement</item>
+        <item>Litany Of Escape</item>
+        <item>Litany Of Madness</item>
+        <item>Litany Of Righteousness</item>
+        <item>Litany Of Sight</item>
+        <item>Litany Of Sloth</item>
+        <item>Litany Of Thunder</item>
+        <item>Litany Of Vengeance</item>
+        <item>Litany Of Warding</item>
+        <item>Litany Of Weakness</item>
+        <item>Liveoak</item>
+        <item>Loathsome Veil</item>
+        <item>Locate Creature</item>
+        <item>Locate Object</item>
+        <item>Locate Weakness</item>
+        <item>Lock Gaze</item>
+        <item>Lockjaw</item>
+        <item>Longshot</item>
+        <item>Longstrider</item>
+        <item>Lullaby</item>
+        <item>Lunar Veil</item>
+        <item>Mad Hallucination</item>
+        <item>Mad Monkeys</item>
+        <item>Mage Armor</item>
+        <item>Mage Hand</item>
+        <item>Mage\'s Disjunction</item>
+        <item>Mage\'s Faithful Hound</item>
+        <item>Mage\'s Lucubration</item>
+        <item>Mage\'s Magnificent Mansion</item>
+        <item>Mage\'s Private Sanctum</item>
+        <item>Mage\'s Sword</item>
+        <item>Magic Aura</item>
+        <item>Magic Circle Against Chaos</item>
+        <item>Magic Circle Against Evil</item>
+        <item>Magic Circle Against Good</item>
+        <item>Magic Circle Against Law</item>
+        <item>Magic Fang</item>
+        <item>Magic Fang, Greater</item>
+        <item>Magic Jar</item>
+        <item>Magic Missile</item>
+        <item>Magic Mouth</item>
+        <item>Magic Siege Engine</item>
+        <item>Magic Siege Engine, Greater</item>
+        <item>Magic Stone</item>
+        <item>Magic Vestment</item>
+        <item>Magic Weapon</item>
+        <item>Magic Weapon, Greater</item>
+        <item>Major Creation</item>
+        <item>Major Image</item>
+        <item>Major Phantom Object</item>
+        <item>Make Whole</item>
+        <item>Malediction</item>
+        <item>Malfunction</item>
+        <item>Malicious Spite</item>
+        <item>Marid\'s Mastery</item>
+        <item>Marionette Possession</item>
+        <item>Mark Of Justice</item>
+        <item>Marks Of Forbiddance</item>
+        <item>Mask Dweomer</item>
+        <item>Mask Dweomer, Communal</item>
+        <item>Masterwork Transformation</item>
+        <item>Maze</item>
+        <item>Meld Into Stone</item>
+        <item>Memory Lapse</item>
+        <item>Mending</item>
+        <item>Message</item>
+        <item>Meteor Swarm</item>
+        <item>Miasmatic Form</item>
+        <item>Mighty Fist Of The Earth</item>
+        <item>Mind Blank</item>
+        <item>Mind Blank, Communal</item>
+        <item>Mind Fog</item>
+        <item>Minor Creation</item>
+        <item>Minor Dream</item>
+        <item>Minor Image</item>
+        <item>Minor Phantom Object</item>
+        <item>Miracle</item>
+        <item>Mirage Arcana</item>
+        <item>Mirror Image</item>
+        <item>Mirror Strike</item>
+        <item>Misdirection</item>
+        <item>Miserable Pity</item>
+        <item>Mislead</item>
+        <item>Mnemonic Enhancer</item>
+        <item>Modify Memory</item>
+        <item>Moment Of Greatness</item>
+        <item>Moment Of Prescience</item>
+        <item>Monstrous Physique I</item>
+        <item>Monstrous Physique II</item>
+        <item>Monstrous Physique III</item>
+        <item>Monstrous Physique IV</item>
+        <item>Moonstruck</item>
+        <item>Mount</item>
+        <item>Mount, Communal</item>
+        <item>Move Earth</item>
+        <item>Mudball</item>
+        <item>Murderous Command</item>
+        <item>Mutagenic Touch</item>
+        <item>Mythic Severance</item>
+        <item>Named Bullet</item>
+        <item>Named Bullet, Greater</item>
+        <item>Nap Stack</item>
+        <item>Natural Rhythm</item>
+        <item>Nature\'s Exile</item>
+        <item>Negate Aroma</item>
+        <item>Negative Reaction</item>
+        <item>Nereid\'s Grace</item>
+        <item>Neutralize Poison</item>
+        <item>Nightmare</item>
+        <item>Nine Lives</item>
+        <item>Nixie\'s Lure</item>
+        <item>Nondetection</item>
+        <item>Nondetection, Communal</item>
+        <item>Oath Of Peace</item>
+        <item>Obscure Object</item>
+        <item>Obscuring Mist</item>
+        <item>Obsidian Flow</item>
+        <item>Old Salt\'s Curse</item>
+        <item>Open/Close</item>
+        <item>Oppressive Boredom</item>
+        <item>Oracle\'s Burden</item>
+        <item>Oracle\'s Vessel</item>
+        <item>Orb Of The Void</item>
+        <item>Order\'s Wrath</item>
+        <item>Overland Flight</item>
+        <item>Overwhelming Grief</item>
+        <item>Overwhelming Presence</item>
+        <item>Owl\'s Wisdom</item>
+        <item>Owl\'s Wisdom, Mass</item>
+        <item>Pain Strike</item>
+        <item>Pain Strike, Mass</item>
+        <item>Paladin\'s Sacrifice</item>
+        <item>Paragon Surge</item>
+        <item>Passwall</item>
+        <item>Pass Without Trace</item>
+        <item>Path Of The Winds</item>
+        <item>Peacebond</item>
+        <item>Pellet Blast</item>
+        <item>Perceive Cues</item>
+        <item>Permanency</item>
+        <item>Permanent Image</item>
+        <item>Pernicious Poison</item>
+        <item>Persistent Image</item>
+        <item>Persuasive Goad</item>
+        <item>Phantasmal Killer</item>
+        <item>Phantasmal Revenge</item>
+        <item>Phantasmal Web</item>
+        <item>Phantom Chariot</item>
+        <item>Phantom Driver</item>
+        <item>Phantom Steed</item>
+        <item>Phantom Steed, Communal</item>
+        <item>Phantom Trap</item>
+        <item>Phase Door</item>
+        <item>Pied Piping</item>
+        <item>Piercing Shriek</item>
+        <item>Pilfering Hand</item>
+        <item>Pillar Of Life</item>
+        <item>Plague Carrier</item>
+        <item>Plague Storm</item>
+        <item>Planar Adaptation</item>
+        <item>Planar Adaptation, Mass</item>
+        <item>Planar Ally</item>
+        <item>Planar Ally, Greater</item>
+        <item>Planar Ally, Lesser</item>
+        <item>Planar Binding</item>
+        <item>Planar Binding, Greater</item>
+        <item>Planar Binding, Lesser</item>
+        <item>Plane Shift</item>
+        <item>Plant Growth</item>
+        <item>Plant Shape I</item>
+        <item>Plant Shape II</item>
+        <item>Plant Shape III</item>
+        <item>Play Instrument</item>
+        <item>Poison</item>
+        <item>Polar Midnight</item>
+        <item>Polar Ray</item>
+        <item>Polymorph</item>
+        <item>Polymorph Any Object</item>
+        <item>Polymorph, Greater</item>
+        <item>Polypurpose Panacea</item>
+        <item>Possess Object</item>
+        <item>Power Word Blind</item>
+        <item>Power Word Kill</item>
+        <item>Power Word Stun</item>
+        <item>Pox Pustules</item>
+        <item>Prayer</item>
+        <item>Prediction Of Failure</item>
+        <item>Prehensile Pilfer</item>
+        <item>Prestidigitation</item>
+        <item>Primal Scream</item>
+        <item>Prismatic Sphere</item>
+        <item>Prismatic Spray</item>
+        <item>Prismatic Wall</item>
+        <item>Produce Flame</item>
+        <item>Programmed Image</item>
+        <item>Project Image</item>
+        <item>Protection From Arrows</item>
+        <item>Protection From Arrows, Communal</item>
+        <item>Protection From Chaos</item>
+        <item>Protection From Chaos, Communal</item>
+        <item>Protection From Energy</item>
+        <item>Protection From Energy, Communal</item>
+        <item>Protection From Evil</item>
+        <item>Protection From Evil, Communal</item>
+        <item>Protection From Good</item>
+        <item>Protection From Good, Communal</item>
+        <item>Protection From Law</item>
+        <item>Protection From Law, Communal</item>
+        <item>Protection From Spells</item>
+        <item>Protective Penumbra</item>
+        <item>Protective Spirit</item>
+        <item>Prying Eyes</item>
+        <item>Prying Eyes, Greater</item>
+        <item>Pup Shape</item>
+        <item>Purging Finale</item>
+        <item>Purified Calling</item>
+        <item>Purify Food And Drink</item>
+        <item>Putrefy Food And Drink</item>
+        <item>Pyrotechnics</item>
+        <item>Qualm</item>
+        <item>Quench</item>
+        <item>Rage</item>
+        <item>Raging Rubble</item>
+        <item>Rainbow Pattern</item>
+        <item>Rain Of Frogs</item>
+        <item>Raise Animal Companion</item>
+        <item>Raise Dead</item>
+        <item>Rally Point</item>
+        <item>Rampart</item>
+        <item>Rapid Repair</item>
+        <item>Ray Of Enfeeblement</item>
+        <item>Ray Of Exhaustion</item>
+        <item>Ray Of Frost</item>
+        <item>Ray Of Sickening</item>
+        <item>Read Magic</item>
+        <item>Rebuke</item>
+        <item>Recharge Innate Magic</item>
+        <item>Reckless Infatuation</item>
+        <item>Recoil Fire</item>
+        <item>Reduce Animal</item>
+        <item>Reduce Person</item>
+        <item>Reduce Person, Mass</item>
+        <item>Refuge</item>
+        <item>Regenerate</item>
+        <item>Reincarnate</item>
+        <item>Reinforce Armaments</item>
+        <item>Reinforce Armaments, Communal</item>
+        <item>Rejuvenate Eidolon</item>
+        <item>Rejuvenate Eidolon, Greater</item>
+        <item>Rejuvenate Eidolon, Lesser</item>
+        <item>Reloading Hands</item>
+        <item>Remove Blindness/Deafness</item>
+        <item>Remove Curse</item>
+        <item>Remove Disease</item>
+        <item>Remove Fear</item>
+        <item>Remove Paralysis</item>
+        <item>Remove Sickness</item>
+        <item>Repel Metal Or Stone</item>
+        <item>Repel Vermin</item>
+        <item>Repel Wood</item>
+        <item>Reprobation</item>
+        <item>Repulsion</item>
+        <item>Residual Tracking</item>
+        <item>Resilient Reservoir</item>
+        <item>Resilient Sphere</item>
+        <item>Resinous Skin</item>
+        <item>Resistance</item>
+        <item>Resist Energy</item>
+        <item>Resist Energy, Communal</item>
+        <item>Resonating Word</item>
+        <item>Resounding Blow</item>
+        <item>Rest Eternal</item>
+        <item>Restful Sleep</item>
+        <item>Restoration</item>
+        <item>Restoration, Greater</item>
+        <item>Restoration, Lesser</item>
+        <item>Restore Corpse</item>
+        <item>Restore Eidolon</item>
+        <item>Restore Eidolon, Lesser</item>
+        <item>Restore Mythic Power</item>
+        <item>Resurgent Transformation</item>
+        <item>Resurrection</item>
+        <item>Retribution</item>
+        <item>Returning Weapon</item>
+        <item>Returning Weapon, Communal</item>
+        <item>Reverse Gravity</item>
+        <item>Reviving Finale</item>
+        <item>Ricochet Shot</item>
+        <item>Ride The Lightning</item>
+        <item>Ride The Waves</item>
+        <item>Righteous Might</item>
+        <item>Righteous Vigor</item>
+        <item>River Of Wind</item>
+        <item>Rope Trick</item>
+        <item>Rusting Grasp</item>
+        <item>Sacred Bond</item>
+        <item>Sacred Space</item>
+        <item>Sacrificial Oath</item>
+        <item>Saddle Surge</item>
+        <item>Sanctify Armor</item>
+        <item>Sanctify Corpse</item>
+        <item>Sanctuary</item>
+        <item>Sands Of Time</item>
+        <item>Savage Maw</item>
+        <item>Saving Finale</item>
+        <item>Scare</item>
+        <item>Scent Trail</item>
+        <item>Scintillating Pattern</item>
+        <item>Scorching Ash Form</item>
+        <item>Scorching Ray</item>
+        <item>Scouring Winds</item>
+        <item>Screech</item>
+        <item>Screen</item>
+        <item>Scrying</item>
+        <item>Scrying, Greater</item>
+        <item>Sculpt Corpse</item>
+        <item>Sculpt Simulacrum</item>
+        <item>Sculpt Sound</item>
+        <item>Seamantle</item>
+        <item>Searing Light</item>
+        <item>Secret Chest</item>
+        <item>Secret Page</item>
+        <item>Secure Shelter</item>
+        <item>See Alignment</item>
+        <item>See Invisibility</item>
+        <item>Seek Thoughts</item>
+        <item>Seeming</item>
+        <item>Sending</item>
+        <item>Sentry Skull</item>
+        <item>Sepia Snake Sigil</item>
+        <item>Sequester</item>
+        <item>Serenity</item>
+        <item>Severed Fate</item>
+        <item>Shades</item>
+        <item>Shadow Anchor</item>
+        <item>Shadowbard</item>
+        <item>Shadow Bomb Admixture</item>
+        <item>Shadow Conjuration</item>
+        <item>Shadow Conjuration, Greater</item>
+        <item>Shadow Evocation</item>
+        <item>Shadow Evocation, Greater</item>
+        <item>Shadow Projection</item>
+        <item>Shadow Step</item>
+        <item>Shadow Walk</item>
+        <item>Shadow Weapon</item>
+        <item>Shadowy Haven</item>
+        <item>Shambler</item>
+        <item>Shapechange</item>
+        <item>Shard Of Chaos</item>
+        <item>Shared Wrath</item>
+        <item>Share Glory</item>
+        <item>Share Language</item>
+        <item>Share Language, Communal</item>
+        <item>Share Memory</item>
+        <item>Share Senses</item>
+        <item>Shatter</item>
+        <item>Shield</item>
+        <item>Shield Of Faith</item>
+        <item>Shield Of Law</item>
+        <item>Shield Other</item>
+        <item>Shifting Sand</item>
+        <item>Shillelagh</item>
+        <item>Shocking Grasp</item>
+        <item>Shocking Image</item>
+        <item>Shock Shield</item>
+        <item>Shout</item>
+        <item>Shout, Greater</item>
+        <item>Shrink Item</item>
+        <item>Sickening Strikes</item>
+        <item>Siege Of Trees</item>
+        <item>Siege Of Trees, Greater</item>
+        <item>Sift</item>
+        <item>Silence</item>
+        <item>Silent Image</item>
+        <item>Silk To Steel</item>
+        <item>Simulacrum</item>
+        <item>Simulacrum, Lesser</item>
+        <item>Sirocco</item>
+        <item>Skinsend</item>
+        <item>Slay Living</item>
+        <item>Sleep</item>
+        <item>Sleepwalk</item>
+        <item>Sleet Storm</item>
+        <item>Slipstream</item>
+        <item>Slow</item>
+        <item>Smug Narcissism</item>
+        <item>Snake Staff</item>
+        <item>Snapdragon Fireworks</item>
+        <item>Snare</item>
+        <item>Soften Earth And Stone</item>
+        <item>Solid Fog</item>
+        <item>Solid Note</item>
+        <item>Song Of Discord</item>
+        <item>Sonic Thrust</item>
+        <item>Soothe Construct</item>
+        <item>Soul Bind</item>
+        <item>Sound Burst</item>
+        <item>Sow Thought</item>
+        <item>Spark</item>
+        <item>Spawn Ward</item>
+        <item>Speak With Animals</item>
+        <item>Speak With Dead</item>
+        <item>Speak With Plants</item>
+        <item>Spear Of Purity</item>
+        <item>Spectral Hand</item>
+        <item>Spell Immunity</item>
+        <item>Spell Immunity, Communal</item>
+        <item>Spell Immunity, Greater</item>
+        <item>Spell Immunity, Greater Communal</item>
+        <item>Spell Resistance</item>
+        <item>Spellstaff</item>
+        <item>Spell Turning</item>
+        <item>Spider Climb</item>
+        <item>Spider Climb, Communal</item>
+        <item>Spiked Pit</item>
+        <item>Spike Growth</item>
+        <item>Spike Stones</item>
+        <item>Spiritual Ally</item>
+        <item>Spiritual Weapon</item>
+        <item>Spite</item>
+        <item>Spit Venom</item>
+        <item>Spontaneous Immolation</item>
+        <item>Squeeze</item>
+        <item>Stabilize</item>
+        <item>Stabilize Powder</item>
+        <item>Statue</item>
+        <item>Status</item>
+        <item>Stay The Hand</item>
+        <item>Steal Breath</item>
+        <item>Steal Power</item>
+        <item>Steal Voice</item>
+        <item>Stinking Cloud</item>
+        <item>Stone Call</item>
+        <item>Stone Fist</item>
+        <item>Stone Shape</item>
+        <item>Stone Shield</item>
+        <item>Stoneskin</item>
+        <item>Stoneskin, Communal</item>
+        <item>Stone Tell</item>
+        <item>Stone To Flesh</item>
+        <item>Stormbolts</item>
+        <item>Storm Of Vengeance</item>
+        <item>Strangling Hair</item>
+        <item>Strong Jaw</item>
+        <item>Strong Wings</item>
+        <item>Stumble Gap</item>
+        <item>Stunning Finale</item>
+        <item>Suffocation</item>
+        <item>Suffocation, Mass</item>
+        <item>Suggestion</item>
+        <item>Suggestion, Mass</item>
+        <item>Summon Eidolon</item>
+        <item>Summon Elder Worm</item>
+        <item>Summoner Conduit</item>
+        <item>Summon Froghemoth</item>
+        <item>Summon Instrument</item>
+        <item>Summon Minor Ally</item>
+        <item>Summon Minor Monster</item>
+        <item>Summon Monster I</item>
+        <item>Summon Monster II</item>
+        <item>Summon Monster III</item>
+        <item>Summon Monster IV</item>
+        <item>Summon Monster IX</item>
+        <item>Summon Monster V</item>
+        <item>Summon Monster VI</item>
+        <item>Summon Monster VII</item>
+        <item>Summon Monster VIII</item>
+        <item>Summon Nature\'s Ally I</item>
+        <item>Summon Nature\'s Ally II</item>
+        <item>Summon Nature\'s Ally III</item>
+        <item>Summon Nature\'s Ally IV</item>
+        <item>Summon Nature\'s Ally IX</item>
+        <item>Summon Nature\'s Ally V</item>
+        <item>Summon Nature\'s Ally VI</item>
+        <item>Summon Nature\'s Ally VII</item>
+        <item>Summon Nature\'s Ally VIII</item>
+        <item>Summon Swarm</item>
+        <item>Sunbeam</item>
+        <item>Sunburst</item>
+        <item>Sun Metal</item>
+        <item>Surmount Affliction</item>
+        <item>Swarm Skin</item>
+        <item>Symbol Of Death</item>
+        <item>Symbol Of Fear</item>
+        <item>Symbol Of Healing</item>
+        <item>Symbol Of Insanity</item>
+        <item>Symbol Of Mirroring</item>
+        <item>Symbol Of Pain</item>
+        <item>Symbol Of Persuasion</item>
+        <item>Symbol Of Revelation</item>
+        <item>Symbol Of Scrying</item>
+        <item>Symbol Of Sealing</item>
+        <item>Symbol Of Sleep</item>
+        <item>Symbol Of Slowing</item>
+        <item>Symbol Of Strife</item>
+        <item>Symbol Of Striking</item>
+        <item>Symbol Of Stunning</item>
+        <item>Symbol Of Vulnerability</item>
+        <item>Symbol Of Weakness</item>
+        <item>Sympathetic Vibration</item>
+        <item>Sympathy</item>
+        <item>Tactical Acumen</item>
+        <item>Tar Ball</item>
+        <item>Targeted Bomb Admixture</item>
+        <item>Tar Pool</item>
+        <item>Telekinesis</item>
+        <item>Telekinetic Assembly</item>
+        <item>Telekinetic Charge</item>
+        <item>Telekinetic Sphere</item>
+        <item>Telepathic Bond</item>
+        <item>Teleport</item>
+        <item>Teleportation Circle</item>
+        <item>Teleport, Greater</item>
+        <item>Teleport Object</item>
+        <item>Temporal Stasis</item>
+        <item>Temporary Resurrection</item>
+        <item>Terraform</item>
+        <item>Terrain Bond</item>
+        <item>Terrible Remorse</item>
+        <item>Theft Ward</item>
+        <item>Thorn Body</item>
+        <item>Threefold Aspect</item>
+        <item>Thunder Fire</item>
+        <item>Thundering Drums</item>
+        <item>Timely Inspiration</item>
+        <item>Time Stop</item>
+        <item>Tiny Hut</item>
+        <item>Tireless Pursuers</item>
+        <item>Tireless Pursuit</item>
+        <item>Toilsome Chant</item>
+        <item>Tongues</item>
+        <item>Tongues, Communal</item>
+        <item>Touch Injection</item>
+        <item>Touch Of Combustion</item>
+        <item>Touch Of Fatigue</item>
+        <item>Touch Of Gracelessness</item>
+        <item>Touch Of Idiocy</item>
+        <item>Touch Of Slime</item>
+        <item>Touch Of The Sea</item>
+        <item>Toxic Gift</item>
+        <item>Transformation</item>
+        <item>Transmogrify</item>
+        <item>Transmute Blood To Acid</item>
+        <item>Transmute Metal To Wood</item>
+        <item>Transmute Mud To Rock</item>
+        <item>Transmute Potion To Poison</item>
+        <item>Transmute Rock To Mud</item>
+        <item>Transport Via Plants</item>
+        <item>Trap The Soul</item>
+        <item>Treasure Stitching</item>
+        <item>Tree Shape</item>
+        <item>Tree Stride</item>
+        <item>True Form</item>
+        <item>True Resurrection</item>
+        <item>True Seeing</item>
+        <item>Truespeak</item>
+        <item>True Strike</item>
+        <item>Tsunami</item>
+        <item>Twilight Knife</item>
+        <item>Twin Form</item>
+        <item>Twisted Space</item>
+        <item>Unadulterated Loathing</item>
+        <item>Unbreakable Construct</item>
+        <item>Undead Anatomy I</item>
+        <item>Undead Anatomy II</item>
+        <item>Undead Anatomy III</item>
+        <item>Undead Anatomy IV</item>
+        <item>Undeath To Death</item>
+        <item>Undetectable Alignment</item>
+        <item>Undine\'s Curse</item>
+        <item>Unerring Weapon</item>
+        <item>Unfetter</item>
+        <item>Unhallow</item>
+        <item>Unholy Aura</item>
+        <item>Unholy Blight</item>
+        <item>Unholy Ice</item>
+        <item>Unholy Sword</item>
+        <item>Universal Formula</item>
+        <item>Unnatural Lust</item>
+        <item>Unprepared Combatant</item>
+        <item>Unravel Destiny</item>
+        <item>Unseen Servant</item>
+        <item>Unshakable Chill</item>
+        <item>Unwilling Shield</item>
+        <item>Unwitting Ally</item>
+        <item>Urban Grace</item>
+        <item>Utter Contempt</item>
+        <item>Vampiric Touch</item>
+        <item>Vanish</item>
+        <item>Veil</item>
+        <item>Veil Of Heaven</item>
+        <item>Veil Of Positive Energy</item>
+        <item>Vengeful Outrage</item>
+        <item>Venomous Bolt</item>
+        <item>Ventriloquism</item>
+        <item>Vermin Shape I</item>
+        <item>Versatile Weapon</item>
+        <item>Vestment Of The Champion</item>
+        <item>Village Veil</item>
+        <item>Viper Bomb Admixture</item>
+        <item>Virtue</item>
+        <item>Virtuoso Performance</item>
+        <item>Vision</item>
+        <item>Vision Of Hell</item>
+        <item>Vitriolic Mist</item>
+        <item>Vocal Alteration</item>
+        <item>Volcanic Storm</item>
+        <item>Vomit Swarm</item>
+        <item>Vomit Twin</item>
+        <item>Vortex</item>
+        <item>Wail Of The Banshee</item>
+        <item>Wake Of Light</item>
+        <item>Walk Through Space</item>
+        <item>Wall Of Fire</item>
+        <item>Wall Of Force</item>
+        <item>Wall Of Ice</item>
+        <item>Wall Of Iron</item>
+        <item>Wall Of Lava</item>
+        <item>Wall Of Sound</item>
+        <item>Wall Of Stone</item>
+        <item>Wall Of Suppression</item>
+        <item>Wall Of Thorns</item>
+        <item>Wandering Star Motes</item>
+        <item>Warding Weapon</item>
+        <item>Ward Of The Season</item>
+        <item>Ward The Faithful</item>
+        <item>Warp Wood</item>
+        <item>Wartrain Mount</item>
+        <item>Water Breathing</item>
+        <item>Water Walk</item>
+        <item>Water Walk, Communal</item>
+        <item>Waves Of Ecstasy</item>
+        <item>Waves Of Exhaustion</item>
+        <item>Waves Of Fatigue</item>
+        <item>Weaken Powder</item>
+        <item>Weapon Of Awe</item>
+        <item>Web</item>
+        <item>Web Bolt</item>
+        <item>Web Cloud</item>
+        <item>Web Shelter</item>
+        <item>Weird</item>
+        <item>Whirlwind</item>
+        <item>Whispering Lore</item>
+        <item>Whispering Wind</item>
+        <item>Wilderness Soldiers</item>
+        <item>Wind Blades</item>
+        <item>Winds Of Vengeance</item>
+        <item>Wind Walk</item>
+        <item>Wind Wall</item>
+        <item>Windy Escape</item>
+        <item>Winter Feathers</item>
+        <item>Wish</item>
+        <item>Witness</item>
+        <item>Wooden Phalanx</item>
+        <item>Wood Shape</item>
+        <item>Word Of Chaos</item>
+        <item>Word Of Recall</item>
+        <item>Word Of Resolve</item>
+        <item>World Wave</item>
+        <item>Wrath</item>
+        <item>Wrathful Mantle</item>
+        <item>Wreath Of Blades</item>
+        <item>Youthful Appearance</item>
+        <item>Zone Of Silence</item>
+        <item>Zone Of Truth</item>
+    </string-array>
+
+</resources>

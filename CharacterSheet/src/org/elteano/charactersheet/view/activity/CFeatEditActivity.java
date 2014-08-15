@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -48,6 +50,8 @@ public class CFeatEditActivity extends Activity implements OnClickListener {
 		setOrientation();
 		featName = (EditText) findViewById(R.id.field_feat_name);
 		featDesc = (EditText) findViewById(R.id.field_feat_desc);
+		featName.setHint("Ability Name");
+		featDesc.setHint("Ability Description");
 		findViewById(R.id.feat_button_done).setOnClickListener(this);
 		if (getIntent().getExtras() != null) {
 			featName.setText(getIntent().getExtras().getString(INPUT_KEY_NAME,
@@ -57,6 +61,11 @@ public class CFeatEditActivity extends Activity implements OnClickListener {
 		}
 		if (featName.getText().toString().isEmpty())
 			featName.requestFocus();
+
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_dropdown_item_1line, getResources()
+						.getStringArray(R.array.misc_array));
+		((AutoCompleteTextView) featName).setAdapter(adapter);
 		setResult(RESULT_CANCELED);
 	}
 

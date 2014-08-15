@@ -8,12 +8,13 @@
 
     <requestFocus />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/activity_skill_edit_skill_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:completionThreshold="3"
         android:hint="@string/hint_skill_name"
         android:inputType="textCapWords|textAutoCorrect" />
 

@@ -24,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -192,6 +193,11 @@ public class SpellEditActivity extends Activity implements OnClickListener,
 				.setText("" + mSpell.saveBonus);
 		((EditText) findViewById(R.id.activity_spell_edit_save_bonus_field))
 				.addTextChangedListener(saveWatcher);
+		ArrayAdapter<String> autocompleteAdapter = new ArrayAdapter<String>(
+				this, android.R.layout.simple_dropdown_item_1line,
+				getResources().getStringArray(R.array.spells_array));
+		((AutoCompleteTextView) findViewById(R.id.activity_spell_edit_name_field))
+				.setAdapter(autocompleteAdapter);
 		updateSave();
 		super.onStart();
 	}
