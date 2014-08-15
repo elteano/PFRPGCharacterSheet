@@ -7,6 +7,8 @@ import org.elteano.charactersheet.view.activity.CharacterReceiveActivity;
 import org.elteano.charactersheet.view.activity.CharacterSelectActivity;
 import org.elteano.charactersheet.view.activity.CharacterSendActivity;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,6 +18,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -174,12 +177,27 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 			promptDeleteCharacter(source.getText().toString());
 			deleting = false;
 		} else if (selectingSend) {
-			PlayerCharacter c = PlayerCharacter.restoreByPlayerList(
-					getActivity(), source.getText().toString());
-			Intent intent = new Intent(getActivity(),
-					BluetoothTransferActivity.class);
-			intent.putExtra(BluetoothTransferActivity.INPUT, (Parcelable) c);
-			startActivityForResult(intent, BluetoothTransferActivity.MODE_SEND);
+			try {
+				PlayerCharacter c = PlayerCharacter
+						.createFromJSON(new JSONObject(
+								getActivity()
+										.getSharedPreferences(
+												CharacterSelectFragment.CHARACTER_LIST_PREFERENCE,
+												Activity.MODE_PRIVATE)
+										.getString(source.getText().toString(),
+												"ERROR")));
+				Intent intent = new Intent(getActivity(),
+						BluetoothTransferActivity.class);
+				intent.putExtra(BluetoothTransferActivity.INPUT, (Parcelable) c);
+				startActivityForResult(intent,
+						BluetoothTransferActivity.MODE_SEND);
+			} catch (JSONException ex) {
+				Toast.makeText(getActivity(),
+						"Error loading character to send.", Toast.LENGTH_SHORT)
+						.show();
+				Log.e("CharacterSheet", "Error loading character to send.");
+				ex.printStackTrace();
+			}
 			selectingSend = false;
 		} else {
 			((CharacterSelectActivity) getActivity()).setResultName(source

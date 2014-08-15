@@ -157,8 +157,6 @@ public class CharacterSheetActivity extends FragmentActivity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		if (getIntent().getStringExtra("result") != null) {
 			Log.i("CharacterSheet", "Character name found.");
-			setCharacter(PlayerCharacter.restoreByPlayerList(this, getIntent()
-					.getStringExtra("result")));
 			try {
 				JSONObject cjson = new JSONObject(getSharedPreferences(
 						CharacterSelectFragment.CHARACTER_LIST_PREFERENCE,
