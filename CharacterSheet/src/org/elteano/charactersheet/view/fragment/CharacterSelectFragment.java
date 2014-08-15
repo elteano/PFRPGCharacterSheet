@@ -306,13 +306,9 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
+	public void onResume() {
+		updateDisplay();
+		super.onResume();
 	}
 
 	private void setToFirstCharacter() {

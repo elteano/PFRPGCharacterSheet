@@ -175,6 +175,8 @@ public class NameFragment extends CharacterUpdaterFragment implements
 			editor.commit();
 		}
 		pushFieldsToCharacter();
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 		super.onPause();
 	}
 
@@ -184,14 +186,6 @@ public class NameFragment extends CharacterUpdaterFragment implements
 		hookupListeners();
 		super.onResume();
 	}
-
-	@Override
-	public void onStop() {
-		pushFieldsToCharacter();
-		((CharacterSheetActivity) getActivity()).getCharacter()
-				.saveSelfByPlayerList(getActivity());
-		super.onStop();
-	};
 
 	private void pushFieldsToCharacter() {
 		((CharacterSheetActivity) getActivity()).getCharacter().setLanguages(
