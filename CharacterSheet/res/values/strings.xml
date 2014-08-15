@@ -33,12 +33,14 @@
     <string name="base_stats">Base Stats</string>
     <string name="cha">CHA</string>
     <string name="character_bio">Character Bio</string>
+    <string name="character_bio_hint">Deep, complicated backstory.</string>
     <string name="character_name_field">Character Name</string>
     <string name="character_name_text">Name</string>
     <string name="character_select_add">Add Character</string>
     <string name="character_select_remove">Erase Character</string>
     <string name="character_size">Character Size</string>
     <string name="character_xp">Character XP</string>
+    <string name="class_field_hint">Class # / Class #</string>
     <string name="class_modifiers">Class Modifiers</string>
     <string name="cmb">CMB</string>
     <string name="cmd">CMD</string>
@@ -90,6 +92,7 @@
     <string name="item_weight">Item Weight</string>
     <string name="known">Known</string>
     <string name="languages">Languages</string>
+    <string name="languages_hint">Common, Grippli, &#8230;</string>
     <string name="listening_for_chars">Now listening for characters.</string>
     <string name="listening_for_chars_already">Already listening for characters.</string>
     <string name="new_c">New C.</string>

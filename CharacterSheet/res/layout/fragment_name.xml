@@ -43,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/fragment_name_class_level_text"
+            android:hint="@string/class_field_hint"
             android:inputType="textCapWords" />
 
         <TextView
@@ -113,6 +114,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@id/fragment_name_languages_text"
+            android:hint="@string/languages_hint"
             android:inputType="textMultiLine|textCapWords" />
 
         <TextView
@@ -128,6 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/fragment_name_character_bio_text"
+            android:hint="@string/character_bio_hint"
             android:inputType="textCapSentences|textMultiLine" />
     </RelativeLayout>
 
