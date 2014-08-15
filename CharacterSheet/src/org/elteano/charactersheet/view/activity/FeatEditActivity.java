@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -58,6 +60,11 @@ public class FeatEditActivity extends Activity implements OnClickListener {
 		}
 		if (featName.getText().toString().isEmpty())
 			featName.requestFocus();
+
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_dropdown_item_1line, getResources()
+						.getStringArray(R.array.feat_array));
+		((AutoCompleteTextView) featName).setAdapter(adapter);
 		setResult(RESULT_CANCELED);
 	}
 

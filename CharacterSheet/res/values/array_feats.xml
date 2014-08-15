@@ -1,0 +1,922 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="feat_array">
+        <item>Ability Focus</item>
+        <item>Abundant Revelations</item>
+        <item>Accursed</item>
+        <item>Accursed Critical</item>
+        <item>Accursed Hex</item>
+        <item>Accursed Hex, Mythic</item>
+        <item>Acrobatic</item>
+        <item>Acrobatic, Mythic</item>
+        <item>Acrobatic Steps</item>
+        <item>Adder Strike</item>
+        <item>Additional Traits</item>
+        <item>Adept Champion</item>
+        <item>Advanced Ranger Trap</item>
+        <item>Agile Maneuvers</item>
+        <item>Alertness</item>
+        <item>Alertness, Mythic</item>
+        <item>Alignment Channel</item>
+        <item>Alignment Channel, Mythic</item>
+        <item>Allied Spellcaster</item>
+        <item>Amateur Gunslinger</item>
+        <item>Animal Affinity</item>
+        <item>Animal Affinity, Mythic</item>
+        <item>Antagonize</item>
+        <item>Arcane Armor Mastery</item>
+        <item>Arcane Armor Training</item>
+        <item>Arcane Armor Training, Mythic</item>
+        <item>Arcane Blast</item>
+        <item>Arcane Blast, Mythic</item>
+        <item>Arcane Shield</item>
+        <item>Arcane Shield, Mythic</item>
+        <item>Arcane Strike</item>
+        <item>Arcane Strike, Mythic</item>
+        <item>Arcane Talent</item>
+        <item>Arc Slinger</item>
+        <item>Arisen</item>
+        <item>Armor Proficiency, Heavy</item>
+        <item>Armor Proficiency, Light</item>
+        <item>Armor Proficiency, Medium</item>
+        <item>Ascendant Spell, Mythic</item>
+        <item>Aspect of the Beast</item>
+        <item>Aspect of the Beast, Mythic</item>
+        <item>Athletic</item>
+        <item>Athletic, Mythic</item>
+        <item>Augment Summoning</item>
+        <item>Augment Summoning, Mythic</item>
+        <item>Awesome Blow</item>
+        <item>Back to Back</item>
+        <item>Bashing Finish</item>
+        <item>Battlefield Healer</item>
+        <item>Betrayer</item>
+        <item>Binding Throw</item>
+        <item>Bleeding Critical</item>
+        <item>Bleeding Critical, Mythic</item>
+        <item>Blighted Critical</item>
+        <item>Blighted Critical Mastery</item>
+        <item>Blind-Fight</item>
+        <item>Blind-Fight, Mythic</item>
+        <item>Blinding Critical</item>
+        <item>Blood of Heroes</item>
+        <item>Bloody Assault</item>
+        <item>Bludgeoner</item>
+        <item>Boar Ferocity</item>
+        <item>Boar Shred</item>
+        <item>Boar Style</item>
+        <item>Bodyguard</item>
+        <item>Body Shield</item>
+        <item>Bolstered Resilience</item>
+        <item>Bonebreaker</item>
+        <item>Bouncing Spell</item>
+        <item>Branded for Retribution</item>
+        <item>Breadth of Experience</item>
+        <item>Break Guard</item>
+        <item>Brew Potion</item>
+        <item>Broken Wing Gambit</item>
+        <item>Bull Rush Strike</item>
+        <item>Burning Spell</item>
+        <item>Cartwheel Dodge</item>
+        <item>Catch Off-Guard</item>
+        <item>Catch Off-Guard, Mythic</item>
+        <item>Cavalry Formation</item>
+        <item>Champion</item>
+        <item>Channeled Revival</item>
+        <item>Channeled Shield Wall</item>
+        <item>Channeling Scourge</item>
+        <item>Channel Smite</item>
+        <item>Channel Smite, Mythic</item>
+        <item>Charge Through</item>
+        <item>Charge Through, Mythic</item>
+        <item>Charging Hurler</item>
+        <item>Childlike</item>
+        <item>Chokehold</item>
+        <item>Cleave</item>
+        <item>Cleave, Mythic</item>
+        <item>Cleaving Finish</item>
+        <item>Close-Quarters Thrower</item>
+        <item>Cloud Step</item>
+        <item>Clustered Shots</item>
+        <item>Cockatrice Strike</item>
+        <item>Combat Casting</item>
+        <item>Combat Expertise</item>
+        <item>Combat Expertise, Mythic</item>
+        <item>Combat Medic</item>
+        <item>Combat Patrol</item>
+        <item>Combat Reflexes</item>
+        <item>Combat Reflexes, Mythic</item>
+        <item>Combat Style Master</item>
+        <item>Command Undead</item>
+        <item>Command Undead, Mythic</item>
+        <item>Concussive Spell</item>
+        <item>Contingent Channeling</item>
+        <item>Cooperative Crafting</item>
+        <item>Coordinated Charge</item>
+        <item>Coordinated Defense</item>
+        <item>Coordinated Maneuvers</item>
+        <item>Cosmopolitan</item>
+        <item>Covering Defense</item>
+        <item>Craft Construct</item>
+        <item>Craft Magic Arms and Armor</item>
+        <item>Craft Rod</item>
+        <item>Craft Staff</item>
+        <item>Craft Wand</item>
+        <item>Craft Wondrous Item</item>
+        <item>Crane Riposte</item>
+        <item>Crane Style</item>
+        <item>Crane Wing</item>
+        <item>Create Reliquary Arms and Shields</item>
+        <item>Create Sanguine Elixir</item>
+        <item>Crippling Critical</item>
+        <item>Critical Focus</item>
+        <item>Critical Focus, Mythic</item>
+        <item>Critical Mastery</item>
+        <item>Critical Mastery, Mythic</item>
+        <item>Crossbow Mastery</item>
+        <item>Crusader\'s Fist</item>
+        <item>Crusader\'s Flurry</item>
+        <item>Crushing Blow</item>
+        <item>Damned</item>
+        <item>Dastardly Finish</item>
+        <item>Dastardly Finish, Mythic</item>
+        <item>Dazing Assault</item>
+        <item>Dazing Spell</item>
+        <item>Dazzling Display</item>
+        <item>Dazzling Display, Mythic</item>
+        <item>Deadly Aim</item>
+        <item>Deadly Aim, Mythic</item>
+        <item>Deadly Finish</item>
+        <item>Deadly Stroke</item>
+        <item>Deadly Stroke, Mythic</item>
+        <item>Deafening Critical</item>
+        <item>Death from Above</item>
+        <item>Death from Above, Mythic</item>
+        <item>Deathless Initiate</item>
+        <item>Deathless Master</item>
+        <item>Deathless Zealot</item>
+        <item>Death or Glory</item>
+        <item>Deceitful</item>
+        <item>Deceitful, Mythic</item>
+        <item>Deceptive Exchange</item>
+        <item>Deep Drinker</item>
+        <item>Deepsight</item>
+        <item>Deepsight, Mythic</item>
+        <item>Defending Eidolon</item>
+        <item>Defensive Combat Training</item>
+        <item>Defensive Combat Training, Mythic</item>
+        <item>Defensive Weapon Training</item>
+        <item>Deflect Arrows</item>
+        <item>Deflect Arrows, Mythic</item>
+        <item>Deft Hands</item>
+        <item>Deft Hands, Mythic</item>
+        <item>Deft Shootist Deed</item>
+        <item>Deny Death</item>
+        <item>Deny the Reaper</item>
+        <item>Destructive Dispel</item>
+        <item>Detect Expertise</item>
+        <item>Detect Expertise, Mythic</item>
+        <item>Devastating Strike</item>
+        <item>Die for Your Master</item>
+        <item>Diehard</item>
+        <item>Dimensional Agility</item>
+        <item>Dimensional Assault</item>
+        <item>Dimensional Dervish</item>
+        <item>Dimensional Maneuvers</item>
+        <item>Dimensional Savant</item>
+        <item>Disarming Strike</item>
+        <item>Discordant Voice</item>
+        <item>Disengaging Feint</item>
+        <item>Disengaging Flourish</item>
+        <item>Disengaging Shot</item>
+        <item>Disorienting Maneuver</item>
+        <item>Dispelling Critical</item>
+        <item>Dispelling Fist</item>
+        <item>Dispel Synergy</item>
+        <item>Disposable Weapon</item>
+        <item>Disrupting Shot</item>
+        <item>Disruptive</item>
+        <item>Disruptive, Mythic</item>
+        <item>Disruptive Recall</item>
+        <item>Disruptive Spell</item>
+        <item>Distance Thrower</item>
+        <item>Distance Thrower, Mythic</item>
+        <item>Divine Interference</item>
+        <item>Divine Interference, Mythic</item>
+        <item>Diviner\'s Delving</item>
+        <item>Djinni Spin</item>
+        <item>Djinni Spirit</item>
+        <item>Djinni Style</item>
+        <item>Dodge</item>
+        <item>Dodge, Mythic</item>
+        <item>Domain Strike</item>
+        <item>Double Bane</item>
+        <item>Double Slice</item>
+        <item>Drag Down</item>
+        <item>Dragonbane Aura</item>
+        <item>Dragon Ferocity</item>
+        <item>Dragon Roar</item>
+        <item>Dragon Style</item>
+        <item>Dramatic Display</item>
+        <item>Dreadful Carnage</item>
+        <item>Dreadful Carnage, Mythic</item>
+        <item>Drink Is Life, Mythic</item>
+        <item>Dual Path, Mythic</item>
+        <item>Duck and Cover</item>
+        <item>Eagle Eyes</item>
+        <item>Eagle Eyes, Mythic</item>
+        <item>Earth Child Binder</item>
+        <item>Earth Child Style</item>
+        <item>Earth Child Topple</item>
+        <item>Echoing Spell</item>
+        <item>Eclectic</item>
+        <item>Ectoplasmic Spell</item>
+        <item>Efreeti Stance</item>
+        <item>Efreeti Style</item>
+        <item>Efreeti Touch</item>
+        <item>Eldritch Claws</item>
+        <item>Eldritch Heritage</item>
+        <item>Eldritch Heritage, Mythic</item>
+        <item>Eldritch Researcher</item>
+        <item>Elemental Channel</item>
+        <item>Elemental Channel, Mythic</item>
+        <item>Elemental Fist</item>
+        <item>Elemental Fist, Mythic</item>
+        <item>Elemental Focus</item>
+        <item>Elemental Focus, Mythic</item>
+        <item>Elemental Spell</item>
+        <item>Elusive Redirection</item>
+        <item>Elven Accuracy</item>
+        <item>Elven Accuracy, Mythic</item>
+        <item>Empower Spell</item>
+        <item>Empower Spell-Like Ability</item>
+        <item>Endurance</item>
+        <item>Endurance, Mythic</item>
+        <item>Enfilading Fire</item>
+        <item>Enforcer</item>
+        <item>Enlarge Spell</item>
+        <item>Ensemble</item>
+        <item>Escape Route</item>
+        <item>Eschew Materials</item>
+        <item>Eschew Materials, Mythic</item>
+        <item>Evolved Familiar</item>
+        <item>Exhausting Critical</item>
+        <item>Exotic Weapon Proficiency</item>
+        <item>Expanded Arcana</item>
+        <item>Experimental Spellcaster</item>
+        <item>Expert Driver</item>
+        <item>Exploit Lore</item>
+        <item>Extended Bane</item>
+        <item>Extend Spell</item>
+        <item>Extra Arcana</item>
+        <item>Extra Arcane Pool</item>
+        <item>Extra Bane</item>
+        <item>Extra Bombs</item>
+        <item>Extra Cantrips or Orisons</item>
+        <item>Extra Channel</item>
+        <item>Extra Discovery</item>
+        <item>Extra Evolution</item>
+        <item>Extra Grit</item>
+        <item>Extra Hex</item>
+        <item>Extra Ki</item>
+        <item>Extra Lay On Hands</item>
+        <item>Extra Mercy</item>
+        <item>Extra Mythic Power, Mythic</item>
+        <item>Extra Path Ability, Mythic</item>
+        <item>Extra Performance</item>
+        <item>Extra Rage</item>
+        <item>Extra Rage Power</item>
+        <item>Extra Ranger Trap</item>
+        <item>Extra Revelation</item>
+        <item>Extra Rogue Talent</item>
+        <item>Extra Summons</item>
+        <item>Extra Word</item>
+        <item>Eyes of Judgment</item>
+        <item>Fabulous Figments, Mythic</item>
+        <item>False Opening</item>
+        <item>Far Shot</item>
+        <item>Far Shot, Mythic</item>
+        <item>Fast Drinker</item>
+        <item>Fast Empathy</item>
+        <item>Fast Empathy, Mythic</item>
+        <item>Fast Healer</item>
+        <item>Favored Defense</item>
+        <item>Favored Judgment</item>
+        <item>Fearless Aura</item>
+        <item>Fearless Zeal</item>
+        <item>Feint Partner</item>
+        <item>Felling Escape</item>
+        <item>Felling Smash</item>
+        <item>Feral Combat Training</item>
+        <item>Feral Heart</item>
+        <item>Field Repair</item>
+        <item>Fight On</item>
+        <item>Final Embrace</item>
+        <item>Final Embrace Horror</item>
+        <item>Final Embrace Master</item>
+        <item>Fire Music</item>
+        <item>Fire Music, Mythic</item>
+        <item>Flanking Foil</item>
+        <item>Flaring Spell</item>
+        <item>Fleet</item>
+        <item>Fleet, Mythic</item>
+        <item>Flyby Attack</item>
+        <item>Focused Eidolon</item>
+        <item>Focused Shot</item>
+        <item>Focused Spell</item>
+        <item>Foeslayer</item>
+        <item>Following Step</item>
+        <item>Forge Ring</item>
+        <item>Forgotten Past</item>
+        <item>Fortified Armor Training</item>
+        <item>Furious Finish</item>
+        <item>Furious Focus</item>
+        <item>Furious Focus, Mythic</item>
+        <item>Gang Up</item>
+        <item>Gliding Steps</item>
+        <item>Glimpse Beyond</item>
+        <item>Gnome Trickster</item>
+        <item>Gnome Trickster, Mythic</item>
+        <item>Gorgon\'s Fist</item>
+        <item>Gorgon\'s Fist, Mythic</item>
+        <item>Gory Finish</item>
+        <item>Go Unnoticed</item>
+        <item>Grant Initiative</item>
+        <item>Great Cleave</item>
+        <item>Greater Blighted Critical</item>
+        <item>Greater Blind-Fight</item>
+        <item>Greater Bull Rush</item>
+        <item>Greater Called Shot</item>
+        <item>Greater Channel Smite</item>
+        <item>Greater Dirty Trick</item>
+        <item>Greater Disarm</item>
+        <item>Greater Drag</item>
+        <item>Greater Eldritch Heritage</item>
+        <item>Greater Elemental Focus</item>
+        <item>Greater Feint</item>
+        <item>Greater Grapple</item>
+        <item>Greater Mercy</item>
+        <item>Greater Overrun</item>
+        <item>Greater Penetrating Strike</item>
+        <item>Greater Rending Fury</item>
+        <item>Greater Reposition</item>
+        <item>Greater Shield Focus</item>
+        <item>Greater Shield Specialization</item>
+        <item>Greater Snap Shot</item>
+        <item>Greater Spell Focus</item>
+        <item>Greater Spell Penetration</item>
+        <item>Greater Spell Specialization</item>
+        <item>Greater Steal</item>
+        <item>Greater Sunder</item>
+        <item>Greater Trip</item>
+        <item>Greater Two-Weapon Fighting</item>
+        <item>Greater Vital Strike</item>
+        <item>Greater Weapon Focus</item>
+        <item>Greater Weapon Specialization</item>
+        <item>Greater Whip Mastery</item>
+        <item>Greater Wild Empathy</item>
+        <item>Great Fortitude</item>
+        <item>Great Fortitude, Mythic</item>
+        <item>Groundling</item>
+        <item>Guided Hand</item>
+        <item>Guided Hand, Mythic</item>
+        <item>Gunsmithing</item>
+        <item>Hammer the Gap</item>
+        <item>Harmonic Sage</item>
+        <item>Haunted Gnome</item>
+        <item>Haunted Gnome Assault</item>
+        <item>Haunted Gnome Shroud</item>
+        <item>Heighten Spell</item>
+        <item>Heroic Defiance</item>
+        <item>Heroic Defiance, Mythic</item>
+        <item>Heroic Recovery</item>
+        <item>Heroic Recovery, Mythic</item>
+        <item>Hero\'s Display</item>
+        <item>Hero\'s Fortune</item>
+        <item>Hex Strike</item>
+        <item>Horse Master</item>
+        <item>Hover</item>
+        <item>Impact Critical Shot</item>
+        <item>Impaling Critical</item>
+        <item>Implant Bomb</item>
+        <item>Improved Back to Back</item>
+        <item>Improved Blind-Fight</item>
+        <item>Improved Bull Rush</item>
+        <item>Improved Bull Rush, Mythic</item>
+        <item>Improved Called Shot</item>
+        <item>Improved Channel</item>
+        <item>Improved Channel, Mythic</item>
+        <item>Improved Charging Hurler</item>
+        <item>Improved Cleaving Finish</item>
+        <item>Improved Counterspell</item>
+        <item>Improved Counterspell, Mythic</item>
+        <item>Improved Critical</item>
+        <item>Improved Critical, Mythic</item>
+        <item>Improved Devastating Strike</item>
+        <item>Improved Dirty Trick</item>
+        <item>Improved Dirty Trick, Mythic</item>
+        <item>Improved Disarm</item>
+        <item>Improved Disarm, Mythic</item>
+        <item>Improved Drag</item>
+        <item>Improved Drag, Mythic</item>
+        <item>Improved Eldritch Heritage</item>
+        <item>Improved Familiar</item>
+        <item>Improved Familiar, Mythic</item>
+        <item>Improved Feint</item>
+        <item>Improved Feint Partner</item>
+        <item>Improved Grapple</item>
+        <item>Improved Grapple, Mythic</item>
+        <item>Improved Great Fortitude</item>
+        <item>Improved Impaling Critical</item>
+        <item>Improved Initiative</item>
+        <item>Improved Initiative, Mythic</item>
+        <item>Improved Iron Will</item>
+        <item>Improved Ki Throw</item>
+        <item>Improved Lightning Reflexes</item>
+        <item>Improved Monster Lore</item>
+        <item>Improved Natural Armor</item>
+        <item>Improved Natural Attack</item>
+        <item>Improved Overrun</item>
+        <item>Improved Overrun, Mythic</item>
+        <item>Improved Precise Shot</item>
+        <item>Improved Rending Fury</item>
+        <item>Improved Reposition</item>
+        <item>Improved Reposition, Mythic</item>
+        <item>Improved Second Chance</item>
+        <item>Improved Share Spells</item>
+        <item>Improved Shield Bash</item>
+        <item>Improved Sidestep</item>
+        <item>Improved Snap Shot</item>
+        <item>Improved Stalwart</item>
+        <item>Improved Steal</item>
+        <item>Improved Steal, Mythic</item>
+        <item>Improved Stonecunning</item>
+        <item>Improved Stonecunning, Mythic</item>
+        <item>Improved Sunder</item>
+        <item>Improved Sunder, Mythic</item>
+        <item>Improved Trip</item>
+        <item>Improved Trip, Mythic</item>
+        <item>Improved Two-Weapon Feint</item>
+        <item>Improved Two-Weapon Fighting</item>
+        <item>Improved Unarmed Strike</item>
+        <item>Improved Unarmed Strike, Mythic</item>
+        <item>Improved Vital Strike</item>
+        <item>Improved Whip Mastery</item>
+        <item>Improvised Weapon Mastery</item>
+        <item>In Harm\'s Way</item>
+        <item>Innocent Blood</item>
+        <item>Insightful Gaze</item>
+        <item>Instant Judgment</item>
+        <item>Intensified Spell</item>
+        <item>Intimidating Bane</item>
+        <item>Intimidating Gaze</item>
+        <item>Intimidating Prowess</item>
+        <item>Intimidating Prowess, Mythic</item>
+        <item>Ironguts</item>
+        <item>Ironhide</item>
+        <item>Iron Will</item>
+        <item>Iron Will, Mythic</item>
+        <item>Janni Rush</item>
+        <item>Janni Style</item>
+        <item>Janni Tempest</item>
+        <item>Jawbreaker</item>
+        <item>Judgment Surge</item>
+        <item>Keen Scent</item>
+        <item>Kirin Path</item>
+        <item>Kirin Strike</item>
+        <item>Kirin Style</item>
+        <item>Ki Stand</item>
+        <item>Ki Throw</item>
+        <item>Knockout Artist</item>
+        <item>Knockout Artist, Mythic</item>
+        <item>Landing Roll</item>
+        <item>Leadership</item>
+        <item>Leaf Singer</item>
+        <item>Leaping Shot Deed</item>
+        <item>Learn Ranger Trap</item>
+        <item>Legendary Teamwork, Mythic</item>
+        <item>Liberator</item>
+        <item>Life Lure</item>
+        <item>Lightning Reflexes</item>
+        <item>Lightning Reflexes, Mythic</item>
+        <item>Lightning Stance</item>
+        <item>Light Step</item>
+        <item>Lingering Performance</item>
+        <item>Lingering Spell</item>
+        <item>Lookout</item>
+        <item>Lost Legacy</item>
+        <item>Low Profile</item>
+        <item>Luck of Heroes</item>
+        <item>Lucky Halfling</item>
+        <item>Lucky Halfling, Mythic</item>
+        <item>Lucky Surge, Mythic</item>
+        <item>Lunge</item>
+        <item>Lunge, Mythic</item>
+        <item>Magical Aptitude</item>
+        <item>Magical Aptitude, Mythic</item>
+        <item>Magnum Opus</item>
+        <item>Major Spell Expertise</item>
+        <item>Mantis Style</item>
+        <item>Mantis Torment</item>
+        <item>Mantis Wisdom</item>
+        <item>Manyshot</item>
+        <item>Manyshot, Mythic</item>
+        <item>Marid Coldsnap</item>
+        <item>Marid Spirit</item>
+        <item>Marid Style</item>
+        <item>Marked for Glory, Mythic</item>
+        <item>Martial Weapon Proficiency</item>
+        <item>Master Alchemist</item>
+        <item>Master Combat Performer</item>
+        <item>Master Craftsman</item>
+        <item>Masterful Display</item>
+        <item>Master Siege Engineer</item>
+        <item>Maximized Spellstrike</item>
+        <item>Maximize Spell</item>
+        <item>Maximize Surge, Mythic</item>
+        <item>Medusa\'s Wrath</item>
+        <item>Medusa\'s Wrath, Mythic</item>
+        <item>Menacing Bane</item>
+        <item>Merciful Bane</item>
+        <item>Merciful Spell</item>
+        <item>Meta Word Mastery</item>
+        <item>Minor Spell Expertise</item>
+        <item>Missile Shield</item>
+        <item>Missile Shield, Mythic</item>
+        <item>Mobility</item>
+        <item>Mobility, Mythic</item>
+        <item>Mocking Dance</item>
+        <item>Monastic Legacy</item>
+        <item>Monastic Legacy, Mythic</item>
+        <item>Monkey Moves</item>
+        <item>Monkey Shine</item>
+        <item>Monkey Style</item>
+        <item>Monument Builder</item>
+        <item>Moonlight Stalker</item>
+        <item>Moonlight Stalker Feint</item>
+        <item>Moonlight Stalker Master</item>
+        <item>Moonlight Summons</item>
+        <item>Mounted Archery</item>
+        <item>Mounted Archery, Mythic</item>
+        <item>Mounted Combat</item>
+        <item>Mounted Combat, Mythic</item>
+        <item>Mounted Shield</item>
+        <item>Mounted Skirmisher</item>
+        <item>Multiattack</item>
+        <item>Multiweapon Fighting</item>
+        <item>Murderer\'s Circle</item>
+        <item>Mystic Stride</item>
+        <item>Mythic Companion, Mythic</item>
+        <item>Mythic Crafter, Mythic</item>
+        <item>Mythic Paragon, Mythic</item>
+        <item>Mythic Spell Lore, Mythic</item>
+        <item>Nation Builder</item>
+        <item>Natural Spell</item>
+        <item>Natural Spell, Mythic</item>
+        <item>Neckbreaker</item>
+        <item>Nemesis</item>
+        <item>Net Adept</item>
+        <item>Net and Trident</item>
+        <item>Net Maneuvering</item>
+        <item>Net Trickery</item>
+        <item>Nightmare Fist</item>
+        <item>Nightmare Striker</item>
+        <item>Nightmare Weaver</item>
+        <item>Nimble Moves</item>
+        <item>Nimble Moves, Mythic</item>
+        <item>No Name</item>
+        <item>Opening Volley</item>
+        <item>Oracular Intuition</item>
+        <item>Outflank</item>
+        <item>Pack Attack</item>
+        <item>Painful Anchor</item>
+        <item>Paired Opportunists</item>
+        <item>Panther Claw</item>
+        <item>Panther Parry</item>
+        <item>Panther Style</item>
+        <item>Parry Spell</item>
+        <item>Parting Shot</item>
+        <item>Pass For Human</item>
+        <item>Passing Trick</item>
+        <item>Penetrating Strike</item>
+        <item>Penetrating Strike, Mythic</item>
+        <item>Perfect Strike</item>
+        <item>Performance Weapon Mastery</item>
+        <item>Performing Combatant</item>
+        <item>Persistent Spell</item>
+        <item>Persuasive</item>
+        <item>Persuasive, Mythic</item>
+        <item>Piercing Spell</item>
+        <item>Pin Down</item>
+        <item>Pinning Knockout</item>
+        <item>Pinning Rend</item>
+        <item>Pinpoint Poisoner</item>
+        <item>Pinpoint Targeting</item>
+        <item>Pinpoint Targeting, Mythic</item>
+        <item>Planar Preservationist</item>
+        <item>Planar Wild Shape</item>
+        <item>Point Blank Master</item>
+        <item>Point-Blank Shot</item>
+        <item>Point-Blank Shot, Mythic</item>
+        <item>Potent Surge, Mythic</item>
+        <item>Power Attack</item>
+        <item>Power Attack, Mythic</item>
+        <item>Powerful Shape</item>
+        <item>Powerful Shape, Mythic</item>
+        <item>Practiced Tactician</item>
+        <item>Precise Shot</item>
+        <item>Precise Strike</item>
+        <item>Preferred Spell</item>
+        <item>Prodigy</item>
+        <item>Prone Shooter</item>
+        <item>Prone Slinger</item>
+        <item>Prophet</item>
+        <item>Prophetic Visionary</item>
+        <item>Prophetic Visionary, Mythic</item>
+        <item>Punishing Kick</item>
+        <item>Pure Faith</item>
+        <item>Pushing Assault</item>
+        <item>Quarterstaff Master</item>
+        <item>Quick Bull Rush</item>
+        <item>Quick Channel</item>
+        <item>Quick Dirty Trick</item>
+        <item>Quick Drag</item>
+        <item>Quick Draw</item>
+        <item>Quick Draw, Mythic</item>
+        <item>Quicken Spell</item>
+        <item>Quicken Spell-Like Ability</item>
+        <item>Quick Reposition</item>
+        <item>Quick Steal</item>
+        <item>Quick Wild Shape</item>
+        <item>Racial Heritage</item>
+        <item>Racial Heritage, Mythic</item>
+        <item>Radiant Charge</item>
+        <item>Raging Brutality</item>
+        <item>Raging Deathblow</item>
+        <item>Raging Hurler</item>
+        <item>Raging Throw</item>
+        <item>Raging Vitality</item>
+        <item>Rapid Grappler</item>
+        <item>Rapid Reload</item>
+        <item>Rapid Reload, Mythic</item>
+        <item>Rapid Shot</item>
+        <item>Rapid Shot, Mythic</item>
+        <item>Ray Shield</item>
+        <item>Razortusk</item>
+        <item>Reach Spell</item>
+        <item>Rebounding Leap</item>
+        <item>Rebuffing Reduction</item>
+        <item>Redemption</item>
+        <item>Remote Bomb</item>
+        <item>Rending Claws</item>
+        <item>Rending Fury</item>
+        <item>Repositioning Strike</item>
+        <item>Resilient Eidolon</item>
+        <item>Revelation Strike</item>
+        <item>Reward of Grace</item>
+        <item>Reward of Life</item>
+        <item>Rhetorical Flourish</item>
+        <item>Rhetorical Flourish, Mythic</item>
+        <item>Ricochet Shot Deed</item>
+        <item>Ricochet Splash Weapon</item>
+        <item>Ride-By Attack</item>
+        <item>Ride-By Attack, Mythic</item>
+        <item>Righteous Healing</item>
+        <item>Rime Spell</item>
+        <item>Run</item>
+        <item>Run, Mythic</item>
+        <item>Sacred Summons</item>
+        <item>Sap Adept</item>
+        <item>Sap Master</item>
+        <item>Savage Display</item>
+        <item>Saving Shield</item>
+        <item>Saving Shield, Mythic</item>
+        <item>School Strike</item>
+        <item>Scorpion Style</item>
+        <item>Scorpion Style, Mythic</item>
+        <item>Scribe Scroll</item>
+        <item>Sea Legs</item>
+        <item>Second Chance</item>
+        <item>Secret Stash Deed</item>
+        <item>Seize the Moment</item>
+        <item>Selective Channeling</item>
+        <item>Selective Channeling, Mythic</item>
+        <item>Selective Spell</item>
+        <item>Self-Sufficient</item>
+        <item>Self-sufficient, Mythic</item>
+        <item>Sense Link</item>
+        <item>Shadow Strike</item>
+        <item>Shaitan Earthblast</item>
+        <item>Shaitan Skin</item>
+        <item>Shaitan Style</item>
+        <item>Shake It Off</item>
+        <item>Shamed</item>
+        <item>Shapeshifter Foil</item>
+        <item>Shapeshifting Hunter</item>
+        <item>Shaping Focus</item>
+        <item>Shared Insight</item>
+        <item>Shared Judgment</item>
+        <item>Sharp Senses</item>
+        <item>Shatter Defenses</item>
+        <item>Shatter Defenses, Mythic</item>
+        <item>Shielded Caster</item>
+        <item>Shield Focus</item>
+        <item>Shield Focus, Mythic</item>
+        <item>Shield Master</item>
+        <item>Shield of Swings</item>
+        <item>Shield Proficiency</item>
+        <item>Shield Slam</item>
+        <item>Shield Slam, Mythic</item>
+        <item>Shield Specialization</item>
+        <item>Shield Wall</item>
+        <item>Shot on the Run</item>
+        <item>Shot on the Run, Mythic</item>
+        <item>Sickening Critical</item>
+        <item>Sickening Spell</item>
+        <item>Sidestep</item>
+        <item>Siege Commander</item>
+        <item>Siege Engineer</item>
+        <item>Siege Gunner</item>
+        <item>Signature Deed</item>
+        <item>Silent Spell</item>
+        <item>Simple Weapon Proficiency</item>
+        <item>Sin Seer</item>
+        <item>Skeleton Summoner</item>
+        <item>Skilled Driver</item>
+        <item>Skill Focus</item>
+        <item>Skill Focus, Mythic</item>
+        <item>Slayer\'s Knack</item>
+        <item>Sling Flail</item>
+        <item>Smash</item>
+        <item>Smell Fear</item>
+        <item>Snake Fang</item>
+        <item>Snake Sidewind</item>
+        <item>Snake Style</item>
+        <item>Snapping Turtle Clutch</item>
+        <item>Snapping Turtle Shell</item>
+        <item>Snapping Turtle Style</item>
+        <item>Snap Shot</item>
+        <item>Snatch</item>
+        <item>Snatch Arrows</item>
+        <item>Snatch Arrows, Mythic</item>
+        <item>Sneaking Precision</item>
+        <item>Sociable</item>
+        <item>Sociable, Mythic</item>
+        <item>Sorcerous Bloodstrike</item>
+        <item>Sorcerous Strike</item>
+        <item>Spell Bane</item>
+        <item>Spell Bluff</item>
+        <item>Spellbreaker</item>
+        <item>Spellbreaker, Mythic</item>
+        <item>Spell Focus</item>
+        <item>Spell Focus, Mythic</item>
+        <item>Spell Hex</item>
+        <item>Spell Mastery</item>
+        <item>Spell Mastery, Mythic</item>
+        <item>Spell Penetration</item>
+        <item>Spell Penetration, Mythic</item>
+        <item>Spell Perfection</item>
+        <item>Spellsong</item>
+        <item>Spell Specialization</item>
+        <item>Spider Step</item>
+        <item>Spinning Throw</item>
+        <item>Spirited Charge</item>
+        <item>Spirited Charge, Mythic</item>
+        <item>Splintering Weapon</item>
+        <item>Split Hex</item>
+        <item>Split Major Hex</item>
+        <item>Spontaneous Metafocus</item>
+        <item>Spontaneous Metafocus, Mythic</item>
+        <item>Spring Attack</item>
+        <item>Spring Attack, Mythic</item>
+        <item>Stabbing Shot</item>
+        <item>Stage Combatant</item>
+        <item>Staggering Critical</item>
+        <item>Stalwart</item>
+        <item>Stand Still</item>
+        <item>Starlight Summons</item>
+        <item>Stealth Synergy</item>
+        <item>Stealthy</item>
+        <item>Stealthy, Mythic</item>
+        <item>Steel Soul</item>
+        <item>Step Up</item>
+        <item>Step Up and Strike</item>
+        <item>Still Spell</item>
+        <item>Stone-Faced</item>
+        <item>Stone Sense</item>
+        <item>Stone Singer</item>
+        <item>Strangler</item>
+        <item>Strike Back</item>
+        <item>Strike Back, Mythic</item>
+        <item>Strong Comeback</item>
+        <item>Strong Comeback, Mythic</item>
+        <item>Stronghold</item>
+        <item>Stunning Assault</item>
+        <item>Stunning Critical</item>
+        <item>Stunning Fist</item>
+        <item>Stunning Fist, Mythic</item>
+        <item>Stunning Pin</item>
+        <item>Summoner\'s Call</item>
+        <item>Sundering Strike</item>
+        <item>Sunlight Summons</item>
+        <item>Superior Summoning</item>
+        <item>Sure Grasp</item>
+        <item>Swap Places</item>
+        <item>Swift Aid</item>
+        <item>Sword and Pistol</item>
+        <item>Tandem Trip</item>
+        <item>Target of Opportunity</item>
+        <item>Taunt</item>
+        <item>Team Pickpocketing</item>
+        <item>Team Up</item>
+        <item>Teleport Tactician</item>
+        <item>Tenacious Transmutation</item>
+        <item>Thanatopic Spell</item>
+        <item>Theurgy</item>
+        <item>Thief of Legend</item>
+        <item>Thoughtful Discernment</item>
+        <item>Threnodic Spell</item>
+        <item>Throw Anything</item>
+        <item>Throw Anything, Mythic</item>
+        <item>Thundering Spell</item>
+        <item>Tiger Claws</item>
+        <item>Tiger Pounce</item>
+        <item>Tiger Style</item>
+        <item>Tiring Critical</item>
+        <item>Titan Strike, Mythic</item>
+        <item>Toppling Spell</item>
+        <item>Touch of Serenity</item>
+        <item>Toughness</item>
+        <item>Toughness, Mythic</item>
+        <item>Tower Shield Proficiency</item>
+        <item>Town Tamer</item>
+        <item>Trample</item>
+        <item>Trample, Mythic</item>
+        <item>Trapper\'s Setup</item>
+        <item>Trick Riding</item>
+        <item>Tripping Staff</item>
+        <item>Tripping Staff, Mythic</item>
+        <item>Tripping Strike</item>
+        <item>Tripping Twirl</item>
+        <item>True Love</item>
+        <item>Turn Undead</item>
+        <item>Turn Undead, Mythic</item>
+        <item>Twin Thunders</item>
+        <item>Twin Thunders Flurry</item>
+        <item>Twin Thunders Master</item>
+        <item>Two-Fisted Drinker, Mythic</item>
+        <item>Two-Handed Thrower</item>
+        <item>Two-Weapon Defense</item>
+        <item>Two-Weapon Defense, Mythic</item>
+        <item>Two-Weapon Feint</item>
+        <item>Two-Weapon Fighting</item>
+        <item>Two-Weapon Fighting, Mythic</item>
+        <item>Two-Weapon Rend</item>
+        <item>Two-Weapon Rend, Mythic</item>
+        <item>Ultimate Mercy</item>
+        <item>Ultimate Resolve</item>
+        <item>Uncanny Alertness</item>
+        <item>Uncanny Concentration</item>
+        <item>Undead Master</item>
+        <item>Undead Master, Mythic</item>
+        <item>Under and Over</item>
+        <item>Underfoot</item>
+        <item>Unforgotten</item>
+        <item>Unsanctioned Detection</item>
+        <item>Unsanctioned Knowledge</item>
+        <item>Unseat</item>
+        <item>Unseat, Mythic</item>
+        <item>Valiant Vault, Mythic</item>
+        <item>Vengeance</item>
+        <item>Vermin Heart</item>
+        <item>Versatile Channeler</item>
+        <item>Vicious Stomp</item>
+        <item>Vigilant Eidolon</item>
+        <item>Vital Strike</item>
+        <item>Vital Strike, Mythic</item>
+        <item>Voice of the Sibyl</item>
+        <item>Voice of the Sibyl, Mythic</item>
+        <item>Warrior Priest</item>
+        <item>Warrior Priest, Mythic</item>
+        <item>War Singer</item>
+        <item>Wave Strike</item>
+        <item>Weapon Finesse</item>
+        <item>Weapon Finesse, Mythic</item>
+        <item>Weapon Focus</item>
+        <item>Weapon Focus, Mythic</item>
+        <item>Weapon Specialization</item>
+        <item>Weapon Specialization, Mythic</item>
+        <item>Well-Prepared</item>
+        <item>Whip Mastery</item>
+        <item>Whirlwind Attack</item>
+        <item>Widen Spell</item>
+        <item>Wild Speech</item>
+        <item>Wind Stance</item>
+        <item>Wingover</item>
+        <item>Witch Knife</item>
+        <item>Witch Knife, Mythic</item>
+        <item>Word of Healing</item>
+    </string-array>
+
+</resources>

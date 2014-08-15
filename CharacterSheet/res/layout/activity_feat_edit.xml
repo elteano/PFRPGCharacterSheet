@@ -7,8 +7,9 @@
 
     <requestFocus />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/field_feat_name"
+        android:completionThreshold="3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
