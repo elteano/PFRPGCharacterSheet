@@ -286,10 +286,7 @@ public class CMB implements Parcelable, Serializable {
 	public static CMB createFromJSON(JSONObject input) {
 		try {
 			CMB ret = new CMB();
-			ret.classList = input.getString("classList");
-			ret.classModifiers = input.getInt("classModifiers");
-			ret.flags = input.getInt("flags");
-			ret.miscModifiers = input.getInt("flags");
+			ret.miscModifiers = input.getInt("miscModifiers");
 			return ret;
 		} catch (JSONException ex) {
 			Log.e("CharacterSheet", "Error inflating CMB from JSON");
