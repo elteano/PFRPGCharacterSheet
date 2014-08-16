@@ -34,11 +34,11 @@ public class SkillListing extends TableRow {
 	}
 
 	public void setAbilityUsed(int used) {
-		skill.baseAbility = used;
+		skill.setBaseAbility(used);
 	}
 
 	public void setName(String name) {
-		skill.skillName = name;
+		skill.setName(name);
 	}
 
 	public void setToSkill(Skill skill) {
@@ -54,6 +54,6 @@ public class SkillListing extends TableRow {
 	}
 
 	public void updateName() {
-		nameView.setText(skill.skillName);
+		nameView.setText(skill.getName());
 	}
 }

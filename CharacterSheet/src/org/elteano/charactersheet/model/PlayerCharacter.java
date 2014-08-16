@@ -533,7 +533,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 
 	public Skill getSkillFromLongName(String name) {
 		for (Skill s : skills) {
-			if (s.skillName.equals(name))
+			if (s.getName().equals(name))
 				return s;
 		}
 		return null;

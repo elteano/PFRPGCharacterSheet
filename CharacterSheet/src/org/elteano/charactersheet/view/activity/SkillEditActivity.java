@@ -102,7 +102,7 @@ public class SkillEditActivity extends Activity implements
 
 			@Override
 			public void numberChanged(int newNumber) {
-				mSkill.miscMod = newNumber;
+				mSkill.setMiscMod(newNumber);
 				updateTotalModButton();
 			}
 		};
@@ -128,12 +128,6 @@ public class SkillEditActivity extends Activity implements
 		if (((EditText) findViewById(R.id.activity_skill_edit_skill_name))
 				.getText().toString().trim().isEmpty()) {
 			((EditText) findViewById(R.id.activity_skill_edit_skill_name))
-					.requestFocus();
-			return;
-		}
-		if (((EditText) findViewById(R.id.activity_skill_edit_skill_ranks))
-				.getText().toString().trim().isEmpty()) {
-			((EditText) findViewById(R.id.activity_skill_edit_skill_ranks))
 					.requestFocus();
 			return;
 		}
@@ -187,11 +181,14 @@ public class SkillEditActivity extends Activity implements
 		((EditText) findViewById(R.id.activity_skill_edit_skill_name))
 				.addTextChangedListener(nameWatcher);
 		((EditText) findViewById(R.id.activity_skill_edit_skill_ranks))
-				.setText("" + mSkill.getNumRanks());
+				.setText(""
+						+ ((mSkill.getNumRanks() > 0) ? mSkill.getNumRanks()
+								: ""));
 		((EditText) findViewById(R.id.activity_skill_edit_skill_ranks))
 				.addTextChangedListener(ranksWatcher);
 		((EditText) findViewById(R.id.activity_skill_edit_misc_mod_field))
-				.setText("" + mSkill.miscMod);
+				.setText(""
+						+ ((mSkill.getMiscMod() > 0) ? mSkill.getMiscMod() : ""));
 		((EditText) findViewById(R.id.activity_skill_edit_misc_mod_field))
 				.addTextChangedListener(miscWatcher);
 		super.onStart();

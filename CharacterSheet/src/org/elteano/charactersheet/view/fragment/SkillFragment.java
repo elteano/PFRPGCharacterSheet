@@ -70,8 +70,8 @@ public class SkillFragment extends CharacterUpdaterFragment implements
 		for (int i = 0; i < list.size() - 1; i++) {
 			int swapWith = i;
 			for (int j = i + 1; j < list.size(); j++) {
-				if (list.get(j).skillName
-						.compareTo(list.get(swapWith).skillName) < 0)
+				if (list.get(j).getName()
+						.compareTo(list.get(swapWith).getName()) < 0)
 					swapWith = j;
 			}
 			Skill s = list.get(i);

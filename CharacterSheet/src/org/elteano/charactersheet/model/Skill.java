@@ -19,10 +19,10 @@ public class Skill implements Parcelable, Serializable {
 	public static final String SKILL_SUFFIX_STR = ".str";
 	public static final String SKILL_SUFFIX_WIS = ".wis";
 
-	public String skillName;
-	public int baseAbility;
-	public int numRanks;
-	public int miscMod;
+	private String skillName;
+	private int baseAbility;
+	private int numRanks;
+	private int miscMod;
 
 	public Skill(String extendedName, int ranks) {
 		skillName = deriveSkillName(extendedName);
@@ -112,6 +112,10 @@ public class Skill implements Parcelable, Serializable {
 		return numRanks;
 	}
 
+	public int getMiscMod() {
+		return miscMod;
+	}
+
 	public int getTotalModifier(AbilityScores abilities) {
 		return abilities.getAbility(baseAbility).getTempModifier() + numRanks
 				+ miscMod;
@@ -127,6 +131,10 @@ public class Skill implements Parcelable, Serializable {
 
 	public void setSkillRanks(int ranks) {
 		numRanks = ranks;
+	}
+
+	public void setMiscMod(int miscMod) {
+		this.miscMod = miscMod;
 	}
 
 	public String toSaveString() {
