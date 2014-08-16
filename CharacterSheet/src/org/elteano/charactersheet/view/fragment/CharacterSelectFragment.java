@@ -1,11 +1,13 @@
 package org.elteano.charactersheet.view.fragment;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.model.PlayerCharacter;
 import org.elteano.charactersheet.view.activity.BluetoothTransferActivity;
 import org.elteano.charactersheet.view.activity.CharacterReceiveActivity;
 import org.elteano.charactersheet.view.activity.CharacterSelectActivity;
-import org.elteano.charactersheet.view.activity.CharacterSendActivity;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +31,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +62,8 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 
 	private int getNextAvailableNumber() {
 		int i = 1;
-		while (playerList.contains("Character_" + i)) {
+		while (playerList.contains("Character_" + i)
+				|| playerList.contains("New Character " + i)) {
 			i++;
 		}
 		return i;
@@ -69,27 +71,6 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 
 	private void saveNewCharacter(PlayerCharacter c, int i) {
 		c.saveToSharedPreferences(playerList);
-	}
-
-	private void addCharacterListing(PlayerCharacter character) {
-		addCharacterListing(character, getView());
-	}
-
-	private void addCharacterListing(PlayerCharacter character, View dest) {
-		addCharacterListing(character.getName(), dest);
-	}
-
-	private void addCharacterListing(String name, View dest) {
-		TextView characterView = new TextView(getActivity());
-		characterView.setText(name);
-		characterView.setTextSize(24);
-		characterView.setClickable(true);
-		characterView
-				.setBackgroundResource(android.R.drawable.list_selector_background);
-		characterView.setOnClickListener(this);
-		((LinearLayout) dest
-				.findViewById(R.id.fragment_character_select_layout))
-				.addView(characterView);
 	}
 
 	/**
@@ -107,11 +88,6 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 			return true;
 		}
 		return false;
-	}
-
-	private void clearList() {
-		((ListView) getView().findViewById(
-				R.id.fragment_character_select_layout)).setAdapter(null);
 	}
 
 	/**
@@ -136,17 +112,15 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 	}
 
 	private void fillList(View dest) {
-		String[] list = new String[playerList.getAll().size()];
-		{
-			int i = 0;
-			for (String key : playerList.getAll().keySet()) {
-				String charName = key;
-				if (charName.startsWith("Character_"))
-					charName = playerList.getString(key, "ERROR");
-				list[i] = charName;
-				i++;
-			}
+		ArrayList<String> list = new ArrayList<String>(playerList.getAll()
+				.size());
+		for (String key : playerList.getAll().keySet()) {
+			String charName = key;
+			if (charName.startsWith("Character_"))
+				charName = playerList.getString(key, "ERROR");
+			list.add(charName);
 		}
+		Collections.sort(list);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_list_item_1, list);
 		((ListView) dest.findViewById(R.id.fragment_character_select_layout))
@@ -258,43 +232,10 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 			return false;
 	}
 
-	private boolean removeCharacterListing(String characterName) {
-		LinearLayout container = (LinearLayout) getView().findViewById(
-				R.id.fragment_character_select_layout);
-		for (int i = 0; i < container.getChildCount(); i++) {
-			TextView tv = (TextView) container.getChildAt(i);
-			if (tv.getText().toString().equals(characterName)) {
-				container.removeView(tv);
-				return true;
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public void onResume() {
 		updateDisplay();
 		super.onResume();
-	}
-
-	private void setToFirstCharacter() {
-		if (playerList.getAll().isEmpty())
-			((CharacterSheetActivity) getActivity())
-					.setCharacter(addCharacter());
-		else
-			((CharacterSheetActivity) getActivity())
-					.setCharacter(PlayerCharacter
-							.restoreFromSharedPreferences(getActivity()
-									.getSharedPreferences(
-											(String) playerList.getAll()
-													.keySet().toArray()[0],
-											Activity.MODE_PRIVATE)));
-	}
-
-	private void sendCharacter(PlayerCharacter c) {
-		Intent intent = new Intent(getActivity(), CharacterSendActivity.class);
-		intent.putExtra(CharacterSendActivity.INPUT, (Parcelable) c);
-		startActivityForResult(intent, BluetoothTransferActivity.MODE_SEND);
 	}
 
 	@Override
@@ -304,7 +245,6 @@ public class CharacterSelectFragment extends CharacterUpdaterFragment implements
 
 	@Override
 	public void updateDisplay() {
-		clearList();
 		fillList(getView());
 	}
 
