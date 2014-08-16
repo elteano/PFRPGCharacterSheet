@@ -42,7 +42,7 @@ public class CMB implements Parcelable, Serializable {
 			ret.setFlags(source.readInt());
 			ret.setClassModifiers(source.readInt());
 			ret.setMiscModifiers(source.readInt());
-			ret.classList = source.readString();
+			ret.setClasses(source.readString());
 			return ret;
 		};
 	};
@@ -272,10 +272,10 @@ public class CMB implements Parcelable, Serializable {
 	public JSONObject writeToJSON() {
 		JSONObject ret = new JSONObject();
 		try {
-			ret.put("classList", classList);
-			ret.put("classModifiers", classModifiers);
-			ret.put("flags", flags);
-			ret.put("miscModifiers", miscModifiers);
+			ret.put("classList", getClassList());
+			ret.put("classModifiers", getClassModifiers());
+			ret.put("flags", getFlags());
+			ret.put("miscModifiers", getMiscModifiers());
 			return ret;
 		} catch (JSONException ex) {
 			Log.e("CharacterSheet", "Error creating JSON for CMB");
@@ -286,7 +286,10 @@ public class CMB implements Parcelable, Serializable {
 	public static CMB createFromJSON(JSONObject input) {
 		try {
 			CMB ret = new CMB();
-			ret.miscModifiers = input.getInt("miscModifiers");
+			ret.setClasses(input.getString("classList"));
+			ret.setClassModifiers(input.getInt("classModifiers"));
+			ret.setFlags(input.getInt("flags"));
+			ret.setMiscModifiers(input.getInt("miscModifiers"));
 			return ret;
 		} catch (JSONException ex) {
 			Log.e("CharacterSheet", "Error inflating CMB from JSON");
