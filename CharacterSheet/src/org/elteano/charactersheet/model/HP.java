@@ -115,10 +115,24 @@ public class HP implements Parcelable, Serializable {
 		return ret;
 	}
 
+	/**
+	 * Ensures that HP is calculated as if the character possesses the given
+	 * number of levels.
+	 *
+	 * Rolled HP values for levels greater than those which the character
+	 * possesses are discarded.
+	 *
+	 * @param level
+	 *            The level of the player character.
+	 */
 	public void ensureLevelCount(int level) {
 		if (mHPs.size() < level) {
 			for (int i = mHPs.size(); i < level; i++)
 				mHPs.add(0);
+		} else {
+			while (mHPs.size() > level) {
+				mHPs.remove(mHPs.size() - 1);
+			}
 		}
 	}
 
