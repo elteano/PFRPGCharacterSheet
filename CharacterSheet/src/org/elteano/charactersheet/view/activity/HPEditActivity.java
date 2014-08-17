@@ -59,7 +59,6 @@ public class HPEditActivity extends Activity {
 		tr.addView(tv);
 		((TableLayout) findViewById(R.id.activity_hpedit_container))
 				.addView(tr);
-		mHP.ensureLevelCount(totalLevels);
 		updateTotalHP();
 	}
 
