@@ -1,10 +1,9 @@
 package org.elteano.charactersheet.view.support;
 
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
-import org.elteano.charactersheet.view.fragment.AttackFragment;
+import org.elteano.charactersheet.view.fragment.AttackPanelFragment;
 import org.elteano.charactersheet.view.fragment.CFeatFragment;
 import org.elteano.charactersheet.view.fragment.CounterFragment;
-import org.elteano.charactersheet.view.fragment.DefenseFragment;
 import org.elteano.charactersheet.view.fragment.FeatFragment;
 import org.elteano.charactersheet.view.fragment.ItemFragment;
 import org.elteano.charactersheet.view.fragment.NameFragment;
@@ -31,8 +30,8 @@ public final class NavDrawerListListener implements
 	@SuppressWarnings("rawtypes")
 	private static final Class[] list = { NameFragment.class,
 			ItemFragment.class, CounterFragment.class, StatsFragment.class,
-			AttackFragment.class, DefenseFragment.class, FeatFragment.class,
-			CFeatFragment.class, SkillFragment.class, SpellFragment.class };
+			AttackPanelFragment.class, FeatFragment.class, CFeatFragment.class,
+			SkillFragment.class, SpellFragment.class };
 
 	/**
 	 * Activity to modify when items are selected.

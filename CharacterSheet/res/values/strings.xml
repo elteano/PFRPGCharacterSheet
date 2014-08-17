@@ -80,6 +80,7 @@
     <string name="field_feat_desc">Feat Description</string>
     <string name="flat_foot_ac">Flat Foot AC</string>
     <string name="fortitude">Fortitude</string>
+    <string name="fortitude_short">F</string>
     <string name="gold">Gold</string>
     <string name="heavy_load">Heavy Load</string>
     <string name="hint_item_name">Item Name</string>
@@ -99,6 +100,7 @@
     <string name="listening_for_chars_already">Already listening for characters.</string>
     <string name="new_c">New C.</string>
     <string name="new_peers">You have new peers available!</string>
+    <string name="main_hand">Main Hand</string>
     <string name="max">Max</string>
     <string name="max_hp">Max HP</string>
     <string name="medium_load">Medium Load</string>
@@ -110,6 +112,7 @@
     <string name="misc_modifiers">Misc. Modifiers</string>
     <string name="misc_mods">Misc. Mods</string>
     <string name="mod_value_done_editing">Done</string>
+    <string name="off_hand">Off Hand</string>
     <string name="ok">OK</string>
     <string name="over_limit">Over Limit</string>
     <string name="paired_devices">Paired Devices</string>
@@ -119,6 +122,7 @@
     <string name="prompt_delete">You will be prompted to delete the next selected character.</string>
     <string name="receive_character">Receive Character</string>
     <string name="reflex">Reflex</string>
+    <string name="reflex_short">R</string>
     <string name="rolled_hp">Rolled HP</string>
     <string name="save_ability">Save Ability</string>
     <string name="save_bonus">Save Bonus</string>
@@ -171,6 +175,7 @@
     <string name="touch">Touch</string>
     <string name="transfer_complete">Transfer complete</string>
     <string name="will">Will</string>
+    <string name="will_short">W</string>
     <string name="wis">WIS</string>
     <string name="title_section3">Section 3</string>
     <string name="title_section2">Section 2</string>
