@@ -47,9 +47,14 @@ public class Attack implements Parcelable, Serializable {
 	}
 
 	public String calculateMultiAttack(AbilityScores abilities, int bab) {
+		return calculateMultiAttack(abilities, bab, 0);
+	}
+
+	public String calculateMultiAttack(AbilityScores abilities, int bab, int mod) {
 		String fulltext = "+";
 		int attackmod = addAttack
-				+ abilities.getAbility(baseAttackAbility).getTempModifier();
+				+ abilities.getAbility(baseAttackAbility).getTempModifier()
+				+ mod;
 		if (bab == 0) {
 			fulltext = (attackmod < 0) ? "" + attackmod : "+" + attackmod;
 		} else {
@@ -63,6 +68,28 @@ public class Attack implements Parcelable, Serializable {
 		if (fulltext.isEmpty())
 			fulltext = "+0";
 		return fulltext;
+	}
+
+	public String calculateSingleOffAttack(AbilityScores abilities, int bab,
+			int mod) {
+		int attackMod = addAttack
+				+ abilities.getAbility(baseAttackAbility).getTempModifier()
+				+ mod;
+		return "" + (bab + attackMod);
+	}
+
+	public String calculateDoubleOffAttack(AbilityScores abilities, int bab,
+			int mod) {
+		return String.format("%s / %s",
+				calculateSingleOffAttack(abilities, bab, mod),
+				calculateSingleOffAttack(abilities, bab, mod - 5));
+	}
+
+	public String calculateTripleOffAttack(AbilityScores abilities, int bab,
+			int mod) {
+		return String.format("%s / %s",
+				calculateDoubleOffAttack(abilities, bab, mod),
+				calculateSingleOffAttack(abilities, bab, mod - 10));
 	}
 
 	public static Attack constructFromString(String string) {
