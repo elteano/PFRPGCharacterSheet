@@ -79,13 +79,18 @@ public class FeatEditActivity extends Activity implements OnClickListener {
 		switch (item.getItemId()) {
 		case R.id.more_info:
 			try {
+				String featNameEdit = featName.getText().toString();
+				if (featNameEdit.contains("(")) {
+					int index = featNameEdit.lastIndexOf("(");
+					featNameEdit = featNameEdit.substring(0, index).trim();
+				}
+
 				Intent intent = new Intent(Intent.ACTION_GET_CONTENT,
-						Uri.parse("pfsrd://PFSRD/Feats/" + featName.getText()));
+						Uri.parse("pfsrd://PFSRD/Feats/" + featNameEdit));
 				intent.setComponent(new ComponentName(
 						"org.evilsoft.pathfinder.reference",
 						"org.evilsoft.pathfinder.reference.DetailsActivity"));
-				intent.putExtra(SearchManager.QUERY, featName.getText()
-						.toString());
+				intent.putExtra(SearchManager.QUERY, featNameEdit);
 				startActivity(intent);
 			} catch (ActivityNotFoundException ex) {
 				Toast.makeText(getApplicationContext(),
