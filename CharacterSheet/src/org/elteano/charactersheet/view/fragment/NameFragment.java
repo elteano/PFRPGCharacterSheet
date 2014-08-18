@@ -172,6 +172,7 @@ public class NameFragment extends CharacterUpdaterFragment implements
 							CharacterSelectFragment.CHARACTER_LIST_PREFERENCE,
 							Activity.MODE_PRIVATE).edit();
 			editor.remove(mOldName);
+			mOldName = "";
 			editor.commit();
 		}
 		pushFieldsToCharacter();
@@ -244,7 +245,6 @@ public class NameFragment extends CharacterUpdaterFragment implements
 			getActivity().getActionBar().setTitle(
 					((CharacterSheetActivity) getActivity()).getCharacter()
 							.getName());
-			updateOthers();
 		}
 
 		public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
