@@ -310,6 +310,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		counters = new ArrayList<Counter>();
 		classes = new ArrayList<PlayerClass>();
 		feats = new ArrayList<Feat>();
+		mWieldableEquipment = new ArrayList<WeapShield>();
 		cfeats = new ArrayList<Feat>();
 		mHP = new HP();
 		items = new ArrayList<Item>();

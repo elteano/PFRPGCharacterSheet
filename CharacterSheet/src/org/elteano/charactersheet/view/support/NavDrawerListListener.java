@@ -20,6 +20,8 @@ import android.widget.ListView;
 public final class NavDrawerListListener implements
 		ListView.OnItemClickListener {
 
+	private int mLastSelected = -1;
+
 	/**
 	 * List of Fragment classes to appear in the list.
 	 *
@@ -64,11 +66,28 @@ public final class NavDrawerListListener implements
 		setToPosition(0);
 	}
 
+	/**
+	 * Sets to the last selected page.
+	 *
+	 * @throws IllegalStateException
+	 *             This method should not be called if no pages have ever been
+	 *             selected.
+	 */
+	public void setToLastSelected() {
+		if (mLastSelected == -1) {
+			throw new IllegalStateException("No page history!");
+		}
+		setToPosition(mLastSelected);
+	}
+
 	private void setToPosition(int position) {
+		mLastSelected = position;
+		mContext.setInTopLevel(true);
 		if (frags[position] == null) {
 			frags[position] = Fragment.instantiate(mContext,
 					list[position].getName());
 		}
+		mContext.clearBackStack();
 		mContext.setToFragment(frags[position]);
 	}
 }

@@ -21,6 +21,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -47,7 +48,10 @@ public class CharacterSheetActivity extends FragmentActivity {
 	private boolean initialized = false;
 	private FragmentPagerAdapter mAdapter;
 	private ViewPager mViewPager;
+	private Fragment mPreviousFragment;
 	private NavDrawerToggle mToggle;
+	private NavDrawerListListener mDrawerListener;
+	private boolean isTablet;
 
 	private void addHandsetTabs() {
 		ActionBar actionBar = getActionBar();
@@ -118,6 +122,15 @@ public class CharacterSheetActivity extends FragmentActivity {
 								SpellFragment.class)));
 	}
 
+	public void clearBackStack() {
+		getSupportFragmentManager().popBackStack(null,
+				FragmentManager.POP_BACK_STACK_INCLUSIVE);
+	}
+
+	public void clearPreviousFragment() {
+		mPreviousFragment = null;
+	}
+
 	public synchronized PlayerCharacter getCharacter() {
 		return character;
 	}
@@ -127,32 +140,36 @@ public class CharacterSheetActivity extends FragmentActivity {
 	}
 
 	public void setToFragment(Fragment f) {
+		setToFragment(f, false);
+	}
+
+	public void setToFragment(Fragment f, boolean addToBackStack) {
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.activity_charactersheet_filler, f);
+		if (addToBackStack) {
+			ft.addToBackStack(null);
+		}
 		ft.commit();
 	}
 
 	private void initialize() {
 		Log.i("CharacterSheet", "Entering initialize()");
-		// setup action bar for tabs
-		ActionBar actionBar = getActionBar();
-
-		// Add all the tabbies
 		int screenSizeFlag = getResources().getConfiguration().screenLayout
 				& Configuration.SCREENLAYOUT_SIZE_MASK;
 		if (screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_SMALL
 				|| screenSizeFlag == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+			isTablet = false;
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 			setContentView(R.layout.activity_charactersheet_drawer);
 			ListView drawers = (ListView) findViewById(R.id.activity_charactersheet_nav_drawer);
 			drawers.setAdapter(new ArrayAdapter<String>(this,
 					android.R.layout.simple_list_item_1, getResources()
 							.getStringArray(R.array.nav_dests)));
-			NavDrawerListListener listener = new NavDrawerListListener(
+			mDrawerListener = new NavDrawerListListener(
 					this,
 					(DrawerLayout) findViewById(R.id.activity_charactersheet_drawer_layout));
-			listener.setToBeginning();
-			drawers.setOnItemClickListener(listener);
+			mDrawerListener.setToBeginning();
+			drawers.setOnItemClickListener(mDrawerListener);
 			mToggle = new NavDrawerToggle(
 					this,
 					(DrawerLayout) findViewById(R.id.activity_charactersheet_drawer_layout));
@@ -162,6 +179,7 @@ public class CharacterSheetActivity extends FragmentActivity {
 			((DrawerLayout) findViewById(R.id.activity_charactersheet_drawer_layout))
 					.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
 		} else {
+			isTablet = true;
 			addTabletTabs();
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 		}
@@ -217,16 +235,35 @@ public class CharacterSheetActivity extends FragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Let the drawer toggle handle it, but only for handsets
-		if (mToggle != null && mToggle.onOptionsItemSelected(item))
+		if (mToggle != null && mToggle.isDrawerIndicatorEnabled()
+				&& mToggle.onOptionsItemSelected(item))
 			return true;
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This is called when the Home (Up) button is pressed
-			// in the Action Bar.
-			navigateUp();
-			return true;
+		if (isTablet) {
+			switch (item.getItemId()) {
+			case android.R.id.home:
+				// This is called when the Home (Up) button is pressed
+				// in the Action Bar.
+				navigateUp();
+				return true;
+			}
+		} else {
+			switch (item.getItemId()) {
+			case android.R.id.home:
+				revertToPreviousFragment();
+				return true;
+			}
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * Sets up UI based on whether the user is viewing a top-level fragment.
+	 *
+	 * @param inTopLevel
+	 */
+	public void setInTopLevel(boolean inTopLevel) {
+		if (mToggle != null)
+			mToggle.setDrawerIndicatorEnabled(inTopLevel);
 	}
 
 	private void navigateUp() {
@@ -289,8 +326,20 @@ public class CharacterSheetActivity extends FragmentActivity {
 		super.onStop();
 	}
 
+	private void revertToPreviousFragment() {
+		if (mPreviousFragment != null) {
+			setToFragment(mPreviousFragment);
+		} else {
+			mDrawerListener.setToLastSelected();
+		}
+	}
+
 	public void setCharacter(PlayerCharacter character) {
 		this.character = character;
+	}
+
+	public void setPreviousFragment(Fragment fragment) {
+		mPreviousFragment = fragment;
 	}
 
 	public static class TabletTabListener<T extends Fragment> implements

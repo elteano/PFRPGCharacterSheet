@@ -81,6 +81,10 @@ public class WeapShield implements Parcelable {
 	 */
 	private int mDamageBonus;
 	/**
+	 * Die to roll when rolling damage with this weapon.
+	 */
+	private String mDamageDie;
+	/**
 	 * The item's name.
 	 */
 	private String mName;
@@ -108,16 +112,17 @@ public class WeapShield implements Parcelable {
 
 	public WeapShield(String name) {
 		this(name, PlayerCharacter.ABILITY_STR, PlayerCharacter.ABILITY_STR, 0,
-				0, 0);
+				"", 0, 0);
 	}
 
 	public WeapShield(String name, int attackAbility, int damageAbility,
-			int attackBonus, int damageBonus, int acBonus) {
+			int attackBonus, String damageDie, int damageBonus, int acBonus) {
 		setName(name);
 		setAttackAbility(attackAbility);
 		setDamageAbility(damageAbility);
 		setAttackBonus(attackBonus);
 		setDamageBonus(damageBonus);
+		setDamageDie(damageDie);
 		setACBonus(acBonus);
 	}
 
@@ -143,6 +148,10 @@ public class WeapShield implements Parcelable {
 
 	public int getDamageBonus() {
 		return mDamageBonus;
+	}
+
+	public String getDamageDie() {
+		return mDamageDie;
 	}
 
 	public String getName() {
@@ -176,6 +185,10 @@ public class WeapShield implements Parcelable {
 	 */
 	public void setDamageBonus(int damageBonus) {
 		this.mDamageBonus = damageBonus;
+	}
+
+	public void setDamageDie(String damageDie) {
+		mDamageDie = damageDie;
 	}
 
 	/**
@@ -217,6 +230,7 @@ public class WeapShield implements Parcelable {
 		dest.writeInt(getDamageAbility());
 		dest.writeInt(getDamageBonus());
 		dest.writeString(getName());
+		dest.writeString(getDamageDie());
 		dest.writeInt(getWeaponType());
 	}
 }

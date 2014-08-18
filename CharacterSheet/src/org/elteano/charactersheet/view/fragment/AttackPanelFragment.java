@@ -16,6 +16,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -26,65 +29,6 @@ import android.widget.Spinner;
  * A fragment consolidating all combat statistics.
  */
 public class AttackPanelFragment extends Fragment {
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == Activity.RESULT_OK) {
-			switch (requestCode) {
-			case (short) R.id.fragment_attack_panel_ac_button:
-			case (short) R.id.fragment_attack_panel_cmd_button:
-				((CharacterSheetActivity) getActivity()).getCharacter().setAC(
-						(ArmorClass) data.getExtras().getParcelable("result"));
-				break;
-			case (short) R.id.fragment_attack_panel_fortitude_button:
-				((CharacterSheetActivity) getActivity())
-						.getCharacter()
-						.setFort(
-								(Save) data.getExtras().getParcelable("result"));
-				break;
-			case (short) R.id.fragment_attack_panel_reflex_button:
-				((CharacterSheetActivity) getActivity()).getCharacter().setRef(
-						(Save) data.getExtras().getParcelable("result"));
-				break;
-			case (short) R.id.fragment_attack_panel_will_button:
-				((CharacterSheetActivity) getActivity())
-						.getCharacter()
-						.setWill(
-								(Save) data.getExtras().getParcelable("result"));
-				break;
-			}
-		}
-		super.onActivityResult(requestCode, resultCode, data);
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View ret = inflater.inflate(R.layout.fragment_attack_panel, container,
-				false);
-		Spinner mMainSpinner = (Spinner) ret
-				.findViewById(R.id.fragment_attack_panel_main_spinner);
-		Spinner mOffSpinner = (Spinner) ret
-				.findViewById(R.id.fragment_attack_panel_off_spinner);
-		ArrayList<String> list = new ArrayList<String>();
-		for (Attack a : ((CharacterSheetActivity) getActivity()).getCharacter()
-				.getAttackList()) {
-			list.add(a.name);
-		}
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_list_item_1, list);
-		mMainSpinner.setAdapter(adapter);
-		mOffSpinner.setAdapter(adapter);
-
-		return ret;
-	}
-
-	@Override
-	public void onStart() {
-		fillButtonDisplays();
-		hookupListeners();
-		super.onStart();
-	}
 
 	private void fillButtonDisplays() {
 		ArmorClass ac = ((CharacterSheetActivity) getActivity()).getCharacter()
@@ -153,5 +97,83 @@ public class AttackPanelFragment extends Fragment {
 								.getWill(),
 						((CharacterSheetActivity) getActivity()).getCharacter()
 								.getAbilities()));
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK) {
+			switch (requestCode) {
+			case (short) R.id.fragment_attack_panel_ac_button:
+			case (short) R.id.fragment_attack_panel_cmd_button:
+				((CharacterSheetActivity) getActivity()).getCharacter().setAC(
+						(ArmorClass) data.getExtras().getParcelable("result"));
+				break;
+			case (short) R.id.fragment_attack_panel_fortitude_button:
+				((CharacterSheetActivity) getActivity())
+						.getCharacter()
+						.setFort(
+								(Save) data.getExtras().getParcelable("result"));
+				break;
+			case (short) R.id.fragment_attack_panel_reflex_button:
+				((CharacterSheetActivity) getActivity()).getCharacter().setRef(
+						(Save) data.getExtras().getParcelable("result"));
+				break;
+			case (short) R.id.fragment_attack_panel_will_button:
+				((CharacterSheetActivity) getActivity())
+						.getCharacter()
+						.setWill(
+								(Save) data.getExtras().getParcelable("result"));
+				break;
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.fragment_attack_panel_menu, menu);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		setHasOptionsMenu(true);
+		View ret = inflater.inflate(R.layout.fragment_attack_panel, container,
+				false);
+		Spinner mMainSpinner = (Spinner) ret
+				.findViewById(R.id.fragment_attack_panel_main_spinner);
+		Spinner mOffSpinner = (Spinner) ret
+				.findViewById(R.id.fragment_attack_panel_off_spinner);
+		ArrayList<String> list = new ArrayList<String>();
+		for (Attack a : ((CharacterSheetActivity) getActivity()).getCharacter()
+				.getAttackList()) {
+			list.add(a.name);
+		}
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+				android.R.layout.simple_list_item_1, list);
+		mMainSpinner.setAdapter(adapter);
+		mOffSpinner.setAdapter(adapter);
+
+		return ret;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.fragment_attack_panel_menu_edit:
+			((CharacterSheetActivity) getActivity()).setInTopLevel(false);
+			((CharacterSheetActivity) getActivity()).setToFragment(
+					new WeapShieldListFragment(), true);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onStart() {
+		fillButtonDisplays();
+		hookupListeners();
+		super.onStart();
 	}
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/fragment_combat_gear_menu_add_item"
+        android:icon="@drawable/ab_add"
+        android:showAsAction="ifRoom"
+        android:title="@string/add_gear"/>
+    <item
+        android:id="@+id/fragment_combat_gear_menu_remove_item"
+        android:icon="@drawable/ab_remove"
+        android:showAsAction="ifRoom"
+        android:title="@string/delete_gear"/>
+
+</menu>

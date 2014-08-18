@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Space
+        android:id="@+id/center_space"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <EditText
+        android:id="@+id/fragment_gear_edit_name_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/padding_medium"
+        android:layout_marginRight="@dimen/padding_medium"
+        android:layout_marginTop="@dimen/padding_small"
+        android:hint="@string/gear_name"
+        android:inputType="textCapWords" />
+
+    <Spinner
+        android:id="@+id/fragment_gear_edit_type_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/fragment_gear_edit_name_field"
+        android:layout_marginRight="@dimen/padding_medium"
+        android:layout_toRightOf="@id/center_space" />
+
+    <TextView
+        android:id="@+id/fragment_gear_edit_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_gear_edit_type_spinner"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/fragment_gear_edit_name_field"
+        android:layout_marginLeft="@dimen/padding_medium"
+        android:text="@string/gear_type"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/fragment_gear_edit_attack_ability_spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/fragment_gear_edit_type_spinner"
+        android:layout_marginRight="@dimen/padding_medium"
+        android:layout_toRightOf="@id/center_space" />
+
+    <TextView
+        android:id="@+id/fragment_gear_edit_attack_ability_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_gear_edit_attack_ability_spinner"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/fragment_gear_edit_type_text"
+        android:layout_marginLeft="@dimen/padding_medium"
+        android:text="@string/attack_ability"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/fragment_gear_edit_attack_bonus_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/fragment_gear_edit_attack_ability_spinner"
+        android:layout_marginRight="@dimen/padding_medium"
+        android:layout_toRightOf="@id/center_space"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/fragment_gear_edit_attack_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_gear_edit_attack_bonus_field"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/fragment_gear_edit_attack_ability_text"
+        android:layout_marginLeft="@dimen/padding_medium"
+        android:text="@string/attack_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/fragment_gear_edit_damage_die_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/fragment_gear_edit_attack_bonus_field"
+        android:layout_marginRight="@dimen/padding_medium"
+        android:layout_toRightOf="@id/center_space"
+        android:hint="1d6" />
+
+    <TextView
+        android:id="@+id/fragment_gear_edit_damage_die_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_gear_edit_damage_die_field"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/fragment_gear_edit_attack_bonus_text"
+        android:layout_marginLeft="@dimen/padding_medium"
+        android:text="@string/damage_die"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/fragment_gear_edit_damage_ability_spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/fragment_gear_edit_damage_die_field"
+        android:layout_marginRight="@dimen/padding_medium"
+        android:layout_toRightOf="@id/center_space" />
+
+    <TextView
+        android:id="@+id/fragment_gear_edit_damage_ability_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_gear_edit_damage_ability_spinner"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/fragment_gear_edit_damage_die_text"
+        android:layout_marginLeft="@dimen/padding_medium"
+        android:text="@string/damage_ability"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/fragment_gear_edit_damage_bonus_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/fragment_gear_edit_damage_ability_spinner"
+        android:layout_marginRight="@dimen/padding_medium"
+        android:layout_toRightOf="@id/center_space"
+        android:hint="@string/z0"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:id="@+id/fragment_gear_edit_damage_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_gear_edit_damage_bonus_field"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/fragment_gear_edit_damage_ability_text"
+        android:layout_marginLeft="@dimen/padding_medium"
+        android:text="@string/damage_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/fragment_gear_edit_shield_bonus_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/fragment_gear_edit_damage_bonus_field"
+        android:layout_marginRight="@dimen/padding_medium"
+        android:layout_toRightOf="@id/center_space"
+        android:hint="@string/z0"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/fragment_gear_edit_shield_bonus_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/fragment_gear_edit_shield_bonus_field"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/fragment_gear_edit_damage_bonus_text"
+        android:layout_marginLeft="@dimen/padding_medium"
+        android:text="@string/shield_bonus"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/fragment_gear_edit_delete_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/padding_small"
+        android:layout_marginLeft="@dimen/padding_medium"
+        android:layout_marginRight="@dimen/padding_medium"
+        android:text="@string/delete" />
+
+</RelativeLayout>
