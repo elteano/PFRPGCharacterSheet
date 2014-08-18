@@ -93,7 +93,8 @@
         android:layout_below="@id/fragment_gear_edit_attack_bonus_field"
         android:layout_marginRight="@dimen/padding_medium"
         android:layout_toRightOf="@id/center_space"
-        android:hint="1d6" />
+        android:hint="1d6"
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/fragment_gear_edit_damage_die_text"
@@ -170,16 +171,14 @@
         android:text="@string/shield_bonus"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/fragment_gear_edit_delete_button"
+    <EditText
+        android:id="@+id/fragment_gear_edit_description_field"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:inputType="text|textMultiLine"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/padding_small"
-        android:layout_marginLeft="@dimen/padding_medium"
-        android:layout_marginRight="@dimen/padding_medium"
-        android:text="@string/delete" />
+        android:layout_below="@id/fragment_gear_edit_shield_bonus_field"
+        android:hint="@string/attack_desc" />
 
 </RelativeLayout>

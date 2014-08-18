@@ -20,12 +20,12 @@ public class GearEditFragment extends Fragment {
 
 	private IntTextWatcher mACBonusWatcher;
 	private Spinner.OnItemSelectedListener mAttackAbilityWatcher;
-	private TextWatcher mNameWatcher;
 	private IntTextWatcher mAttackBonusWatcher;
 	private Spinner.OnItemSelectedListener mDamageAbilityWatcher;
 	private IntTextWatcher mDamageBonusWatcher;
 	private TextWatcher mDamageDieWatcher;
 	private WeapShield mEditing;
+	private TextWatcher mNameWatcher;
 	private Spinner.OnItemSelectedListener mWeaponTypeWatcher;
 
 	public GearEditFragment(WeapShield editing) {
@@ -147,16 +147,16 @@ public class GearEditFragment extends Fragment {
 		};
 		mNameWatcher = new TextWatcher() {
 
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				mEditing.setName(s.toString());
+			public void afterTextChanged(Editable s) {
 			}
 
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 			}
 
-			public void afterTextChanged(Editable s) {
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				mEditing.setName(s.toString());
 			}
 		};
 		mWeaponTypeWatcher = new Spinner.OnItemSelectedListener() {
@@ -196,15 +196,15 @@ public class GearEditFragment extends Fragment {
 
 	private void setupAdapters(View root) {
 		ArrayAdapter<String> abilities = new ArrayAdapter<String>(
-				getActivity(), android.R.layout.simple_list_item_1,
+				getActivity(), android.R.layout.simple_spinner_item,
 				getActivity().getResources().getStringArray(
 						R.array.ability_array));
 		ArrayAdapter<String> abilities_with_none = new ArrayAdapter<String>(
-				getActivity(), android.R.layout.simple_list_item_1,
+				getActivity(), android.R.layout.simple_spinner_item,
 				getActivity().getResources().getStringArray(
 						R.array.ability_array_with_none));
 		ArrayAdapter<String> types = new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_list_item_1, getActivity()
+				android.R.layout.simple_spinner_item, getActivity()
 						.getResources().getStringArray(
 								R.array.weapon_types_array));
 		((Spinner) root

@@ -1,12 +1,10 @@
 package org.elteano.charactersheet.view.fragment;
 
-import java.util.ArrayList;
-
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.model.AbilityScores;
 import org.elteano.charactersheet.model.ArmorClass;
-import org.elteano.charactersheet.model.Attack;
 import org.elteano.charactersheet.model.Save;
+import org.elteano.charactersheet.model.WeapShield;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.support.ACButtonListener;
 import org.elteano.charactersheet.view.support.SaveButtonListener;
@@ -145,13 +143,10 @@ public class AttackPanelFragment extends Fragment {
 				.findViewById(R.id.fragment_attack_panel_main_spinner);
 		Spinner mOffSpinner = (Spinner) ret
 				.findViewById(R.id.fragment_attack_panel_off_spinner);
-		ArrayList<String> list = new ArrayList<String>();
-		for (Attack a : ((CharacterSheetActivity) getActivity()).getCharacter()
-				.getAttackList()) {
-			list.add(a.name);
-		}
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_list_item_1, list);
+		ArrayAdapter<WeapShield> adapter = new ArrayAdapter<WeapShield>(
+				getActivity(), android.R.layout.simple_spinner_item,
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.getWieldableEquipment());
 		mMainSpinner.setAdapter(adapter);
 		mOffSpinner.setAdapter(adapter);
 
@@ -175,5 +170,16 @@ public class AttackPanelFragment extends Fragment {
 		fillButtonDisplays();
 		hookupListeners();
 		super.onStart();
+	}
+
+	@Override
+	public void onResume() {
+		Spinner mMainSpinner = (Spinner) getView().findViewById(
+				R.id.fragment_attack_panel_main_spinner);
+		Spinner mOffSpinner = (Spinner) getView().findViewById(
+				R.id.fragment_attack_panel_off_spinner);
+		((ArrayAdapter) mMainSpinner.getAdapter()).notifyDataSetChanged();
+		((ArrayAdapter) mOffSpinner.getAdapter()).notifyDataSetChanged();
+		super.onResume();
 	}
 }

@@ -107,6 +107,7 @@ public class WeapShield implements Parcelable {
 		setAttackBonus(attack.addAttack);
 		setDamageAbility(attack.baseDamageAbility);
 		setDamageBonus(attack.addDamage);
+		setDamageDie(attack.damageDie);
 		setACBonus(0);
 	}
 
