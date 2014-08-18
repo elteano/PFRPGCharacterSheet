@@ -291,6 +291,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	private ArrayList<Spell> prepSpells;
 	private ArrayList<Skill> skills;
 	private ArrayList<Spell> spells;
+	private ArrayList<WeapShield> mWieldableEquipment;
 
 	public PlayerCharacter() {
 		abilities = new AbilityScores();
@@ -1133,8 +1134,9 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			// inflate attacks
 			JSONArray attacks = input.getJSONArray("attacks");
 			for (int i = 0; i < attacks.length(); ++i) {
-				ret.attacks
-						.add(Attack.createFromJSON(attacks.getJSONObject(i)));
+				Attack a = Attack.createFromJSON(attacks.getJSONObject(i));
+				ret.attacks.add(a);
+				ret.mWieldableEquipment.add(new WeapShield(a));
 			}
 			// inflate cfeats
 			JSONArray cfeats = input.getJSONArray("cfeats");
@@ -1185,5 +1187,9 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			ex.printStackTrace();
 			return null;
 		}
+	}
+
+	public ArrayList<WeapShield> getWieldableEquipment() {
+		return mWieldableEquipment;
 	}
 }

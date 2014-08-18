@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="weapon_types_array">
+        <item>Light</item>
+        <item>One-Handed</item>
+        <item>Two-Handed</item>
+        <item>Ranged</item>
+    </string-array>
+
+</resources>
