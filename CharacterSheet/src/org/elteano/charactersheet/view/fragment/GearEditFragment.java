@@ -24,6 +24,7 @@ public class GearEditFragment extends Fragment {
 	private Spinner.OnItemSelectedListener mDamageAbilityWatcher;
 	private IntTextWatcher mDamageBonusWatcher;
 	private TextWatcher mDamageDieWatcher;
+	private TextWatcher mDescriptionWatcher;
 	private WeapShield mEditing;
 	private TextWatcher mNameWatcher;
 	private Spinner.OnItemSelectedListener mWeaponTypeWatcher;
@@ -55,6 +56,9 @@ public class GearEditFragment extends Fragment {
 				.setText(getStringFromValue(mEditing.getACBonus()));
 		((EditText) getView().findViewById(R.id.fragment_gear_edit_name_field))
 				.setText(mEditing.getName());
+		((EditText) getView().findViewById(
+				R.id.fragment_gear_edit_description_field)).setText(mEditing
+				.getDescription());
 	}
 
 	private String getStringFromValue(int value) {
@@ -87,6 +91,9 @@ public class GearEditFragment extends Fragment {
 				.addTextChangedListener(mACBonusWatcher);
 		((EditText) getView().findViewById(R.id.fragment_gear_edit_name_field))
 				.addTextChangedListener(mNameWatcher);
+		((EditText) getView().findViewById(
+				R.id.fragment_gear_edit_description_field))
+				.addTextChangedListener(mDescriptionWatcher);
 	}
 
 	private void initializeListeners() {
@@ -143,6 +150,20 @@ public class GearEditFragment extends Fragment {
 			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
 					int arg3) {
 				mEditing.setDamageDie(arg0.toString());
+			}
+		};
+		mDescriptionWatcher = new TextWatcher() {
+
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				mEditing.setDescription(s.toString());
+			}
+
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+
+			public void afterTextChanged(Editable s) {
 			}
 		};
 		mNameWatcher = new TextWatcher() {
@@ -240,5 +261,8 @@ public class GearEditFragment extends Fragment {
 				.removeTextChangedListener(mACBonusWatcher);
 		((EditText) getView().findViewById(R.id.fragment_gear_edit_name_field))
 				.removeTextChangedListener(mNameWatcher);
+		((EditText) getView().findViewById(
+				R.id.fragment_gear_edit_description_field))
+				.removeTextChangedListener(mDescriptionWatcher);
 	}
 }

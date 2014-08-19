@@ -85,6 +85,7 @@
     <string name="fortitude">Fortitude</string>
     <string name="fortitude_short">F</string>
     <string name="gear_name">Equipment Name</string>
+    <string name="gear_desc">Other notes</string>
     <string name="gear_type">Gear Type</string>
     <string name="gold">Gold</string>
     <string name="heavy_load">Heavy Load</string>

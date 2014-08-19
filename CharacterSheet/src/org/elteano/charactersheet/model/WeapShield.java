@@ -85,6 +85,10 @@ public class WeapShield implements Parcelable {
 	 */
 	private String mDamageDie;
 	/**
+	 * Description of the miscellaneous errata regarding the gear piece.
+	 */
+	private String mDescription;
+	/**
 	 * The item's name.
 	 */
 	private String mName;
@@ -108,6 +112,7 @@ public class WeapShield implements Parcelable {
 		setDamageAbility(attack.baseDamageAbility);
 		setDamageBonus(attack.addDamage);
 		setDamageDie(attack.damageDie);
+		setDescription(attack.description);
 		setACBonus(0);
 	}
 
@@ -155,6 +160,10 @@ public class WeapShield implements Parcelable {
 		return mDamageDie;
 	}
 
+	public String getDescription() {
+		return mDescription;
+	}
+
 	public String getName() {
 		return mName;
 	}
@@ -190,6 +199,10 @@ public class WeapShield implements Parcelable {
 
 	public void setDamageDie(String damageDie) {
 		mDamageDie = damageDie;
+	}
+
+	public void setDescription(String description) {
+		mDescription = description;
 	}
 
 	/**
