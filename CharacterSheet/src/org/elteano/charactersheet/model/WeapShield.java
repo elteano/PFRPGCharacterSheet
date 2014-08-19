@@ -1,7 +1,11 @@
 package org.elteano.charactersheet.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 /**
  * Object representing a wieldable item, typically a weapon or shield.
@@ -29,6 +33,25 @@ public class WeapShield implements Parcelable {
 			return new WeapShield[size];
 		}
 	};
+
+	public static WeapShield createFromJSON(JSONObject source) {
+		WeapShield ret = new WeapShield("");
+		try {
+			ret.setACBonus(source.getInt("mACBonus"));
+			ret.setAttackAbility(source.getInt("mAttackAbility"));
+			ret.setAttackBonus(source.getInt("mAttackBonus"));
+			ret.setDamageAbility(source.getInt("mDamageAbility"));
+			ret.setDamageBonus(source.getInt("mDamageBonus"));
+			ret.setDamageDie(source.getString("mDamageDie"));
+			ret.setDescription(source.getString("mDescription"));
+			ret.setName(source.getString("mName"));
+			ret.setWeaponType(source.getInt("mType"));
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error inflating WeapShield from JSON.");
+			ex.printStackTrace();
+		}
+		return ret;
+	}
 
 	/**
 	 * Type value corresponding to light weapons.
@@ -246,5 +269,24 @@ public class WeapShield implements Parcelable {
 		dest.writeString(getName());
 		dest.writeString(getDamageDie());
 		dest.writeInt(getWeaponType());
+	}
+
+	public JSONObject writeToJSON() {
+		JSONObject ret = new JSONObject();
+		try {
+			ret.put("mACBonus", getACBonus());
+			ret.put("mAttackAbility", getAttackAbility());
+			ret.put("mAttackBonus", getAttackBonus());
+			ret.put("mDamageAbility", getDamageAbility());
+			ret.put("mDamageBonus", getDamageBonus());
+			ret.put("mDamageDie", getDamageDie());
+			ret.put("mDescription", getDescription());
+			ret.put("mName", getName());
+			ret.put("mType", getWeaponType());
+		} catch (JSONException ex) {
+			Log.e("CharacterSheet", "Error creating JSON from WeapShield.");
+			ex.printStackTrace();
+		}
+		return ret;
 	}
 }
