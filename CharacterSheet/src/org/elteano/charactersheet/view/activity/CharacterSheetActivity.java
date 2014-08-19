@@ -123,6 +123,7 @@ public class CharacterSheetActivity extends FragmentActivity {
 	}
 
 	public void clearBackStack() {
+		clearPreviousFragment();
 		getSupportFragmentManager().popBackStack(null,
 				FragmentManager.POP_BACK_STACK_INCLUSIVE);
 	}
@@ -328,7 +329,9 @@ public class CharacterSheetActivity extends FragmentActivity {
 
 	private void revertToPreviousFragment() {
 		if (mPreviousFragment != null) {
+			getSupportFragmentManager().popBackStack();
 			setToFragment(mPreviousFragment);
+			clearPreviousFragment();
 		} else {
 			mDrawerListener.setToLastSelected();
 		}

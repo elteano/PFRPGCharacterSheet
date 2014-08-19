@@ -37,6 +37,7 @@ public class WeapShieldListFragment extends Fragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
+		((CharacterSheetActivity) getActivity()).clearPreviousFragment();
 		View ret = inflater.inflate(R.layout.fragment_weap_shield_list,
 				container, false);
 		mAdapter = new ArrayAdapter<WeapShield>(getActivity(),
