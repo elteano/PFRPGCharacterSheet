@@ -90,6 +90,17 @@ public class CharacterReceiveActivity extends Activity implements
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+	protected void onResume() {
+		BluetoothAdapter blueAdp = BluetoothAdapter.getDefaultAdapter();
+		if (!blueAdp.isEnabled()) {
+			Intent enableBtIntent = new Intent(
+					BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			startActivityForResult(enableBtIntent, 0xfa10e);
+		}
+		super.onResume();
+	}
+
 	public void onCharacterReceive(PlayerCharacter character) {
 		if (character == null) {
 			// Notify the user of the failure
