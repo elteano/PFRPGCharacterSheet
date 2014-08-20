@@ -25,6 +25,12 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	public static final int ABILITY_INT = 3;
 	public static final int ABILITY_STR = 4;
 	public static final int ABILITY_WIS = 5;
+
+	public static final int LOAD_LIGHT = 0;
+	public static final int LOAD_MEDIUM = 1;
+	public static final int LOAD_HEAVY = 2;
+	public static final int LOAD_OVERLIMIT = 3;
+
 	public static Parcelable.Creator<PlayerCharacter> CREATOR = new Parcelable.Creator<PlayerCharacter>() {
 
 		public PlayerCharacter createFromParcel(Parcel src) {
@@ -393,6 +399,18 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		return characterBio;
 	}
 
+	public int getCarriedLoad() {
+		float weight = calculateTotalCarriedWeight();
+		if (weight <= getLightCarryingCapacityMax())
+			return LOAD_LIGHT;
+		else if (weight <= getMediumCarryingCapacityMax())
+			return LOAD_MEDIUM;
+		else if (weight <= getHeavyCarryingCapacityMax())
+			return LOAD_HEAVY;
+		else
+			return LOAD_OVERLIMIT;
+	}
+
 	public Feat getCFeat(String featName) {
 		for (Feat f : cfeats) {
 			if (f.getName().equals(featName))
@@ -497,6 +515,216 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	public String getLevelString() {
 		return getPlayerClassString();
 		// return levelString;
+	}
+
+	public int getLightCarryingCapacityMax() {
+		return getLightCarryingCapacityMax(getAbilities().getStr()
+				.getBaseValue());
+	}
+
+	private static int getLightCarryingCapacityMax(int score) {
+		switch (score) {
+		case 1:
+			return 3;
+		case 2:
+			return 6;
+		case 3:
+			return 10;
+		case 4:
+			return 13;
+		case 5:
+			return 16;
+		case 6:
+			return 20;
+		case 7:
+			return 23;
+		case 8:
+			return 26;
+		case 9:
+			return 30;
+		case 10:
+			return 33;
+		case 11:
+			return 38;
+		case 12:
+			return 43;
+		case 13:
+			return 50;
+		case 14:
+			return 58;
+		case 15:
+			return 66;
+		case 16:
+			return 76;
+		case 17:
+			return 86;
+		case 18:
+			return 100;
+		case 19:
+			return 116;
+		case 20:
+			return 133;
+		case 21:
+			return 153;
+		case 22:
+			return 173;
+		case 23:
+			return 200;
+		case 24:
+			return 233;
+		case 25:
+			return 266;
+		case 26:
+			return 306;
+		case 27:
+			return 346;
+		case 28:
+			return 400;
+		case 29:
+			return 466;
+		default:
+			return getLightCarryingCapacityMax(score - 10) * 4;
+		}
+	}
+
+	public int getMediumCarryingCapacityMax() {
+		return getMediumCarryingCapacityMax(getAbilities().getStr()
+				.getBaseValue());
+	}
+
+	private static int getMediumCarryingCapacityMax(int score) {
+		switch (score) {
+		case 1:
+			return 6;
+		case 2:
+			return 13;
+		case 3:
+			return 20;
+		case 4:
+			return 26;
+		case 5:
+			return 33;
+		case 6:
+			return 40;
+		case 7:
+			return 46;
+		case 8:
+			return 53;
+		case 9:
+			return 60;
+		case 10:
+			return 66;
+		case 11:
+			return 76;
+		case 12:
+			return 86;
+		case 13:
+			return 100;
+		case 14:
+			return 116;
+		case 15:
+			return 133;
+		case 16:
+			return 153;
+		case 17:
+			return 173;
+		case 18:
+			return 200;
+		case 19:
+			return 233;
+		case 20:
+			return 266;
+		case 21:
+			return 306;
+		case 22:
+			return 346;
+		case 23:
+			return 400;
+		case 24:
+			return 466;
+		case 25:
+			return 533;
+		case 26:
+			return 613;
+		case 27:
+			return 693;
+		case 28:
+			return 800;
+		case 29:
+			return 933;
+		default:
+			return getMediumCarryingCapacityMax(score - 10) * 4;
+		}
+	}
+
+	public int getHeavyCarryingCapacityMax() {
+		return getHeavyCarryingCapacityMax(getAbilities().getStr()
+				.getBaseValue());
+	}
+
+	private static int getHeavyCarryingCapacityMax(int score) {
+		switch (score) {
+		case 1:
+			return 10;
+		case 2:
+			return 20;
+		case 3:
+			return 30;
+		case 4:
+			return 40;
+		case 5:
+			return 50;
+		case 6:
+			return 60;
+		case 7:
+			return 70;
+		case 8:
+			return 80;
+		case 9:
+			return 90;
+		case 10:
+			return 100;
+		case 11:
+			return 115;
+		case 12:
+			return 130;
+		case 13:
+			return 150;
+		case 14:
+			return 175;
+		case 15:
+			return 200;
+		case 16:
+			return 230;
+		case 17:
+			return 260;
+		case 18:
+			return 300;
+		case 19:
+			return 350;
+		case 20:
+			return 400;
+		case 21:
+			return 460;
+		case 22:
+			return 520;
+		case 23:
+			return 600;
+		case 24:
+			return 700;
+		case 25:
+			return 800;
+		case 26:
+			return 920;
+		case 27:
+			return 1040;
+		case 28:
+			return 1200;
+		case 29:
+			return 1400;
+		default:
+			return getHeavyCarryingCapacityMax(score - 10) * 4;
+		}
 	}
 
 	public int getMiscInitBonus() {

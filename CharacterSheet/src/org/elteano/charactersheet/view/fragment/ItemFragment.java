@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.model.Item;
+import org.elteano.charactersheet.model.PlayerCharacter;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.activity.ItemEditActivity;
 import org.elteano.charactersheet.view.support.ItemListing;
@@ -173,6 +174,7 @@ public class ItemFragment extends CharacterUpdaterFragment implements
 		super.onResume();
 	}
 
+	@Override
 	public void onPause() {
 		unhookListeners();
 		super.onPause();
@@ -191,6 +193,23 @@ public class ItemFragment extends CharacterUpdaterFragment implements
 			weight.setText(""
 					+ ((CharacterSheetActivity) getActivity()).getCharacter()
 							.calculateTotalCarriedWeight() + " lbs");
+		TextView label = (TextView) getView().findViewById(
+				R.id.fragment_item_weight_text);
+		switch (((CharacterSheetActivity) getActivity()).getCharacter()
+				.getCarriedLoad()) {
+		case PlayerCharacter.LOAD_LIGHT:
+			label.setText(R.string.light_load);
+			break;
+		case PlayerCharacter.LOAD_MEDIUM:
+			label.setText(R.string.medium_load);
+			break;
+		case PlayerCharacter.LOAD_HEAVY:
+			label.setText(R.string.heavy_load);
+			break;
+		case PlayerCharacter.LOAD_OVERLIMIT:
+			label.setText(R.string.over_limit);
+			break;
+		}
 	}
 
 	@Override
