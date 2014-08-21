@@ -89,6 +89,12 @@ public class WeapShield implements Parcelable, Comparable<WeapShield> {
 	 * @see setWeaponType()
 	 */
 	public static final int TYPE_TWO_HANDED = 2;
+	/**
+	 * Type value corresponding to placeholder weapons.
+	 *
+	 * The user should not be able to create such weapons.
+	 */
+	public static final int TYPE_NONE = 4;
 
 	/**
 	 * Armor class bonus granted by this item. This is nullified if using this

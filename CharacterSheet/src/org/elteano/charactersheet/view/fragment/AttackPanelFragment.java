@@ -36,6 +36,7 @@ public class AttackPanelFragment extends Fragment implements
 
 	private Spinner mMainSpinner;
 	private Spinner mOffSpinner;
+	private OffHandSpinnerAdapter mOffSpinnerAdapter;
 
 	private void fillACButton() {
 		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
@@ -279,9 +280,12 @@ public class AttackPanelFragment extends Fragment implements
 				switch (arg0.getId()) {
 				case R.id.fragment_attack_panel_main_spinner:
 					c.setPreviouslySelectedMainWeapon(selected.getName());
+					mOffSpinnerAdapter.notifyDataSetChanged();
+					checkTwoHandedVisiblility();
 					break;
 				case R.id.fragment_attack_panel_off_spinner:
 					c.setPreviouslySelectedOffWeapon(selected.getName());
+					checkTwoHandedVisiblility();
 					break;
 				}
 			}
@@ -412,7 +416,11 @@ public class AttackPanelFragment extends Fragment implements
 				((CharacterSheetActivity) getActivity()).getCharacter()
 						.getWieldableEquipment());
 		mMainSpinner.setAdapter(adapter);
-		mOffSpinner.setAdapter(adapter);
+		mOffSpinnerAdapter = new OffHandSpinnerAdapter(getActivity(),
+				android.R.layout.simple_spinner_item,
+				((CharacterSheetActivity) getActivity()).getCharacter()
+						.getWieldableEquipment(), mMainSpinner);
+		mOffSpinner.setAdapter(mOffSpinnerAdapter);
 		setFeatDependentBoxes(ret);
 		return ret;
 	}
@@ -475,6 +483,18 @@ public class AttackPanelFragment extends Fragment implements
 			resetButton.setText(R.string.reset_);
 		} else {
 			resetButton.setText(R.string.reset);
+		}
+	}
+
+	private void checkTwoHandedVisiblility() {
+		if (((WeapShield) mOffSpinner.getSelectedItem()).getWeaponType() == WeapShield.TYPE_NONE) {
+			((CheckBox) getView().findViewById(
+					R.id.fragment_attack_panel_check_two_handed))
+					.setVisibility(View.INVISIBLE);
+		} else {
+			((CheckBox) getView().findViewById(
+					R.id.fragment_attack_panel_check_two_handed))
+					.setVisibility(View.VISIBLE);
 		}
 	}
 }
