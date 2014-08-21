@@ -39,6 +39,10 @@ public class AttackPanelFragment extends Fragment implements
 	private OffHandSpinnerAdapter mOffSpinnerAdapter;
 
 	private void fillACButton() {
+		fillACButton(false);
+	}
+
+	private void fillACButton(boolean useMain) {
 		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
 				.getCharacter();
 		ArmorClass ac = c.getAC();
@@ -65,6 +69,8 @@ public class AttackPanelFragment extends Fragment implements
 		WeapShield main = (WeapShield) mMainSpinner.getSelectedItem();
 		WeapShield off = (WeapShield) mOffSpinner.getSelectedItem();
 		int mainBonus = 0;
+		if (main != null && useMain)
+			mainBonus = main.getACBonus();
 		int offBonus = 0;
 		if (off != null
 				&& !(((CheckBox) getView().findViewById(
@@ -80,7 +86,7 @@ public class AttackPanelFragment extends Fragment implements
 	}
 
 	private void fillButtonDisplays() {
-		fillACButton();
+		fillACButton(true);
 		((Button) getView().findViewById(R.id.fragment_attack_panel_cmb_button))
 				.setText(""
 						+ ((CharacterSheetActivity) getActivity())
@@ -392,7 +398,7 @@ public class AttackPanelFragment extends Fragment implements
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_check_two_handed)).setChecked(false);
 		resetConditions();
-		fillACButton();
+		fillACButton(true);
 	}
 
 	@Override
