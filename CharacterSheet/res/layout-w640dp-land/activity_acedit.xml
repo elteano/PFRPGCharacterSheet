@@ -69,30 +69,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/activity_acedit_shield_bonus_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/activity_acedit_defl_bonus_field"
-        android:ems="@integer/ems_standard"
-        android:hint="@string/z0"
-        android:inputType="numberSigned" />
-
-    <TextView
-        android:id="@+id/activity_acedit_shield_bonus_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/activity_acedit_shield_bonus_field"
-        android:layout_toRightOf="@id/center_space"
-        android:text="@string/shield_bonus"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-   
-    <EditText
         android:id="@+id/activity_acedit_cmd_bonus_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/activity_acedit_shield_bonus_field"
+        android:layout_below="@+id/activity_acedit_defl_bonus_field"
         android:ems="@integer/ems_standard"
         android:hint="@string/z0"
         android:inputType="numberSigned" />
@@ -237,13 +218,5 @@
         android:layout_alignLeft="@+id/activity_acedit_ff_t_ac_text"
         android:text="@string/ffcmd"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <CheckBox
-        android:id="@+id/activity_acedit_shield_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/activity_acedit_shield_bonus_text"
-        android:layout_alignBottom="@+id/activity_acedit_shield_bonus_text"
-        android:layout_toLeftOf="@id/activity_acedit_shield_bonus_field" />
 
 </RelativeLayout>

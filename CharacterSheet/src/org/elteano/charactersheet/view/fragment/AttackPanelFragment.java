@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -33,7 +34,10 @@ import android.widget.TextView;
 public class AttackPanelFragment extends Fragment implements
 		View.OnClickListener {
 
-	private void fillButtonDisplays() {
+	private Spinner mMainSpinner;
+	private Spinner mOffSpinner;
+
+	private void fillACButton() {
 		ArmorClass ac = ((CharacterSheetActivity) getActivity()).getCharacter()
 				.getAC();
 		AbilityScores abilities = ((CharacterSheetActivity) getActivity())
@@ -42,10 +46,24 @@ public class AttackPanelFragment extends Fragment implements
 				.getSize();
 		int bab = ((CharacterSheetActivity) getActivity()).getCharacter()
 				.getBAB();
+		WeapShield main = (WeapShield) mMainSpinner.getSelectedItem();
+		WeapShield off = (WeapShield) mOffSpinner.getSelectedItem();
+		int mainBonus = 0;
+		int offBonus = 0;
+		if (main != null)
+			mainBonus = main.getACBonus();
+		if (off != null)
+			offBonus = off.getACBonus();
 		((Button) getView().findViewById(R.id.fragment_attack_panel_ac_button))
-				.setText("" + ac.getAC(abilities, size, bab));
+				.setText(""
+						+ (ac.getAC(abilities, size, bab) + Math.max(mainBonus,
+								offBonus)));
 		((Button) getView().findViewById(R.id.fragment_attack_panel_cmd_button))
 				.setText("" + ac.getCMD(abilities, size, bab));
+	}
+
+	private void fillButtonDisplays() {
+		fillACButton();
 		((Button) getView().findViewById(
 				R.id.fragment_attack_panel_fortitude_button)).setText(""
 				+ ((CharacterSheetActivity) getActivity())
@@ -201,6 +219,16 @@ public class AttackPanelFragment extends Fragment implements
 				R.id.fragment_attack_panel_condition_stunned))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
 						PlayerCharacter.CONDITION_STUNNED));
+		Spinner.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
+
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				fillACButton();
+			}
+
+			public void onNothingSelected(AdapterView<?> arg0) {
+			}
+		};
 	}
 
 	@Override
@@ -249,10 +277,6 @@ public class AttackPanelFragment extends Fragment implements
 		String offHand = "";
 		TextView out = ((TextView) getView().findViewById(
 				R.id.fragment_attack_panel_output_text));
-		Spinner mMainSpinner = (Spinner) getView().findViewById(
-				R.id.fragment_attack_panel_main_spinner);
-		Spinner mOffSpinner = (Spinner) getView().findViewById(
-				R.id.fragment_attack_panel_off_spinner);
 		WeapShield main = (WeapShield) mMainSpinner.getSelectedItem();
 		WeapShield off = (WeapShield) mOffSpinner.getSelectedItem();
 		int flags = 0;
@@ -304,9 +328,9 @@ public class AttackPanelFragment extends Fragment implements
 		setHasOptionsMenu(true);
 		View ret = inflater.inflate(R.layout.fragment_attack_panel, container,
 				false);
-		Spinner mMainSpinner = (Spinner) ret
+		mMainSpinner = (Spinner) ret
 				.findViewById(R.id.fragment_attack_panel_main_spinner);
-		Spinner mOffSpinner = (Spinner) ret
+		mOffSpinner = (Spinner) ret
 				.findViewById(R.id.fragment_attack_panel_off_spinner);
 		ArrayAdapter<WeapShield> adapter = new ArrayAdapter<WeapShield>(
 				getActivity(), android.R.layout.simple_spinner_item,
@@ -332,10 +356,6 @@ public class AttackPanelFragment extends Fragment implements
 
 	@Override
 	public void onResume() {
-		Spinner mMainSpinner = (Spinner) getView().findViewById(
-				R.id.fragment_attack_panel_main_spinner);
-		Spinner mOffSpinner = (Spinner) getView().findViewById(
-				R.id.fragment_attack_panel_off_spinner);
 		((ArrayAdapter) mMainSpinner.getAdapter()).notifyDataSetChanged();
 		((ArrayAdapter) mOffSpinner.getAdapter()).notifyDataSetChanged();
 		fillCheckBoxes();

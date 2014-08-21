@@ -50,9 +50,10 @@
     <string name="cmb">CMB</string>
     <string name="cmd">CMD</string>
     <string name="cmd_bonus">CMD Bonus</string>
-    <string name="con">CON</string>
     <string name="combat_expertise">Combat Expertise</string>
     <string name="combat_maneuver_bonus">Combat Maneuver Bonus</string>
+    <string name="con">CON</string>
+    <string name="conditions">Conditions</string>
     <string name="counter_name">Counter Name</string>
     <string name="cowering">Cowering</string>
     <string name="crash_toast_text">Ooooops ! I crashed, but a report has been sent to my developer to help fix the issue !</string>

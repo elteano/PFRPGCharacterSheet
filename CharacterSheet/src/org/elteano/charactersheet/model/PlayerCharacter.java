@@ -52,8 +52,6 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			Bundle b = src.readBundle();
 			b.setClassLoader(AbilityScores.class.getClassLoader());
 			ret.abilities = b.getParcelable("abilities");
-			b.setClassLoader(Attack.class.getClassLoader());
-			ret.attacks = b.getParcelableArrayList("attacks");
 			b.setClassLoader(Counter.class.getClassLoader());
 			ret.counters = b.getParcelableArrayList("counters");
 			b.setClassLoader(Feat.class.getClassLoader());
@@ -68,6 +66,9 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			b.setClassLoader(Spell.class.getClassLoader());
 			ret.spells = b.getParcelableArrayList("spells");
 			ret.prepSpells = b.getParcelableArrayList("prepSpells");
+			b.setClassLoader(WeapShield.class.getClassLoader());
+			ret.mWieldableEquipment = b
+					.getParcelableArrayList("mWieldableEquipment");
 			ret.ac = (ArmorClass) src.readParcelable(ArmorClass.class
 					.getClassLoader());
 			ret.cmb = (CMB) src.readParcelable(CMB.class.getClassLoader());
@@ -193,6 +194,14 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			SharedPreferences state) {
 		PlayerCharacter ret = new PlayerCharacter();
 		ret.ac = ArmorClass.fromSaveString(state.getString(SAVESTATE_AC, ""));
+		if (ret.ac.shieldBonus > 0) {
+			// Convert shield bonus to wieldable shield
+			WeapShield add = new WeapShield("Shield", ABILITY_STR, ABILITY_STR,
+					0, "", 0, ret.ac.shieldBonus);
+			add.setDescription("Automatically generated equipment.");
+			ret.mWieldableEquipment.add(add);
+			ret.ac.shieldBonus = 0;
+		}
 		ret.hpCurrent = state.getInt(SAVESTATE_HP_CURRENT, 0);
 		ret.hpRolled = state.getInt(SAVESTATE_HP_ROLLED, 0);
 		// Code to convert old HP system to new HP system
@@ -258,6 +267,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			Attack attack = Attack.constructFromString(attackString);
 			if (attack != null) {
 				ret.attacks.add(attack);
+				ret.mWieldableEquipment.add(new WeapShield(attack));
 			}
 		}
 		s = state.getString(SAVESTATE_FEATS, "");
@@ -1110,7 +1120,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	public void writeToParcel(Parcel dest, int flags) {
 		Bundle b = new Bundle();
 		b.putParcelable("abilities", abilities);
-		b.putParcelableArrayList("attacks", attacks);
+		b.putParcelableArrayList("mWieldableEquipment", mWieldableEquipment);
 		b.putParcelableArrayList("counters", counters);
 		b.putParcelableArrayList("cfeats", cfeats);
 		b.putParcelableArrayList("feats", feats);
@@ -1150,7 +1160,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		try {
 			ret.put("abilities", abilities.writeToJSON());
 			ret.put("ac", ac.writeToJSON());
-			// attacks handled below
+			// attacks deprecated
 			ret.put("baseAttackBonus", baseAttackBonus);
 			// cfeats handled below
 			ret.put("characterAge", characterAge);
@@ -1178,17 +1188,12 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			ret.put("mModFort", mModFort);
 			ret.put("mModRef", mModRef);
 			ret.put("mModWill", mModWill);
+			// mWieldableEquipment handled below
 			ret.put("name", name);
 			// prepSpells handled below
 			// skills handled below
 			// spells handled below
 
-			// attacks
-			JSONArray atk = new JSONArray();
-			for (Attack a : attacks) {
-				atk.put(a.writeToJSON());
-			}
-			ret.put("attacks", atk);
 			// cfeats
 			JSONArray cfts = new JSONArray();
 			for (Feat cf : cfeats) {
@@ -1225,6 +1230,12 @@ public class PlayerCharacter implements Parcelable, Serializable {
 				pspls.put(ps.writeToJSON());
 			}
 			ret.put("prepSpells", pspls);
+			// mWieldableEquipment
+			JSONArray cgr = new JSONArray();
+			for (WeapShield ws : mWieldableEquipment) {
+				cgr.put(ws.writeToJSON());
+			}
+			ret.put("mWieldableEquipment", cgr);
 			// skills
 			JSONArray skls = new JSONArray();
 			for (Skill s : skills) {
@@ -1278,18 +1289,48 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			ret.mModFort = input.getInt("mModFort");
 			ret.mModRef = input.getInt("mModRef");
 			ret.mModWill = input.getInt("mModWill");
+			// mWieldableEquipment handled below
 			ret.name = input.getString("name");
 			// prepSpells handled below
 			// skills handled below
 			// spells handled below
 
-			// inflate attacks
-			JSONArray attacks = input.getJSONArray("attacks");
-			for (int i = 0; i < attacks.length(); ++i) {
-				Attack a = Attack.createFromJSON(attacks.getJSONObject(i));
-				ret.attacks.add(a);
-				ret.mWieldableEquipment.add(new WeapShield(a));
+			try {
+				// inflate mWieldableEquipment
+				// before attacks for now to transition previous development
+				// saves
+				JSONArray gear = input.getJSONArray("mWieldableEquipment");
+				for (int i = 0; i < gear.length(); ++i) {
+					ret.mWieldableEquipment.add(WeapShield.createFromJSON(gear
+							.getJSONObject(i)));
+				}
+			} catch (JSONException ex) {
+				// might not exist
 			}
+			boolean needsEquip = ret.mWieldableEquipment.isEmpty();
+
+			try {
+				// inflate attacks
+				JSONArray attacks = input.getJSONArray("attacks");
+				for (int i = 0; i < attacks.length(); ++i) {
+					Attack a = Attack.createFromJSON(attacks.getJSONObject(i));
+					ret.attacks.add(a);
+					if (needsEquip)
+						ret.mWieldableEquipment.add(new WeapShield(a));
+				}
+			} catch (JSONException ex) {
+				// might not exist
+			}
+
+			// convert AC shield bonus to wieldable shield
+			if (ret.ac.shieldBonus > 0) {
+				WeapShield asdf = new WeapShield("Shield", ABILITY_STR,
+						ABILITY_STR, 0, "", 0, ret.ac.shieldBonus);
+				asdf.setDescription("Automatically generated.");
+				ret.mWieldableEquipment.add(asdf);
+				ret.ac.shieldBonus = 0;
+			}
+
 			// inflate cfeats
 			JSONArray cfeats = input.getJSONArray("cfeats");
 			for (int i = 0; i < cfeats.length(); ++i) {

@@ -12,12 +12,9 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 
-public class ACEditActivity extends Activity implements OnCheckedChangeListener {
+public class ACEditActivity extends Activity {
 
 	public static final String INPUT_ABILITIES = "abilities";
 	public static final String INPUT_SIZE = "size";
@@ -27,7 +24,7 @@ public class ACEditActivity extends Activity implements OnCheckedChangeListener 
 	private AbilityScores abilities;
 	private int size;
 	private int bab;
-	private IntTextWatcher aBonus, deBonus, doBonus, sBonus, cBonus;
+	private IntTextWatcher aBonus, deBonus, doBonus, cBonus;
 
 	private void setOrientation() {
 		int screenSizeFlag = getResources().getConfiguration().screenLayout
@@ -38,11 +35,6 @@ public class ACEditActivity extends Activity implements OnCheckedChangeListener 
 		} else {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 		}
-	}
-
-	public void onCheckedChanged(CompoundButton source, boolean newVal) {
-		ac.shield = newVal;
-		updateButtons();
 	}
 
 	public void onClickDoneButton(View source) {
@@ -79,17 +71,11 @@ public class ACEditActivity extends Activity implements OnCheckedChangeListener 
 				.removeTextChangedListener(deBonus);
 		((EditText) findViewById(R.id.activity_acedit_dodge_bonus_field))
 				.removeTextChangedListener(doBonus);
-		((EditText) findViewById(R.id.activity_acedit_shield_bonus_field))
-				.removeTextChangedListener(sBonus);
 		((EditText) findViewById(R.id.activity_acedit_cmd_bonus_field))
 				.removeTextChangedListener(cBonus);
 	}
 
 	private void updateText() {
-		((CheckBox) findViewById(R.id.activity_acedit_shield_checkbox))
-				.setChecked(ac.shield);
-		((CheckBox) findViewById(R.id.activity_acedit_shield_checkbox))
-				.setOnCheckedChangeListener(this);
 		EditText tv = (EditText) findViewById(R.id.activity_acedit_armor_bonus_field);
 		if (ac.armorBonus != 0)
 			tv.setText("" + ac.armorBonus);
@@ -120,17 +106,6 @@ public class ACEditActivity extends Activity implements OnCheckedChangeListener 
 			@Override
 			public void numberChanged(int newNumber) {
 				ac.dodgeBonus = newNumber;
-				updateButtons();
-			}
-		});
-		tv = (EditText) findViewById(R.id.activity_acedit_shield_bonus_field);
-		if (ac.shieldBonus != 0)
-			tv.setText("" + ac.shieldBonus);
-		tv.addTextChangedListener(sBonus = new IntTextWatcher() {
-
-			@Override
-			public void numberChanged(int newNumber) {
-				ac.shieldBonus = newNumber;
 				updateButtons();
 			}
 		});

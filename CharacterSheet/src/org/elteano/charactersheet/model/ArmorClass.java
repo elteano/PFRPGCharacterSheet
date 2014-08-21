@@ -12,11 +12,13 @@ import android.util.Log;
 public class ArmorClass implements Parcelable, Serializable {
 
 	public static final long serialVersionUID = 1L;
+	@Deprecated
 	public boolean shield;
 	public int armorBonus;
 	public int miscBonus;
 	public int dodgeBonus;
 	public int cmdBonus;
+	@Deprecated
 	public int shieldBonus;
 
 	public static transient final Parcelable.Creator<ArmorClass> CREATOR = new Parcelable.Creator<ArmorClass>() {
