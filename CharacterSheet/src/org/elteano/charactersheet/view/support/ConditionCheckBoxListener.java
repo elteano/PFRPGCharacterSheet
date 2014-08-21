@@ -1,6 +1,7 @@
 package org.elteano.charactersheet.view.support;
 
 import org.elteano.charactersheet.model.PlayerCharacter;
+import org.elteano.charactersheet.view.fragment.AttackPanelFragment;
 
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -14,15 +15,18 @@ public class ConditionCheckBoxListener implements OnCheckedChangeListener {
 
 	private int mConditionCode;
 	private PlayerCharacter mEditingCharacter;
+	private AttackPanelFragment mNotify;
 
 	public ConditionCheckBoxListener(PlayerCharacter editCharacter,
-			int conditionCode) {
+			int conditionCode, AttackPanelFragment notify) {
 		mEditingCharacter = editCharacter;
 		mConditionCode = conditionCode;
+		mNotify = notify;
 	}
 
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		mEditingCharacter.setConditions(mConditionCode, isChecked);
+		if (mNotify != null)
+			mNotify.updateOnConditionChange();
 	}
-
 }

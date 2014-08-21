@@ -83,6 +83,37 @@ public class ArmorClass implements Parcelable, Serializable {
 		return new ArmorClass(abonus, dbonus, mbonus, sbonus, cbonus, shield);
 	}
 
+	public int getConditionModifiers(PlayerCharacter c) {
+		int ret = 0;
+		if (c.isBlinded()) {
+			ret -= 2;
+		}
+		if (c.isCowering()) {
+			ret -= 2;
+		}
+		if (c.isHelpless()) {
+			ret -= 4;
+		}
+		if (c.isPinned()) {
+			ret -= 4;
+		}
+		if (c.isProne()) {
+			ret -= 4;
+		}
+		if (c.isSqueezing()) {
+			ret -= 4;
+		}
+		if (c.isStunned()) {
+			ret -= 2;
+		}
+		return ret;
+	}
+
+	public int getACFromCharacter(PlayerCharacter c) {
+		return getAC(c.getAbilities(), c.getSize(), c.getBAB())
+				+ getConditionModifiers(c);
+	}
+
 	public int getAC(AbilityScores abilities, int size, int bab) {
 		return 10
 				+ armorBonus

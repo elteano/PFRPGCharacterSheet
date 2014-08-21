@@ -38,14 +38,29 @@ public class AttackPanelFragment extends Fragment implements
 	private Spinner mOffSpinner;
 
 	private void fillACButton() {
-		ArmorClass ac = ((CharacterSheetActivity) getActivity()).getCharacter()
-				.getAC();
-		AbilityScores abilities = ((CharacterSheetActivity) getActivity())
-				.getCharacter().getAbilities();
-		int size = ((CharacterSheetActivity) getActivity()).getCharacter()
-				.getSize();
-		int bab = ((CharacterSheetActivity) getActivity()).getCharacter()
-				.getBAB();
+		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
+				.getCharacter();
+		ArmorClass ac = c.getAC();
+		AbilityScores abilities = c.getAbilities();
+		int size = c.getSize();
+		int bab = c.getBAB();
+		int modifiers = 0;
+		if (((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_charge)).isChecked()) {
+			modifiers -= 2;
+		}
+		if (((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_defensive)).isChecked()) {
+			modifiers += 2;
+		}
+		if (((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_expertise)).isChecked()) {
+			modifiers += 1 + c.getBAB() / 4;
+		}
+		if (((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_cleave)).isChecked()) {
+			modifiers -= 2;
+		}
 		WeapShield main = (WeapShield) mMainSpinner.getSelectedItem();
 		WeapShield off = (WeapShield) mOffSpinner.getSelectedItem();
 		int mainBonus = 0;
@@ -56,8 +71,8 @@ public class AttackPanelFragment extends Fragment implements
 			offBonus = off.getACBonus();
 		((Button) getView().findViewById(R.id.fragment_attack_panel_ac_button))
 				.setText(""
-						+ (ac.getAC(abilities, size, bab) + Math.max(mainBonus,
-								offBonus)));
+						+ (ac.getACFromCharacter(c)
+								+ Math.max(mainBonus, offBonus) + modifiers));
 		((Button) getView().findViewById(R.id.fragment_attack_panel_cmd_button))
 				.setText("" + ac.getCMD(abilities, size, bab));
 	}
@@ -95,43 +110,46 @@ public class AttackPanelFragment extends Fragment implements
 		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
 				.getCharacter();
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_cowering)).setEnabled(c
+				R.id.fragment_attack_panel_condition_blinded)).setChecked(c
+				.isBlinded());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_cowering)).setChecked(c
 				.isCowering());
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_dazzled)).setEnabled(c
+				R.id.fragment_attack_panel_condition_dazzled)).setChecked(c
 				.isDazzled());
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_entangled)).setEnabled(c
+				R.id.fragment_attack_panel_condition_entangled)).setChecked(c
 				.isEntangled());
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_flat_footed)).setEnabled(c
+				R.id.fragment_attack_panel_condition_flat_footed)).setChecked(c
 				.isFlatFooted());
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_frightened)).setEnabled(c
+				R.id.fragment_attack_panel_condition_frightened)).setChecked(c
 				.isFrightened());
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_grappling)).setEnabled(c
+				R.id.fragment_attack_panel_condition_grappling)).setChecked(c
 				.isGrappling());
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_helpless)).setEnabled(c
+				R.id.fragment_attack_panel_condition_helpless)).setChecked(c
 				.isHelpless());
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_invisible)).setEnabled(c
+				R.id.fragment_attack_panel_condition_invisible)).setChecked(c
 				.isInvisible());
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_pinned)).setEnabled(c
+				R.id.fragment_attack_panel_condition_pinned)).setChecked(c
 				.isPinned());
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_prone)).setEnabled(c
+				R.id.fragment_attack_panel_condition_prone)).setChecked(c
 				.isProne());
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_shaken)).setEnabled(c
+				R.id.fragment_attack_panel_condition_shaken)).setChecked(c
 				.isShaken());
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_squeezing)).setEnabled(c
+				R.id.fragment_attack_panel_condition_squeezing)).setChecked(c
 				.isSqueezing());
 		((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_condition_stunned)).setEnabled(c
+				R.id.fragment_attack_panel_condition_stunned)).setChecked(c
 				.isStunned());
 	}
 
@@ -168,57 +186,61 @@ public class AttackPanelFragment extends Fragment implements
 								.getAbilities()));
 
 		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_blinded))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_BLINDED, this));
+		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_cowering))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_COWERING));
+						PlayerCharacter.CONDITION_COWERING, this));
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_dazzled))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_DAZZLED));
+						PlayerCharacter.CONDITION_DAZZLED, this));
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_entangled))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_ENTANGLED));
+						PlayerCharacter.CONDITION_ENTANGLED, this));
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_flat_footed))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_FLAT_FOOTED));
+						PlayerCharacter.CONDITION_FLAT_FOOTED, this));
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_frightened))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_FRIGHTENED));
+						PlayerCharacter.CONDITION_FRIGHTENED, this));
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_grappling))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_GRAPPLING));
+						PlayerCharacter.CONDITION_GRAPPLING, this));
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_helpless))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_HELPLESS));
+						PlayerCharacter.CONDITION_HELPLESS, this));
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_invisible))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_INVISIBLE));
+						PlayerCharacter.CONDITION_INVISIBLE, this));
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_pinned))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_PINNED));
+						PlayerCharacter.CONDITION_PINNED, this));
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_prone))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_PRONE));
+						PlayerCharacter.CONDITION_PRONE, this));
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_shaken))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_SHAKEN));
+						PlayerCharacter.CONDITION_SHAKEN, this));
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_squeezing))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_SQUEEZING));
+						PlayerCharacter.CONDITION_SQUEEZING, this));
 		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_stunned))
 				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
-						PlayerCharacter.CONDITION_STUNNED));
+						PlayerCharacter.CONDITION_STUNNED, this));
 		Spinner.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
 
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -383,5 +405,9 @@ public class AttackPanelFragment extends Fragment implements
 					.findViewById(R.id.fragment_attack_panel_check_expertise))
 					.setVisibility(View.VISIBLE);
 		}
+	}
+
+	public void updateOnConditionChange() {
+		fillACButton();
 	}
 }
