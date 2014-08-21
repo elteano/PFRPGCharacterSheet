@@ -251,6 +251,8 @@ public class AttackPanelFragment extends Fragment implements
 			public void onNothingSelected(AdapterView<?> arg0) {
 			}
 		};
+		mMainSpinner.setOnItemSelectedListener(listener);
+		mOffSpinner.setOnItemSelectedListener(listener);
 	}
 
 	@Override
