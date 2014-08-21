@@ -13,7 +13,7 @@ import android.util.Log;
  * This is the replacement for the current Attack system, and will also replace
  * the shield bonus section of AC.
  */
-public class WeapShield implements Parcelable {
+public class WeapShield implements Parcelable, Comparable<WeapShield> {
 
 	public static final int MODIFIER_CHARGE = 1;
 	public static final int MODIFIER_DEFENSIVE = 2;
@@ -365,5 +365,9 @@ public class WeapShield implements Parcelable {
 			ex.printStackTrace();
 		}
 		return ret;
+	}
+
+	public int compareTo(WeapShield another) {
+		return getName().compareTo(another.getName());
 	}
 }

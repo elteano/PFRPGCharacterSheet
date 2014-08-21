@@ -3,6 +3,7 @@ package org.elteano.charactersheet.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.elteano.charactersheet.view.fragment.CharacterSelectFragment;
 import org.json.JSONArray;
@@ -1165,6 +1166,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	}
 
 	public JSONObject writeToJSON() {
+		Collections.sort(mWieldableEquipment);
 		JSONObject ret = new JSONObject();
 		try {
 			ret.put("abilities", abilities.writeToJSON());
