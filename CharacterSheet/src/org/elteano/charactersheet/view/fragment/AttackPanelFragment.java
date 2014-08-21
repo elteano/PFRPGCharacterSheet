@@ -65,9 +65,10 @@ public class AttackPanelFragment extends Fragment implements
 		WeapShield off = (WeapShield) mOffSpinner.getSelectedItem();
 		int mainBonus = 0;
 		int offBonus = 0;
-		if (main != null)
-			mainBonus = main.getACBonus();
-		if (off != null)
+		if (off != null
+				&& !(((CheckBox) getView().findViewById(
+						R.id.fragment_attack_panel_check_two_handed))
+						.isChecked()))
 			offBonus = off.getACBonus();
 		((Button) getView().findViewById(R.id.fragment_attack_panel_ac_button))
 				.setText(""
