@@ -4,6 +4,7 @@
     <string name="z0">0</string>
     <string name="ac">AC</string>
     <string name="ability_mod">Ability Mod.</string>
+    <string name="act">Act!</string>
     <string name="add">Add</string>
     <string name="add_attack">Add Attack</string>
     <string name="add_cfeat">Add Other</string>
@@ -42,12 +43,15 @@
     <string name="character_select_remove">Erase Character</string>
     <string name="character_size">Character Size</string>
     <string name="character_xp">Character XP</string>
+    <string name="charge">Charge</string>
     <string name="class_field_hint">Class # / Class #</string>
     <string name="class_modifiers">Class Modifiers</string>
+    <string name="cleave">Cleave</string>
     <string name="cmb">CMB</string>
     <string name="cmd">CMD</string>
     <string name="cmd_bonus">CMD Bonus</string>
     <string name="con">CON</string>
+    <string name="combat_expertise">Combat Expertise</string>
     <string name="combat_maneuver_bonus">Combat Maneuver Bonus</string>
     <string name="counter_name">Counter Name</string>
     <string name="cowering">Cowering</string>
@@ -84,6 +88,7 @@
     <string name="fftac">FF+T AC</string>
     <string name="field_feat_name">Feat Name</string>
     <string name="field_feat_desc">Feat Description</string>
+    <string name="fight_defensively">Fight Defensively</string>
     <string name="flat_foot_ac">Flat Foot AC</string>
     <string name="flat_footed">Flat-Footed</string>
     <string name="fortitude">Fortitude</string>
@@ -139,6 +144,7 @@
     <string name="receive_character">Receive Character</string>
     <string name="reflex">Reflex</string>
     <string name="reflex_short">R</string>
+    <string name="reset">Reset</string>
     <string name="rolled_hp">Rolled HP</string>
     <string name="save_ability">Save Ability</string>
     <string name="save_bonus">Save Bonus</string>
@@ -193,6 +199,7 @@
     <string name="total_weight">Total Weight</string>
     <string name="touch">Touch</string>
     <string name="transfer_complete">Transfer complete</string>
+    <string name="two_handed">Two-Handed</string>
     <string name="will">Will</string>
     <string name="will_short">W</string>
     <string name="wis">WIS</string>

@@ -15,6 +15,14 @@ import android.util.Log;
  */
 public class WeapShield implements Parcelable {
 
+	public static final int MODIFIER_CHARGE = 1;
+	public static final int MODIFIER_DEFENSIVE = 2;
+	public static final int MODIFIER_EXPERTISE = 4;
+	public static final int MODIFIER_TWO_HANDED = 8;
+	public static final int MODIFIER_TWO_HANDED_HAS_FEAT = 16;
+	public static final int MODIFIER_TWO_HANDED_IS_OFFHAND = 32;
+	public static final int MODIFIER_TWO_HANDED_OFFHAND_LIGHT = 64;
+
 	public static final Parcelable.Creator<WeapShield> CREATOR = new Parcelable.Creator<WeapShield>() {
 
 		public WeapShield createFromParcel(Parcel source) {
@@ -153,6 +161,73 @@ public class WeapShield implements Parcelable {
 		setDamageBonus(damageBonus);
 		setDamageDie(damageDie);
 		setACBonus(acBonus);
+	}
+
+	public String calculateAttack(PlayerCharacter c, int otherModifiers) {
+		int conditionModifiers = calculateModifiersFromCodes(c, otherModifiers);
+		int bab = c.getBAB();
+		String ret = "";
+		if (c.isDazzled())
+			conditionModifiers -= 1;
+		if (c.isEntangled()) {
+			conditionModifiers -= 2;
+		}
+		if (c.isInvisible()) {
+			conditionModifiers += 2;
+		}
+		if (c.isProne()) {
+			conditionModifiers -= 4;
+		}
+		if (c.isShaken() || c.isFrightened()) {
+			conditionModifiers -= 2;
+		}
+		if (c.isSqueezing()) {
+			conditionModifiers -= 4;
+		}
+		do {
+			int curMod = bab + conditionModifiers
+					+ c.getAbility(mAttackAbility).getTempModifier();
+			ret += ((curMod >= 0) ? "+" : "") + curMod + " / ";
+			bab -= 5;
+		} while (bab > 0);
+		return ret.substring(0, ret.length() - 3);
+	}
+
+	private int calculateModifiersFromCodes(PlayerCharacter c, int modifierCodes) {
+		int ret = 0;
+		if ((modifierCodes & MODIFIER_CHARGE) == MODIFIER_CHARGE) {
+			ret += 2;
+		}
+		if ((modifierCodes & MODIFIER_DEFENSIVE) == MODIFIER_DEFENSIVE) {
+			ret -= 4;
+		}
+		if ((modifierCodes & MODIFIER_EXPERTISE) == MODIFIER_EXPERTISE) {
+			ret -= 1 + c.getBAB() / 4;
+		}
+		if ((modifierCodes & MODIFIER_TWO_HANDED) == MODIFIER_TWO_HANDED) {
+			boolean hasFeat = (modifierCodes & MODIFIER_TWO_HANDED_HAS_FEAT) == MODIFIER_TWO_HANDED_HAS_FEAT;
+			boolean offLight = (modifierCodes & MODIFIER_TWO_HANDED_OFFHAND_LIGHT) == MODIFIER_TWO_HANDED_OFFHAND_LIGHT;
+			if (hasFeat) {
+				if (offLight)
+					ret -= 2;
+				else
+					ret -= 4;
+			} else {
+				boolean isOff = (modifierCodes & MODIFIER_TWO_HANDED_IS_OFFHAND) == MODIFIER_TWO_HANDED_IS_OFFHAND;
+				if (offLight) {
+					if (isOff)
+						ret -= 8;
+					else
+						ret -= 4;
+				} else {
+					if (isOff)
+						ret -= 10;
+					else
+						ret -= 6;
+				}
+			}
+		}
+		return ret;
 	}
 
 	public int describeContents() {

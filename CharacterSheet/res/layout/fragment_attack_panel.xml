@@ -51,6 +51,91 @@
             android:layout_below="@id/fragment_attack_panel_main_spinner"
             android:layout_toRightOf="@id/center_space" />
 
+        <CheckBox
+            android:id="@+id/fragment_attack_panel_check_charge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/fragment_attack_panel_off_spinner"
+            android:text="@string/charge" />
+
+        <CheckBox
+            android:id="@+id/fragment_attack_panel_check_cleave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_attack_panel_off_spinner"
+            android:layout_toRightOf="@id/center_space"
+            android:text="@string/cleave"
+            android:visibility="invisible" />
+
+        <CheckBox
+            android:id="@+id/fragment_attack_panel_check_defensive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/fragment_attack_panel_check_charge"
+            android:text="@string/fight_defensively" />
+
+        <CheckBox
+            android:id="@+id/fragment_attack_panel_check_expertise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_attack_panel_check_cleave"
+            android:layout_toRightOf="@id/center_space"
+            android:text="@string/combat_expertise"
+            android:visibility="invisible" />
+
+        <CheckBox
+            android:id="@+id/fragment_attack_panel_check_two_handed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/fragment_attack_panel_check_defensive"
+            android:text="@string/two_handed" />
+
+        <LinearLayout
+            android:id="@+id/fragment_attack_panel_button_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_attack_panel_check_two_handed"
+            android:orientation="horizontal" >
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/fragment_attack_panel_act_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/act" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/fragment_attack_panel_reset_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/fragment_attack_panel_output_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/fragment_attack_panel_button_container"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
         <TextView
             android:id="@+id/fragment_attack_panel_fortitude_text"
             android:layout_width="wrap_content"

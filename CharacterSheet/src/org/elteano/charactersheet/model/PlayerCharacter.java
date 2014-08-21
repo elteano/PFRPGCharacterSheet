@@ -31,6 +31,20 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	public static final int LOAD_HEAVY = 2;
 	public static final int LOAD_OVERLIMIT = 3;
 
+	public static final int CONDITION_COWERING = 1;
+	public static final int CONDITION_DAZZLED = 2;
+	public static final int CONDITION_ENTANGLED = 4;
+	public static final int CONDITION_FLAT_FOOTED = 8;
+	public static final int CONDITION_FRIGHTENED = 16;
+	public static final int CONDITION_GRAPPLING = 32;
+	public static final int CONDITION_HELPLESS = 64;
+	public static final int CONDITION_INVISIBLE = 128;
+	public static final int CONDITION_PINNED = 256;
+	public static final int CONDITION_PRONE = 512;
+	public static final int CONDITION_SHAKEN = 1024;
+	public static final int CONDITION_SQUEEZING = 2048;
+	public static final int CONDITION_STUNNED = 4096;
+
 	public static Parcelable.Creator<PlayerCharacter> CREATOR = new Parcelable.Creator<PlayerCharacter>() {
 
 		public PlayerCharacter createFromParcel(Parcel src) {
@@ -282,6 +296,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	private int hpRolled;
 	private ArrayList<Item> items;
 	private String languages;
+	private int mConditions;
 	private int miscInitBonus;
 	private HP mHP;
 	private int mModFort;
@@ -346,8 +361,72 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		return ret;
 	}
 
+	public void clearConditions() {
+		mConditions = 0;
+	}
+
 	public int describeContents() {
 		return 0;
+	}
+
+	public void disableConditions(int conditions) {
+		mConditions &= ~conditions;
+	}
+
+	public void enableConditions(int conditions) {
+		mConditions |= conditions;
+	}
+
+	public void enableCowering() {
+		enableConditions(CONDITION_COWERING);
+	}
+
+	public void enableDazzled() {
+		enableConditions(CONDITION_DAZZLED);
+	}
+
+	public void enableEntangled() {
+		enableConditions(CONDITION_ENTANGLED);
+	}
+
+	public void enableFlatFooted() {
+		enableConditions(CONDITION_FLAT_FOOTED);
+	}
+
+	public void enableFrightened() {
+		enableConditions(CONDITION_FRIGHTENED);
+	}
+
+	public void enableGrappling() {
+		enableConditions(CONDITION_GRAPPLING);
+	}
+
+	public void enableHelpless() {
+		enableConditions(CONDITION_HELPLESS);
+	}
+
+	public void enableInvisible() {
+		enableConditions(CONDITION_INVISIBLE);
+	}
+
+	public void enablePinned() {
+		enableConditions(CONDITION_PINNED);
+	}
+
+	public void enableProne() {
+		enableConditions(CONDITION_PRONE);
+	}
+
+	public void enableShaken() {
+		enableConditions(CONDITION_SHAKEN);
+	}
+
+	public void enableSqueezing() {
+		enableConditions(CONDITION_SQUEEZING);
+	}
+
+	public void enableStunned() {
+		enableConditions(CONDITION_STUNNED);
 	}
 
 	public AbilityScores getAbilities() {
@@ -801,6 +880,70 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		return characterXP;
 	}
 
+	public boolean hasFeat(String featName) {
+		for (Feat f : getFeatList()) {
+			if (f.getName().equals(featName))
+				return true;
+		}
+		return false;
+	}
+
+	public boolean isAffectedByConditions(int conditions) {
+		return (mConditions & conditions) == conditions;
+	}
+
+	public boolean isCowering() {
+		return isAffectedByConditions(CONDITION_COWERING);
+	}
+
+	public boolean isDazzled() {
+		return isAffectedByConditions(CONDITION_DAZZLED);
+	}
+
+	public boolean isEntangled() {
+		return isAffectedByConditions(CONDITION_ENTANGLED);
+	}
+
+	public boolean isFlatFooted() {
+		return isAffectedByConditions(CONDITION_FLAT_FOOTED);
+	}
+
+	public boolean isFrightened() {
+		return isAffectedByConditions(CONDITION_FRIGHTENED);
+	}
+
+	public boolean isGrappling() {
+		return isAffectedByConditions(CONDITION_GRAPPLING);
+	}
+
+	public boolean isHelpless() {
+		return isAffectedByConditions(CONDITION_HELPLESS);
+	}
+
+	public boolean isInvisible() {
+		return isAffectedByConditions(CONDITION_INVISIBLE);
+	}
+
+	public boolean isPinned() {
+		return isAffectedByConditions(CONDITION_PINNED);
+	}
+
+	public boolean isProne() {
+		return isAffectedByConditions(CONDITION_PRONE);
+	}
+
+	public boolean isShaken() {
+		return isAffectedByConditions(CONDITION_SHAKEN);
+	}
+
+	public boolean isSqueezing() {
+		return isAffectedByConditions(CONDITION_SQUEEZING);
+	}
+
+	public boolean isStunned() {
+		return isAffectedByConditions(CONDITION_STUNNED);
+	}
+
 	public void removeAttack(Attack attack) {
 		attacks.remove(attack);
 	}
@@ -882,6 +1025,14 @@ public class PlayerCharacter implements Parcelable, Serializable {
 
 	public void setCMB(CMB cmb) {
 		this.cmb = cmb;
+	}
+
+	public void setConditions(int conditions, boolean status) {
+		if (status) {
+			enableConditions(conditions);
+		} else {
+			disableConditions(conditions);
+		}
 	}
 
 	public void setFort(Save fort) {

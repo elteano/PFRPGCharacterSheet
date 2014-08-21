@@ -3,10 +3,12 @@ package org.elteano.charactersheet.view.fragment;
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.model.AbilityScores;
 import org.elteano.charactersheet.model.ArmorClass;
+import org.elteano.charactersheet.model.PlayerCharacter;
 import org.elteano.charactersheet.model.Save;
 import org.elteano.charactersheet.model.WeapShield;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.support.ACButtonListener;
+import org.elteano.charactersheet.view.support.ConditionCheckBoxListener;
 import org.elteano.charactersheet.view.support.SaveButtonListener;
 
 import android.app.Activity;
@@ -21,12 +23,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 /**
  * A fragment consolidating all combat statistics.
  */
-public class AttackPanelFragment extends Fragment {
+public class AttackPanelFragment extends Fragment implements
+		View.OnClickListener {
 
 	private void fillButtonDisplays() {
 		ArmorClass ac = ((CharacterSheetActivity) getActivity()).getCharacter()
@@ -68,8 +73,56 @@ public class AttackPanelFragment extends Fragment {
 												.getCharacter().getAbilities()));
 	}
 
+	private void fillCheckBoxes() {
+		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
+				.getCharacter();
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_cowering)).setEnabled(c
+				.isCowering());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_dazzled)).setEnabled(c
+				.isDazzled());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_entangled)).setEnabled(c
+				.isEntangled());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_flat_footed)).setEnabled(c
+				.isFlatFooted());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_frightened)).setEnabled(c
+				.isFrightened());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_grappling)).setEnabled(c
+				.isGrappling());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_helpless)).setEnabled(c
+				.isHelpless());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_invisible)).setEnabled(c
+				.isInvisible());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_pinned)).setEnabled(c
+				.isPinned());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_prone)).setEnabled(c
+				.isProne());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_shaken)).setEnabled(c
+				.isShaken());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_squeezing)).setEnabled(c
+				.isSqueezing());
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_stunned)).setEnabled(c
+				.isStunned());
+	}
+
 	private void hookupListeners() {
+		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
+				.getCharacter();
 		ACButtonListener acButtonListener = new ACButtonListener(this);
+		((Button) getView().findViewById(R.id.fragment_attack_panel_act_button))
+				.setOnClickListener(this);
 		((Button) getView().findViewById(R.id.fragment_attack_panel_ac_button))
 				.setOnClickListener(acButtonListener);
 		((Button) getView().findViewById(R.id.fragment_attack_panel_cmd_button))
@@ -95,6 +148,59 @@ public class AttackPanelFragment extends Fragment {
 								.getWill(),
 						((CharacterSheetActivity) getActivity()).getCharacter()
 								.getAbilities()));
+
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_cowering))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_COWERING));
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_dazzled))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_DAZZLED));
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_entangled))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_ENTANGLED));
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_flat_footed))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_FLAT_FOOTED));
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_frightened))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_FRIGHTENED));
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_grappling))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_GRAPPLING));
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_helpless))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_HELPLESS));
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_invisible))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_INVISIBLE));
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_pinned))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_PINNED));
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_prone))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_PRONE));
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_shaken))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_SHAKEN));
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_squeezing))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_SQUEEZING));
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_stunned))
+				.setOnCheckedChangeListener(new ConditionCheckBoxListener(c,
+						PlayerCharacter.CONDITION_STUNNED));
 	}
 
 	@Override
@@ -127,6 +233,65 @@ public class AttackPanelFragment extends Fragment {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.fragment_attack_panel_act_button:
+			onClickActButton();
+			break;
+		case R.id.fragment_attack_panel_reset_button:
+			onClickResetButton();
+			break;
+		}
+	}
+
+	private void onClickActButton() {
+		String mainHand = "";
+		String offHand = "";
+		TextView out = ((TextView) getView().findViewById(
+				R.id.fragment_attack_panel_output_text));
+		Spinner mMainSpinner = (Spinner) getView().findViewById(
+				R.id.fragment_attack_panel_main_spinner);
+		Spinner mOffSpinner = (Spinner) getView().findViewById(
+				R.id.fragment_attack_panel_off_spinner);
+		WeapShield main = (WeapShield) mMainSpinner.getSelectedItem();
+		WeapShield off = (WeapShield) mOffSpinner.getSelectedItem();
+		int flags = 0;
+		if (((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_charge)).isChecked())
+			flags |= WeapShield.MODIFIER_CHARGE;
+		if (((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_defensive)).isChecked())
+			flags |= WeapShield.MODIFIER_DEFENSIVE;
+		if (((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_expertise)).isChecked())
+			flags |= WeapShield.MODIFIER_EXPERTISE;
+		if (((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_two_handed)).isChecked()) {
+			flags |= WeapShield.MODIFIER_TWO_HANDED;
+			if (((CharacterSheetActivity) getActivity()).getCharacter()
+					.hasFeat("Two-Weapon Fighting"))
+				flags |= WeapShield.MODIFIER_TWO_HANDED_HAS_FEAT;
+			if (((WeapShield) mOffSpinner.getSelectedItem()).getWeaponType() == WeapShield.TYPE_LIGHT)
+				flags |= WeapShield.MODIFIER_TWO_HANDED_OFFHAND_LIGHT;
+			offHand = "\nOff Hand: "
+					+ off.calculateAttack(
+							((CharacterSheetActivity) getActivity())
+									.getCharacter(), flags
+									| WeapShield.MODIFIER_TWO_HANDED_IS_OFFHAND);
+		}
+		mainHand = main.calculateAttack(
+				((CharacterSheetActivity) getActivity()).getCharacter(), flags);
+		if (!offHand.isEmpty())
+			mainHand = "Main Hand: " + mainHand;
+		out.setText(mainHand + offHand);
+	}
+
+	private void onClickResetButton() {
+		TextView out = (TextView) getView().findViewById(
+				R.id.fragment_attack_panel_output_text);
+		out.setText("");
+	}
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
@@ -149,7 +314,7 @@ public class AttackPanelFragment extends Fragment {
 						.getWieldableEquipment());
 		mMainSpinner.setAdapter(adapter);
 		mOffSpinner.setAdapter(adapter);
-
+		setFeatDependentBoxes(ret);
 		return ret;
 	}
 
@@ -166,13 +331,6 @@ public class AttackPanelFragment extends Fragment {
 	}
 
 	@Override
-	public void onStart() {
-		fillButtonDisplays();
-		hookupListeners();
-		super.onStart();
-	}
-
-	@Override
 	public void onResume() {
 		Spinner mMainSpinner = (Spinner) getView().findViewById(
 				R.id.fragment_attack_panel_main_spinner);
@@ -180,6 +338,29 @@ public class AttackPanelFragment extends Fragment {
 				R.id.fragment_attack_panel_off_spinner);
 		((ArrayAdapter) mMainSpinner.getAdapter()).notifyDataSetChanged();
 		((ArrayAdapter) mOffSpinner.getAdapter()).notifyDataSetChanged();
+		fillCheckBoxes();
 		super.onResume();
+	}
+
+	@Override
+	public void onStart() {
+		fillButtonDisplays();
+		hookupListeners();
+		super.onStart();
+	}
+
+	private void setFeatDependentBoxes(View root) {
+		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
+				.getCharacter();
+		if (c.hasFeat("Cleave")) {
+			((CheckBox) root
+					.findViewById(R.id.fragment_attack_panel_check_cleave))
+					.setVisibility(View.VISIBLE);
+		}
+		if (c.hasFeat("Combat Expertise")) {
+			((CheckBox) root
+					.findViewById(R.id.fragment_attack_panel_check_expertise))
+					.setVisibility(View.VISIBLE);
+		}
 	}
 }
