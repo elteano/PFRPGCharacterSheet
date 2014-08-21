@@ -273,6 +273,7 @@ public class AttackPanelFragment extends Fragment implements
 	}
 
 	private void onClickActButton() {
+		fillACButton();
 		String mainHand = "";
 		String offHand = "";
 		TextView out = ((TextView) getView().findViewById(

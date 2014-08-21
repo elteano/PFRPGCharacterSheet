@@ -33,6 +33,7 @@
     <string name="base_score">Base Score</string>
     <string name="base_score_modifier">Modifier</string>
     <string name="base_stats">Base Stats</string>
+    <string name="blinded">Blinded</string>
     <string name="cancel">Cancel</string>
     <string name="cha">CHA</string>
     <string name="character_bio">Character Bio</string>

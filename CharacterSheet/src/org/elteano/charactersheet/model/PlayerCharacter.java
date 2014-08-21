@@ -31,19 +31,20 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	public static final int LOAD_HEAVY = 2;
 	public static final int LOAD_OVERLIMIT = 3;
 
-	public static final int CONDITION_COWERING = 1;
-	public static final int CONDITION_DAZZLED = 2;
-	public static final int CONDITION_ENTANGLED = 4;
-	public static final int CONDITION_FLAT_FOOTED = 8;
-	public static final int CONDITION_FRIGHTENED = 16;
-	public static final int CONDITION_GRAPPLING = 32;
-	public static final int CONDITION_HELPLESS = 64;
-	public static final int CONDITION_INVISIBLE = 128;
-	public static final int CONDITION_PINNED = 256;
-	public static final int CONDITION_PRONE = 512;
-	public static final int CONDITION_SHAKEN = 1024;
-	public static final int CONDITION_SQUEEZING = 2048;
-	public static final int CONDITION_STUNNED = 4096;
+	public static final int CONDITION_BLINDED = 1;
+	public static final int CONDITION_COWERING = 2;
+	public static final int CONDITION_DAZZLED = 4;
+	public static final int CONDITION_ENTANGLED = 8;
+	public static final int CONDITION_FLAT_FOOTED = 16;
+	public static final int CONDITION_FRIGHTENED = 32;
+	public static final int CONDITION_GRAPPLING = 64;
+	public static final int CONDITION_HELPLESS = 128;
+	public static final int CONDITION_INVISIBLE = 256;
+	public static final int CONDITION_PINNED = 512;
+	public static final int CONDITION_PRONE = 1024;
+	public static final int CONDITION_SHAKEN = 2048;
+	public static final int CONDITION_SQUEEZING = 4096;
+	public static final int CONDITION_STUNNED = 8192;
 
 	public static Parcelable.Creator<PlayerCharacter> CREATOR = new Parcelable.Creator<PlayerCharacter>() {
 
@@ -381,6 +382,10 @@ public class PlayerCharacter implements Parcelable, Serializable {
 
 	public void disableConditions(int conditions) {
 		mConditions &= ~conditions;
+	}
+
+	public void enableBlinded() {
+		enableConditions(CONDITION_BLINDED);
 	}
 
 	public void enableConditions(int conditions) {
@@ -900,6 +905,10 @@ public class PlayerCharacter implements Parcelable, Serializable {
 
 	public boolean isAffectedByConditions(int conditions) {
 		return (mConditions & conditions) == conditions;
+	}
+
+	public boolean isBlinded() {
+		return isAffectedByConditions(CONDITION_BLINDED);
 	}
 
 	public boolean isCowering() {
