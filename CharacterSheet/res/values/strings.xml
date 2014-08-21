@@ -147,6 +147,7 @@
     <string name="reflex">Reflex</string>
     <string name="reflex_short">R</string>
     <string name="reset">Reset</string>
+    <string name="reset_">Reset*</string>
     <string name="rolled_hp">Rolled HP</string>
     <string name="save_ability">Save Ability</string>
     <string name="save_bonus">Save Bonus</string>

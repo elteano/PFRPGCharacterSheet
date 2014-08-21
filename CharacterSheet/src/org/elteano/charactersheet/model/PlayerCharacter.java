@@ -908,6 +908,10 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		return characterXP;
 	}
 
+	public boolean hasAnyConditions() {
+		return mConditions != 0;
+	}
+
 	public boolean hasFeat(String featName) {
 		for (Feat f : getFeatList()) {
 			if (f.getName().equals(featName))

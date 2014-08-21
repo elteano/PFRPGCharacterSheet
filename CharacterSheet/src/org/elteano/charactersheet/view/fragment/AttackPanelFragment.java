@@ -183,6 +183,9 @@ public class AttackPanelFragment extends Fragment implements
 		ACButtonListener acButtonListener = new ACButtonListener(this);
 		((Button) getView().findViewById(R.id.fragment_attack_panel_act_button))
 				.setOnClickListener(this);
+		((Button) getView().findViewById(
+				R.id.fragment_attack_panel_reset_button))
+				.setOnClickListener(this);
 		((Button) getView().findViewById(R.id.fragment_attack_panel_ac_button))
 				.setOnClickListener(acButtonListener);
 		((Button) getView().findViewById(R.id.fragment_attack_panel_cmd_button))
@@ -374,6 +377,18 @@ public class AttackPanelFragment extends Fragment implements
 		TextView out = (TextView) getView().findViewById(
 				R.id.fragment_attack_panel_output_text);
 		out.setText("");
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_charge)).setChecked(false);
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_cleave)).setChecked(false);
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_defensive)).setChecked(false);
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_expertise)).setChecked(false);
+		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_two_handed)).setChecked(false);
+		resetConditions();
+		fillACButton();
 	}
 
 	@Override
@@ -430,6 +445,12 @@ public class AttackPanelFragment extends Fragment implements
 		super.onStart();
 	}
 
+	private void resetConditions() {
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.clearConditions();
+		fillCheckBoxes();
+	}
+
 	private void setFeatDependentBoxes(View root) {
 		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
 				.getCharacter();
@@ -447,5 +468,13 @@ public class AttackPanelFragment extends Fragment implements
 
 	public void updateOnConditionChange() {
 		fillACButton();
+		TextView resetButton = (TextView) getView().findViewById(
+				R.id.fragment_attack_panel_reset_button);
+		if (((CharacterSheetActivity) getActivity()).getCharacter()
+				.hasAnyConditions()) {
+			resetButton.setText(R.string.reset_);
+		} else {
+			resetButton.setText(R.string.reset);
+		}
 	}
 }
