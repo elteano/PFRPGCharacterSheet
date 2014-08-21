@@ -80,6 +80,10 @@ public class AttackPanelFragment extends Fragment implements
 
 	private void fillButtonDisplays() {
 		fillACButton();
+		((Button) getView().findViewById(R.id.fragment_attack_panel_cmb_button))
+				.setText(""
+						+ ((CharacterSheetActivity) getActivity())
+								.getCharacter().getCMB());
 		((Button) getView().findViewById(
 				R.id.fragment_attack_panel_fortitude_button)).setText(""
 				+ ((CharacterSheetActivity) getActivity())
