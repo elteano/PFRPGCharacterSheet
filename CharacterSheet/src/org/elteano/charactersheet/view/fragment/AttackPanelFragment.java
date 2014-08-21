@@ -153,6 +153,25 @@ public class AttackPanelFragment extends Fragment implements
 				.isStunned());
 	}
 
+	private void fillSpinners() {
+		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
+				.getCharacter();
+		for (int i = 0; i < c.getWieldableEquipment().size(); ++i) {
+			WeapShield ws = c.getWieldableEquipment().get(i);
+			if (ws.getName().equals(c.getPreviouslySelectedMainWeapon())) {
+				mMainSpinner.setSelection(i);
+				break;
+			}
+		}
+		for (int i = 0; i < c.getWieldableEquipment().size(); ++i) {
+			WeapShield ws = c.getWieldableEquipment().get(i);
+			if (ws.getName().equals(c.getPreviouslySelectedOffWeapon())) {
+				mOffSpinner.setSelection(i);
+				break;
+			}
+		}
+	}
+
 	private void hookupListeners() {
 		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
 				.getCharacter();
@@ -246,6 +265,17 @@ public class AttackPanelFragment extends Fragment implements
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				fillACButton();
+				PlayerCharacter c = ((CharacterSheetActivity) getActivity())
+						.getCharacter();
+				WeapShield selected = (WeapShield) arg0.getSelectedItem();
+				switch (arg0.getId()) {
+				case R.id.fragment_attack_panel_main_spinner:
+					c.setPreviouslySelectedMainWeapon(selected.getName());
+					break;
+				case R.id.fragment_attack_panel_off_spinner:
+					c.setPreviouslySelectedOffWeapon(selected.getName());
+					break;
+				}
 			}
 
 			public void onNothingSelected(AdapterView<?> arg0) {
@@ -384,6 +414,7 @@ public class AttackPanelFragment extends Fragment implements
 		((ArrayAdapter) mMainSpinner.getAdapter()).notifyDataSetChanged();
 		((ArrayAdapter) mOffSpinner.getAdapter()).notifyDataSetChanged();
 		fillCheckBoxes();
+		fillSpinners();
 		super.onResume();
 	}
 

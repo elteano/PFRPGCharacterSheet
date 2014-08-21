@@ -314,6 +314,8 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	private int mModFort;
 	private int mModRef;
 	private int mModWill;
+	private String mPreviouslySelectedMainWeapon;
+	private String mPreviouslySelectedOffWeapon;
 	private String name;
 	private ArrayList<Spell> prepSpells;
 	private ArrayList<Skill> skills;
@@ -321,6 +323,8 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	private ArrayList<WeapShield> mWieldableEquipment;
 
 	public PlayerCharacter() {
+		mPreviouslySelectedMainWeapon = "";
+		mPreviouslySelectedOffWeapon = "";
 		abilities = new AbilityScores();
 		ac = new ArmorClass(0, 0, 0, 0, 0, true);
 		name = "New Character";
@@ -844,6 +848,14 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		return prepSpells;
 	}
 
+	public String getPreviouslySelectedMainWeapon() {
+		return mPreviouslySelectedMainWeapon;
+	}
+
+	public String getPreviouslySelectedOffWeapon() {
+		return mPreviouslySelectedOffWeapon;
+	}
+
 	public Save getRef() {
 		return new Save(flagsRef, cModRef, mModRef);
 	}
@@ -1107,6 +1119,14 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		this.name = name;
 	}
 
+	public void setPreviouslySelectedMainWeapon(String weaponName) {
+		mPreviouslySelectedMainWeapon = weaponName;
+	}
+
+	public void setPreviouslySelectedOffWeapon(String weaponName) {
+		mPreviouslySelectedOffWeapon = weaponName;
+	}
+
 	public void setRef(Save ref) {
 		flagsRef = ref.flags;
 		cModRef = ref.classModifiers;
@@ -1199,6 +1219,10 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			ret.put("mModFort", mModFort);
 			ret.put("mModRef", mModRef);
 			ret.put("mModWill", mModWill);
+			ret.put("mPreviouslySelectedMainWeapon",
+					mPreviouslySelectedMainWeapon);
+			ret.put("mPreviouslySelectedOffWeapon",
+					mPreviouslySelectedOffWeapon);
 			// mWieldableEquipment handled below
 			ret.put("name", name);
 			// prepSpells handled below
@@ -1300,6 +1324,14 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			ret.mModFort = input.getInt("mModFort");
 			ret.mModRef = input.getInt("mModRef");
 			ret.mModWill = input.getInt("mModWill");
+			try {
+				ret.mPreviouslySelectedMainWeapon = input
+						.getString("mPreviouslySelectedMainWeapon");
+				ret.mPreviouslySelectedOffWeapon = input
+						.getString("mPreviouslySelectedOffWeapon");
+			} catch (JSONException ex) {
+				// may not exist
+			}
 			// mWieldableEquipment handled below
 			ret.name = input.getString("name");
 			// prepSpells handled below
