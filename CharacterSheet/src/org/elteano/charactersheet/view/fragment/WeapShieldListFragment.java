@@ -71,6 +71,8 @@ public class WeapShieldListFragment extends Fragment implements
 					.getWieldableEquipment()
 					.add(new WeapShield("New Gear Item"));
 			mAdapter.notifyDataSetChanged();
+			((CharacterSheetActivity) getActivity()).getCharacter()
+					.saveSelfByPlayerList(getActivity());
 			return true;
 		case R.id.fragment_combat_gear_menu_remove_item:
 			if (deleting) {
@@ -91,8 +93,17 @@ public class WeapShieldListFragment extends Fragment implements
 	}
 
 	@Override
+	public void onPause() {
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
+		super.onPause();
+	};
+
+	@Override
 	public void onResume() {
 		mAdapter.notifyDataSetChanged();
+		((CharacterSheetActivity) getActivity()).getCharacter()
+				.saveSelfByPlayerList(getActivity());
 		super.onResume();
 	}
 

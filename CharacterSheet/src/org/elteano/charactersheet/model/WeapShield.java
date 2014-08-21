@@ -145,6 +145,7 @@ public class WeapShield implements Parcelable {
 		setDamageDie(attack.damageDie);
 		setDescription(attack.description);
 		setACBonus(0);
+		mDescription = "";
 	}
 
 	public WeapShield(String name) {
@@ -161,6 +162,7 @@ public class WeapShield implements Parcelable {
 		setDamageBonus(damageBonus);
 		setDamageDie(damageDie);
 		setACBonus(acBonus);
+		mDescription = "";
 	}
 
 	public String calculateAttack(PlayerCharacter c, int otherModifiers) {
