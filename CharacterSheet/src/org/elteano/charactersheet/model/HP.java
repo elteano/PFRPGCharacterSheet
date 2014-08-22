@@ -77,6 +77,31 @@ public class HP implements Parcelable, Serializable {
 		return new HP(misc, hps);
 	}
 
+	public int getFlatModifiers(PlayerCharacter c) {
+		int ret = 0;
+		if (c.hasFeat("Toughness")) {
+			ret += 3;
+		}
+		if (c.hasFeat("Toughness, Mythic") || c.hasFeat("Mythic Toughness")) {
+			ret += 3;
+		}
+		return ret;
+	}
+
+	/**
+	 * Get maximum possible HP, using the given PlayerCharacter to determine
+	 * appropriate modifiers.
+	 *
+	 * @param perLevelModifiers
+	 *            Modifiers applied to each level roll.
+	 * @return The maximum HP this character can possess.
+	 */
+	public int getMaxHP(PlayerCharacter c) {
+		int additionalMods = getFlatModifiers(c);
+		int perLevelMods = getPerLevelModifiers(c);
+		return getMaxHP(perLevelMods) + additionalMods;
+	}
+
 	/**
 	 * Get maximum possible HP, applying the given per-level modifiers
 	 * (typically constitution modifier)
@@ -85,11 +110,22 @@ public class HP implements Parcelable, Serializable {
 	 *            Modifiers applied to each level roll.
 	 * @return The maximum HP this character can possess.
 	 */
-	public int getMaxHP(int perLevelModifiers) {
+	private int getMaxHP(int perLevelModifiers) {
 		int ret = miscMods;
 		for (int roll : mHPs) {
 			roll += perLevelModifiers;
 			ret += (roll > 0) ? roll : 1;
+		}
+		return ret;
+	}
+
+	public int getPerLevelModifiers(PlayerCharacter c) {
+		int ret = c.getAbilities().getCon().getTempModifier();
+		if (c.hasFeat("Toughness")) {
+			ret += 1;
+		}
+		if (c.hasFeat("Toughness, Mythic") || c.hasFeat("Mythic Toughness")) {
+			ret += 1;
 		}
 		return ret;
 	}

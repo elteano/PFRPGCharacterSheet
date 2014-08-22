@@ -2,6 +2,7 @@ package org.elteano.charactersheet.view.activity;
 
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.model.HP;
+import org.elteano.charactersheet.model.PlayerCharacter;
 import org.elteano.charactersheet.view.support.IntTextWatcher;
 
 import android.app.Activity;
@@ -26,23 +27,24 @@ public class HPEditActivity extends Activity {
 	public static final int REQUEST_EDIT = 21;
 	public static final String RESULT = "result";
 	public static final String INPUT_TOTAL_LEVELS = "levels";
-	public static final String INPUT_PER_LEVEL_MOD = "per level mod";
+	public static final String INPUT_CHARACTER = "character";
 	public static final String INPUT_HP = "in hp";
 
-	private int perLevelMod;
 	private HP mHP;
 	private int totalLevels;
+	private PlayerCharacter mCharacter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_hpedit);
 		mHP = getIntent().getParcelableExtra(INPUT_HP);
-		perLevelMod = getIntent().getIntExtra(INPUT_PER_LEVEL_MOD, 0);
+		mCharacter = getIntent().getParcelableExtra(INPUT_CHARACTER);
 		totalLevels = getIntent().getIntExtra(INPUT_TOTAL_LEVELS, 0);
 		setResult(RESULT_CANCELED);
-		Log.i("CharacterSheet", "levelmod: " + perLevelMod + "; total levels: "
-				+ totalLevels);
+		Log.i("CharacterSheet",
+				"levelmod: " + mHP.getPerLevelModifiers(mCharacter)
+						+ "; total levels: " + totalLevels);
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		TableRow tr = new TableRow(this, null);
@@ -67,6 +69,7 @@ public class HPEditActivity extends Activity {
 		EditText et = new EditText(this, null);
 		final TextView conmod = new TextView(this, null);
 		final TextView result = new TextView(this, null);
+		final int perLevelMod = mHP.getPerLevelModifiers(mCharacter);
 		IntTextWatcher itw = new IntTextWatcher() {
 
 			@Override
@@ -141,6 +144,6 @@ public class HPEditActivity extends Activity {
 
 	private void updateTotalHP() {
 		((TextView) findViewById(R.id.activity_hpedit_total_text)).setText(""
-				+ mHP.getMaxHP(perLevelMod));
+				+ mHP.getMaxHP(mCharacter));
 	}
 }

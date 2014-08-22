@@ -197,8 +197,7 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 			Log.i("CharacterSheet", "HP button clicked");
 			intent = new Intent(getActivity(), HPEditActivity.class);
 			intent.putExtra(HPEditActivity.INPUT_HP, (Parcelable) c.getHP());
-			intent.putExtra(HPEditActivity.INPUT_PER_LEVEL_MOD,
-					c.getAbility(PlayerCharacter.ABILITY_CON).getTempModifier());
+			intent.putExtra(HPEditActivity.INPUT_CHARACTER, (Parcelable) c);
 			intent.putExtra(HPEditActivity.INPUT_TOTAL_LEVELS,
 					c.getTotalLevel());
 			startActivityForResult(intent, HPEditActivity.REQUEST_EDIT);

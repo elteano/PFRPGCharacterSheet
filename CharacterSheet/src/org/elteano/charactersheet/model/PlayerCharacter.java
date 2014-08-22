@@ -52,8 +52,6 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		public PlayerCharacter createFromParcel(Parcel src) {
 			PlayerCharacter ret = new PlayerCharacter();
 			Bundle b = src.readBundle();
-			b.setClassLoader(AbilityScores.class.getClassLoader());
-			ret.abilities = b.getParcelable("abilities");
 			b.setClassLoader(Counter.class.getClassLoader());
 			ret.counters = b.getParcelableArrayList("counters");
 			b.setClassLoader(Feat.class.getClassLoader());
@@ -71,6 +69,8 @@ public class PlayerCharacter implements Parcelable, Serializable {
 			b.setClassLoader(WeapShield.class.getClassLoader());
 			ret.mWieldableEquipment = b
 					.getParcelableArrayList("mWieldableEquipment");
+			ret.abilities = (AbilityScores) src
+					.readParcelable(AbilityScores.class.getClassLoader());
 			ret.ac = (ArmorClass) src.readParcelable(ArmorClass.class
 					.getClassLoader());
 			ret.cmb = (CMB) src.readParcelable(CMB.class.getClassLoader());
@@ -455,7 +455,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 
 	/**
 	 * Gets Ability Scores with DEX denials and entanglement modifiers.
-	 * 
+	 *
 	 * @return
 	 */
 	public AbilityScores getAbilitiesAfterConditionsForAC() {
@@ -607,7 +607,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	}
 
 	public int getHPMax() {
-		return mHP.getMaxHP(abilities.getCon().getTempModifier());
+		return mHP.getMaxHP(this);
 	}
 
 	public int getHPRolled() {
@@ -1179,7 +1179,6 @@ public class PlayerCharacter implements Parcelable, Serializable {
 
 	public void writeToParcel(Parcel dest, int flags) {
 		Bundle b = new Bundle();
-		b.putParcelable("abilities", abilities);
 		b.putParcelableArrayList("mWieldableEquipment", mWieldableEquipment);
 		b.putParcelableArrayList("counters", counters);
 		b.putParcelableArrayList("cfeats", cfeats);
@@ -1190,6 +1189,7 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		b.putParcelableArrayList("spells", spells);
 		b.putParcelableArrayList("prepSpells", prepSpells);
 		dest.writeBundle(b);
+		dest.writeParcelable(abilities, 0);
 		dest.writeParcelable(ac, 0);
 		dest.writeParcelable(cmb, 0);
 		dest.writeFloat(characterGold);
