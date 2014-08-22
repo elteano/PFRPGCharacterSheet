@@ -33,6 +33,7 @@ public class WeapShield implements Parcelable, Comparable<WeapShield> {
 			ret.setDamageAbility(source.readInt());
 			ret.setDamageBonus(source.readInt());
 			ret.setName(source.readString());
+			ret.setDamageDie(source.readString());
 			ret.setWeaponType(source.readInt());
 			return ret;
 		}
