@@ -3,6 +3,7 @@
 
     <string name="z0">0</string>
     <string name="ac">AC</string>
+    <string name="ac_">AC*</string>
     <string name="ability_mod">Ability Mod.</string>
     <string name="act">Act!</string>
     <string name="add">Add</string>

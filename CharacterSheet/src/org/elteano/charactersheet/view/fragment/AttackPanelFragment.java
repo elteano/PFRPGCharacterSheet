@@ -43,6 +43,7 @@ public class AttackPanelFragment extends Fragment implements
 	}
 
 	private void fillACButton(boolean useMain) {
+		fillACText();
 		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
 				.getCharacter();
 		ArmorClass ac = c.getAC();
@@ -83,6 +84,18 @@ public class AttackPanelFragment extends Fragment implements
 								+ Math.max(mainBonus, offBonus) + modifiers));
 		((Button) getView().findViewById(R.id.fragment_attack_panel_cmd_button))
 				.setText("" + ac.getCMD(abilities, size, bab));
+	}
+
+	private void fillACText() {
+		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
+				.getCharacter();
+		TextView acText = ((TextView) getView().findViewById(
+				R.id.fragment_attack_panel_ac_text));
+		if (c.hasAnyConditions()) {
+			acText.setText(R.string.ac_);
+		} else {
+			acText.setText(R.string.ac);
+		}
 	}
 
 	private void fillButtonDisplays() {
