@@ -544,6 +544,10 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		return counters;
 	}
 
+	public int getExpertiseBonus() {
+		return 1 + getBAB() / 4;
+	}
+
 	public Feat getFeat(String featName) {
 		for (Feat f : feats) {
 			if (f.getName().equals(featName))

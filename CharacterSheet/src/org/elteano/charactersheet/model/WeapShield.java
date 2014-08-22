@@ -210,7 +210,7 @@ public class WeapShield implements Parcelable, Comparable<WeapShield> {
 			ret -= 4;
 		}
 		if ((modifierCodes & MODIFIER_EXPERTISE) == MODIFIER_EXPERTISE) {
-			ret -= 1 + c.getBAB() / 4;
+			ret -= c.getExpertiseBonus();
 		}
 		if ((modifierCodes & MODIFIER_TWO_HANDED) == MODIFIER_TWO_HANDED) {
 			boolean hasFeat = (modifierCodes & MODIFIER_TWO_HANDED_HAS_FEAT) == MODIFIER_TWO_HANDED_HAS_FEAT;

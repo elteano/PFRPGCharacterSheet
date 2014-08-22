@@ -51,20 +51,16 @@ public class AttackPanelFragment extends Fragment implements
 		int size = c.getSize();
 		int bab = c.getBAB();
 		int modifiers = 0;
-		if (((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_check_charge)).isChecked()) {
+		if (isCharging()) {
 			modifiers -= 2;
 		}
-		if (((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_check_defensive)).isChecked()) {
+		if (isDefensive()) {
 			modifiers += 2;
 		}
-		if (((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_check_expertise)).isChecked()) {
-			modifiers += 1 + c.getBAB() / 4;
+		if (isExpertise()) {
+			modifiers += c.getExpertiseBonus();
 		}
-		if (((CheckBox) getView().findViewById(
-				R.id.fragment_attack_panel_check_cleave)).isChecked()) {
+		if (isCleaving()) {
 			modifiers -= 2;
 		}
 		WeapShield main = (WeapShield) mMainSpinner.getSelectedItem();
@@ -314,6 +310,31 @@ public class AttackPanelFragment extends Fragment implements
 		};
 		mMainSpinner.setOnItemSelectedListener(listener);
 		mOffSpinner.setOnItemSelectedListener(listener);
+	}
+
+	private boolean isCharging() {
+		return ((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_charge)).isChecked();
+	}
+
+	private boolean isCleaving() {
+		return ((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_cleave)).isChecked();
+	}
+
+	private boolean isDefensive() {
+		return ((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_defensive)).isChecked();
+	}
+
+	private boolean isExpertise() {
+		return ((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_expertise)).isChecked();
+	}
+
+	private boolean isTwoHanded() {
+		return ((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_two_handed)).isChecked();
 	}
 
 	@Override
