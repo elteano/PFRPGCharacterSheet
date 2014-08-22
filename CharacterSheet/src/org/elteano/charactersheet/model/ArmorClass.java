@@ -110,7 +110,8 @@ public class ArmorClass implements Parcelable, Serializable {
 	}
 
 	public int getACFromCharacter(PlayerCharacter c) {
-		return getAC(c.getAbilities(), c.getSize(), c.getBAB())
+		return getAC(c.getAbilitiesAfterConditionsForAC(), c.getSize(),
+				c.getBAB())
 				+ getConditionModifiers(c);
 	}
 

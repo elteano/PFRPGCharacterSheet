@@ -453,6 +453,28 @@ public class PlayerCharacter implements Parcelable, Serializable {
 		return abilities;
 	}
 
+	/**
+	 * Gets Ability Scores with DEX denials and entanglement modifiers.
+	 * 
+	 * @return
+	 */
+	public AbilityScores getAbilitiesAfterConditionsForAC() {
+		AbilityScores modified = new AbilityScores(getAbilities());
+		if ((isBlinded() || isCowering() || isFlatFooted() || isStunned()
+				|| isHelpless() || isPinned())
+				&& modified.getDex().getTempModifier() > 0) {
+			int denialAdjustment = modified.getDex().getBaseValue()
+					+ modified.getDex().getTempAdjustment() - 10;
+			modified.getDex().setTempAdjustment(
+					modified.getDex().getTempAdjustment() - denialAdjustment);
+		}
+		if (isEntangled()) {
+			modified.getDex().setTempAdjustment(
+					modified.getDex().getTempAdjustment() - 4);
+		}
+		return modified;
+	}
+
 	public AbilityScore getAbility(int ability) {
 		switch (ability) {
 		case ABILITY_CHA:

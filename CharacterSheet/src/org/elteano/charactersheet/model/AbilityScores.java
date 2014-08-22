@@ -62,6 +62,28 @@ public class AbilityScores implements Parcelable, Serializable {
 				new AbilityScore(10));
 	}
 
+	/**
+	 * Deep copy constructor.
+	 *
+	 * @param copy
+	 *            Scores to copy.
+	 */
+	public AbilityScores(AbilityScores copy) {
+		this();
+		getCha().setBaseValue(copy.getCha().getBaseValue());
+		getCha().setTempAdjustment(copy.getCha().getTempAdjustment());
+		getCon().setBaseValue(copy.getCon().getBaseValue());
+		getCon().setTempAdjustment(copy.getCon().getTempAdjustment());
+		getDex().setBaseValue(copy.getDex().getBaseValue());
+		getDex().setTempAdjustment(copy.getDex().getTempAdjustment());
+		getInt().setBaseValue(copy.getInt().getBaseValue());
+		getInt().setTempAdjustment(copy.getInt().getTempAdjustment());
+		getStr().setBaseValue(copy.getStr().getBaseValue());
+		getStr().setTempAdjustment(copy.getStr().getTempAdjustment());
+		getWis().setBaseValue(copy.getWis().getBaseValue());
+		getWis().setTempAdjustment(copy.getWis().getTempAdjustment());
+	}
+
 	public AbilityScore getAbility(int ability) {
 		return scores[ability];
 	}
