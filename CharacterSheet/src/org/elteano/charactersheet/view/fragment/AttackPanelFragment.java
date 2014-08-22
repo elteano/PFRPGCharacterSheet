@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A fragment consolidating all combat statistics.
@@ -74,11 +75,15 @@ public class AttackPanelFragment extends Fragment implements
 		if (main != null && useMain)
 			mainBonus = main.getACBonus();
 		int offBonus = 0;
-		if (off != null
-				&& !(((CheckBox) getView().findViewById(
-						R.id.fragment_attack_panel_check_two_handed))
-						.isChecked()))
+		if (off != null && !isTwoHanded()) {
 			offBonus = off.getACBonus();
+		} else if (isTwoHanded() && c.hasFeat("Two-Weapon Defense")) {
+			if (isDefensive()) {
+				modifiers += 1;
+			} else {
+				modifiers += 2;
+			}
+		}
 		((Button) getView().findViewById(R.id.fragment_attack_panel_ac_button))
 				.setText(""
 						+ (ac.getACFromCharacter(c)
@@ -256,8 +261,7 @@ public class AttackPanelFragment extends Fragment implements
 			ret.append(ac.getACFromCharacter(c));
 		}
 		ret.append("\n");
-		ret.append("Note: Charging, cleaving, lunging, fighting defensively, and");
-		ret.append(" using combat expertise will give additional modifiers.");
+		ret.append(getResources().getString(R.string.note_ac_mods));
 		return ret.toString();
 	}
 
@@ -485,8 +489,15 @@ public class AttackPanelFragment extends Fragment implements
 									.getCharacter(), flags
 									| WeapShield.MODIFIER_TWO_HANDED_IS_OFFHAND);
 		}
-		mainHand = main.calculateAttack(
-				((CharacterSheetActivity) getActivity()).getCharacter(), flags);
+		if (main != null) {
+			mainHand = main.calculateAttack(
+					((CharacterSheetActivity) getActivity()).getCharacter(),
+					flags);
+		} else {
+			Toast.makeText(getActivity(), R.string.no_weapon_notice,
+					Toast.LENGTH_LONG).show();
+			return;
+		}
 		if (!offHand.isEmpty())
 			mainHand = "Main Hand: " + mainHand;
 		out.setText(mainHand + offHand);

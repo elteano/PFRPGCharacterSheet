@@ -123,6 +123,8 @@
     <string name="lunge">Lunge</string>
     <string name="new_c">New C.</string>
     <string name="new_peers">You have new peers available!</string>
+    <string name="no_weapon_notice">Please use the Edit Combat Gear panel to equip yourself before trying to attack. Note that you may add Unarmed Strike if you plan on using it.</string>
+    <string name="note_ac_mods">Note: Charging, cleaving, lunging, fighting defensively, Two-Weapon Defense, and Combat Expertise will give additional modifiers.</string>
     <string name="main_hand">Main Hand</string>
     <string name="max">Max</string>
     <string name="max_hp">Max HP</string>
