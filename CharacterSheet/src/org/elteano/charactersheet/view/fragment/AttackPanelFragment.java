@@ -65,6 +65,9 @@ public class AttackPanelFragment extends Fragment implements
 		if (isCleaving()) {
 			modifiers -= 2;
 		}
+		if (isLunging()) {
+			modifiers -= 2;
+		}
 		WeapShield main = (WeapShield) mMainSpinner.getSelectedItem();
 		WeapShield off = (WeapShield) mOffSpinner.getSelectedItem();
 		int mainBonus = 0;
@@ -252,8 +255,8 @@ public class AttackPanelFragment extends Fragment implements
 			ret.append(ac.getACFromCharacter(c));
 		}
 		ret.append("\n");
-		ret.append("Note: Charging, cleaving, fighting defensively, and using");
-		ret.append(" combat expertise will give additional modifiers.");
+		ret.append("Note: Charging, cleaving, lunging, fighting defensively, and");
+		ret.append(" using combat expertise will give additional modifiers.");
 		return ret.toString();
 	}
 
@@ -396,6 +399,11 @@ public class AttackPanelFragment extends Fragment implements
 	private boolean isExpertise() {
 		return ((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_check_expertise)).isChecked();
+	}
+
+	private boolean isLunging() {
+		return ((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_check_lunge)).isChecked();
 	}
 
 	private boolean isTwoHanded() {
@@ -577,6 +585,11 @@ public class AttackPanelFragment extends Fragment implements
 		if (c.hasFeat("Combat Expertise")) {
 			((CheckBox) root
 					.findViewById(R.id.fragment_attack_panel_check_expertise))
+					.setVisibility(View.VISIBLE);
+		}
+		if (c.hasFeat("Lunge")) {
+			((CheckBox) root
+					.findViewById(R.id.fragment_attack_panel_check_lunge))
 					.setVisibility(View.VISIBLE);
 		}
 	}

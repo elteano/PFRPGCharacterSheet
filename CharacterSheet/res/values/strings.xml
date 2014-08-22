@@ -120,6 +120,7 @@
     <string name="light_load">Light Load</string>
     <string name="listening_for_chars">Now listening for characters.</string>
     <string name="listening_for_chars_already">Already listening for characters.</string>
+    <string name="lunge">Lunge</string>
     <string name="new_c">New C.</string>
     <string name="new_peers">You have new peers available!</string>
     <string name="main_hand">Main Hand</string>
