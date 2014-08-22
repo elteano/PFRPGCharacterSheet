@@ -9,6 +9,7 @@ import org.elteano.charactersheet.model.WeapShield;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.support.ACButtonListener;
 import org.elteano.charactersheet.view.support.ConditionCheckBoxListener;
+import org.elteano.charactersheet.view.support.InfoClickListener;
 import org.elteano.charactersheet.view.support.SaveButtonListener;
 
 import android.app.Activity;
@@ -34,6 +35,7 @@ import android.widget.TextView;
 public class AttackPanelFragment extends Fragment implements
 		View.OnClickListener {
 
+	private InfoClickListener mACInfoListener;
 	private Spinner mMainSpinner;
 	private Spinner mOffSpinner;
 	private OffHandSpinnerAdapter mOffSpinnerAdapter;
@@ -92,6 +94,7 @@ public class AttackPanelFragment extends Fragment implements
 		} else {
 			acText.setText(R.string.ac);
 		}
+		mACInfoListener.setInfoMessage(getConditionACInfoString());
 	}
 
 	private void fillButtonDisplays() {
@@ -193,10 +196,73 @@ public class AttackPanelFragment extends Fragment implements
 		}
 	}
 
+	private String getConditionACInfoString() {
+		StringBuilder ret = new StringBuilder();
+		int totalModifiers = 0;
+		int rangedDifference = 0;
+		boolean rangedDiffers = false;
+		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
+				.getCharacter();
+		if (c.isBlinded()) {
+			ret.append("Blinded: -2\n");
+			totalModifiers -= 2;
+		}
+		if (c.isCowering()) {
+			ret.append("Cowering: -2\n");
+			totalModifiers -= 2;
+		}
+		if (c.isEntangled()) {
+			ret.append("Entangled: -4 to DEX\n");
+		}
+		if (c.isFlatFooted()) {
+			ret.append("Flat-Footed: DEX bonus to AC lost\n");
+		}
+		if (c.isPinned()) {
+			ret.append("Pinned: -4 to melee (ranged unaffected)\n");
+			totalModifiers -= 4;
+			rangedDifference += 4;
+			rangedDiffers = true;
+		}
+		if (c.isProne()) {
+			ret.append("Prone: -4 to melee, +4 to ranged\n");
+			totalModifiers -= 4;
+			rangedDifference += 8;
+			rangedDiffers = true;
+		}
+		if (c.isSqueezing()) {
+			ret.append("Squeezing: -4\n");
+			totalModifiers -= 4;
+		}
+		if (c.isStunned()) {
+			ret.append("Stunned: -2, DEX bonus to AC lost\n");
+			totalModifiers -= 2;
+		}
+		ret.append("Total modifier: ");
+		ret.append(totalModifiers);
+		ret.append("\n");
+		ArmorClass ac = c.getAC();
+		if (rangedDiffers) {
+			ret.append("Melee AC: ");
+			ret.append(ac.getACFromCharacter(c));
+			ret.append("\n");
+			ret.append("Ranged AC: ");
+			ret.append(ac.getACFromCharacter(c) + rangedDifference);
+		} else {
+			ret.append("AC: ");
+			ret.append(ac.getACFromCharacter(c));
+		}
+		ret.append("\n");
+		ret.append("Note: Charging, cleaving, fighting defensively, and using");
+		ret.append(" combat expertise will give additional modifiers.");
+		return ret.toString();
+	}
+
 	private void hookupListeners() {
 		PlayerCharacter c = ((CharacterSheetActivity) getActivity())
 				.getCharacter();
 		ACButtonListener acButtonListener = new ACButtonListener(this);
+		((TextView) getView().findViewById(R.id.fragment_attack_panel_ac_text))
+				.setOnClickListener(mACInfoListener);
 		((Button) getView().findViewById(R.id.fragment_attack_panel_act_button))
 				.setOnClickListener(this);
 		((Button) getView().findViewById(
@@ -445,6 +511,7 @@ public class AttackPanelFragment extends Fragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
+		mACInfoListener = new InfoClickListener(getActivity(), "");
 		View ret = inflater.inflate(R.layout.fragment_attack_panel, container,
 				false);
 		mMainSpinner = (Spinner) ret
