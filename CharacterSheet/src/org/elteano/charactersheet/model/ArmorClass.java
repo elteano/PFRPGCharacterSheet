@@ -85,17 +85,25 @@ public class ArmorClass implements Parcelable, Serializable {
 
 	public int getConditionModifiers(PlayerCharacter c) {
 		int ret = 0;
+		boolean getsDodge = true;
 		if (c.isBlinded()) {
 			ret -= 2;
+			getsDodge = false;
 		}
 		if (c.isCowering()) {
 			ret -= 2;
+			getsDodge = false;
+		}
+		if (c.isFlatFooted()) {
+			getsDodge = false;
 		}
 		if (c.isHelpless()) {
 			ret -= 4;
+			getsDodge = false;
 		}
 		if (c.isPinned()) {
 			ret -= 4;
+			getsDodge = false;
 		}
 		if (c.isProne()) {
 			ret -= 4;
@@ -105,6 +113,15 @@ public class ArmorClass implements Parcelable, Serializable {
 		}
 		if (c.isStunned()) {
 			ret -= 2;
+			getsDodge = false;
+		}
+		if (getsDodge && c.hasFeat("Dodge")) {
+			if (c.hasFeat("Mythic Dodge") || c.hasFeat("Dodge, Mythic")
+					|| c.hasFeat("Dodge (Mythic)")) {
+				ret += 2;
+			} else {
+				ret += 1;
+			}
 		}
 		return ret;
 	}
@@ -134,6 +151,11 @@ public class ArmorClass implements Parcelable, Serializable {
 						.getTempModifier()
 				+ abilities.getAbility(PlayerCharacter.ABILITY_STR)
 						.getTempModifier();
+	}
+
+	public static boolean getAbilityToDodge(PlayerCharacter c) {
+		return !(c.isBlinded() || c.isCowering() || c.isFlatFooted()
+				|| c.isHelpless() || c.isPinned() || c.isStunned());
 	}
 
 	public int getFlatFootAC(AbilityScores abilities, int size, int bab) {

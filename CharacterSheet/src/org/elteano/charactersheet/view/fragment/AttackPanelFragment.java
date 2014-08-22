@@ -220,6 +220,14 @@ public class AttackPanelFragment extends Fragment implements
 			ret.append("Cowering: -2\n");
 			totalModifiers -= 2;
 		}
+		if (ArmorClass.getAbilityToDodge(c)) {
+			if (c.hasFeat("Dodge, Mythic") || c.hasFeat("Mythic Dodge")
+					|| c.hasFeat("Dodge (Mythic)")) {
+				ret.append("Mythic Dodge: +2 to AC\n");
+			} else if (c.hasFeat("Dodge")) {
+				ret.append("Dodge: +1 to AC\n");
+			}
+		}
 		if (c.isEntangled()) {
 			ret.append("Entangled: -4 to DEX\n");
 		}
