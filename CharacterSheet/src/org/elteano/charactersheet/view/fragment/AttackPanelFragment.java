@@ -190,6 +190,7 @@ public class AttackPanelFragment extends Fragment implements
 				break;
 			}
 		}
+		mOffSpinner.setSelection(mOffSpinner.getCount());
 		for (int i = 0; i < c.getWieldableEquipment().size(); ++i) {
 			WeapShield ws = c.getWieldableEquipment().get(i);
 			if (ws.getName().equals(c.getPreviouslySelectedOffWeapon())) {
