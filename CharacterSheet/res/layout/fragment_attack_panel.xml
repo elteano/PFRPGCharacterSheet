@@ -359,6 +359,12 @@
                 android:text="@string/invisible" />
 
             <CheckBox
+                android:id="@+id/fragment_attack_panel_condition_kneeling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kneeling" />
+
+            <CheckBox
                 android:id="@+id/fragment_attack_panel_condition_pinned"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

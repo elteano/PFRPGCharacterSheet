@@ -169,6 +169,9 @@ public class AttackPanelFragment extends Fragment implements
 				R.id.fragment_attack_panel_condition_invisible)).setChecked(c
 				.isInvisible());
 		((CheckBox) getView().findViewById(
+				R.id.fragment_attack_panel_condition_kneeling)).setChecked(c
+				.isKneeling());
+		((CheckBox) getView().findViewById(
 				R.id.fragment_attack_panel_condition_pinned)).setChecked(c
 				.isPinned());
 		((CheckBox) getView().findViewById(
@@ -233,6 +236,16 @@ public class AttackPanelFragment extends Fragment implements
 		}
 		if (c.isFlatFooted()) {
 			ret.append("Flat-Footed: DEX bonus to AC lost\n");
+		}
+		if (c.isHelpless()) {
+			ret.append("Helpless: -4 to melee (ranged unaffected), DEX bonus to AC lost\n");
+			totalModifiers -= 4;
+			rangedDifference += 4;
+		}
+		if (c.isKneeling()) {
+			ret.append("Kneeling or Sitting: -2 to melee, +2 to ranged\n");
+			totalModifiers -= 2;
+			rangedDifference += 4;
 		}
 		if (c.isPinned()) {
 			ret.append("Pinned: -4 to melee (ranged unaffected)\n");

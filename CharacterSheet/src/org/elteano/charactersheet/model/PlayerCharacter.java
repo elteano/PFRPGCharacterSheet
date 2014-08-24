@@ -41,11 +41,12 @@ public class PlayerCharacter implements Parcelable, Serializable {
 	public static final int CONDITION_GRAPPLING = 64;
 	public static final int CONDITION_HELPLESS = 128;
 	public static final int CONDITION_INVISIBLE = 256;
-	public static final int CONDITION_PINNED = 512;
-	public static final int CONDITION_PRONE = 1024;
-	public static final int CONDITION_SHAKEN = 2048;
-	public static final int CONDITION_SQUEEZING = 4096;
-	public static final int CONDITION_STUNNED = 8192;
+	public static final int CONDITION_KNEELING = 512;
+	public static final int CONDITION_PINNED = 1024;
+	public static final int CONDITION_PRONE = 2048;
+	public static final int CONDITION_SHAKEN = 4096;
+	public static final int CONDITION_SQUEEZING = 8192;
+	public static final int CONDITION_STUNNED = 16384;
 
 	public static Parcelable.Creator<PlayerCharacter> CREATOR = new Parcelable.Creator<PlayerCharacter>() {
 
@@ -984,6 +985,10 @@ public class PlayerCharacter implements Parcelable, Serializable {
 
 	public boolean isInvisible() {
 		return isAffectedByConditions(CONDITION_INVISIBLE);
+	}
+
+	public boolean isKneeling() {
+		return isAffectedByConditions(CONDITION_KNEELING);
 	}
 
 	public boolean isPinned() {

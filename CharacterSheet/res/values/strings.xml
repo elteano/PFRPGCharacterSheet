@@ -114,6 +114,7 @@
     <string name="invisible">Invisible</string>
     <string name="item_quantity">Item Quantity</string>
     <string name="item_weight">Item Weight</string>
+    <string name="kneeling">Kneeling</string>
     <string name="known">Known</string>
     <string name="languages">Languages</string>
     <string name="languages_hint">Common, Grippli, &#8230;</string>

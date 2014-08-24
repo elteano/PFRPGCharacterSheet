@@ -85,25 +85,20 @@ public class ArmorClass implements Parcelable, Serializable {
 
 	public int getConditionModifiers(PlayerCharacter c) {
 		int ret = 0;
-		boolean getsDodge = true;
 		if (c.isBlinded()) {
 			ret -= 2;
-			getsDodge = false;
 		}
 		if (c.isCowering()) {
 			ret -= 2;
-			getsDodge = false;
-		}
-		if (c.isFlatFooted()) {
-			getsDodge = false;
 		}
 		if (c.isHelpless()) {
 			ret -= 4;
-			getsDodge = false;
+		}
+		if (c.isKneeling()) {
+			ret -= 2;
 		}
 		if (c.isPinned()) {
 			ret -= 4;
-			getsDodge = false;
 		}
 		if (c.isProne()) {
 			ret -= 4;
@@ -113,9 +108,8 @@ public class ArmorClass implements Parcelable, Serializable {
 		}
 		if (c.isStunned()) {
 			ret -= 2;
-			getsDodge = false;
 		}
-		if (getsDodge && c.hasFeat("Dodge")) {
+		if (getAbilityToDodge(c) && c.hasFeat("Dodge")) {
 			if (c.hasFeat("Mythic Dodge") || c.hasFeat("Dodge, Mythic")
 					|| c.hasFeat("Dodge (Mythic)")) {
 				ret += 2;
