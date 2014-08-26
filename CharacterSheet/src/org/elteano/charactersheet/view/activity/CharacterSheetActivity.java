@@ -188,6 +188,14 @@ public class CharacterSheetActivity extends FragmentActivity {
 		Log.i("CharacterSheet", "Exiting initialize()");
 	}
 
+	public boolean isPortraitLayout() {
+		return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+	}
+
+	public boolean isLandscapeLayout() {
+		return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+	}
+
 	/**
 	 * Called when the activity is first created.
 	 */
