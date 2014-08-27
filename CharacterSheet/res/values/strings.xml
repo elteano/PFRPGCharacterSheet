@@ -43,9 +43,11 @@
     <string name="character_bio_hint">Deep, complicated backstory.</string>
     <string name="character_name_field">Character Name</string>
     <string name="character_name_text">Name</string>
+    <string name="character_receive_info">In order to receive a character from another device, you must use Bluetooth to pair with that device. Use the \'Settings\' menu option and follow the directions there in order to pair a device. Once this is done, select the \'Listen\' button on this device, and then select this device from the \'Paired Devices\' list on the sending device. Then select the character\'s name from the list on this page, and hit the \'back\' button. Note that if a character with that name exists, it will be overwritten.</string>
     <string name="character_select_add">Add Character</string>
     <string name="character_select_remove">Erase Character</string>
     <string name="character_size">Character Size</string>
+    <string name="character_transfer_info">In order to transfer a character to a device, first select the \'Listen\' option in the \'Receive Character\' page on that device, and then select the device from this device\'s \'Paired Devices\' list. If you haven\'t yet paired with the device to which you wish to transfer your character, select the \'Settings\' menu option and follow the directions in your Bluetooth Settings page.</string>
     <string name="character_xp">Character XP</string>
     <string name="charge">Charge</string>
     <string name="class_field_hint">Class # / Class #</string>
@@ -122,6 +124,7 @@
     <string name="languages">Languages</string>
     <string name="languages_hint">Common, Grippli, &#8230;</string>
     <string name="light_load">Light Load</string>
+    <string name="listen">Listen</string>
     <string name="listening_for_chars">Now listening for characters.</string>
     <string name="listening_for_chars_already">Already listening for characters.</string>
     <string name="lunge">Lunge</string>
