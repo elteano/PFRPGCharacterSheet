@@ -12,6 +12,7 @@ import org.elteano.charactersheet.view.support.InfoClickListener;
 import org.elteano.charactersheet.view.support.SaveButtonListener;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -502,6 +503,20 @@ public class AttackPanelFragment extends CharacterUpdaterFragment implements
 			((CharacterSheetActivity) getActivity()).setInTopLevel(false);
 			((CharacterSheetActivity) getActivity()).setToFragment(
 					new WeapShieldListFragment(), true);
+			return true;
+		case R.id.fragment_attack_panel_menu_info:
+			AlertDialog.Builder build = new AlertDialog.Builder(getActivity());
+			build.setTitle(R.string.info);
+			if (((CharacterSheetActivity) getActivity()).isPortraitLayout()) {
+				build.setMessage(getResources().getString(
+						R.string.attack_panel_info_standard)
+						+ " "
+						+ getResources().getString(
+								R.string.attack_panel_info_portrait));
+			} else {
+				build.setMessage(R.string.attack_panel_info_standard);
+			}
+			build.show();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

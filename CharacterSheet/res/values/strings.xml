@@ -28,6 +28,8 @@
     <string name="attack_bonus">Attack Bonus</string>
     <string name="attack_desc">Attack Description</string>
     <string name="attack_name">Attack Name</string>
+    <string name="attack_panel_info_standard">Use the Edit Combat Gear panel in order to add weapons. Select main hand and off hand weapons using the drop-down menus. Use the \'Act!\' button in order to see the attack bonuses for each attack in a full attack action (a standard action uses only the first bonus).</string>
+    <string name="attack_panel_info_portrait"> Conditions may be set using the drawer on the right. Drag your finger from the right edge of the screen in order to reveal the Conditions panel.</string>
     <string name="bab">BAB</string>
     <string name="base_abilities">Base Abilities</string>
     <string name="base_attack_bonus">Base Attack Bonus</string>
@@ -107,6 +109,7 @@
     <string name="hint_item_name">Item Name</string>
     <string name="hint_item_desc">Item Description</string>
     <string name="hint_skill_name">Skill Name</string>
+    <string name="info">Info</string>
     <string name="init">Init</string>
     <string name="init_bonus">Init. Bonus</string>
     <string name="initiative_bonus">Initiative Bonus</string>

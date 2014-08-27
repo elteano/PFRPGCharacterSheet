@@ -5,5 +5,10 @@
         android:id="@+id/fragment_attack_panel_menu_edit"
         android:showAsAction="ifRoom|withText"
         android:title="@string/edit_combat_gear"/>
+    <item
+        android:id="@+id/fragment_attack_panel_menu_info"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_about"
+        android:title="@string/info"/>
 
 </menu>

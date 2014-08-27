@@ -15,14 +15,18 @@ public class InfoClickListener implements OnClickListener {
 		mMessage = message;
 	}
 
-	public void setInfoMessage(String message) {
-		mMessage = message;
-	}
-
-	public void onClick(View v) {
+	public void displayInfoBlurb() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 		builder.setTitle("Info");
 		builder.setMessage(mMessage);
 		builder.show();
+	}
+
+	public void onClick(View v) {
+		displayInfoBlurb();
+	}
+
+	public void setInfoMessage(String message) {
+		mMessage = message;
 	}
 }
