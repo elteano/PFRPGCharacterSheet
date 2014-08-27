@@ -65,7 +65,7 @@ public class OffHandSpinnerAdapter extends ArrayAdapter<WeapShield> {
 		if (isMainTwoHanded()) {
 			return createPlaceholderWeapon();
 		}
-		if (position == super.getCount()) {
+		if (position >= super.getCount()) {
 			return createPlaceholderWeapon();
 		}
 		return super.getItem(position);
