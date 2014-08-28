@@ -3,11 +3,7 @@ package org.elteano.charactersheet.view.activity;
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.model.PlayerCharacter;
 import org.elteano.charactersheet.view.fragment.CharacterSelectFragment;
-import org.elteano.charactersheet.view.fragment.FeatSkillFragment;
-import org.elteano.charactersheet.view.fragment.SelectInfoItemsFragment;
-import org.elteano.charactersheet.view.fragment.SpellFragment;
-import org.elteano.charactersheet.view.fragment.StatsAttackDefenseFragment;
-import org.elteano.charactersheet.view.support.HandsetPagerAdapter;
+import org.elteano.charactersheet.view.fragment.TabbedWrapperFragment;
 import org.elteano.charactersheet.view.support.NavDrawerListListener;
 import org.elteano.charactersheet.view.support.NavDrawerToggle;
 import org.json.JSONException;
@@ -22,7 +18,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -46,80 +41,18 @@ public class CharacterSheetActivity extends FragmentActivity {
 	private PlayerCharacter character;
 	// Really bad coding
 	private boolean initialized = false;
-	private FragmentPagerAdapter mAdapter;
 	private ViewPager mViewPager;
 	private Fragment mPreviousFragment;
 	private NavDrawerToggle mToggle;
 	private NavDrawerListListener mDrawerListener;
 	private boolean isTablet;
 
-	private void addHandsetTabs() {
-		ActionBar actionBar = getActionBar();
-		actionBar.addTab(actionBar.newTab().setText(R.string.title_character)
-				.setIcon(R.drawable.ic_pencil)
-				.setTabListener(new TabListener()));
-		actionBar
-				.addTab(actionBar.newTab().setText(R.string.title_items)
-						.setIcon(R.drawable.ic_items)
-						.setTabListener(new TabListener()));
-		actionBar.addTab(actionBar.newTab().setText("Counter")
-				.setIcon(R.drawable.ic_counter)
-				.setTabListener(new TabListener()));
-		actionBar
-				.addTab(actionBar.newTab().setText(R.string.title_stats)
-						.setIcon(R.drawable.ic_stats)
-						.setTabListener(new TabListener()));
-		actionBar.addTab(actionBar.newTab().setText(R.string.title_attacks)
-				.setIcon(R.drawable.ic_attack)
-				.setTabListener(new TabListener()));
-		actionBar.addTab(actionBar.newTab().setText(R.string.title_defense)
-				.setIcon(R.drawable.ic_defense)
-				.setTabListener(new TabListener()));
-		actionBar.addTab(actionBar.newTab().setText(R.string.title_feat)
-				.setIcon(R.drawable.ic_feat).setTabListener(new TabListener()));
-		actionBar
-				.addTab(actionBar.newTab().setText(R.string.title_cfeat)
-						.setIcon(R.drawable.ic_other)
-						.setTabListener(new TabListener()));
-		actionBar.addTab(actionBar.newTab().setText(R.string.title_skill)
-				.setIcon(R.drawable.ic_skills)
-				.setTabListener(new TabListener()));
-		actionBar.addTab(actionBar.newTab().setText(R.string.title_spells)
-				.setIcon(R.drawable.ic_mag).setTabListener(new TabListener()));
-		mAdapter = new HandsetPagerAdapter(getSupportFragmentManager(), this);
-	}
-
 	private void addTabletTabs() {
-		ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		actionBar.addTab(actionBar
-				.newTab()
-				.setText(R.string.title_select_info_items)
-				.setIcon(R.drawable.ic_list)
-				.setTabListener(
-						new TabletTabListener<SelectInfoItemsFragment>(this,
-								"select", SelectInfoItemsFragment.class)));
-		actionBar.addTab(actionBar
-				.newTab()
-				.setText(R.string.title_stats_combat)
-				.setIcon(R.drawable.ic_stats)
-				.setTabListener(
-						new TabletTabListener<StatsAttackDefenseFragment>(this,
-								"stats", StatsAttackDefenseFragment.class)));
-		actionBar.addTab(actionBar
-				.newTab()
-				.setText(R.string.title_feat_skill)
-				.setIcon(R.drawable.ic_feat)
-				.setTabListener(
-						new TabletTabListener<FeatSkillFragment>(this,
-								"feats/skills", FeatSkillFragment.class)));
-		actionBar.addTab(actionBar
-				.newTab()
-				.setText(R.string.title_spells)
-				.setIcon(R.drawable.ic_mag)
-				.setTabListener(
-						new TabletTabListener<SpellFragment>(this, "spells",
-								SpellFragment.class)));
+		setContentView(R.layout.activity_charactersheet);
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		TabbedWrapperFragment f = new TabbedWrapperFragment();
+		ft.replace(R.id.activity_charactersheet_filler, f);
+		ft.commit();
 	}
 
 	public void clearBackStack() {
