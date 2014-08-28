@@ -146,7 +146,14 @@ public class CharacterSheetActivity extends FragmentActivity {
 
 	public void setToFragment(Fragment f, boolean addToBackStack) {
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.replace(R.id.activity_charactersheet_filler, f);
+		if (isPortraitLayout()) {
+			ft.replace(R.id.activity_charactersheet_filler, f);
+		} else {
+			getActionBar()
+					.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+			ft.replace(android.R.id.content, f);
+		}
+		ft.replace(android.R.id.content, f);
 		if (addToBackStack) {
 			ft.addToBackStack(null);
 		}
@@ -194,6 +201,19 @@ public class CharacterSheetActivity extends FragmentActivity {
 
 	public boolean isLandscapeLayout() {
 		return getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (isPortraitLayout()) {
+			super.onBackPressed();
+		} else {
+			super.onBackPressed();
+			if (getFragmentManager().getBackStackEntryCount() == 0) {
+				getActionBar()
+						.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+			}
+		}
 	}
 
 	/**
