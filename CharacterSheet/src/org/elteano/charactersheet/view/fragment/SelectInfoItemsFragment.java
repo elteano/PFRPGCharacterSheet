@@ -4,7 +4,6 @@ import org.elteano.charactersheet.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,8 +22,8 @@ public class SelectInfoItemsFragment extends CharacterUpdaterListenerFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		FragmentTransaction ft = ((FragmentActivity) getActivity())
-				.getSupportFragmentManager().beginTransaction();
+		FragmentTransaction ft = getActivity().getSupportFragmentManager()
+				.beginTransaction();
 		if (noChildren()) {
 			CounterFragment csf = new CounterFragment();
 			ft.replace(R.id.right_fragment_space, csf);
@@ -46,8 +45,8 @@ public class SelectInfoItemsFragment extends CharacterUpdaterListenerFragment {
 	@Override
 	public void onStop() {
 		Log.d("CharacterSheet", "Detaching");
-		FragmentTransaction ft = ((FragmentActivity) getActivity())
-				.getSupportFragmentManager().beginTransaction();
+		FragmentTransaction ft = getActivity().getSupportFragmentManager()
+				.beginTransaction();
 		for (Fragment f : children) {
 			ft.detach(f);
 		}

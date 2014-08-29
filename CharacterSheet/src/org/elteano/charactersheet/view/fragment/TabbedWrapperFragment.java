@@ -20,12 +20,18 @@ public class TabbedWrapperFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View ret = inflater.inflate(R.layout.fragment_tabbed_wrapper,
 				container, false);
-		SlidingTabLayout l = (SlidingTabLayout) ret
-				.findViewById(R.id.fragment_tabbed_wrapper_slide_tab);
-		mPager = (ViewPager) ret.findViewById(R.id.pager);
+		return ret;
+	}
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		mPager = (ViewPager) view.findViewById(R.id.pager);
 		mPager.setAdapter(new TabletPagerAdapter(getActivity()
 				.getSupportFragmentManager(), getActivity()));
+
+		SlidingTabLayout l = (SlidingTabLayout) view
+				.findViewById(R.id.fragment_tabbed_wrapper_slide_tab);
 		l.setViewPager(mPager);
-		return ret;
+		super.onViewCreated(view, savedInstanceState);
 	}
 }
