@@ -79,14 +79,7 @@ public class CharacterSheetActivity extends FragmentActivity {
 
 	public void setToFragment(Fragment f, boolean addToBackStack) {
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		if (isPortraitLayout()) {
-			ft.replace(R.id.activity_charactersheet_filler, f);
-		} else {
-			getActionBar()
-					.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-			ft.replace(android.R.id.content, f);
-		}
-		ft.replace(android.R.id.content, f);
+		ft.replace(R.id.activity_charactersheet_filler, f);
 		if (addToBackStack) {
 			ft.addToBackStack(null);
 		}
