@@ -9,6 +9,8 @@ import org.elteano.charactersheet.model.WeapShield;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.support.ACButtonListener;
 import org.elteano.charactersheet.view.support.InfoClickListener;
+import org.elteano.charactersheet.view.support.MenuNestingFragment;
+import org.elteano.charactersheet.view.support.OffHandSpinnerAdapter;
 import org.elteano.charactersheet.view.support.SaveButtonListener;
 
 import android.app.Activity;
@@ -39,7 +41,7 @@ import android.widget.Toast;
  * A fragment consolidating all combat statistics.
  */
 public class AttackPanelFragment extends CharacterUpdaterFragment implements
-		View.OnClickListener {
+		View.OnClickListener, MenuNestingFragment {
 
 	private InfoClickListener mACInfoListener;
 	private Spinner mMainSpinner;
@@ -467,13 +469,14 @@ public class AttackPanelFragment extends CharacterUpdaterFragment implements
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.fragment_attack_panel_menu, menu);
+		inflater.inflate(getMenuId(), menu);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		setHasOptionsMenu(true);
+		if (((CharacterSheetActivity) getActivity()).isPortraitLayout())
+			setHasOptionsMenu(true);
 		mACInfoListener = new InfoClickListener(getActivity(), "");
 		View ret = inflater.inflate(R.layout.fragment_attack_panel, container,
 				false);
@@ -588,5 +591,13 @@ public class AttackPanelFragment extends CharacterUpdaterFragment implements
 	@Override
 	public void updateDisplay() {
 		fillButtonDisplays();
+	}
+
+	public boolean hasMenu() {
+		return true;
+	}
+
+	public int getMenuId() {
+		return R.menu.fragment_attack_panel_menu;
 	}
 }

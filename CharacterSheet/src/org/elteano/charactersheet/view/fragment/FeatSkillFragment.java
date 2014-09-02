@@ -4,7 +4,6 @@ import org.elteano.charactersheet.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +14,15 @@ public class FeatSkillFragment extends CharacterUpdaterListenerFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		setHasOptionsMenu(true);
 		return inflater.inflate(R.layout.fragment_feat_skill, container, false);
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-		FragmentTransaction ft = ((FragmentActivity) getActivity())
-				.getSupportFragmentManager().beginTransaction();
+		FragmentTransaction ft = getActivity().getSupportFragmentManager()
+				.beginTransaction();
 		if (noChildren()) {
 			FeatFragment csf = new FeatFragment();
 			ft.replace(R.id.left_fragment_spacec, csf);
@@ -43,8 +43,8 @@ public class FeatSkillFragment extends CharacterUpdaterListenerFragment {
 
 	@Override
 	public void onStop() {
-		FragmentTransaction ft = ((FragmentActivity) getActivity())
-				.getSupportFragmentManager().beginTransaction();
+		FragmentTransaction ft = getActivity().getSupportFragmentManager()
+				.beginTransaction();
 		for (Fragment f : children) {
 			ft.detach(f);
 		}

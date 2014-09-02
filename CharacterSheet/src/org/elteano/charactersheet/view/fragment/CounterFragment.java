@@ -7,6 +7,7 @@ import org.elteano.charactersheet.model.Counter;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.activity.CounterEditActivity;
 import org.elteano.charactersheet.view.support.CounterListing;
+import org.elteano.charactersheet.view.support.MenuNestingFragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,7 +26,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 
 public class CounterFragment extends CharacterUpdaterFragment implements
-		OnClickListener {
+		OnClickListener, MenuNestingFragment {
 
 	private Counter lastCounter;
 
@@ -99,13 +100,14 @@ public class CounterFragment extends CharacterUpdaterFragment implements
 		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE)
 			inflater.inflate(R.menu.fragment_counter_menu_large, menu);
 		else
-			inflater.inflate(R.menu.fragment_counter_menu, menu);
+			inflater.inflate(getMenuId(), menu);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		setHasOptionsMenu(true);
+		if (((CharacterSheetActivity) getActivity()).isPortraitLayout())
+			setHasOptionsMenu(true);
 		return inflater.inflate(R.layout.fragment_counter, container, false);
 	}
 
@@ -143,5 +145,13 @@ public class CounterFragment extends CharacterUpdaterFragment implements
 	public void updateDisplay() {
 		clearListings();
 		fillListings();
+	}
+
+	public boolean hasMenu() {
+		return true;
+	}
+
+	public int getMenuId() {
+		return R.menu.fragment_counter_menu;
 	}
 }

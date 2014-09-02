@@ -8,6 +8,7 @@ import org.elteano.charactersheet.model.PlayerCharacter;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.activity.ItemEditActivity;
 import org.elteano.charactersheet.view.support.ItemListing;
+import org.elteano.charactersheet.view.support.MenuNestingFragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -29,7 +30,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 public class ItemFragment extends CharacterUpdaterFragment implements
-		OnClickListener {
+		OnClickListener, MenuNestingFragment {
 
 	private Item lastItem;
 	private TextWatcher goldWatcher;
@@ -116,11 +117,10 @@ public class ItemFragment extends CharacterUpdaterFragment implements
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
 		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE)
 			inflater.inflate(R.menu.fragment_item_menu_large, menu);
 		else
-			inflater.inflate(R.menu.fragment_item_menu, menu);
+			inflater.inflate(getMenuId(), menu);
 	}
 
 	@Override
@@ -149,7 +149,8 @@ public class ItemFragment extends CharacterUpdaterFragment implements
 			}
 
 		};
-		setHasOptionsMenu(true);
+		if (((CharacterSheetActivity) getActivity()).isPortraitLayout())
+			setHasOptionsMenu(true);
 		return inflater.inflate(R.layout.fragment_item, container, false);
 	}
 
@@ -161,7 +162,7 @@ public class ItemFragment extends CharacterUpdaterFragment implements
 			startActivityForResult(intent, ItemEditActivity.REQUEST_NEW_ITEM);
 			return true;
 		}
-		return super.onOptionsItemSelected(item);
+		return false;
 	}
 
 	@Override
@@ -224,5 +225,13 @@ public class ItemFragment extends CharacterUpdaterFragment implements
 		fillFields();
 		hookupListeners();
 		updateWeight();
+	}
+
+	public boolean hasMenu() {
+		return true;
+	}
+
+	public int getMenuId() {
+		return R.menu.fragment_item_menu;
 	}
 }

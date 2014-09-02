@@ -6,6 +6,7 @@ import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.model.Skill;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.activity.SkillEditActivity;
+import org.elteano.charactersheet.view.support.MenuNestingFragment;
 import org.elteano.charactersheet.view.support.SkillListing;
 
 import android.app.Activity;
@@ -25,7 +26,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.TableLayout;
 
 public class SkillFragment extends CharacterUpdaterFragment implements
-		OnClickListener {
+		OnClickListener, MenuNestingFragment {
 
 	private Skill lastSkill;
 
@@ -86,7 +87,8 @@ public class SkillFragment extends CharacterUpdaterFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		setHasOptionsMenu(true);
+		if (((CharacterSheetActivity) getActivity()).isPortraitLayout())
+			setHasOptionsMenu(true);
 		View ret = inflater.inflate(R.layout.fragment_skill, container, false);
 		return ret;
 	}
@@ -103,7 +105,7 @@ public class SkillFragment extends CharacterUpdaterFragment implements
 		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE)
 			inflater.inflate(R.menu.fragment_skill_menu_large, menu);
 		else
-			inflater.inflate(R.menu.skill_menu, menu);
+			inflater.inflate(getMenuId(), menu);
 	}
 
 	@Override
@@ -140,5 +142,13 @@ public class SkillFragment extends CharacterUpdaterFragment implements
 	@Override
 	public void preUpdate() {
 		// Unused
+	}
+
+	public boolean hasMenu() {
+		return true;
+	}
+
+	public int getMenuId() {
+		return R.menu.skill_menu;
 	}
 }

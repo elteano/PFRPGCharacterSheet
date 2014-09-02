@@ -3,6 +3,7 @@ package org.elteano.charactersheet.view.fragment;
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.support.IntTextWatcher;
+import org.elteano.charactersheet.view.support.MenuNestingFragment;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -20,7 +21,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 public class NameFragment extends CharacterUpdaterFragment implements
-		OnItemSelectedListener {
+		OnItemSelectedListener, MenuNestingFragment {
 
 	private TextWatcher ageTextWatcher;
 	// private TextWatcher bioTextWatcher;
@@ -278,5 +279,13 @@ public class NameFragment extends CharacterUpdaterFragment implements
 		if (((CharacterSheetActivity) getActivity()).getCharacter() != null) {
 			pushFieldsToCharacter();
 		}
+	}
+
+	public boolean hasMenu() {
+		return false;
+	}
+
+	public int getMenuId() {
+		return 0;
 	}
 }

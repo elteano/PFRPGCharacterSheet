@@ -3,6 +3,7 @@ package org.elteano.charactersheet.view.fragment;
 import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.model.WeapShield;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
+import org.elteano.charactersheet.view.support.MenuNestingFragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -21,7 +22,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class WeapShieldListFragment extends Fragment implements
-		OnItemClickListener {
+		OnItemClickListener, MenuNestingFragment {
 
 	private boolean deleting;
 	private ArrayAdapter<WeapShield> mAdapter;
@@ -29,14 +30,15 @@ public class WeapShieldListFragment extends Fragment implements
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.fragment_combat_gear_menu, menu);
+		inflater.inflate(getMenuId(), menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		setHasOptionsMenu(true);
+		if (((CharacterSheetActivity) getActivity()).isPortraitLayout())
+			setHasOptionsMenu(true);
 		((CharacterSheetActivity) getActivity()).clearPreviousFragment();
 		View ret = inflater.inflate(R.layout.fragment_weap_shield_list,
 				container, false);
@@ -127,5 +129,13 @@ public class WeapShieldListFragment extends Fragment implements
 					}
 				});
 		builder.create().show();
+	}
+
+	public boolean hasMenu() {
+		return true;
+	}
+
+	public int getMenuId() {
+		return R.menu.fragment_combat_gear_menu;
 	}
 }

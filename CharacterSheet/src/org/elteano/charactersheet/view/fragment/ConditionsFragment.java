@@ -4,6 +4,7 @@ import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.model.PlayerCharacter;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.support.ConditionCheckBoxListener;
+import org.elteano.charactersheet.view.support.MenuNestingFragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
-public class ConditionsFragment extends CharacterUpdaterFragment {
+public class ConditionsFragment extends CharacterUpdaterFragment implements
+		MenuNestingFragment {
 
 	private AttackPanelFragment mInform;
 
@@ -150,5 +152,13 @@ public class ConditionsFragment extends CharacterUpdaterFragment {
 	@Override
 	public void updateDisplay() {
 		fillCheckBoxes();
+	}
+
+	public boolean hasMenu() {
+		return false;
+	}
+
+	public int getMenuId() {
+		return 0;
 	}
 }

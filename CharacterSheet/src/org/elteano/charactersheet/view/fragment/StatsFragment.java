@@ -8,6 +8,7 @@ import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.activity.HPEditActivity;
 import org.elteano.charactersheet.view.activity.ModValueEditActivity;
 import org.elteano.charactersheet.view.support.IntTextWatcher;
+import org.elteano.charactersheet.view.support.MenuNestingFragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class StatsFragment extends CharacterUpdaterFragment implements
-		OnClickListener {
+		OnClickListener, MenuNestingFragment {
 
 	private IntTextWatcher currentWatcher;
 	private IntTextWatcher initWatcher;
@@ -312,5 +313,13 @@ public class StatsFragment extends CharacterUpdaterFragment implements
 	@Override
 	public void preUpdate() {
 		// Unused
+	}
+
+	public boolean hasMenu() {
+		return false;
+	}
+
+	public int getMenuId() {
+		return 0;
 	}
 }

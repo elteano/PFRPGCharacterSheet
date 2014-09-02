@@ -3,8 +3,12 @@ package org.elteano.charactersheet.view.fragment;
 import java.util.ArrayList;
 
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
+import org.elteano.charactersheet.view.support.MenuNestingFragment;
 
 import android.support.v4.app.Fragment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 public abstract class CharacterUpdaterListenerFragment extends Fragment {
@@ -62,5 +66,26 @@ public abstract class CharacterUpdaterListenerFragment extends Fragment {
 					Toast.LENGTH_SHORT).show();
 			getActivity().finish();
 		}
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		for (Fragment f : children) {
+			MenuNestingFragment mnf = (MenuNestingFragment) f;
+			if (mnf.hasMenu()) {
+				inflater.inflate(mnf.getMenuId(), menu);
+			}
+		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		for (Fragment f : children) {
+			MenuNestingFragment mnf = (MenuNestingFragment) f;
+			if (mnf.hasMenu() && f.onOptionsItemSelected(item)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

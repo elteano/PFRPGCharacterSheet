@@ -6,6 +6,7 @@ import org.elteano.charactersheet.R;
 import org.elteano.charactersheet.model.Feat;
 import org.elteano.charactersheet.view.activity.CharacterSheetActivity;
 import org.elteano.charactersheet.view.activity.FeatEditActivity;
+import org.elteano.charactersheet.view.support.MenuNestingFragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class FeatFragment extends CharacterUpdaterFragment implements
-		OnClickListener {
+		OnClickListener, MenuNestingFragment {
 	private TextView lastSelectedView;
 
 	private void clearListings() {
@@ -103,14 +104,15 @@ public class FeatFragment extends CharacterUpdaterFragment implements
 		if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE)
 			inflater.inflate(R.menu.fragment_feat_menu_large, menu);
 		else
-			inflater.inflate(R.menu.fragment_feat_menu, menu);
+			inflater.inflate(getMenuId(), menu);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View ret = inflater.inflate(R.layout.fragment_feat, container, false);
-		setHasOptionsMenu(true);
+		if (((CharacterSheetActivity) getActivity()).isPortraitLayout())
+			setHasOptionsMenu(true);
 		return ret;
 	}
 
@@ -142,5 +144,13 @@ public class FeatFragment extends CharacterUpdaterFragment implements
 	public void updateDisplay() {
 		clearListings();
 		fillListings();
+	}
+
+	public boolean hasMenu() {
+		return true;
+	}
+
+	public int getMenuId() {
+		return R.menu.fragment_feat_menu;
 	}
 }
