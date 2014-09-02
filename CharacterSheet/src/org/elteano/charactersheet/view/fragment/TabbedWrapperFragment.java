@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 public class TabbedWrapperFragment extends Fragment {
 
 	private ViewPager mPager;
+	private TabletPagerAdapter mAdapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,8 +27,9 @@ public class TabbedWrapperFragment extends Fragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		mPager = (ViewPager) view.findViewById(R.id.pager);
-		mPager.setAdapter(new TabletPagerAdapter(getActivity()
-				.getSupportFragmentManager(), getActivity()));
+		mAdapter = new TabletPagerAdapter(getChildFragmentManager(),
+				getActivity());
+		mPager.setAdapter(mAdapter);
 
 		SlidingTabLayout l = (SlidingTabLayout) view
 				.findViewById(R.id.fragment_tabbed_wrapper_slide_tab);
